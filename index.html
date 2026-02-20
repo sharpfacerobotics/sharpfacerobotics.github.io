@@ -4,9 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sharp Face Robotics · Team 30450</title>
+  <link rel="icon" href="SharpFace.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=DM+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -139,7 +141,7 @@
       border: 1px solid rgba(200,169,78,.32);
       background: rgba(200,169,78,.055); padding: .5rem .95rem;
     }
-    .award-icon { font-size: 1rem; line-height: 1; }
+    .award-icon { font-size: .95rem; line-height: 1; color: var(--gold); width: 18px; text-align: center; }
     .award-lbl { line-height: 1.2; }
     .award-lbl b {
       display: block; font-family: var(--M);
@@ -261,7 +263,7 @@
     }
     .oc { background: var(--bg); padding: 1.8rem; transition: background .2s; }
     .oc:hover { background: var(--card); }
-    .oc-ico { font-size: 1.4rem; margin-bottom: .65rem; }
+    .oc-ico { font-size: 1.3rem; margin-bottom: .65rem; color: var(--cyan); width: 24px; }
     .oc h3 { font-family: var(--D); font-size: 1.2rem; letter-spacing: .06em; margin-bottom: .35rem; }
     .oc p { font-size: .83rem; color: var(--dim); line-height: 1.62; }
 
@@ -291,7 +293,7 @@
       border: 1px solid rgba(82,219,212,.22); background: rgba(82,219,212,.04);
       padding: 1.5rem 2rem; text-align: center;
     }
-    .ai-badge-icon { font-size: 2rem; }
+    .ai-badge-icon { font-size: 1.8rem; color: var(--cyan); }
     .ai-badge-name { font-family: var(--D); font-size: 1.6rem; letter-spacing: .1em; color: var(--cyan); }
     .ai-badge-sub { font-family: var(--M); font-size: .57rem; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); }
 
@@ -373,14 +375,14 @@
 
       <div class="awards">
         <div class="award">
-          <div class="award-icon">🏆</div>
+          <div class="award-icon"><i class="fas fa-trophy"></i></div>
           <div class="award-lbl">
             <b>2nd Place Inspire</b>
             <span>League Award</span>
           </div>
         </div>
         <div class="award">
-          <div class="award-icon">🎖️</div>
+          <div class="award-icon"><i class="fas fa-medal"></i></div>
           <div class="award-lbl">
             <b>Finalist Award</b>
             <span>Alliance Finalist</span>
@@ -478,22 +480,22 @@
     <div class="bar"></div>
     <div class="oc-grid">
       <div class="oc reveal">
-        <div class="oc-ico">🏫</div>
+        <div class="oc-ico"><i class="fas fa-school"></i></div>
         <h3>Emerald Summit</h3>
         <p>Fully-inclusive STEM summit for 21 Northern California schools, featuring hands-on engineering tracks and CAD-a-thons.</p>
       </div>
       <div class="oc reveal">
-        <div class="oc-ico">🌱</div>
+        <div class="oc-ico"><i class="fas fa-seedling"></i></div>
         <h3>SEWA International</h3>
         <p>STEM curriculum for underserved elementary students in Newark and Hayward — now adopted district-wide by SEWA Aspire.</p>
       </div>
       <div class="oc reveal">
-        <div class="oc-ico">🧠</div>
+        <div class="oc-ico"><i class="fas fa-brain"></i></div>
         <h3>Project NITE</h3>
         <p>Software and mechanical engineering curriculum for neurodiverse individuals, making technology education accessible for all.</p>
       </div>
       <div class="oc reveal">
-        <div class="oc-ico">♿</div>
+        <div class="oc-ico"><i class="fas fa-wheelchair"></i></div>
         <h3>Veterans Affairs</h3>
         <p>Custom assistive technology for veterans. First project: MOVE, a holonomic wheelchair designed for in-home mobility.</p>
       </div>
@@ -519,7 +521,7 @@
         <a href="https://sharpai-2-7.vercel.app/" target="_blank" rel="noopener" class="btn btn-ghost" style="margin-top:1.5rem;">Launch Sharp AI →</a>
       </div>
       <div class="ai-badge">
-        <div class="ai-badge-icon">🤖</div>
+        <div class="ai-badge-icon"><i class="fas fa-microchip"></i></div>
         <div class="ai-badge-name">Sharp</div>
         <div class="ai-badge-sub">FTC Code LLM</div>
       </div>
@@ -534,7 +536,7 @@
     <div class="contact-h">Get in <span class="c">Touch</span></div>
     <p class="contact-p">Interested in sponsoring, collaborating, or learning more about our team? We'd love to hear from you.</p>
     <a class="contact-email" href="mailto:sharpfacerobotics@gmail.com">
-      ✉&nbsp; sharpfacerobotics@gmail.com
+      <i class="fas fa-envelope"></i>&nbsp; sharpfacerobotics@gmail.com
     </a>
     <div class="contact-foot">Emerald High School · Dublin, CA · FTC Team 30450</div>
   </div>
@@ -545,7 +547,7 @@
   <p>© 2025–26 Sharp Face Robotics · FTC Team 30450 · Emerald High School · Dublin, CA</p>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); } });
   }, { threshold: 0.1 });
@@ -553,11 +555,4 @@
 
   const secs = document.querySelectorAll('section[id]');
   const links = document.querySelectorAll('.nav-links a');
-  window.addEventListener('scroll', () => {
-    let cur = '';
-    secs.forEach(s => { if (window.scrollY >= s.offsetTop - 80) cur = s.id; });
-    links.forEach(a => { a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--cyan)' : ''; });
-  }, { passive: true });
-</script>
-</body>
-</html>
+  window.addEventListener('scroll', ()
