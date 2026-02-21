@@ -111,6 +111,7 @@
         0 0 80px rgba(82,219,212,.06),
         inset 0 1px 0 rgba(255,255,255,.06);
     }
+    @media (max-width:700px) { .tilt-wrap { margin-left: 0; } }
     .tilt-wrap img { width: 100%; filter: drop-shadow(0 0 48px rgba(82,219,212,.3)); display: block; border-radius: 2px; }
 
     /* SECTIONS */
@@ -317,7 +318,7 @@
     <p class="contact-p">Interested in sponsoring, collaborating, or learning more about our team? We'd love to hear from you.</p>
     <button class="contact-email" id="copy-email" onclick="copyEmail()">
       <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
-      <span id="email-text"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0c7f646d7e7c6a6d6f697e636e6378656f7f4c6b616d6560226f6361">[email&#160;protected]</a></span>
+      <span id="email-text">sharpfacerobotics@gmail.com</span>
       <svg class="icon" id="copy-icon" viewBox="0 0 24 24" fill="currentColor" style="opacity:.5;font-size:.75em"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"/></svg>
     </button>
     <div class="contact-foot">Emerald High School · Dublin, CA · FTC Team 30450</div>
@@ -329,7 +330,7 @@
   <p>© 2025–26 Sharp Face Robotics · FTC Team 30450 · Emerald High School · Dublin, CA</p>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   // Scroll reveal
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => {
