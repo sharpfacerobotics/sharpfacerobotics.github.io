@@ -39,6 +39,19 @@
 
     .icon { display: inline-block; width: 1em; height: 1em; vertical-align: middle; fill: currentColor; flex-shrink: 0; }
 
+    /* PAGE SYSTEM */
+    .page {
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+    .page.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     /* NAV */
     nav {
       position: fixed; inset: 0 0 auto 0; z-index: 99; width: 100%; height: 58px;
@@ -46,14 +59,63 @@
       border-bottom: 1px solid var(--edge); display: flex; align-items: center;
     }
     .nav-in { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 3rem; display: flex; align-items: center; justify-content: space-between; }
-    .brand { display: flex; align-items: center; gap: .7rem; }
+    .brand { display: flex; align-items: center; gap: .7rem; cursor: pointer; }
     .brand img { width: 30px; height: 30px; object-fit: contain; }
     .brand-t { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: .12em; line-height: 1; }
     .brand-t small { display: block; font-family: 'Roboto Mono', monospace; font-size: .52rem; letter-spacing: .2em; color: var(--cyan); margin-top: 3px; }
     .nav-links { display: flex; gap: 1.8rem; }
-    .nav-links a { font-family: 'Roboto Mono', monospace; font-size: .6rem; letter-spacing: .16em; text-transform: uppercase; color: var(--dim); transition: color .2s; }
+    .nav-links a { 
+      font-family: 'Roboto Mono', monospace; font-size: .6rem; letter-spacing: .16em; 
+      text-transform: uppercase; color: var(--dim); transition: color .2s; cursor: pointer;
+    }
     .nav-links a:hover { color: var(--cyan); }
-    @media (max-width:580px) { .nav-links { display: none; } }
+    .nav-links a.active { color: var(--cyan); }
+    @media (max-width:768px) { 
+      .nav-links { display: none; }
+      .mobile-menu-btn { display: block; }
+    }
+    @media (min-width:769px) {
+      .mobile-menu-btn { display: none; }
+    }
+
+    /* Mobile Menu */
+    .mobile-menu-btn {
+      background: none;
+      border: none;
+      color: var(--cyan);
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+    .mobile-menu {
+      position: fixed;
+      top: 58px;
+      left: 0;
+      right: 0;
+      background: rgba(6,8,11,.98);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--edge);
+      padding: 1rem 3rem;
+      display: none;
+      flex-direction: column;
+      gap: 1rem;
+      z-index: 98;
+    }
+    .mobile-menu.open {
+      display: flex;
+    }
+    .mobile-menu a {
+      font-family: 'Roboto Mono', monospace;
+      font-size: .7rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--dim);
+      padding: 0.5rem 0;
+      cursor: pointer;
+    }
+    .mobile-menu a.active {
+      color: var(--cyan);
+    }
 
     /* HERO */
     #hero { min-height: 100vh; display: flex; align-items: center; width: 100%; padding-top: 58px; position: relative; overflow: hidden; }
@@ -87,7 +149,7 @@
     .award-lbl span { font-size: .76rem; color: var(--dim); }
 
     .hero-ctas { display: flex; flex-wrap: wrap; gap: .9rem; margin-top: 2.2rem; opacity: 0; animation: up .7s .35s ease forwards; }
-    .btn { display: inline-flex; align-items: center; gap: .5rem; padding: .65rem 1.5rem; font-family: 'Roboto Mono', monospace; font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; transition: background .2s, border-color .2s, color .2s; }
+    .btn { display: inline-flex; align-items: center; gap: .5rem; padding: .65rem 1.5rem; font-family: 'Roboto Mono', monospace; font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; transition: background .2s, border-color .2s, color .2s; cursor: pointer; }
     .btn-primary { background: var(--cyan); color: #000; border: 1px solid var(--cyan); }
     .btn-primary:hover { background: #7ae8e2; border-color: #7ae8e2; }
     .btn-ghost { background: transparent; color: var(--cyan); border: 1px solid rgba(82,219,212,.35); }
@@ -114,6 +176,8 @@
     @media (max-width:700px) { .tilt-wrap { margin-left: 0; } }
     .tilt-wrap img { width: 100%; filter: drop-shadow(0 0 48px rgba(82,219,212,.3)); display: block; border-radius: 2px; }
 
+    @keyframes up { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
     /* SECTIONS */
     .section { padding: 5.5rem 0; width: 100%; }
     .section.alt { background: var(--surface); }
@@ -122,7 +186,7 @@
     .s-h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.2rem, 4.5vw, 3.4rem); letter-spacing: .05em; line-height: 1; }
     .bar { width: 36px; height: 2px; background: linear-gradient(90deg, var(--cyan), var(--lime)); margin: .9rem 0 2.5rem; }
 
-    /* TEAM */
+    /* TEAM OVERVIEW */
     .team-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 3.5rem; align-items: start; }
     @media (max-width:700px) { .team-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
 
@@ -139,42 +203,299 @@
     .pillar:hover { border-color: rgba(82,219,212,.3); }
     .p-tag { font-family: 'Roboto Mono', monospace; font-size: .57rem; letter-spacing: .13em; text-transform: uppercase; color: var(--lime); flex-shrink: 0; padding-top: .12rem; width: 56px; }
     .p-body strong { font-size: .93rem; font-weight: 700; color: var(--text); display: block; margin-bottom: .15rem; }
-    .p-body p { font-size: .82rem; color: var(--dim); line-height: 1.55; }
+    .p-body p { font-size: .87rem; color: var(--dim); }
 
-    /* SHARP AI */
-    .ai-card { border: 1px solid var(--edge); background: var(--card); padding: 2.5rem; display: flex; gap: 2.5rem; align-items: center; flex-wrap: wrap; }
-    .ai-copy { flex: 1; min-width: 220px; }
-    .ai-copy p { font-size: .95rem; color: var(--dim); line-height: 1.78; margin-top: .75rem; max-width: 520px; }
+    /* COACHES SECTION */
+    .coaches-section {
+      margin-bottom: 4rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--edge);
+    }
+    .coaches-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .coach-card {
+      background: var(--card);
+      border: 1px solid var(--edge);
+      padding: 2rem;
+      transition: border-color .3s, transform .3s;
+      text-align: center;
+    }
+    .coach-card:hover {
+      border-color: rgba(82,219,212,.4);
+      transform: translateY(-4px);
+    }
+    .coach-img {
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 1.2rem;
+      background: linear-gradient(145deg, rgba(82,219,212,.08) 0%, rgba(111,232,106,.05) 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--edge);
+      overflow: hidden;
+    }
+    .coach-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .coach-img-placeholder {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      color: var(--cyan);
+      opacity: 0.3;
+    }
+    .coach-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: .05em;
+      color: var(--text);
+      margin-bottom: .4rem;
+    }
+    .coach-title {
+      font-family: 'Roboto Mono', monospace;
+      font-size: .65rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 1rem;
+    }
+    .coach-bio {
+      font-size: .88rem;
+      color: var(--dim);
+      line-height: 1.7;
+    }
+
+    /* TEAM BIO CARDS */
+    .students-section {
+      margin-top: 3rem;
+    }
+    .bio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .bio-card {
+      background: var(--card);
+      border: 1px solid var(--edge);
+      transition: border-color .3s, transform .3s;
+      overflow: hidden;
+    }
+    .bio-card:hover {
+      border-color: rgba(82,219,212,.4);
+      transform: translateY(-4px);
+    }
+    .bio-img {
+      width: 100%;
+      height: 280px;
+      background: linear-gradient(145deg, rgba(82,219,212,.08) 0%, rgba(111,232,106,.05) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid var(--edge);
+      overflow: hidden;
+    }
+    .bio-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .bio-img-placeholder {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 4rem;
+      color: var(--cyan);
+      opacity: 0.3;
+    }
+    .bio-content {
+      padding: 1.3rem;
+    }
+    .bio-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: .05em;
+      color: var(--text);
+      margin-bottom: .3rem;
+    }
+    .bio-roles {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+      margin-bottom: 1rem;
+    }
+    .role-badge {
+      font-family: 'Roboto Mono', monospace;
+      font-size: .55rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: .35rem .65rem;
+      border: 1px solid;
+      display: inline-block;
+    }
+    .role-badge.mechanical {
+      color: var(--gold);
+      border-color: rgba(200,169,78,.4);
+      background: rgba(200,169,78,.08);
+    }
+    .role-badge.software {
+      color: var(--cyan);
+      border-color: rgba(82,219,212,.4);
+      background: rgba(82,219,212,.08);
+    }
+    .role-badge.outreach {
+      color: var(--lime);
+      border-color: rgba(111,232,106,.4);
+      background: rgba(111,232,106,.08);
+    }
+    .bio-details {
+      font-size: .85rem;
+      color: var(--dim);
+      line-height: 1.6;
+    }
+    .bio-detail-item {
+      margin-bottom: .5rem;
+    }
+    .bio-detail-label {
+      font-family: 'Roboto Mono', monospace;
+      font-size: .65rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      display: block;
+      margin-bottom: .2rem;
+    }
+
+    /* ROBOT */
+    .robot-hero { background: var(--card); border: 1px solid var(--edge); padding: 2.5rem; margin-bottom: 3rem; display: grid; grid-template-columns: 1.2fr 1fr; gap: 3rem; align-items: center; }
+    @media (max-width:700px) { .robot-hero { grid-template-columns: 1fr; padding: 1.5rem; } }
+    .robot-img-wrap { border: 1px solid rgba(82,219,212,.35); padding: 8px; background: linear-gradient(135deg, rgba(82,219,212,.04) 0%, rgba(111,232,106,.02) 100%); }
+    .robot-img-wrap img { width: 100%; display: block; border-radius: 2px; }
+    .robot-h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: .05em; margin-bottom: .9rem; }
+    .robot-p { font-size: .95rem; color: var(--dim); line-height: 1.75; margin-bottom: 1.2rem; }
+    .specs { display: flex; flex-direction: column; gap: .6rem; }
+    .spec-row { display: flex; justify-content: space-between; align-items: center; padding: .65rem 1rem; background: rgba(255,255,255,.02); border-left: 2px solid var(--cyan); }
+    .spec-row strong { font-family: 'Roboto Mono', monospace; font-size: .65rem; letter-spacing: .1em; text-transform: uppercase; color: var(--cyan); font-weight: 500; }
+    .spec-row span { font-size: .9rem; color: var(--text); }
+
+    .features-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; }
+    .feat { background: var(--card); border: 1px solid var(--edge); padding: 1.3rem; transition: border-color .2s; }
+    .feat:hover { border-color: rgba(82,219,212,.3); }
+    .feat-icon { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: rgba(82,219,212,.12); color: var(--cyan); border-radius: 2px; margin-bottom: .9rem; }
+    .feat-h { font-family: 'Roboto Mono', monospace; font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; color: var(--text); margin-bottom: .5rem; }
+    .feat-p { font-size: .88rem; color: var(--dim); line-height: 1.6; }
+
+    /* AI */
+    .ai-card { background: var(--card); border: 1px solid var(--edge); padding: 2.5rem; display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center; }
+    @media (max-width:700px) { .ai-card { grid-template-columns: 1fr; padding: 1.5rem; } }
+    .ai-copy { font-size: .96rem; color: var(--dim); line-height: 1.82; }
     .ai-copy strong { color: var(--text); font-weight: 700; }
-    .ai-badge { flex-shrink: 0; display: flex; flex-direction: column; align-items: center; gap: .5rem; border: 1px solid rgba(82,219,212,.22); background: rgba(82,219,212,.04); padding: 1.5rem 2rem; text-align: center; }
-    .ai-badge-icon { color: var(--cyan); display: flex; align-items: center; justify-content: center; }
-    .ai-badge-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: .1em; color: var(--cyan); }
-    .ai-badge-sub { font-family: 'Roboto Mono', monospace; font-size: .57rem; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); }
+    .ai-badge { display: flex; flex-direction: column; align-items: center; gap: .7rem; padding: 1.8rem 2.2rem; background: rgba(82,219,212,.06); border: 1px solid rgba(82,219,212,.25); }
+    .ai-badge-icon { width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; background: rgba(82,219,212,.15); color: var(--cyan); }
+    .ai-badge-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: .05em; line-height: 1; }
+    .ai-badge-sub { font-family: 'Roboto Mono', monospace; font-size: .58rem; letter-spacing: .14em; text-transform: uppercase; color: var(--cyan); }
+
+    /* SPONSORS */
+    .sponsor-intro {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 3rem;
+      font-size: .95rem;
+      color: var(--dim);
+      line-height: 1.8;
+    }
+    .sponsor-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    .sponsor-card {
+      background: var(--card);
+      border: 1px solid var(--edge);
+      padding: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 180px;
+      transition: border-color .3s, transform .3s;
+    }
+    .sponsor-card:hover {
+      border-color: rgba(82,219,212,.4);
+      transform: translateY(-4px);
+    }
+    .sponsor-card img {
+      max-width: 100%;
+      max-height: 80px;
+      object-fit: contain;
+      filter: grayscale(100%) brightness(1.2);
+      opacity: 0.7;
+      transition: filter .3s, opacity .3s;
+    }
+    .sponsor-card:hover img {
+      filter: grayscale(0%) brightness(1);
+      opacity: 1;
+    }
+    .sponsor-placeholder {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      color: var(--dim);
+      opacity: 0.3;
+    }
+    .sponsor-cta {
+      text-align: center;
+      padding: 3rem 2rem;
+      background: var(--card);
+      border: 1px solid var(--edge);
+    }
+    .sponsor-cta-h {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      letter-spacing: .05em;
+      margin-bottom: 1rem;
+    }
+    .sponsor-cta-p {
+      font-size: .95rem;
+      color: var(--dim);
+      margin-bottom: 1.5rem;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
 
     /* CONTACT */
-    #contact { text-align: center; padding: 6rem 2rem; position: relative; overflow: hidden; width: 100%; }
-    #contact::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 65% 70% at 50% 50%, rgba(82,219,212,.05) 0%, transparent 70%); }
-    .contact-in { position: relative; z-index: 1; }
-    .contact-logo { width: 80px; margin: 0 auto 1.8rem; filter: drop-shadow(0 0 18px rgba(82,219,212,.2)); }
-    .contact-h { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.4rem, 5.5vw, 4rem); letter-spacing: .05em; line-height: 1; }
+    #contact { background: var(--surface); padding: 5.5rem 0; }
+    .contact-in { max-width: 600px; margin: 0 auto; text-align: center; padding: 0 3rem; }
+    .contact-logo { width: 80px; height: 80px; margin: 0 auto 1.5rem; filter: drop-shadow(0 0 24px rgba(82,219,212,.4)); }
+    .contact-h { font-family: 'Bebas Neue', sans-serif; font-size: 2.8rem; letter-spacing: .05em; margin-bottom: 1rem; }
     .contact-h .c { color: var(--cyan); }
-    .contact-p { font-size: .93rem; color: var(--dim); max-width: 400px; margin: .9rem auto 2.2rem; }
-    .contact-email { display: inline-flex; cursor: pointer; background-color: rgba(82,219,212,.04); font-family: 'Roboto Mono', monospace; align-items: center; gap: .6rem; border: 1px solid rgba(82,219,212,.3); background: rgba(82,219,212,.04); color: var(--cyan); font-family: 'Roboto Mono', monospace; font-size: .82rem; letter-spacing: .06em; padding: .8rem 1.8rem; transition: background .2s, border-color .2s; }
-    button.contact-email { appearance: none; -webkit-appearance: none; }
-    .contact-email:hover { background: rgba(82,219,212,.1); border-color: var(--cyan); }
-    .contact-foot { margin-top: 1.1rem; font-family: 'Roboto Mono', monospace; font-size: .58rem; letter-spacing: .18em; text-transform: uppercase; color: var(--dim); }
+    .contact-p { font-size: .96rem; color: var(--dim); line-height: 1.75; margin-bottom: 2rem; }
+    .contact-email {
+      display: inline-flex; align-items: center; gap: .7rem; padding: .85rem 1.8rem;
+      background: var(--card); border: 1px solid var(--edge); color: var(--cyan);
+      font-family: 'Roboto Mono', monospace; font-size: .75rem; letter-spacing: .08em;
+      cursor: pointer; transition: background .2s, border-color .2s;
+    }
+    .contact-email:hover { background: rgba(82,219,212,.08); border-color: var(--cyan); }
+    .contact-foot { margin-top: 2.5rem; font-family: 'Roboto Mono', monospace; font-size: .6rem; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); }
 
     /* FOOTER */
-    footer { background: var(--surface); border-top: 1px solid var(--edge); padding: 1.8rem 2rem; text-align: center; width: 100%; }
-    footer p { font-family: 'Roboto Mono', monospace; font-size: .58rem; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); }
+    footer { background: var(--bg); padding: 2rem 3rem; text-align: center; border-top: 1px solid var(--edge); }
+    footer p { font-family: 'Roboto Mono', monospace; font-size: .62rem; letter-spacing: .12em; color: var(--dim); }
 
-    /* ANIMATIONS */
-    @keyframes up { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:none} }
+    /* REVEAL ANIMATION */
     .reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
-    .reveal.vis { opacity: 1; transform: none; }
-    .reveal:nth-child(2) { transition-delay: .07s; }
-    .reveal:nth-child(3) { transition-delay: .14s; }
-    .reveal:nth-child(4) { transition-delay: .21s; }
+    .reveal.vis { opacity: 1; transform: translateY(0); }
+
+    /* Page-specific nav spacing */
+    .page-content {
+      padding-top: 58px;
+    }
   </style>
 </head>
 <body>
@@ -182,171 +503,543 @@
 <!-- NAV -->
 <nav>
   <div class="nav-in">
-    <div class="brand">
-      <img src="SharpFace.png" alt="Sharp Face Robotics" />
+    <div class="brand" onclick="navigateTo('home')">
+      <img src="SharpFace.png" alt="Sharp Face Robotics">
       <div class="brand-t">
         Sharp Face Robotics
-        <small>FTC Team 30450</small>
+        <small>FTC #30450</small>
       </div>
     </div>
     <div class="nav-links">
-      <a href="#team">Team</a>
-      <a href="#ai">Sharp AI</a>
-      <a href="#contact">Contact</a>
+      <a onclick="navigateTo('home')" data-page="home">Home</a>
+      <a onclick="navigateTo('team')" data-page="team">Team</a>
+      <a onclick="navigateTo('bios')" data-page="bios">Team Bios</a>
+      <a onclick="navigateTo('ai')" data-page="ai">Sharp AI</a>
+      <a onclick="navigateTo('sponsors')" data-page="sponsors">Sponsors</a>
+      <a onclick="navigateTo('contact')" data-page="contact">Contact</a>
     </div>
+    <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
   </div>
 </nav>
 
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-wrap">
-    <div>
-      <div class="eyebrow">Emerald High School · Dublin, CA · FTC 2025–26</div>
-      <h1 class="hero-h1">Sharp<br>Face<br><span class="c">Robotics</span></h1>
-      <p class="hero-sub">Engineering excellence, community impact, and innovation — built by students, for the world.</p>
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <a onclick="navigateTo('home'); toggleMobileMenu();" data-page="home">Home</a>
+  <a onclick="navigateTo('team'); toggleMobileMenu();" data-page="team">Team</a>
+  <a onclick="navigateTo('bios'); toggleMobileMenu();" data-page="bios">Team Bios</a>
+  <a onclick="navigateTo('ai'); toggleMobileMenu();" data-page="ai">Sharp AI</a>
+  <a onclick="navigateTo('sponsors'); toggleMobileMenu();" data-page="sponsors">Sponsors</a>
+  <a onclick="navigateTo('contact'); toggleMobileMenu();" data-page="contact">Contact</a>
+</div>
 
-      <div class="awards">
-        <div class="award">
-          <span class="aw-icon">
-            <svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 5h-1V3H6v2H5C3.3 5 2 6.3 2 8c0 1.5 1 2.8 2.4 3.2C5 13.2 6.7 14.8 9 15.4V17H7v2h10v-2h-2v-1.6c2.3-.6 4-2.2 4.6-4.2C21 10.8 22 9.5 22 8c0-1.7-1.3-3-3-3zm0 4.8c-.1 0-.1.1-.2.1V7h.2c.6 0 1 .4 1 1 0 .5-.4.9-.9 1L19 9.8zM5 9.8C4.4 9.7 4 9.2 4 8.7c0-.3.2-.6.5-.8l.5-.1v2.8C5 10.4 5 10.1 5 9.8zm7 7.2c-2.8 0-5-2.2-5-5V5h10v7c0 2.8-2.2 5-5 5z"/></svg>
-          </span>
-          <div class="award-lbl">
-            <b>2nd Place Inspire</b>
-            <span>League Award</span>
-          </div>
-        </div>
-        <div class="award">
-          <span class="aw-icon">
-            <svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l2.4 4.8L20 8l-4 3.9 1 5.4-4.5-2.4L8 17.3l1-5.4L5 8l5.6-.8L12 2zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm0-1a3 3 0 1 1 0 6 3 3 0 0 1 0-6zM9 19.5l-1.5 1L9 22l1.5-1L12 22l1.5-1.5L15 22l1.5-1.5-1.5-1-1.5 1-1.5-1-1.5 1z"/></svg>
-          </span>
-          <div class="award-lbl">
-            <b>Finalist Award</b>
-            <span>Alliance Finalist</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="hero-ctas">
-        <a href="#contact" class="btn btn-primary">Get in Touch</a>
-        <a href="https://sharpai-2-7.vercel.app/" target="_blank" rel="noopener" class="btn btn-ghost">Try Sharp AI</a>
-      </div>
-    </div>
-
-    <div class="hero-logo-col">
-      <div class="tilt-wrap" id="tilt">
-        <img src="team.png" alt="Sharp Face Robotics Dragon" />
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TEAM -->
-<section id="team" class="section alt">
-  <div class="wrap">
-    <div class="s-tag">Who We Are</div>
-    <div class="s-h2">Our Team</div>
-    <div class="bar"></div>
-    <div class="team-grid">
+<!-- HOME PAGE -->
+<div class="page active" id="page-home">
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-wrap">
       <div>
-        <div class="mission reveal">
-          <strong>Sharp Face Robotics</strong> is a FIRST Tech Challenge team from Emerald High School in Dublin, California. We empower students to grow as engineers, leaders, and community builders — designing competitive robots while running STEM outreach programs that reach thousands across the Bay Area.
+        <div class="eyebrow">FTC Team 30450 · Emerald High School</div>
+        <h1 class="hero-h1">Sharp Face <span class="c">Robotics</span></h1>
+        <p class="hero-sub">Building competitive robots and inspiring the next generation of engineers through STEM education across the Bay Area.</p>
+        
+        <div class="awards">
+          <div class="award">
+            <div class="aw-icon">🏆</div>
+            <div class="award-lbl">
+              <b>2nd Place Inspire</b>
+              <span>League Award</span>
+            </div>
+          </div>
+          <div class="award">
+            <div class="aw-icon">⭐</div>
+            <div class="award-lbl">
+              <b>Finalist Award</b>
+              <span>Alliance Finalist</span>
+            </div>
+          </div>
         </div>
-        <div class="counters reveal">
-          <div class="counter"><div class="n">49</div><div class="l">Club Members</div></div>
-          <div class="counter"><div class="n">3</div><div class="l">Coaches</div></div>
-          <div class="counter"><div class="n">9,395</div><div class="l">People Reached</div></div>
-          <div class="counter"><div class="n">2,026</div><div class="l">Volunteer Hours</div></div>
+
+        <div class="hero-ctas">
+          <button class="btn btn-primary" onclick="navigateTo('team')">Meet the Team</button>
+          <button class="btn btn-ghost" onclick="navigateTo('contact')">Get in Touch</button>
         </div>
       </div>
-      <div class="pillars">
-        <div class="pillar reveal">
-          <div class="p-tag">Design</div>
-          <div class="p-body">
-            <strong>Engineering Excellence</strong>
-            <p>Custom mecanum drivetrain, dual-compliant intake, and an iterated flywheel shooter — built for reliability all season long.</p>
+      <div class="hero-logo-col">
+        <div class="tilt-wrap" id="tilt">
+          <img src="team.png" alt="Sharp Face Robotics Team">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM PREVIEW -->
+  <section class="section alt">
+    <div class="wrap">
+      <div class="s-tag">Who We Are</div>
+      <div class="s-h2">Our Team</div>
+      <div class="bar"></div>
+      <div class="team-grid">
+        <div>
+          <div class="mission reveal">
+            <strong>Sharp Face Robotics</strong> is a FIRST Tech Challenge team from Emerald High School in Dublin, California. We empower students to grow as engineers, leaders, and community builders — designing competitive robots while running STEM outreach programs that reach thousands across the Bay Area.
+          </div>
+          <div class="counters reveal">
+            <div class="counter"><div class="n">49</div><div class="l">Club Members</div></div>
+            <div class="counter"><div class="n">3</div><div class="l">Coaches</div></div>
+            <div class="counter"><div class="n">9,395</div><div class="l">People Reached</div></div>
+            <div class="counter"><div class="n">2,026</div><div class="l">Volunteer Hours</div></div>
           </div>
         </div>
-        <div class="pillar reveal">
-          <div class="p-tag">Software</div>
-          <div class="p-body">
-            <strong>Smart Autonomy</strong>
-            <p>Pedro Pathing, AprilTag vision, and voltage compensation — clean code that makes the robot feel effortless to drive.</p>
+        <div class="pillars">
+          <div class="pillar reveal">
+            <div class="p-tag">Design</div>
+            <div class="p-body">
+              <strong>Engineering Excellence</strong>
+              <p>Custom mecanum drivetrain, dual-compliant intake, and an iterated flywheel shooter — built for reliability all season long.</p>
+            </div>
           </div>
-        </div>
-        <div class="pillar reveal">
-          <div class="p-tag">Outreach</div>
-          <div class="p-body">
-            <strong>Community Presence</strong>
-            <p>We have an active presence across the Bay Area. Contact us for curriculum development partnerships or any other inquiries — we'd love to connect.</p>
+          <div class="pillar reveal">
+            <div class="p-tag">Software</div>
+            <div class="p-body">
+              <strong>Smart Autonomy</strong>
+              <p>Pedro Pathing, AprilTag vision, and voltage compensation — clean code that makes the robot feel effortless to drive.</p>
+            </div>
+          </div>
+          <div class="pillar reveal">
+            <div class="p-tag">Outreach</div>
+            <div class="p-body">
+              <strong>Community Presence</strong>
+              <p>We have an active presence across the Bay Area. Contact us for curriculum development partnerships or any other inquiries — we'd love to connect.</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- SHARP AI -->
-<section id="ai" class="section">
-  <div class="wrap">
-    <div class="s-tag">Innovation</div>
-    <div class="s-h2">Sharp AI</div>
-    <div class="bar"></div>
-    <div class="ai-card reveal">
-      <div class="ai-copy">
-        <p>As a rookie team, we struggled to find AI tools tailored to FTC programming — so we built our own. <strong>Sharp</strong> is a large language model designed specifically to generate FTC-ready code, helping our team iterate faster and sharing that advantage with the wider robotics community.</p>
-        <a href="https://sharpai-2-7.vercel.app/" target="_blank" rel="noopener" class="btn btn-ghost" style="margin-top:1.5rem;">
-          Launch Sharp AI
-          <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
-        </a>
-      </div>
-      <div class="ai-badge">
-        <div class="ai-badge-icon">
-          <svg class="icon" style="width:1.8rem;height:1.8rem" viewBox="0 0 24 24" fill="currentColor"><path d="M9 2v2H7a2 2 0 0 0-2 2v2H3v2h2v2H3v2h2v2a2 2 0 0 0 2 2h2v2h2v-2h2v2h2v-2h2a2 2 0 0 0 2-2v-2h2v-2h-2v-2h2V9h-2V7a2 2 0 0 0-2-2h-2V3h-2v2h-2V3H9zm-2 4h10v10H7V6zm2 2v6h6V8H9z"/></svg>
+  <!-- SHARP AI PREVIEW -->
+  <section class="section">
+    <div class="wrap">
+      <div class="s-tag">Innovation</div>
+      <div class="s-h2">Sharp AI</div>
+      <div class="bar"></div>
+      <div class="ai-card reveal">
+        <div class="ai-copy">
+          <p>As a rookie team, we struggled to find AI tools tailored to FTC programming — so we built our own. <strong>Sharp</strong> is a large language model designed specifically to generate FTC-ready code, helping our team iterate faster and sharing that advantage with the wider robotics community.</p>
+          <a href="https://sharpai-2-7.vercel.app/" target="_blank" rel="noopener" class="btn btn-ghost" style="margin-top:1.5rem;">
+            Launch Sharp AI
+            <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+          </a>
         </div>
-        <div class="ai-badge-name">Sharp</div>
-        <div class="ai-badge-sub">FTC Code LLM</div>
+        <div class="ai-badge">
+          <div class="ai-badge-icon">
+            <svg class="icon" style="width:1.8rem;height:1.8rem" viewBox="0 0 24 24" fill="currentColor"><path d="M9 2v2H7a2 2 0 0 0-2 2v2H3v2h2v2H3v2h2v2a2 2 0 0 0 2 2h2v2h2v-2h2v2h2v-2h2a2 2 0 0 0 2-2v-2h2v-2h-2v-2h2V9h-2V7a2 2 0 0 0-2-2h-2V3h-2v2h-2V3H9zm-2 4h10v10H7V6zm2 2v6h6V8H9z"/></svg>
+          </div>
+          <div class="ai-badge-name">Sharp</div>
+          <div class="ai-badge-sub">FTC Code LLM</div>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+  
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-in">
+      <img class="contact-logo" src="SharpFace.png" alt="Sharp Face Robotics" />
+      <div class="contact-h">Get in <span class="c">Touch</span></div>
+      <p class="contact-p">Interested in sponsoring, collaborating, or learning more about our team? We'd love to hear from you.</p>
+      <button class="contact-email" id="copy-email" onclick="copyEmail()">
+        <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        <span id="email-text">contact30450@gmail.com</span>
+        <svg class="icon" id="copy-icon" viewBox="0 0 24 24" fill="currentColor" style="opacity:.5;font-size:.75em"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"/></svg>
+      </button>
+    </div>
+  </section>
+</div>
 
-<!-- CONTACT -->
-<section id="contact">
-  <div class="contact-in">
-    <img class="contact-logo" src="SharpFace.png" alt="Sharp Face Robotics" />
-    <div class="contact-h">Get in <span class="c">Touch</span></div>
-    <p class="contact-p">Interested in sponsoring, collaborating, or learning more about our team? We'd love to hear from you.</p>
-    <button class="contact-email" id="copy-email" onclick="copyEmail()">
-      <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
-      <span id="email-text">contact30450@gmail.com</span>
-      <svg class="icon" id="copy-icon" viewBox="0 0 24 24" fill="currentColor" style="opacity:.5;font-size:.75em"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"/></svg>
-    </button>
-    <div class="contact-foot">Emerald High School · Dublin, CA · FTC Team 30450</div>
+<!-- TEAM OVERVIEW PAGE -->
+<div class="page" id="page-team">
+  <div class="page-content">
+    <section class="section">
+      <div class="wrap">
+        <div class="s-tag">Who We Are</div>
+        <div class="s-h2">Our Team</div>
+        <div class="bar"></div>
+        <div class="team-grid">
+          <div>
+            <div class="mission reveal">
+              <strong>Sharp Face Robotics</strong> is a FIRST Tech Challenge team from Emerald High School in Dublin, California. We empower students to grow as engineers, leaders, and community builders — designing competitive robots while running STEM outreach programs that reach thousands across the Bay Area.
+            </div>
+            <div class="counters reveal">
+              <div class="counter"><div class="n">49</div><div class="l">Club Members</div></div>
+              <div class="counter"><div class="n">3</div><div class="l">Coaches</div></div>
+              <div class="counter"><div class="n">9,395</div><div class="l">People Reached</div></div>
+              <div class="counter"><div class="n">2,026</div><div class="l">Volunteer Hours</div></div>
+            </div>
+          </div>
+          <div class="pillars">
+            <div class="pillar reveal">
+              <div class="p-tag">Design</div>
+              <div class="p-body">
+                <strong>Engineering Excellence</strong>
+                <p>Custom mecanum drivetrain, dual-compliant intake, and an iterated flywheel shooter — built for reliability all season long.</p>
+              </div>
+            </div>
+            <div class="pillar reveal">
+              <div class="p-tag">Software</div>
+              <div class="p-body">
+                <strong>Smart Autonomy</strong>
+                <p>Pedro Pathing, AprilTag vision, and voltage compensation — clean code that makes the robot feel effortless to drive.</p>
+              </div>
+            </div>
+            <div class="pillar reveal">
+              <div class="p-tag">Outreach</div>
+              <div class="p-body">
+                <strong>Community Presence</strong>
+                <p>We have an active presence across the Bay Area. Contact us for curriculum development partnerships or any other inquiries — we'd love to connect.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
-</section>
+</div>
+
+<!-- TEAM BIOS PAGE -->
+<div class="page" id="page-bios">
+  <div class="page-content">
+    <section class="section alt">
+      <div class="wrap">
+        <div class="s-tag">Meet Our Members</div>
+        <div class="s-h2">Team Bios</div>
+        <div class="bar"></div>
+
+        <!-- COACHES SECTION -->
+        <div class="coaches-section">
+          <div class="s-h2" style="font-size: 2rem; margin-bottom: 1rem;">Our Coaches</div>
+          <div class="coaches-grid">
+            <!-- Coach 1 -->
+            <div class="coach-card reveal">
+              <div class="coach-img">
+                <!-- Replace with actual image: <img src="coach1.jpg" alt="Coach Name"> -->
+                <div class="coach-img-placeholder">SF</div>
+              </div>
+              <div class="coach-name">Coach Name</div>
+              <div class="coach-title">Head Coach</div>
+              <div class="coach-bio">
+                Brief bio about the coach's experience, expertise, and role with the team. Mention their background in robotics, teaching, or engineering.
+              </div>
+            </div>
+
+            <!-- Coach 2 -->
+            <div class="coach-card reveal">
+              <div class="coach-img">
+                <div class="coach-img-placeholder">SF</div>
+              </div>
+              <div class="coach-name">Coach Name</div>
+              <div class="coach-title">Assistant Coach</div>
+              <div class="coach-bio">
+                Brief bio about the coach's experience, expertise, and role with the team. Mention their background in robotics, teaching, or engineering.
+              </div>
+            </div>
+
+            <!-- Coach 3 -->
+            <div class="coach-card reveal">
+              <div class="coach-img">
+                <div class="coach-img-placeholder">SF</div>
+              </div>
+              <div class="coach-name">Coach Name</div>
+              <div class="coach-title">Technical Mentor</div>
+              <div class="coach-bio">
+                Brief bio about the coach's experience, expertise, and role with the team. Mention their background in robotics, teaching, or engineering.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STUDENTS SECTION -->
+        <div class="students-section">
+          <div class="s-h2" style="font-size: 2rem; margin-bottom: 1rem;">Student Members</div>
+          <div class="bio-grid">
+          <!-- Example Team Member 1 -->
+          <div class="bio-card reveal">
+            <div class="bio-img">
+              <!-- Replace with actual image: <img src="member1.jpg" alt="Member Name"> -->
+              <div class="bio-img-placeholder">SF</div>
+            </div>
+            <div class="bio-content">
+              <div class="bio-name">Alex Chen</div>
+              <div class="bio-roles">
+                <span class="role-badge mechanical">Mechanical</span>
+                <span class="role-badge software">Software</span>
+              </div>
+              <div class="bio-details">
+                <div class="bio-detail-item">
+                  <span class="bio-detail-label">Grade</span>
+                  Senior
+                </div>
+                <div class="bio-detail-item">
+                  <span class="bio-detail-label">Hobbies</span>
+                  3D printing, robotics competitions, gaming
+                </div>
+                <div class="bio-detail-item">
+                  <span class="bio-detail-label">Favorite Project</span>
+                  Designing the robot's intake mechanism
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Example Team Member 2 -->
+          <div class="bio-card reveal">
+            <div class="bio-img">
+              <div class="bio-img-placeholder">SF</div>
+            </div>
+            <div class="bio-content">
+              <div class="bio-name">Sarah Martinez</div>
+              <div class="bio-roles">
+                <span class="role-badge software">Software</span>
+              </div>
+              <div class="bio-details">
+                <div class="bio-detail-item">
+                  <span class="bio-detail-label">Grade</span>
+                  Junior
+                </div>
+                <div class="bio-detail-item">
+                  <span class="bio-detail-label">Hobbies</span>
+                  Programming, machine learning, music production
+                </div>
+                <div class="bio-detail-item">
+                  <span class="bio-detail-label">Favorite Project</span>
+                  Implementing autonomous navigation
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Example Team Member 3 -->
+          <div class="bio-card reveal">
+            <div class="bio-img">
+              <div class="bio-img-placeholder">SF</div>
+            </div>
+            <div class="bio-content">
+              <div class="bio-name">Jordan Kim</div>
+              <div class="bio-roles">
+                <span class="role-badge outreach">Outreach</span>
+              </div>
+              <div class="bio-details">
+                <div class="bio-detail-item">
+                  <span class="bio-detail-label">Grade</span>
+                  Sophomore
+                </div>
+                <div class="bio-detail-item">
+                  <span class="bio-detail-label">Hobbies</span>
+                  Public speaking, photography, teaching STEM
+                </div>
+                <div class="bio-detail-item">
+                  <span class="bio-detail-label">Favorite Project</span>
+                  Organizing elementary school workshops
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Example Team Member 4 -->
+          <div class="bio-card reveal">
+            <div class="bio-img">
+              <div class="bio-img-placeholder">SF</div>
+            </div>
+            <div class="bio-content">
+              <div class="bio-name">Marcus Johnson</div>
+              <div class="bio-roles">
+                <span class="role-badge mechanical">Mechanical</span>
+                <span class="role-badge outreach">Outreach</span>
+              </div>
+              <div class="bio-details">
+                <div class="bio-detail-item">
+                  <span class="bio-detail-label">Grade</span>
+                  Senior
+                </div>
+                <div class="bio-detail-item">
+                  <span class="bio-detail-label">Hobbies</span>
+                  CAD design, basketball, community service
+                </div>
+                <div class="bio-detail-item">
+                  <span class="bio-detail-label">Favorite Project</span>
+                  Leading team workshops
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Add more team members as needed -->
+        </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- SHARP AI PAGE -->
+<div class="page" id="page-ai">
+  <div class="page-content">
+    <section class="section">
+      <div class="wrap">
+        <div class="s-tag">Innovation</div>
+        <div class="s-h2">Sharp AI</div>
+        <div class="bar"></div>
+        <div class="ai-card reveal">
+          <div class="ai-copy">
+            <p>As a rookie team, we struggled to find AI tools tailored to FTC programming — so we built our own. <strong>Sharp</strong> is a large language model designed specifically to generate FTC-ready code, helping our team iterate faster and sharing that advantage with the wider robotics community.</p>
+            <a href="https://sharpai-2-7.vercel.app/" target="_blank" rel="noopener" class="btn btn-ghost" style="margin-top:1.5rem;">
+              Launch Sharp AI
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+            </a>
+          </div>
+          <div class="ai-badge">
+            <div class="ai-badge-icon">
+              <svg class="icon" style="width:1.8rem;height:1.8rem" viewBox="0 0 24 24" fill="currentColor"><path d="M9 2v2H7a2 2 0 0 0-2 2v2H3v2h2v2H3v2h2v2a2 2 0 0 0 2 2h2v2h2v-2h2v2h2v-2h2a2 2 0 0 0 2-2v-2h2v-2h-2v-2h2V9h-2V7a2 2 0 0 0-2-2h-2V3h-2v2h-2V3H9zm-2 4h10v10H7V6zm2 2v6h6V8H9z"/></svg>
+            </div>
+            <div class="ai-badge-name">Sharp</div>
+            <div class="ai-badge-sub">FTC Code LLM</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- SPONSORS PAGE -->
+<div class="page" id="page-sponsors">
+  <div class="page-content">
+    <section class="section">
+      <div class="wrap">
+        <div class="s-tag">Our Partners</div>
+        <div class="s-h2">Sponsors</div>
+        <div class="bar"></div>
+
+        <div class="sponsor-intro reveal">
+          We're grateful for the support of our sponsors who make our work possible. Their contributions help fund competition fees, robot parts, tools, and outreach programs that inspire the next generation of engineers.
+        </div>
+
+        <div class="sponsor-grid">
+          <!-- Example Sponsor 1 -->
+          <div class="sponsor-card reveal">
+            <!-- Replace with actual logo: <img src="sponsor1-logo.png" alt="Sponsor Name"> -->
+            <div class="sponsor-placeholder">SPONSOR 1</div>
+          </div>
+
+          <!-- Example Sponsor 2 -->
+          <div class="sponsor-card reveal">
+            <div class="sponsor-placeholder">SPONSOR 2</div>
+          </div>
+
+          <!-- Example Sponsor 3 -->
+          <div class="sponsor-card reveal">
+            <div class="sponsor-placeholder">SPONSOR 3</div>
+          </div>
+
+          <!-- Example Sponsor 4 -->
+          <div class="sponsor-card reveal">
+            <div class="sponsor-placeholder">SPONSOR 4</div>
+          </div>
+
+          <!-- Example Sponsor 5 -->
+          <div class="sponsor-card reveal">
+            <div class="sponsor-placeholder">SPONSOR 5</div>
+          </div>
+
+          <!-- Example Sponsor 6 -->
+          <div class="sponsor-card reveal">
+            <div class="sponsor-placeholder">SPONSOR 6</div>
+          </div>
+        </div>
+
+        <div class="sponsor-cta reveal">
+          <h3 class="sponsor-cta-h">Become a Sponsor</h3>
+          <p class="sponsor-cta-p">Interested in supporting our team? Sponsorships help us compete, innovate, and inspire students across the Bay Area.</p>
+          <button class="btn btn-primary" onclick="navigateTo('contact')">Contact Us</button>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- CONTACT PAGE -->
+<div class="page" id="page-contact">
+  <div class="page-content">
+    <section id="contact">
+      <div class="contact-in">
+        <img class="contact-logo" src="SharpFace.png" alt="Sharp Face Robotics" />
+        <div class="contact-h">Get in <span class="c">Touch</span></div>
+        <p class="contact-p">Interested in sponsoring, collaborating, or learning more about our team? We'd love to hear from you.</p>
+        <button class="contact-email" id="copy-email-page" onclick="copyEmailPage()">
+          <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          <span id="email-text-page">contact30450@gmail.com</span>
+          <svg class="icon" id="copy-icon-page" viewBox="0 0 24 24" fill="currentColor" style="opacity:.5;font-size:.75em"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"/></svg>
+        </button>
+      </div>
+    </section>
+  </div>
+</div>
 
 <!-- FOOTER -->
 <footer>
   <p>© 2025–26 Sharp Face Robotics · FTC Team 30450 · Emerald High School · Dublin, CA</p>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Page Navigation System
+  function navigateTo(pageName) {
+    // Hide all pages
+    document.querySelectorAll('.page').forEach(page => {
+      page.classList.remove('active');
+    });
+    
+    // Show selected page
+    const targetPage = document.getElementById('page-' + pageName);
+    if (targetPage) {
+      targetPage.classList.add('active');
+    }
+    
+    // Update nav active state
+    document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(link => {
+      link.classList.remove('active');
+      if (link.dataset.page === pageName) {
+        link.classList.add('active');
+      }
+    });
+    
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    // Re-run reveal animations for new page
+    setTimeout(() => {
+      document.querySelectorAll('.page.active .reveal').forEach(el => {
+        obs.observe(el);
+      });
+    }, 100);
+  }
+
+  // Mobile Menu Toggle
+  function toggleMobileMenu() {
+    const menu = document.getElementById('mobile-menu');
+    menu.classList.toggle('open');
+  }
+
   // Scroll reveal
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); }
+      if (e.isIntersecting) { 
+        e.target.classList.add('vis'); 
+        obs.unobserve(e.target); 
+      }
     });
   }, { threshold: 0.1 });
+  
+  // Observe all reveal elements on page load
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-  // Nav active highlight
-  const secs = document.querySelectorAll('section[id]');
-  const links = document.querySelectorAll('.nav-links a');
-  window.addEventListener('scroll', () => {
-    let cur = '';
-    secs.forEach(s => { if (window.scrollY >= s.offsetTop - 80) cur = s.id; });
-    links.forEach(a => { a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--cyan)' : ''; });
-  }, { passive: true });
 
   // 3D tilt effect on hero logo
   const tilt = document.getElementById('tilt');
@@ -368,6 +1061,7 @@
   }
 
   // Clipboard copy on email button
+  // Clipboard copy on email button (main page)
   function copyEmail() {
     navigator.clipboard.writeText('contact30450@gmail.com').then(() => {
       const txt = document.getElementById('email-text');
@@ -377,11 +1071,28 @@
       icon.innerHTML = '<path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>';
       setTimeout(() => {
         txt.textContent = 'contact30450@gmail.com';
-        icon.style.opacity = '0.5';
+        icon.style.opacity = '.5';
+        icon.innerHTML = '<path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"/>';
+      }, 2000);
+    });
+  }
+
+  // Clipboard copy on email button (contact page)
+  function copyEmailPage() {
+    navigator.clipboard.writeText('contact30450@gmail.com').then(() => {
+      const txt = document.getElementById('email-text-page');
+      const icon = document.getElementById('copy-icon-page');
+      txt.textContent = 'Copied!';
+      icon.style.opacity = '1';
+      icon.innerHTML = '<path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>';
+      setTimeout(() => {
+        txt.textContent = 'contact30450@gmail.com';
+        icon.style.opacity = '.5';
         icon.innerHTML = '<path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"/>';
       }, 2000);
     });
   }
 </script>
+
 </body>
 </html>
