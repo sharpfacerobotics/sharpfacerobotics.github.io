@@ -21,7 +21,6 @@ jobs:
         uses: cicirello/generate-sitemap@v1
         with:
           base-url-path: https://sharpfacerobotics.github.io
-          include-robots: false
 
       - name: Normalize sitemap (UTC lastmod + cleanup)
         run: |
