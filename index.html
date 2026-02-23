@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="SharpFace.png" type="image/png">
+  <link rel="icon" href="assets/SharpFace.png" type="image/png">
   <title>Sharp Face Robotics · Team 30450</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -206,6 +206,76 @@
     .p-body p { font-size: .87rem; color: var(--dim); }
 
     /* COACHES SECTION */
+    .captain-section {
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--edge);
+    }
+    .captain-card {
+      max-width: 400px;
+      margin: 0 auto;
+      background: var(--card);
+      border: 2px solid var(--cyan);
+      padding: 2rem;
+      text-align: center;
+    }
+    .captain-img {
+      width: 180px;
+      height: 180px;
+      margin: 0 auto 1.5rem;
+      background: linear-gradient(145deg, rgba(82,219,212,.12) 0%, rgba(111,232,106,.08) 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 3px solid var(--cyan);
+      overflow: hidden;
+    }
+    .captain-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .captain-img-placeholder {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 4rem;
+      color: var(--cyan);
+      opacity: 0.3;
+    }
+    .captain-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      letter-spacing: .05em;
+      color: var(--text);
+      margin-bottom: .4rem;
+    }
+    .captain-title {
+      font-family: 'Roboto Mono', monospace;
+      font-size: .7rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 1.2rem;
+      font-weight: 500;
+    }
+    .captain-details {
+      font-size: .88rem;
+      color: var(--dim);
+      line-height: 1.6;
+    }
+    .captain-detail-item {
+      margin-bottom: .7rem;
+    }
+    .captain-detail-label {
+      font-family: 'Roboto Mono', monospace;
+      font-size: .65rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      display: block;
+      margin-bottom: .25rem;
+    }
+
     .coaches-section {
       margin-bottom: 4rem;
       padding-bottom: 3rem;
@@ -213,7 +283,7 @@
     }
     .coaches-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 2rem;
       margin-top: 2rem;
     }
@@ -266,21 +336,83 @@
       color: var(--cyan);
       margin-bottom: 1rem;
     }
-    .coach-bio {
+    .coach-details {
       font-size: .88rem;
       color: var(--dim);
-      line-height: 1.7;
+      line-height: 1.6;
+    }
+    .coach-detail-item {
+      margin-bottom: .5rem;
+    }
+    .coach-detail-label {
+      font-family: 'Roboto Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      display: block;
+      margin-bottom: .2rem;
     }
 
-    /* TEAM BIO CARDS */
+    /* TEAM BIO CARDS - ROLE-BASED LAYOUT */
     .students-section {
       margin-top: 3rem;
     }
+    .role-section {
+      margin-bottom: 3rem;
+    }
+    .role-section:last-child {
+      margin-bottom: 0;
+    }
+    .role-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .role-header-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: .05em;
+      color: var(--text);
+    }
+    .role-header-badge {
+      font-family: 'Roboto Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: .4rem .8rem;
+      border: 1px solid;
+    }
+    .role-header-badge.mechanical {
+      color: var(--gold);
+      border-color: rgba(200,169,78,.4);
+      background: rgba(200,169,78,.08);
+    }
+    .role-header-badge.software {
+      color: var(--cyan);
+      border-color: rgba(82,219,212,.4);
+      background: rgba(82,219,212,.08);
+    }
     .bio-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      grid-template-columns: repeat(4, 1fr);
       gap: 1.5rem;
-      margin-top: 2rem;
+    }
+    @media (max-width: 1200px) {
+      .bio-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    @media (max-width: 900px) {
+      .bio-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 600px) {
+      .bio-grid {
+        grid-template-columns: 1fr;
+      }
     }
     .bio-card {
       background: var(--card);
@@ -294,18 +426,29 @@
     }
     .bio-img {
       width: 100%;
-      height: 280px;
+      height: 220px;
       background: linear-gradient(145deg, rgba(82,219,212,.08) 0%, rgba(111,232,106,.05) 100%);
       display: flex;
       align-items: center;
       justify-content: center;
-      border-bottom: 1px solid var(--edge);
       overflow: hidden;
+      position: relative;
+    }
+    .bio-img::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: linear-gradient(to bottom, transparent, rgba(18,21,30,.95));
+      pointer-events: none;
     }
     .bio-img img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: top;
     }
     .bio-img-placeholder {
       font-family: 'Bebas Neue', sans-serif;
@@ -532,7 +675,7 @@
 <nav>
   <div class="nav-in">
     <div class="brand" onclick="navigateTo('home')">
-      <img src="SharpFace.png" alt="Sharp Face Robotics">
+      <img src="assets/SharpFace.png" alt="Sharp Face Robotics">
       <div class="brand-t">
         Sharp Face Robotics
         <small>FTC #30450</small>
@@ -594,7 +737,7 @@
       </div>
       <div class="hero-logo-col">
         <div class="tilt-wrap" id="tilt">
-          <img src="team.png" alt="Sharp Face Robotics Team">
+          <img src="assets/team.png" alt="Sharp Face Robotics Team">
         </div>
       </div>
     </div>
@@ -673,12 +816,12 @@
   <!-- CONTACT -->
   <section id="contact">
     <div class="contact-in">
-      <img class="contact-logo" src="SharpFace.png" alt="Sharp Face Robotics" />
+      <img class="contact-logo" src="assets/SharpFace.png" alt="Sharp Face Robotics" />
       <div class="contact-h">Get in <span class="c">Touch</span></div>
       <p class="contact-p">Interested in sponsoring, collaborating, or learning more about our team? We'd love to hear from you.</p>
       <button class="contact-email" id="copy-email" onclick="copyEmail()">
         <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
-        <span id="email-text">contact30450@gmail.com</span>
+        <span id="email-text"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="385b57564c595b4c0b080c0d08785f55595154165b5755">[email&#160;protected]</a></span>
         <svg class="icon" id="copy-icon" viewBox="0 0 24 24" fill="currentColor" style="opacity:.5;font-size:.75em"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"/></svg>
       </button>
     </div>
@@ -743,6 +886,28 @@
         <div class="s-h2">Team Bios</div>
         <div class="bar"></div>
 
+        <!-- CAPTAIN SECTION -->
+        <div class="captain-section">
+          <div class="captain-card reveal">
+            <div class="captain-img">
+              <!-- Replace with: <img src="assets/captain.jpg" alt="Captain Name"> -->
+              <img src="assets/varun.png" alt="Varun Vasishta">
+            </div>
+            <div class="captain-name">Varun Vasishta</div>
+            <div class="captain-title">Team Captain</div>
+            <div class="captain-details">
+              <div class="captain-detail-item">
+                <span class="captain-detail-label">Grade</span>
+                Junior
+              </div>
+              <div class="captain-detail-item">
+                <span class="captain-detail-label">Favorite Part</span>
+                Crashing into the Fadhil wall with no regret
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- COACHES SECTION -->
         <div class="coaches-section">
           <div class="s-h2" style="font-size: 2rem; margin-bottom: 1rem;">Our Coaches</div>
@@ -750,37 +915,48 @@
             <!-- Coach 1 -->
             <div class="coach-card reveal">
               <div class="coach-img">
-                <!-- Replace with actual image: <img src="coach1.jpg" alt="Coach Name"> -->
+                <!-- Replace with: <img src="assets/coach1.jpg" alt="Coach Name"> -->
                 <div class="coach-img-placeholder">SF</div>
               </div>
               <div class="coach-name">Coach Name</div>
               <div class="coach-title">Head Coach</div>
-              <div class="coach-bio">
-                Brief bio about the coach's experience, expertise, and role with the team. Mention their background in robotics, teaching, or engineering.
+              <div class="coach-details">
+                <div class="coach-detail-item">
+                  <span class="coach-detail-label">Favorite Part</span>
+                  Watching students grow as engineers and leaders
+                </div>
               </div>
             </div>
 
             <!-- Coach 2 -->
             <div class="coach-card reveal">
               <div class="coach-img">
+                <!-- Replace with: <img src="assets/coach2.jpg" alt="Coach Name"> -->
                 <div class="coach-img-placeholder">SF</div>
               </div>
               <div class="coach-name">Coach Name</div>
               <div class="coach-title">Assistant Coach</div>
-              <div class="coach-bio">
-                Brief bio about the coach's experience, expertise, and role with the team. Mention their background in robotics, teaching, or engineering.
+              <div class="coach-details">
+                <div class="coach-detail-item">
+                  <span class="coach-detail-label">Favorite Part</span>
+                  Mentoring students through technical challenges
+                </div>
               </div>
             </div>
 
             <!-- Coach 3 -->
             <div class="coach-card reveal">
               <div class="coach-img">
+                <!-- Replace with: <img src="assets/coach3.jpg" alt="Coach Name"> -->
                 <div class="coach-img-placeholder">SF</div>
               </div>
               <div class="coach-name">Coach Name</div>
               <div class="coach-title">Technical Mentor</div>
-              <div class="coach-bio">
-                Brief bio about the coach's experience, expertise, and role with the team. Mention their background in robotics, teaching, or engineering.
+              <div class="coach-details">
+                <div class="coach-detail-item">
+                  <span class="coach-detail-label">Favorite Part</span>
+                  Helping teams solve complex engineering problems
+                </div>
               </div>
             </div>
           </div>
@@ -788,121 +964,229 @@
 
         <!-- STUDENTS SECTION -->
         <div class="students-section">
-          <div class="s-h2" style="font-size: 2rem; margin-bottom: 1rem;">Student Members</div>
-          <div class="bio-grid">
-          <!-- Example Team Member 1 -->
-          <div class="bio-card reveal">
-            <div class="bio-img">
-              <!-- Replace with actual image: <img src="member1.jpg" alt="Member Name"> -->
-              <div class="bio-img-placeholder">SF</div>
+          
+          <!-- MECHANICAL TEAM -->
+          <div class="role-section">
+            <div class="role-header">
+              <div class="role-header-title">Mechanical Team</div>
+              <div class="role-header-badge mechanical">Design & Build</div>
             </div>
-            <div class="bio-content">
-              <div class="bio-name">Alex Chen</div>
-              <div class="bio-roles">
-                <span class="role-badge mechanical">Mechanical</span>
-                <span class="role-badge software">Software</span>
+            <div class="bio-grid">
+              <!-- Mechanical Member 1 -->
+              <div class="bio-card reveal">
+                <div class="bio-img">
+                  <!-- Replace with: <img src="assets/member1.jpg" alt="Member Name"> -->
+                  <img src="assets/guhan.png" alt="Guhan Bala">
+                </div>
+                <div class="bio-content">
+                  <div class="bio-name">Guhan Bala</div>
+                  <div class="bio-roles">
+                    <span class="role-badge mechanical">Mechanical</span>
+                    <!-- Add outreach badge if applicable: <span class="role-badge outreach">Outreach</span> -->
+                    <span class="role-badge outreach">Outreach</span>
+                  </div>
+                  <div class="bio-details">
+                    <div class="bio-detail-item">
+                      <span class="bio-detail-label">Grade</span>
+                      Sophomore
+                    </div>
+                    <div class="bio-detail-item">
+                      <span class="bio-detail-label">Favorite Part</span>
+                      Being able to help the team from the ground up, learn engineering skills, meeting people from different teams and their approach to the season
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="bio-details">
-                <div class="bio-detail-item">
-                  <span class="bio-detail-label">Grade</span>
-                  Senior
+
+              <!-- Mechanical Member 2 -->
+              <div class="bio-card reveal">
+                <div class="bio-img">
+                  <!-- Replace with: <img src="assets/member1.jpg" alt="Member Name"> -->
+                  <img src="assets/kevin.png" alt="Kevin Sun">
                 </div>
-                <div class="bio-detail-item">
-                  <span class="bio-detail-label">Hobbies</span>
-                  3D printing, robotics competitions, gaming
-                </div>
-                <div class="bio-detail-item">
-                  <span class="bio-detail-label">Favorite Project</span>
-                  Designing the robot's intake mechanism
+                <div class="bio-content">
+                  <div class="bio-name">Kevin Sun</div>
+                  <div class="bio-roles">
+                    <span class="role-badge mechanical">Mechanical</span>
+                    <!-- Add outreach badge if applicable: <span class="role-badge outreach">Outreach</span> -->
+                  </div>
+                  <div class="bio-details">
+                    <div class="bio-detail-item">
+                      <span class="bio-detail-label">Grade</span>
+                      Sophomore
+                    </div>
+                    <div class="bio-detail-item">
+                      <span class="bio-detail-label">Favorite Part</span>
+                      Watching the bot successfully have a 12 ball auto
+                    </div>
+                  </div>
                 </div>
               </div>
+
+              <!-- Mechanical Member 3 -->
+              <div class="bio-card reveal">
+                <div class="bio-img">
+                  <!-- Replace with: <img src="assets/member1.jpg" alt="Member Name"> -->
+                  <img src="assets/vivaan.png" alt="Vivaan Brar">
+                </div>
+                <div class="bio-content">
+                  <div class="bio-name">Vivaan Brar</div>
+                  <div class="bio-roles">
+                    <span class="role-badge mechanical">Mechanical</span>
+                    <!-- Add outreach badge if applicable: <span class="role-badge outreach">Outreach</span> -->
+                    <span class="role-badge outreach">Outreach</span>
+                  </div>
+                  <div class="bio-details">
+                    <div class="bio-detail-item">
+                      <span class="bio-detail-label">Grade</span>
+                      Freshman
+                    </div>
+                    <div class="bio-detail-item">
+                      <span class="bio-detail-label">Favorite Part</span>
+                      The challenge and how it forced us to improvise solutions quickly. Last years challenge was a great learning experience for a rookie team and we are preparing to do our best this season
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Mechanical Member 4 -->
+              <div class="bio-card reveal">
+                <div class="bio-img">
+                  <div class="bio-img-placeholder">SF</div>
+                </div>
+                <div class="bio-content">
+                  <div class="bio-name">Member Name</div>
+                  <div class="bio-roles">
+                    <span class="role-badge mechanical">Mechanical</span>
+                    <!-- Add outreach badge if applicable: <span class="role-badge outreach">Outreach</span> -->
+                  </div>
+                  <div class="bio-details">
+                    <div class="bio-detail-item">
+                      <span class="bio-detail-label">Grade</span>
+                      Senior
+                    </div>
+                    <div class="bio-detail-item">
+                      <span class="bio-detail-label">Favorite Part</span>
+                      Design iterations and improvements
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Add more mechanical members as needed (4 per row) -->
             </div>
           </div>
 
-          <!-- Example Team Member 2 -->
-          <div class="bio-card reveal">
-            <div class="bio-img">
-              <div class="bio-img-placeholder">SF</div>
+          <!-- SOFTWARE TEAM -->
+          <div class="role-section">
+            <div class="role-header">
+              <div class="role-header-title">Software Team</div>
+              <div class="role-header-badge software">Programming & Controls</div>
             </div>
-            <div class="bio-content">
-              <div class="bio-name">Sarah Martinez</div>
-              <div class="bio-roles">
-                <span class="role-badge software">Software</span>
+            <div class="bio-grid">
+              <!-- Software Member 1 -->
+              <div class="bio-card reveal">
+                <div class="bio-img">
+                  <!-- Replace with: <img src="assets/member5.jpg" alt="Member Name"> -->
+                  <img src="assets/arnav.png" alt="Arnav Gupta">
+                </div>
+                <div class="bio-content">
+                  <div class="bio-name">Arnav Gupta</div>
+                  <div class="bio-roles">
+                    <span class="role-badge software">Software</span>
+                    <!-- Add outreach badge if applicable: <span class="role-badge outreach">Outreach</span> -->
+                  </div>
+                  <div class="bio-details">
+                    <div class="bio-detail-item">
+                      <span class="bio-detail-label">Grade</span>
+                      Junior
+                    </div>
+                    <div class="bio-detail-item">
+                      <span class="bio-detail-label">Favorite Part</span>
+                      Programming donut routes
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="bio-details">
-                <div class="bio-detail-item">
-                  <span class="bio-detail-label">Grade</span>
-                  Junior
+
+              <!-- Software Member 2 -->
+              <div class="bio-card reveal">
+                <div class="bio-img">
+                  <!-- Replace with: <img src="assets/member5.jpg" alt="Member Name"> -->
+                  <img src="assets/vivek.png" alt="Vivek Vasishta">
                 </div>
-                <div class="bio-detail-item">
-                  <span class="bio-detail-label">Hobbies</span>
-                  Programming, machine learning, music production
-                </div>
-                <div class="bio-detail-item">
-                  <span class="bio-detail-label">Favorite Project</span>
-                  Implementing autonomous navigation
+                <div class="bio-content">
+                  <div class="bio-name">Vivek Vasishta</div>
+                  <div class="bio-roles">
+                    <span class="role-badge software">Software</span>
+                    <!-- Add outreach badge if applicable: <span class="role-badge outreach">Outreach</span> -->
+                  </div>
+                  <div class="bio-details">
+                    <div class="bio-detail-item">
+                      <span class="bio-detail-label">Grade</span>
+                      8th
+                    </div>
+                    <div class="bio-detail-item">
+                      <span class="bio-detail-label">Favorite Part</span>
+                      Programming autonomous routines
+                    </div>
+                  </div>
                 </div>
               </div>
+
+              <!-- Software Member 3 -->
+              <div class="bio-card reveal">
+                <div class="bio-img">
+                  <!-- Replace with: <img src="assets/member5.jpg" alt="Member Name"> -->
+                  <img src="assets/alex.png" alt="Alex Xu">
+                </div>
+                <div class="bio-content">
+                  <div class="bio-name">Alex Xu</div>
+                  <div class="bio-roles">
+                    <span class="role-badge software">Software</span>
+                    <!-- Add outreach badge if applicable: <span class="role-badge outreach">Outreach</span> -->
+                  </div>
+                  <div class="bio-details">
+                    <div class="bio-detail-item">
+                      <span class="bio-detail-label">Grade</span>
+                      Freshman
+                    </div>
+                    <div class="bio-detail-item">
+                      <span class="bio-detail-label">Favorite Part</span>
+                      Joining a competetive yet friendly community
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Software Member 4 -->
+              <div class="bio-card reveal">
+                <div class="bio-img">
+                  <div class="bio-img-placeholder">SF</div>
+                </div>
+                <div class="bio-content">
+                  <div class="bio-name">Member Name</div>
+                  <div class="bio-roles">
+                    <span class="role-badge software">Software</span>
+                    <!-- Add outreach badge if applicable: <span class="role-badge outreach">Outreach</span> -->
+                  </div>
+                  <div class="bio-details">
+                    <div class="bio-detail-item">
+                      <span class="bio-detail-label">Grade</span>
+                      Junior
+                    </div>
+                    <div class="bio-detail-item">
+                      <span class="bio-detail-label">Favorite Part</span>
+                      Optimizing robot performance
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Add more software members as needed (4 per row) -->
             </div>
           </div>
 
-          <!-- Example Team Member 3 -->
-          <div class="bio-card reveal">
-            <div class="bio-img">
-              <div class="bio-img-placeholder">SF</div>
-            </div>
-            <div class="bio-content">
-              <div class="bio-name">Jordan Kim</div>
-              <div class="bio-roles">
-                <span class="role-badge outreach">Outreach</span>
-              </div>
-              <div class="bio-details">
-                <div class="bio-detail-item">
-                  <span class="bio-detail-label">Grade</span>
-                  Sophomore
-                </div>
-                <div class="bio-detail-item">
-                  <span class="bio-detail-label">Hobbies</span>
-                  Public speaking, photography, teaching STEM
-                </div>
-                <div class="bio-detail-item">
-                  <span class="bio-detail-label">Favorite Project</span>
-                  Organizing elementary school workshops
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Example Team Member 4 -->
-          <div class="bio-card reveal">
-            <div class="bio-img">
-              <div class="bio-img-placeholder">SF</div>
-            </div>
-            <div class="bio-content">
-              <div class="bio-name">Marcus Johnson</div>
-              <div class="bio-roles">
-                <span class="role-badge mechanical">Mechanical</span>
-                <span class="role-badge outreach">Outreach</span>
-              </div>
-              <div class="bio-details">
-                <div class="bio-detail-item">
-                  <span class="bio-detail-label">Grade</span>
-                  Senior
-                </div>
-                <div class="bio-detail-item">
-                  <span class="bio-detail-label">Hobbies</span>
-                  CAD design, basketball, community service
-                </div>
-                <div class="bio-detail-item">
-                  <span class="bio-detail-label">Favorite Project</span>
-                  Leading team workshops
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Add more team members as needed -->
-        </div>
         </div>
       </div>
     </section>
@@ -954,44 +1238,44 @@
         <div class="sponsor-grid">
           <!-- Example Sponsor 1 -->
           <div class="sponsor-card reveal">
-            <img src="altair.webp" alt="Altair">
+            <img src="assets/sponsors/altair.webp" alt="Altair">
           </div>
 
           <!-- Example Sponsor 2 -->
           <div class="sponsor-card reveal">
-            <img src="EHSpfso.webp" alt="EHS PFSO">
+            <img src="assets/sponsors/EHSpfso.webp" alt="EHS PFSO">
           </div>  
 
           <!-- Example Sponsor 3 -->
           <div class="sponsor-card reveal">
-            <img src="fabworks.png" alt="FabWorks">
+            <img src="assets/sponsors/fabworks.png" alt="FabWorks">
           </div>
 
           <!-- Example Sponsor 4 -->
           <div class="sponsor-card reveal">
-            <img src="first.png" alt="FIRST">
+            <img src="assets/sponsors/first.png" alt="FIRST">
           </div>
 
           <!-- Example Sponsor 5 -->
           <div class="sponsor-card reveal">
-            <img src="gobilda.jpg" alt="GoBilda">
+            <img src="assets/sponsors/gobilda.jpg" alt="GoBilda">
           </div>
 
           <div class="sponsor-card reveal">
-            <img src="KaleidoEffect.webp" alt="Kaleido Effect">
+            <img src="assets/sponsors/KaleidoEffect.webp" alt="Kaleido Effect">
           </div>
 
           <!-- Example Sponsor 6 -->
           <div class="sponsor-card reveal">
-            <img src="NorthropGrumman.png" alt="Northrop Grumman">
+            <img src="assets/sponsors/NorthropGrumman.png" alt="Northrop Grumman">
           </div>
 
           <div class="sponsor-card reveal">
-            <img src="onlineMetals.png" alt="Online Metals">
+            <img src="assets/sponsors/onlineMetals.png" alt="Online Metals">
           </div>
 
           <div class="sponsor-card reveal">
-            <img src="workday.png" alt="Workday">
+            <img src="assets/sponsors/workday.png" alt="Workday">
           </div>
         </div>
 
@@ -1010,12 +1294,12 @@
   <div class="page-content">
     <section id="contact">
       <div class="contact-in">
-        <img class="contact-logo" src="SharpFace.png" alt="Sharp Face Robotics" />
+        <img class="contact-logo" src="assets/SharpFace.png" alt="Sharp Face Robotics" />
         <div class="contact-h">Get in <span class="c">Touch</span></div>
         <p class="contact-p">Interested in sponsoring, collaborating, or learning more about our team? We'd love to hear from you.</p>
         <button class="contact-email" id="copy-email-page" onclick="copyEmailPage()">
           <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
-          <span id="email-text-page">contact30450@gmail.com</span>
+          <span id="email-text-page"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="25464a4b514446511615111015654248444c490b464a48">[email&#160;protected]</a></span>
           <svg class="icon" id="copy-icon-page" viewBox="0 0 24 24" fill="currentColor" style="opacity:.5;font-size:.75em"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"/></svg>
         </button>
       </div>
@@ -1028,7 +1312,7 @@
   <p>© 2025–26 Sharp Face Robotics · FTC Team 30450 · Emerald High School · Dublin, CA</p>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Page Navigation System
   function navigateTo(pageName) {
     // Hide all pages
@@ -1099,7 +1383,8 @@
     });
   }
 
-  // Clipboard copy on email button
+
+
   // Clipboard copy on email button (main page)
   function copyEmail() {
     navigator.clipboard.writeText('contact30450@gmail.com').then(() => {
@@ -1132,5 +1417,6 @@
     });
   }
 </script>
+
 </body>
 </html>
