@@ -24,6 +24,9 @@ jobs:
 
       - name: Normalize sitemap (UTC lastmod + cleanup)
         run: |
+          # Grant write permissions to the file
+          sudo chmod 666 sitemap.xml
+          
           python3 << 'EOF'
           from datetime import datetime, timezone
           import xml.etree.ElementTree as ET
