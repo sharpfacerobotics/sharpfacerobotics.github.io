@@ -726,6 +726,8 @@
     .admin-panel {
       position: relative;
       width: min(380px, calc(100vw - 2rem));
+      max-height: 90vh;
+      overflow-y: auto;
       padding: 1rem;
       background: rgba(6,8,11,0.95);
       border: 1px solid rgba(82,219,212,0.35);
@@ -1691,8 +1693,7 @@
   function initializeAdminUi() {
     adminUi.modal = document.getElementById('admin-modal');
     adminUi.panel = document.getElementById('admin-panel');
-    adminUi.navDesktop = document.getElementById('admin-nav-trigger');
-    adminUi.navMobile = document.getElementById('admin-nav-trigger-mobile');
+    refreshAdminNavRefs();
     adminUi.close = document.getElementById('admin-close-btn');
     adminUi.status = document.getElementById('admin-status');
     adminUi.login = document.getElementById('admin-login-btn');
@@ -1730,7 +1731,17 @@
     updateAdminControls();
   }
 
+  function refreshAdminNavRefs() {
+    adminUi.navDesktop =
+      document.getElementById('admin-nav-trigger') ||
+      document.querySelector('.nav-links button[onclick*="openAdminModal"]');
+    adminUi.navMobile =
+      document.getElementById('admin-nav-trigger-mobile') ||
+      document.querySelector('.mobile-menu button[onclick*="openAdminModal"]');
+  }
+
   function updateAdminNavLabels() {
+    refreshAdminNavRefs();
     const label = isAdmin ? 'Admin Panel' : 'Admin Login';
     if (adminUi.navDesktop) {
       adminUi.navDesktop.textContent = label;
@@ -2257,6 +2268,7 @@
       const data = snapshot.data();
       if (data && typeof data.html === 'string' && data.html.trim().length > 0) {
         root.innerHTML = data.html;
+        updateAdminNavLabels();
       }
     } catch (error) {
       console.error('Load error:', error);
