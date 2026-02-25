@@ -1552,6 +1552,7 @@
   let isAdmin = false;
   let editMode = false;
   let activeUserEmail = '';
+  let sourceTemplateHtml = '';
   let dragSource = null;
   const adminUi = {};
 
@@ -2165,41 +2166,111 @@
     }
   }
 
+  function removeEmptyClassAttributes(root) {
+    if (!root || !root.querySelectorAll) {
+      return;
+    }
+
+    root.querySelectorAll('[class]').forEach(el => {
+      const className = (el.getAttribute('class') || '').trim();
+      if (!className) {
+        el.removeAttribute('class');
+      }
+    });
+  }
+
+  function normalizeAdminNavButtons(root) {
+    if (!root || !root.querySelector) {
+      return;
+    }
+
+    const navDesktop =
+      root.querySelector('#admin-nav-trigger') ||
+      root.querySelector('.nav-links button[onclick*="openAdminModal"]');
+    if (navDesktop) {
+      navDesktop.id = 'admin-nav-trigger';
+      navDesktop.textContent = 'Admin Login';
+    }
+
+    const navMobile =
+      root.querySelector('#admin-nav-trigger-mobile') ||
+      root.querySelector('.mobile-menu button[onclick*="openAdminModal"]');
+    if (navMobile) {
+      navMobile.id = 'admin-nav-trigger-mobile';
+      navMobile.textContent = 'Admin Login';
+    }
+  }
+
+  function cleanSiteRootForExport(root) {
+    if (!root || !root.querySelectorAll) {
+      return;
+    }
+
+    root.removeAttribute('data-image-editor-bound');
+    root.querySelectorAll('.admin-editable-text').forEach(el => el.classList.remove('admin-editable-text'));
+    root.querySelectorAll('.admin-editable-image').forEach(el => {
+      el.classList.remove('admin-editable-image');
+      if (el.getAttribute('title') === 'Double-click to replace image source') {
+        el.removeAttribute('title');
+      }
+    });
+    root.querySelectorAll('.admin-layout-item').forEach(el => el.classList.remove('admin-layout-item'));
+    root.querySelectorAll('.admin-layout-container').forEach(el => el.classList.remove('admin-layout-container'));
+    root.querySelectorAll('.admin-dragging').forEach(el => el.classList.remove('admin-dragging'));
+    root.querySelectorAll('.reveal.vis').forEach(el => el.classList.remove('vis'));
+    root.querySelectorAll('[contenteditable]').forEach(el => el.removeAttribute('contenteditable'));
+    root.querySelectorAll('[spellcheck]').forEach(el => el.removeAttribute('spellcheck'));
+    root.querySelectorAll('[draggable]').forEach(el => el.removeAttribute('draggable'));
+
+    const mobileMenu = root.querySelector('#mobile-menu');
+    if (mobileMenu) {
+      mobileMenu.classList.remove('open');
+    }
+
+    const tilt = root.querySelector('#tilt');
+    if (tilt) {
+      tilt.removeAttribute('style');
+      tilt.removeAttribute('data-tilt-bound');
+    }
+
+    root.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
+    const homePage = root.querySelector('#page-home');
+    if (homePage) {
+      homePage.classList.add('active');
+    }
+
+    normalizeAdminNavButtons(root);
+    removeEmptyClassAttributes(root);
+  }
+
   function createPersistedMarkup(root) {
     const clone = root.cloneNode(true);
-    clone.querySelectorAll('.admin-editable-text').forEach(el => el.classList.remove('admin-editable-text'));
-    clone.querySelectorAll('.admin-editable-image').forEach(el => el.classList.remove('admin-editable-image'));
-    clone.querySelectorAll('.admin-layout-item').forEach(el => el.classList.remove('admin-layout-item'));
-    clone.querySelectorAll('.admin-layout-container').forEach(el => el.classList.remove('admin-layout-container'));
-    clone.querySelectorAll('.admin-dragging').forEach(el => el.classList.remove('admin-dragging'));
-    
-    clone.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
-    const homePage = clone.querySelector('#page-home');
-    if (homePage) homePage.classList.add('active');
-    
-    clone.querySelectorAll('[contenteditable]').forEach(el => el.removeAttribute('contenteditable'));
-    clone.querySelectorAll('[spellcheck]').forEach(el => el.removeAttribute('spellcheck'));
-    clone.querySelectorAll('[draggable]').forEach(el => el.removeAttribute('draggable'));
+    cleanSiteRootForExport(clone);
     return clone.innerHTML;
   }
 
   function createCommittableHtml() {
-    const docClone = document.documentElement.cloneNode(true);
+    const sourceDoc = sourceTemplateHtml
+      ? new DOMParser().parseFromString(sourceTemplateHtml, 'text/html')
+      : null;
+    const docClone = sourceDoc ? sourceDoc.documentElement : document.documentElement.cloneNode(true);
+
+    if (!sourceDoc) {
+      docClone.querySelectorAll('script[src*="apis.google.com"], script[gapi_processed]').forEach(el => el.remove());
+      docClone.querySelectorAll('iframe[src*="/__/auth/iframe"], iframe[id^="I0_"], iframe[name^="I0_"]').forEach(el => el.remove());
+    }
+
+    const currentRoot = getSiteContentRoot();
+    const siteRootClone = docClone.querySelector('#' + SITE_CONTENT_ID);
+    if (currentRoot && siteRootClone) {
+      const cleanRoot = currentRoot.cloneNode(true);
+      cleanSiteRootForExport(cleanRoot);
+      siteRootClone.innerHTML = cleanRoot.innerHTML;
+    }
+
     const bodyClone = docClone.querySelector('body');
     if (bodyClone) {
       bodyClone.classList.remove('edit-mode');
-    }
-
-    const siteRootClone = docClone.querySelector('#' + SITE_CONTENT_ID);
-    if (siteRootClone) {
-      siteRootClone.querySelectorAll('.admin-editable-text').forEach(el => el.classList.remove('admin-editable-text'));
-      siteRootClone.querySelectorAll('.admin-editable-image').forEach(el => el.classList.remove('admin-editable-image'));
-      siteRootClone.querySelectorAll('.admin-layout-item').forEach(el => el.classList.remove('admin-layout-item'));
-      siteRootClone.querySelectorAll('.admin-layout-container').forEach(el => el.classList.remove('admin-layout-container'));
-      siteRootClone.querySelectorAll('.admin-dragging').forEach(el => el.classList.remove('admin-dragging'));
-      siteRootClone.querySelectorAll('[contenteditable]').forEach(el => el.removeAttribute('contenteditable'));
-      siteRootClone.querySelectorAll('[spellcheck]').forEach(el => el.removeAttribute('spellcheck'));
-      siteRootClone.querySelectorAll('[draggable]').forEach(el => el.removeAttribute('draggable'));
     }
 
     const modalClone = docClone.querySelector('#admin-modal');
@@ -2246,7 +2317,27 @@
       loginClone.removeAttribute('disabled');
     }
 
+    normalizeAdminNavButtons(docClone);
+    removeEmptyClassAttributes(docClone);
     return '<!DOCTYPE html>\n' + docClone.outerHTML;
+  }
+
+  async function cacheSourceTemplate() {
+    if (sourceTemplateHtml) {
+      return;
+    }
+
+    try {
+      const sourceUrl = window.location.origin + window.location.pathname;
+      const response = await fetch(sourceUrl, { cache: 'no-store' });
+      if (!response.ok) {
+        return;
+      }
+
+      sourceTemplateHtml = await response.text();
+    } catch (error) {
+      console.warn('Could not cache source template:', error);
+    }
   }
 
   async function loadSiteContent() {
@@ -2278,6 +2369,7 @@
 
   async function bootstrap() {
     initializeAdminUi();
+    await cacheSourceTemplate();
     await initializeFirebase();
     await loadSiteContent();
     initRevealObserver();
