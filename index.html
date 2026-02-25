@@ -858,7 +858,7 @@
       <a onclick="navigateTo('ai')" data-page="ai">Sharp AI</a>
       <a onclick="navigateTo('sponsors')" data-page="sponsors">Sponsors</a>
       <a onclick="navigateTo('contact')" data-page="contact">Contact</a>
-      <button type="button" onclick="openAdminModal()">Admin Login</button>
+      <button type="button" id="admin-nav-trigger" onclick="openAdminModal()">Admin Login</button>
     </div>
     <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
   </div>
@@ -872,7 +872,7 @@
   <a onclick="navigateTo('ai'); toggleMobileMenu();" data-page="ai">Sharp AI</a>
   <a onclick="navigateTo('sponsors'); toggleMobileMenu();" data-page="sponsors">Sponsors</a>
   <a onclick="navigateTo('contact'); toggleMobileMenu();" data-page="contact">Contact</a>
-  <button type="button" onclick="openAdminModal(); toggleMobileMenu();">Admin Login</button>
+  <button type="button" id="admin-nav-trigger-mobile" onclick="openAdminModal(); toggleMobileMenu();">Admin Login</button>
 </div>
 
 <!-- HOME PAGE -->
@@ -1688,6 +1688,8 @@
   function initializeAdminUi() {
     adminUi.modal = document.getElementById('admin-modal');
     adminUi.panel = document.getElementById('admin-panel');
+    adminUi.navDesktop = document.getElementById('admin-nav-trigger');
+    adminUi.navMobile = document.getElementById('admin-nav-trigger-mobile');
     adminUi.close = document.getElementById('admin-close-btn');
     adminUi.status = document.getElementById('admin-status');
     adminUi.login = document.getElementById('admin-login-btn');
@@ -1719,6 +1721,16 @@
     adminUi.save.addEventListener('click', saveSiteContent);
     adminUi.signOut.addEventListener('click', signOutAdmin);
     updateAdminControls();
+  }
+
+  function updateAdminNavLabels() {
+    const label = isAdmin ? 'Admin Panel' : 'Admin Login';
+    if (adminUi.navDesktop) {
+      adminUi.navDesktop.textContent = label;
+    }
+    if (adminUi.navMobile) {
+      adminUi.navMobile.textContent = label;
+    }
   }
 
   function setStatus(message) {
@@ -1819,6 +1831,8 @@
   }
 
   function updateAdminControls() {
+    updateAdminNavLabels();
+
     if (!adminUi.panel) {
       return;
     }
