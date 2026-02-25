@@ -1514,6 +1514,8 @@
       <button class="admin-btn" type="button" id="admin-edit-btn" disabled>Enter Edit Mode</button>
       <button class="admin-btn" type="button" id="admin-save-btn" disabled>Save Changes</button>
       <button class="admin-btn secondary" type="button" id="admin-signout-btn" disabled>Sign Out</button>
+      <button class="admin-btn full secondary" type="button" id="admin-commit-btn" disabled>Commit to GitHub</button>
+      <button class="admin-btn full secondary" type="button" id="admin-copy-btn" disabled>Copy Website Code</button>
     </div>
     <div class="admin-help">Double-click any image in Edit Mode to change its source.</div>
   </aside>
@@ -1528,6 +1530,7 @@
   const SITE_CONTENT_ID = 'site-content';
   const CMS_COLLECTION = 'siteContent';
   const CMS_DOC = 'main';
+  const GITHUB_SYNC_ENDPOINT = 'REPLACE_WITH_GITHUB_SYNC_FUNCTION_URL';
   const LAYOUT_CONTAINER_SELECTOR = '.awards, .hero-ctas, .counters, .pillars, .coaches-grid, .bio-grid, .sponsor-grid, .social-links';
   const LAYOUT_ITEM_SELECTOR = '.award, .btn, .counter, .pillar, .coach-card, .bio-card, .sponsor-card, .social-link';
   const firebaseConfig = {
@@ -1696,8 +1699,10 @@
     adminUi.edit = document.getElementById('admin-edit-btn');
     adminUi.save = document.getElementById('admin-save-btn');
     adminUi.signOut = document.getElementById('admin-signout-btn');
+    adminUi.commit = document.getElementById('admin-commit-btn');
+    adminUi.copy = document.getElementById('admin-copy-btn');
 
-    if (!adminUi.panel || !adminUi.modal || !adminUi.close || !adminUi.login || !adminUi.edit || !adminUi.save || !adminUi.signOut) {
+    if (!adminUi.panel || !adminUi.modal || !adminUi.close || !adminUi.login || !adminUi.edit || !adminUi.save || !adminUi.signOut || !adminUi.commit || !adminUi.copy) {
       return;
     }
 
@@ -1720,6 +1725,8 @@
     });
     adminUi.save.addEventListener('click', saveSiteContent);
     adminUi.signOut.addEventListener('click', signOutAdmin);
+    adminUi.commit.addEventListener('click', commitToGithub);
+    adminUi.copy.addEventListener('click', copyWebsiteCode);
     updateAdminControls();
   }
 
@@ -1743,6 +1750,12 @@
     return Object.values(firebaseConfig).every(value =>
       typeof value === 'string' && value.trim().length > 0 && !value.startsWith('REPLACE_WITH_')
     );
+  }
+
+  function isGithubSyncConfigured() {
+    return typeof GITHUB_SYNC_ENDPOINT === 'string'
+      && GITHUB_SYNC_ENDPOINT.trim().length > 0
+      && !GITHUB_SYNC_ENDPOINT.startsWith('REPLACE_WITH_');
   }
 
   async function initializeFirebase() {
@@ -1830,6 +1843,92 @@
     }
   }
 
+  async function commitToGithub() {
+    if (!isAdmin || !auth || !auth.currentUser) {
+      setStatus('Sign in as admin before committing.');
+      return;
+    }
+
+    if (!isGithubSyncConfigured()) {
+      setStatus('Set GITHUB_SYNC_ENDPOINT before committing.');
+      return;
+    }
+
+    const commitInput = window.prompt(
+      'Commit message for GitHub:',
+      'chore: update website content via admin panel'
+    );
+    if (commitInput === null) {
+      return;
+    }
+
+    const commitMessage = commitInput.trim() || 'chore: update website content via admin panel';
+    setStatus('Committing to GitHub...');
+
+    try {
+      const idToken = await auth.currentUser.getIdToken(true);
+      const response = await fetch(GITHUB_SYNC_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + idToken
+        },
+        body: JSON.stringify({
+          path: 'index.html',
+          commitMessage,
+          html: createCommittableHtml()
+        })
+      });
+
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(data.error || 'GitHub sync request failed.');
+      }
+
+      const shortSha = data.commitSha ? String(data.commitSha).slice(0, 7) : '';
+      if (shortSha) {
+        setStatus('Committed to GitHub (' + shortSha + ').');
+      } else {
+        setStatus('Committed to GitHub.');
+      }
+    } catch (error) {
+      console.error('GitHub commit error:', error);
+      setStatus('GitHub commit failed. Check function logs.');
+    }
+  }
+
+  async function copyWebsiteCode() {
+    if (!isAdmin) {
+      setStatus('Sign in as admin before copying code.');
+      return;
+    }
+
+    const html = createCommittableHtml();
+    if (!html || !html.trim()) {
+      setStatus('No content available to copy.');
+      return;
+    }
+
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(html);
+        setStatus('Website code copied. Paste into index.html and commit to GitHub.');
+        return;
+      }
+      throw new Error('Clipboard API unavailable');
+    } catch (error) {
+      console.error('Clipboard copy error:', error);
+      const copyWindow = window.open('', '_blank');
+      if (copyWindow) {
+        copyWindow.document.write('<pre style="white-space:pre-wrap;word-break:break-word;">' + html.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</pre>');
+        copyWindow.document.close();
+        setStatus('Clipboard blocked. Opened code in a new tab for manual copy.');
+      } else {
+        setStatus('Clipboard blocked. Allow popups to view and copy the code.');
+      }
+    }
+  }
+
   function updateAdminControls() {
     updateAdminNavLabels();
 
@@ -1841,6 +1940,8 @@
     adminUi.edit.disabled = !isAdmin;
     adminUi.save.disabled = !isAdmin;
     adminUi.signOut.disabled = !isAdmin;
+    adminUi.commit.disabled = !isAdmin || !isGithubSyncConfigured();
+    adminUi.copy.disabled = !isAdmin;
     adminUi.edit.textContent = editMode ? 'Exit Edit Mode' : 'Enter Edit Mode';
   }
 
@@ -2060,7 +2161,7 @@
     clone.querySelectorAll('.admin-layout-item').forEach(el => el.classList.remove('admin-layout-item'));
     clone.querySelectorAll('.admin-layout-container').forEach(el => el.classList.remove('admin-layout-container'));
     clone.querySelectorAll('.admin-dragging').forEach(el => el.classList.remove('admin-dragging'));
-
+    
     clone.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
     const homePage = clone.querySelector('#page-home');
     if (homePage) homePage.classList.add('active');
@@ -2069,6 +2170,72 @@
     clone.querySelectorAll('[spellcheck]').forEach(el => el.removeAttribute('spellcheck'));
     clone.querySelectorAll('[draggable]').forEach(el => el.removeAttribute('draggable'));
     return clone.innerHTML;
+  }
+
+  function createCommittableHtml() {
+    const docClone = document.documentElement.cloneNode(true);
+    const bodyClone = docClone.querySelector('body');
+    if (bodyClone) {
+      bodyClone.classList.remove('edit-mode');
+    }
+
+    const siteRootClone = docClone.querySelector('#' + SITE_CONTENT_ID);
+    if (siteRootClone) {
+      siteRootClone.querySelectorAll('.admin-editable-text').forEach(el => el.classList.remove('admin-editable-text'));
+      siteRootClone.querySelectorAll('.admin-editable-image').forEach(el => el.classList.remove('admin-editable-image'));
+      siteRootClone.querySelectorAll('.admin-layout-item').forEach(el => el.classList.remove('admin-layout-item'));
+      siteRootClone.querySelectorAll('.admin-layout-container').forEach(el => el.classList.remove('admin-layout-container'));
+      siteRootClone.querySelectorAll('.admin-dragging').forEach(el => el.classList.remove('admin-dragging'));
+      siteRootClone.querySelectorAll('[contenteditable]').forEach(el => el.removeAttribute('contenteditable'));
+      siteRootClone.querySelectorAll('[spellcheck]').forEach(el => el.removeAttribute('spellcheck'));
+      siteRootClone.querySelectorAll('[draggable]').forEach(el => el.removeAttribute('draggable'));
+    }
+
+    const modalClone = docClone.querySelector('#admin-modal');
+    if (modalClone) {
+      modalClone.classList.remove('open');
+      modalClone.setAttribute('aria-hidden', 'true');
+    }
+
+    const navDesktopClone = docClone.querySelector('#admin-nav-trigger');
+    if (navDesktopClone) {
+      navDesktopClone.textContent = 'Admin Login';
+    }
+    const navMobileClone = docClone.querySelector('#admin-nav-trigger-mobile');
+    if (navMobileClone) {
+      navMobileClone.textContent = 'Admin Login';
+    }
+    const statusClone = docClone.querySelector('#admin-status');
+    if (statusClone) {
+      statusClone.textContent = 'Not signed in.';
+    }
+    const editClone = docClone.querySelector('#admin-edit-btn');
+    if (editClone) {
+      editClone.textContent = 'Enter Edit Mode';
+      editClone.setAttribute('disabled', '');
+    }
+    const saveClone = docClone.querySelector('#admin-save-btn');
+    if (saveClone) {
+      saveClone.setAttribute('disabled', '');
+    }
+    const signOutClone = docClone.querySelector('#admin-signout-btn');
+    if (signOutClone) {
+      signOutClone.setAttribute('disabled', '');
+    }
+    const commitClone = docClone.querySelector('#admin-commit-btn');
+    if (commitClone) {
+      commitClone.setAttribute('disabled', '');
+    }
+    const copyClone = docClone.querySelector('#admin-copy-btn');
+    if (copyClone) {
+      copyClone.setAttribute('disabled', '');
+    }
+    const loginClone = docClone.querySelector('#admin-login-btn');
+    if (loginClone) {
+      loginClone.removeAttribute('disabled');
+    }
+
+    return '<!DOCTYPE html>\n' + docClone.outerHTML;
   }
 
   async function loadSiteContent() {
