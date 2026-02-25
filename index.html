@@ -1634,12 +1634,19 @@
 
   function initTilt() {
     const tilt = document.getElementById('tilt');
-    if (!tilt || tilt.dataset.tiltBound === 'true') {
+    if (!tilt) {
       return;
     }
 
     const STRENGTH = 28;
-    tilt.addEventListener('mousemove', event => {
+    if (tilt._tiltMouseMove) {
+      tilt.removeEventListener('mousemove', tilt._tiltMouseMove);
+    }
+    if (tilt._tiltMouseLeave) {
+      tilt.removeEventListener('mouseleave', tilt._tiltMouseLeave);
+    }
+
+    const onMouseMove = event => {
       const rect = tilt.getBoundingClientRect();
       const cx = rect.left + rect.width / 2;
       const cy = rect.top + rect.height / 2;
@@ -1648,11 +1655,16 @@
       const rotY = -dx * STRENGTH;
       const rotX = dy * STRENGTH;
       tilt.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale3d(1.04,1.04,1.04)`;
-    });
+    };
 
-    tilt.addEventListener('mouseleave', () => {
+    const onMouseLeave = () => {
       tilt.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)';
-    });
+    };
+
+    tilt.addEventListener('mousemove', onMouseMove);
+    tilt.addEventListener('mouseleave', onMouseLeave);
+    tilt._tiltMouseMove = onMouseMove;
+    tilt._tiltMouseLeave = onMouseLeave;
 
     tilt.dataset.tiltBound = 'true';
   }
@@ -2240,6 +2252,22 @@
     removeEmptyClassAttributes(root);
   }
 
+  function sanitizeLoadedRuntimeState(root) {
+    if (!root || !root.querySelectorAll) {
+      return;
+    }
+
+    root.removeAttribute('data-image-editor-bound');
+    root.querySelectorAll('.reveal.vis').forEach(el => el.classList.remove('vis'));
+    root.querySelectorAll('img[title="Double-click to replace image source"]').forEach(el => el.removeAttribute('title'));
+
+    const tilt = root.querySelector('#tilt');
+    if (tilt) {
+      tilt.removeAttribute('data-tilt-bound');
+      tilt.removeAttribute('style');
+    }
+  }
+
   function createPersistedMarkup(root) {
     const clone = root.cloneNode(true);
     cleanSiteRootForExport(clone);
@@ -2356,6 +2384,7 @@
       const data = snapshot.data();
       if (data && typeof data.html === 'string' && data.html.trim().length > 0) {
         root.innerHTML = data.html;
+        sanitizeLoadedRuntimeState(root);
         updateAdminNavLabels();
       }
     } catch (error) {
