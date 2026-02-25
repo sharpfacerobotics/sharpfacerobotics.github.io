@@ -64,12 +64,16 @@
     .brand-t { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: .12em; line-height: 1; }
     .brand-t small { display: block; font-family: 'Roboto Mono', monospace; font-size: .52rem; letter-spacing: .2em; color: var(--cyan); margin-top: 3px; }
     .nav-links { display: flex; gap: 1.8rem; }
-    .nav-links a { 
+    .nav-links a,
+    .nav-links button {
       font-family: 'Roboto Mono', monospace; font-size: .6rem; letter-spacing: .16em; 
       text-transform: uppercase; color: var(--dim); transition: color .2s; cursor: pointer;
+      background: none; border: 0; padding: 0;
     }
-    .nav-links a:hover { color: var(--cyan); }
-    .nav-links a.active { color: var(--cyan); }
+    .nav-links a:hover,
+    .nav-links button:hover { color: var(--cyan); }
+    .nav-links a.active,
+    .nav-links button.active { color: var(--cyan); }
     @media (max-width:768px) { 
       .nav-links { display: none; }
       .mobile-menu-btn { display: block; }
@@ -104,7 +108,8 @@
     .mobile-menu.open {
       display: flex;
     }
-    .mobile-menu a {
+    .mobile-menu a,
+    .mobile-menu button {
       font-family: 'Roboto Mono', monospace;
       font-size: .7rem;
       letter-spacing: .16em;
@@ -112,8 +117,12 @@
       color: var(--dim);
       padding: 0.5rem 0;
       cursor: pointer;
+      background: none;
+      border: 0;
+      text-align: left;
     }
-    .mobile-menu a.active {
+    .mobile-menu a.active,
+    .mobile-menu button.active {
       color: var(--cyan);
     }
 
@@ -698,10 +707,140 @@
     .page-content {
       padding-top: 58px;
     }
+
+    /* ADMIN CMS */
+    .admin-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 320;
+      background: rgba(0,0,0,0.62);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      backdrop-filter: blur(3px);
+    }
+    .admin-modal.open {
+      display: flex;
+    }
+    .admin-panel {
+      position: relative;
+      width: min(380px, calc(100vw - 2rem));
+      padding: 1rem;
+      background: rgba(6,8,11,0.95);
+      border: 1px solid rgba(82,219,212,0.35);
+      box-shadow: 0 10px 35px rgba(0,0,0,0.35);
+      backdrop-filter: blur(16px);
+    }
+    .admin-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.8rem;
+    }
+    .admin-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.35rem;
+      letter-spacing: 0.06em;
+      color: var(--cyan);
+      line-height: 1;
+    }
+    .admin-close {
+      appearance: none;
+      border: 1px solid var(--edge);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      font-size: 1rem;
+      line-height: 1;
+    }
+    .admin-close:hover {
+      border-color: rgba(82,219,212,0.5);
+      color: var(--cyan);
+    }
+    .admin-status {
+      margin-top: 0.5rem;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.63rem;
+      letter-spacing: 0.08em;
+      line-height: 1.5;
+      text-transform: uppercase;
+      color: var(--dim);
+      min-height: 2.4em;
+    }
+    .admin-actions {
+      margin-top: 0.8rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.55rem;
+    }
+    .admin-btn {
+      appearance: none;
+      border: 1px solid rgba(82,219,212,0.4);
+      background: rgba(82,219,212,0.07);
+      color: var(--cyan);
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.55rem 0.65rem;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+    .admin-btn:hover:not(:disabled) {
+      background: rgba(82,219,212,0.15);
+      border-color: var(--cyan);
+    }
+    .admin-btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+    .admin-btn.secondary {
+      border-color: var(--edge);
+      color: var(--text);
+      background: rgba(255,255,255,0.03);
+    }
+    .admin-btn.full {
+      grid-column: 1 / -1;
+    }
+    .admin-help {
+      margin-top: 0.65rem;
+      font-size: 0.72rem;
+      line-height: 1.45;
+      color: var(--dim);
+    }
+
+    body.edit-mode .admin-editable-text {
+      outline: 1px dashed rgba(82,219,212,0.55);
+      outline-offset: 2px;
+      background: rgba(82,219,212,0.06);
+    }
+    body.edit-mode .admin-editable-image {
+      outline: 2px solid rgba(111,232,106,0.6);
+      outline-offset: 2px;
+      cursor: pointer;
+    }
+    body.edit-mode .admin-layout-item {
+      outline: 1px dashed rgba(200,169,78,0.7);
+      outline-offset: 2px;
+      cursor: move;
+    }
+    .admin-dragging {
+      opacity: 0.45;
+    }
+    @media (max-width: 640px) {
+      .admin-panel { width: 100%; }
+      .admin-actions {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
 
+<div id="site-content">
 <!-- NAV -->
 <nav>
   <div class="nav-in">
@@ -719,6 +858,7 @@
       <a onclick="navigateTo('ai')" data-page="ai">Sharp AI</a>
       <a onclick="navigateTo('sponsors')" data-page="sponsors">Sponsors</a>
       <a onclick="navigateTo('contact')" data-page="contact">Contact</a>
+      <button type="button" onclick="openAdminModal()">Admin Login</button>
     </div>
     <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
   </div>
@@ -732,6 +872,7 @@
   <a onclick="navigateTo('ai'); toggleMobileMenu();" data-page="ai">Sharp AI</a>
   <a onclick="navigateTo('sponsors'); toggleMobileMenu();" data-page="sponsors">Sponsors</a>
   <a onclick="navigateTo('contact'); toggleMobileMenu();" data-page="contact">Contact</a>
+  <button type="button" onclick="openAdminModal(); toggleMobileMenu();">Admin Login</button>
 </div>
 
 <!-- HOME PAGE -->
@@ -1359,112 +1500,594 @@
     </a>
   </div>
 </footer>
+</div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  // Page Navigation System
+<div class="admin-modal" id="admin-modal" aria-hidden="true">
+  <aside class="admin-panel" id="admin-panel" aria-live="polite" role="dialog" aria-modal="true" aria-label="Team Admin">
+    <div class="admin-head">
+      <div class="admin-title">Team Admin</div>
+      <button class="admin-close" type="button" id="admin-close-btn" aria-label="Close admin popup">×</button>
+    </div>
+    <div class="admin-status" id="admin-status">Not signed in.</div>
+    <div class="admin-actions">
+      <button class="admin-btn full" type="button" id="admin-login-btn">Sign in with Google</button>
+      <button class="admin-btn" type="button" id="admin-edit-btn" disabled>Enter Edit Mode</button>
+      <button class="admin-btn" type="button" id="admin-save-btn" disabled>Save Changes</button>
+      <button class="admin-btn secondary" type="button" id="admin-signout-btn" disabled>Sign Out</button>
+    </div>
+    <div class="admin-help">Double-click any image in Edit Mode to change its source.</div>
+  </aside>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script>
+  const ADMIN_EMAIL = 'sharpfacerobotics@gmail.com';
+  const SITE_CONTENT_ID = 'site-content';
+  const CMS_COLLECTION = 'siteContent';
+  const CMS_DOC = 'main';
+  const LAYOUT_CONTAINER_SELECTOR = '.awards, .hero-ctas, .counters, .pillars, .coaches-grid, .bio-grid, .sponsor-grid, .social-links';
+  const LAYOUT_ITEM_SELECTOR = '.award, .btn, .counter, .pillar, .coach-card, .bio-card, .sponsor-card, .social-link';
+  const firebaseConfig = {
+    apiKey: "AIzaSyCpjYZZ5ewUBuysfDa-zj9NG4UpyycpM3U",
+    authDomain: "sharp-face-robotics-website.firebaseapp.com",
+    projectId: "sharp-face-robotics-website",
+    storageBucket: "sharp-face-robotics-website.firebasestorage.app",
+    messagingSenderId: "721099167616",
+    appId: "1:721099167616:web:b12b9b9349878a0fae5365"
+  };
+
+  let obs = null;
+  let auth = null;
+  let db = null;
+  let provider = null;
+  let firebaseReady = false;
+  let isAdmin = false;
+  let editMode = false;
+  let activeUserEmail = '';
+  let dragSource = null;
+  const adminUi = {};
+
   function navigateTo(pageName) {
-    // Hide all pages
     document.querySelectorAll('.page').forEach(page => {
       page.classList.remove('active');
     });
-    
-    // Show selected page
+
     const targetPage = document.getElementById('page-' + pageName);
     if (targetPage) {
       targetPage.classList.add('active');
     }
-    
-    // Update nav active state
+
+    setActiveNavLink(pageName);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    if (obs) {
+      setTimeout(() => {
+        document.querySelectorAll('.page.active .reveal').forEach(el => {
+          obs.observe(el);
+        });
+      }, 100);
+    }
+  }
+
+  function setActiveNavLink(pageName) {
     document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(link => {
       link.classList.remove('active');
       if (link.dataset.page === pageName) {
         link.classList.add('active');
       }
     });
-    
-    // Scroll to top
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    
-    // Re-run reveal animations for new page
-    setTimeout(() => {
-      document.querySelectorAll('.page.active .reveal').forEach(el => {
-        obs.observe(el);
-      });
-    }, 100);
   }
 
-  // Mobile Menu Toggle
   function toggleMobileMenu() {
     const menu = document.getElementById('mobile-menu');
-    menu.classList.toggle('open');
+    if (menu) {
+      menu.classList.toggle('open');
+    }
   }
 
-  // Scroll reveal
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { 
-        e.target.classList.add('vis'); 
-        obs.unobserve(e.target); 
-      }
-    });
-  }, { threshold: 0.1 });
-  
-  // Observe all reveal elements on page load
-  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  function openAdminModal() {
+    const modal = document.getElementById('admin-modal');
+    if (!modal) {
+      return;
+    }
 
-  // 3D tilt effect on hero logo
-  const tilt = document.getElementById('tilt');
-  if (tilt) {
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    const focusTarget = document.getElementById('admin-login-btn') || document.getElementById('admin-close-btn');
+    if (focusTarget) {
+      focusTarget.focus();
+    }
+  }
+
+  function closeAdminModal() {
+    const modal = document.getElementById('admin-modal');
+    if (!modal) {
+      return;
+    }
+
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+  }
+
+  function initRevealObserver() {
+    if (obs) {
+      obs.disconnect();
+    }
+
+    obs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('vis');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  }
+
+  function initTilt() {
+    const tilt = document.getElementById('tilt');
+    if (!tilt || tilt.dataset.tiltBound === 'true') {
+      return;
+    }
+
     const STRENGTH = 28;
-    tilt.addEventListener('mousemove', e => {
+    tilt.addEventListener('mousemove', event => {
       const rect = tilt.getBoundingClientRect();
       const cx = rect.left + rect.width / 2;
       const cy = rect.top + rect.height / 2;
-      const dx = (e.clientX - cx) / (rect.width / 2);
-      const dy = (e.clientY - cy) / (rect.height / 2);
-      const rotY = -dx * STRENGTH;  // Reversed: negative makes it tilt towards cursor
-      const rotX = dy * STRENGTH;   // Reversed: positive makes it tilt towards cursor
+      const dx = (event.clientX - cx) / (rect.width / 2);
+      const dy = (event.clientY - cy) / (rect.height / 2);
+      const rotY = -dx * STRENGTH;
+      const rotX = dy * STRENGTH;
       tilt.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale3d(1.04,1.04,1.04)`;
     });
+
     tilt.addEventListener('mouseleave', () => {
       tilt.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)';
     });
+
+    tilt.dataset.tiltBound = 'true';
   }
 
-
-
-  // Clipboard copy on email button (main page)
   function copyEmail() {
-    navigator.clipboard.writeText('contact30450@gmail.com').then(() => {
-      const txt = document.getElementById('email-text');
-      const icon = document.getElementById('copy-icon');
-      txt.textContent = 'Copied!';
-      icon.style.opacity = '1';
-      icon.innerHTML = '<path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>';
-      setTimeout(() => {
-        txt.textContent = 'contact30450@gmail.com';
-        icon.style.opacity = '.5';
-        icon.innerHTML = '<path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"/>';
-      }, 2000);
-    });
+    copyEmailWithFeedback('email-text', 'copy-icon');
   }
 
-
-  // Clipboard copy on email button (contact page)
   function copyEmailPage() {
+    copyEmailWithFeedback('email-text-page', 'copy-icon-page');
+  }
+
+  function copyEmailWithFeedback(textId, iconId) {
+    if (!navigator.clipboard) {
+      return;
+    }
+
     navigator.clipboard.writeText('contact30450@gmail.com').then(() => {
-      const txt = document.getElementById('email-text-page');
-      const icon = document.getElementById('copy-icon-page');
-      txt.textContent = 'Copied!';
+      const text = document.getElementById(textId);
+      const icon = document.getElementById(iconId);
+      if (!text || !icon) {
+        return;
+      }
+
+      text.textContent = 'Copied!';
       icon.style.opacity = '1';
       icon.innerHTML = '<path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>';
       setTimeout(() => {
-        txt.textContent = 'contact30450@gmail.com';
+        text.textContent = 'contact30450@gmail.com';
         icon.style.opacity = '.5';
         icon.innerHTML = '<path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"/>';
       }, 2000);
     });
   }
+
+  function initializeAdminUi() {
+    adminUi.modal = document.getElementById('admin-modal');
+    adminUi.panel = document.getElementById('admin-panel');
+    adminUi.close = document.getElementById('admin-close-btn');
+    adminUi.status = document.getElementById('admin-status');
+    adminUi.login = document.getElementById('admin-login-btn');
+    adminUi.edit = document.getElementById('admin-edit-btn');
+    adminUi.save = document.getElementById('admin-save-btn');
+    adminUi.signOut = document.getElementById('admin-signout-btn');
+
+    if (!adminUi.panel || !adminUi.modal || !adminUi.close || !adminUi.login || !adminUi.edit || !adminUi.save || !adminUi.signOut) {
+      return;
+    }
+
+    adminUi.login.addEventListener('click', signInAdmin);
+    adminUi.close.addEventListener('click', closeAdminModal);
+    adminUi.modal.addEventListener('click', event => {
+      if (event.target === adminUi.modal) {
+        closeAdminModal();
+      }
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && adminUi.modal.classList.contains('open')) {
+        closeAdminModal();
+      }
+    });
+    adminUi.edit.addEventListener('click', () => {
+      setEditMode(!editMode);
+      setStatus(editMode ? 'Edit mode enabled.' : 'Edit mode disabled.');
+      updateAdminControls();
+    });
+    adminUi.save.addEventListener('click', saveSiteContent);
+    adminUi.signOut.addEventListener('click', signOutAdmin);
+    updateAdminControls();
+  }
+
+  function setStatus(message) {
+    if (adminUi.status) {
+      adminUi.status.textContent = message;
+    }
+  }
+
+  function isFirebaseConfigured() {
+    return Object.values(firebaseConfig).every(value =>
+      typeof value === 'string' && value.trim().length > 0 && !value.startsWith('REPLACE_WITH_')
+    );
+  }
+
+  async function initializeFirebase() {
+    if (!isFirebaseConfigured()) {
+      setStatus('Set Firebase keys in this file to enable secure admin login.');
+      updateAdminControls();
+      return;
+    }
+
+    if (typeof firebase === 'undefined') {
+      setStatus('Firebase SDK did not load.');
+      updateAdminControls();
+      return;
+    }
+
+    try {
+      if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+      }
+
+      auth = firebase.auth();
+      db = firebase.firestore();
+      provider = new firebase.auth.GoogleAuthProvider();
+      provider.setCustomParameters({ prompt: 'select_account' });
+      firebaseReady = true;
+      auth.onAuthStateChanged(handleAuthState);
+      setStatus('Ready. Sign in as ' + ADMIN_EMAIL + '.');
+    } catch (error) {
+      console.error('Firebase init error:', error);
+      setStatus('Firebase setup failed. Check console.');
+    }
+
+    updateAdminControls();
+  }
+
+  async function handleAuthState(user) {
+    if (!user) {
+      isAdmin = false;
+      activeUserEmail = '';
+      if (editMode) {
+        setEditMode(false);
+      }
+      setStatus(firebaseReady ? 'Not signed in.' : 'Admin auth unavailable.');
+      updateAdminControls();
+      return;
+    }
+
+    const email = (user.email || '').toLowerCase();
+    if (email !== ADMIN_EMAIL) {
+      setStatus('Access denied for ' + (user.email || 'unknown account') + '.');
+      await auth.signOut();
+      return;
+    }
+
+    isAdmin = true;
+    activeUserEmail = email;
+    setStatus('Signed in as ' + email + '.');
+    updateAdminControls();
+  }
+
+  async function signInAdmin() {
+    if (!firebaseReady || !auth || !provider) {
+      setStatus('Firebase is not configured yet.');
+      return;
+    }
+
+    try {
+      await auth.signInWithPopup(provider);
+    } catch (error) {
+      console.error('Sign-in error:', error);
+      setStatus('Sign-in failed. Check console.');
+    }
+  }
+
+  async function signOutAdmin() {
+    if (!auth) {
+      return;
+    }
+
+    try {
+      await auth.signOut();
+    } catch (error) {
+      console.error('Sign-out error:', error);
+      setStatus('Sign-out failed. Check console.');
+    }
+  }
+
+  function updateAdminControls() {
+    if (!adminUi.panel) {
+      return;
+    }
+
+    adminUi.login.disabled = isAdmin || !firebaseReady;
+    adminUi.edit.disabled = !isAdmin;
+    adminUi.save.disabled = !isAdmin;
+    adminUi.signOut.disabled = !isAdmin;
+    adminUi.edit.textContent = editMode ? 'Exit Edit Mode' : 'Enter Edit Mode';
+  }
+
+  function getSiteContentRoot() {
+    return document.getElementById(SITE_CONTENT_ID);
+  }
+
+  function setEditMode(enabled) {
+    if (!isAdmin && enabled) {
+      return;
+    }
+
+    const root = getSiteContentRoot();
+    if (!root) {
+      return;
+    }
+
+    editMode = enabled;
+    document.body.classList.toggle('edit-mode', enabled);
+    applyTextEditingState(root, enabled);
+    applyImageEditingState(root, enabled);
+    applyLayoutEditingState(root, enabled);
+  }
+
+  function applyTextEditingState(root, enabled) {
+    const inlineTags = new Set(['SPAN', 'STRONG', 'B', 'EM', 'SMALL', 'I', 'U', 'BR']);
+    const candidates = Array.from(root.querySelectorAll('*')).filter(el => {
+      if (el.closest('svg')) {
+        return false;
+      }
+      if (['IMG', 'SVG', 'PATH', 'SCRIPT', 'STYLE', 'A', 'BUTTON'].includes(el.tagName)) {
+        return false;
+      }
+      if (!el.textContent || !el.textContent.trim()) {
+        return false;
+      }
+      const children = Array.from(el.children);
+      if (!children.length) {
+        return true;
+      }
+      return children.every(child => inlineTags.has(child.tagName));
+    });
+
+    candidates.forEach(el => {
+      el.classList.toggle('admin-editable-text', enabled);
+      if (enabled) {
+        el.setAttribute('contenteditable', 'true');
+        el.setAttribute('spellcheck', 'false');
+      } else {
+        el.removeAttribute('contenteditable');
+        el.removeAttribute('spellcheck');
+      }
+    });
+  }
+
+  function applyImageEditingState(root, enabled) {
+    root.querySelectorAll('img').forEach(image => {
+      image.classList.toggle('admin-editable-image', enabled);
+      image.title = enabled ? 'Double-click to replace image source' : '';
+    });
+
+    if (root.dataset.imageEditorBound !== 'true') {
+      root.addEventListener('dblclick', event => {
+        if (!editMode || !isAdmin) {
+          return;
+        }
+
+        const image = event.target.closest('img');
+        if (!image) {
+          return;
+        }
+
+        event.preventDefault();
+        const nextSrc = window.prompt('Enter a new image URL or local path:', image.getAttribute('src') || '');
+        if (nextSrc === null) {
+          return;
+        }
+
+        const trimmedSrc = nextSrc.trim();
+        if (trimmedSrc.length) {
+          image.setAttribute('src', trimmedSrc);
+        }
+
+        const nextAlt = window.prompt('Enter alt text:', image.getAttribute('alt') || '');
+        if (nextAlt !== null) {
+          image.setAttribute('alt', nextAlt.trim());
+        }
+      });
+      root.dataset.imageEditorBound = 'true';
+    }
+  }
+
+  function applyLayoutEditingState(root, enabled) {
+    const containers = root.querySelectorAll(LAYOUT_CONTAINER_SELECTOR);
+    containers.forEach(container => {
+      container.classList.toggle('admin-layout-container', enabled);
+      container.removeEventListener('dragover', onLayoutDragOver);
+      container.removeEventListener('drop', onLayoutDrop);
+      if (enabled) {
+        container.addEventListener('dragover', onLayoutDragOver);
+        container.addEventListener('drop', onLayoutDrop);
+      }
+
+      Array.from(container.children).forEach(child => {
+        if (!child.matches(LAYOUT_ITEM_SELECTOR)) {
+          return;
+        }
+
+        child.classList.toggle('admin-layout-item', enabled);
+        child.removeEventListener('dragstart', onLayoutDragStart);
+        child.removeEventListener('dragend', onLayoutDragEnd);
+
+        if (enabled) {
+          child.setAttribute('draggable', 'true');
+          child.addEventListener('dragstart', onLayoutDragStart);
+          child.addEventListener('dragend', onLayoutDragEnd);
+        } else {
+          child.removeAttribute('draggable');
+        }
+      });
+    });
+  }
+
+  function onLayoutDragStart(event) {
+    if (!editMode) {
+      return;
+    }
+
+    dragSource = event.currentTarget;
+    dragSource.classList.add('admin-dragging');
+    event.dataTransfer.effectAllowed = 'move';
+    event.dataTransfer.setData('text/plain', 'layout-move');
+  }
+
+  function onLayoutDragEnd() {
+    if (dragSource) {
+      dragSource.classList.remove('admin-dragging');
+    }
+    dragSource = null;
+  }
+
+  function onLayoutDragOver(event) {
+    if (!editMode || !dragSource) {
+      return;
+    }
+
+    const container = event.currentTarget;
+    if (dragSource.parentElement !== container) {
+      return;
+    }
+
+    event.preventDefault();
+    const afterElement = getDropPosition(container, event.clientY);
+    if (!afterElement) {
+      container.appendChild(dragSource);
+      return;
+    }
+    if (afterElement !== dragSource) {
+      container.insertBefore(dragSource, afterElement);
+    }
+  }
+
+  function onLayoutDrop(event) {
+    if (!editMode) {
+      return;
+    }
+    event.preventDefault();
+  }
+
+  function getDropPosition(container, y) {
+    const draggableElements = [...container.querySelectorAll('.admin-layout-item:not(.admin-dragging)')];
+    let closest = null;
+    let closestOffset = Number.NEGATIVE_INFINITY;
+
+    draggableElements.forEach(item => {
+      const box = item.getBoundingClientRect();
+      const offset = y - box.top - box.height / 2;
+      if (offset < 0 && offset > closestOffset) {
+        closestOffset = offset;
+        closest = item;
+      }
+    });
+
+    return closest;
+  }
+
+  async function saveSiteContent() {
+    if (!isAdmin || !db) {
+      setStatus('Sign in as admin before saving.');
+      return;
+    }
+
+    const root = getSiteContentRoot();
+    if (!root) {
+      return;
+    }
+
+    setStatus('Saving changes...');
+    try {
+      const html = createPersistedMarkup(root);
+      await db.collection(CMS_COLLECTION).doc(CMS_DOC).set({
+        html,
+        updatedBy: activeUserEmail || ADMIN_EMAIL,
+        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+      }, { merge: true });
+      setStatus('Changes saved for all visitors.');
+    } catch (error) {
+      console.error('Save error:', error);
+      setStatus('Save failed. Check console and Firestore permissions.');
+    }
+  }
+
+  function createPersistedMarkup(root) {
+    const clone = root.cloneNode(true);
+    clone.querySelectorAll('.admin-editable-text').forEach(el => el.classList.remove('admin-editable-text'));
+    clone.querySelectorAll('.admin-editable-image').forEach(el => el.classList.remove('admin-editable-image'));
+    clone.querySelectorAll('.admin-layout-item').forEach(el => el.classList.remove('admin-layout-item'));
+    clone.querySelectorAll('.admin-layout-container').forEach(el => el.classList.remove('admin-layout-container'));
+    clone.querySelectorAll('.admin-dragging').forEach(el => el.classList.remove('admin-dragging'));
+    clone.querySelectorAll('[contenteditable]').forEach(el => el.removeAttribute('contenteditable'));
+    clone.querySelectorAll('[spellcheck]').forEach(el => el.removeAttribute('spellcheck'));
+    clone.querySelectorAll('[draggable]').forEach(el => el.removeAttribute('draggable'));
+    return clone.innerHTML;
+  }
+
+  async function loadSiteContent() {
+    if (!db) {
+      return;
+    }
+
+    const root = getSiteContentRoot();
+    if (!root) {
+      return;
+    }
+
+    try {
+      const snapshot = await db.collection(CMS_COLLECTION).doc(CMS_DOC).get();
+      if (!snapshot.exists) {
+        return;
+      }
+
+      const data = snapshot.data();
+      if (data && typeof data.html === 'string' && data.html.trim().length > 0) {
+        root.innerHTML = data.html;
+      }
+    } catch (error) {
+      console.error('Load error:', error);
+      setStatus('Could not load saved content from Firestore.');
+    }
+  }
+
+  async function bootstrap() {
+    initializeAdminUi();
+    await initializeFirebase();
+    await loadSiteContent();
+    initRevealObserver();
+    initTilt();
+    setActiveNavLink('home');
+  }
+
+  bootstrap();
 </script>
 
 </body>
