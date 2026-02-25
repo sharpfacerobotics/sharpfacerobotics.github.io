@@ -2060,6 +2060,11 @@
     clone.querySelectorAll('.admin-layout-item').forEach(el => el.classList.remove('admin-layout-item'));
     clone.querySelectorAll('.admin-layout-container').forEach(el => el.classList.remove('admin-layout-container'));
     clone.querySelectorAll('.admin-dragging').forEach(el => el.classList.remove('admin-dragging'));
+
+    clone.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
+    const homePage = clone.querySelector('#page-home');
+    if (homePage) homePage.classList.add('active');
+    
     clone.querySelectorAll('[contenteditable]').forEach(el => el.removeAttribute('contenteditable'));
     clone.querySelectorAll('[spellcheck]').forEach(el => el.removeAttribute('spellcheck'));
     clone.querySelectorAll('[draggable]').forEach(el => el.removeAttribute('draggable'));
@@ -2096,6 +2101,7 @@
     initializeAdminUi();
     await initializeFirebase();
     await loadSiteContent();
+    navigateTo('home');
     initRevealObserver();
     initTilt();
     setActiveNavLink('home');
