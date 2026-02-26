@@ -530,9 +530,30 @@
     .robot-h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: .05em; margin-bottom: .9rem; }
     .robot-p { font-size: .95rem; color: var(--dim); line-height: 1.75; margin-bottom: 1.2rem; }
     .specs { display: flex; flex-direction: column; gap: .6rem; }
-    .spec-row { display: flex; justify-content: space-between; align-items: center; padding: .65rem 1rem; background: rgba(255,255,255,.02); border-left: 2px solid var(--cyan); }
-    .spec-row strong { font-family: 'Roboto Mono', monospace; font-size: .65rem; letter-spacing: .1em; text-transform: uppercase; color: var(--cyan); font-weight: 500; }
-    .spec-row span { font-size: .9rem; color: var(--text); }
+    .spec-row {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: .35rem;
+      padding: .75rem 1rem;
+      background: rgba(255,255,255,.02);
+      border-left: 2px solid var(--cyan);
+    }
+    .spec-row strong {
+      display: block;
+      font-family: 'Roboto Mono', monospace;
+      font-size: .65rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      font-weight: 500;
+      line-height: 1.2;
+    }
+    .spec-row span {
+      font-size: .9rem;
+      color: var(--text);
+      line-height: 1.45;
+    }
 
     .features-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; }
     .feat { background: var(--card); border: 1px solid var(--edge); padding: 1.3rem; transition: border-color .2s; }
@@ -856,6 +877,7 @@
       <a onclick="navigateTo('home')" data-page="home" class="active">Home</a>
       <a onclick="navigateTo('team')" data-page="team">Team</a>
       <a onclick="navigateTo('bios')" data-page="bios">Team Bios</a>
+      <a onclick="navigateTo('robot')" data-page="robot">Robot</a>
       <a onclick="navigateTo('ai')" data-page="ai">Sharp AI</a>
       <a onclick="navigateTo('sponsors')" data-page="sponsors">Sponsors</a>
       <a onclick="navigateTo('contact')" data-page="contact">Contact</a>
@@ -869,6 +891,7 @@
 <div class="mobile-menu" id="mobile-menu">
   <a onclick="navigateTo('home'); toggleMobileMenu();" data-page="home" class="active">Home</a>
   <a onclick="navigateTo('team'); toggleMobileMenu();" data-page="team">Team</a>
+  <a onclick="navigateTo('robot'); toggleMobileMenu();" data-page="robot">Robot</a>
   <a onclick="navigateTo('bios'); toggleMobileMenu();" data-page="bios">Team Bios</a>
   <a onclick="navigateTo('ai'); toggleMobileMenu();" data-page="ai">Sharp AI</a>
   <a onclick="navigateTo('sponsors'); toggleMobileMenu();" data-page="sponsors">Sponsors</a>
@@ -1366,6 +1389,102 @@
   </div>
 </div>
 
+<!-- ROBOT PAGE -->
+<div class="page" id="page-robot">
+  <div class="page-content">
+    <section class="section">
+      <div class="wrap">
+        <div class="s-tag">Robot Architecture</div>
+        <div class="s-h2">KG</div>
+        <div class="bar"></div>
+
+        <article class="robot-hero reveal" aria-labelledby="robot-overview-title">
+          <figure class="robot-img-wrap">
+            <img src="assets/explodedCad.png" alt="Exploded CAD of robot KG showing shooter, transfer, intake, drivetrain, and electronics assemblies.">
+          </figure>
+          <div>
+            <h3 class="robot-h3" id="robot-overview-title">Exploded CAD + System Overview</h3>
+            <p class="robot-p">
+              KG was built around reliability, cycle speed, and simple serviceability. Our design combines an integrated mecanum drivetrain, dual-compliant intake, compact transfer path, and a tuned single-flywheel launcher so the robot can keep consistent scoring pressure throughout a match.
+            </p>
+            <div class="specs" role="list" aria-label="Robot specification highlights">
+              <div class="spec-row" role="listitem"><strong>Drivebase</strong><span>Integrated mecanum with 45 degree rollers and low friction losses</span></div>
+              <div class="spec-row" role="listitem"><strong>Intake</strong><span>Dual-compliant 3-stage intake at 1150 RPM with a 35 degree ramp</span></div>
+              <div class="spec-row" role="listitem"><strong>Transfer</strong><span>Flicker + passive ramp handoff with approximately 0.83 second transfer</span></div>
+              <div class="spec-row" role="listitem"><strong>Launcher</strong><span>Single 3 inch flywheel tuned for approximately 50 degree scoring shots</span></div>
+              <div class="spec-row" role="listitem"><strong>Autonomous</strong><span>Pedro Pathing with AprilTag + odometry localization and correction</span></div>
+              <div class="spec-row" role="listitem"><strong>Cycle Timing</strong><span>Structured 1.5 second shot sequence with staged trigger reset logic</span></div>
+              <div class="spec-row" role="listitem"><strong>Controls</strong><span>State-machine architecture with voltage compensation and driver macros</span></div>
+            </div>
+          </div>
+        </article>
+
+        <div class="features-list">
+          <article class="feat reveal">
+            <div class="feat-icon" aria-hidden="true">
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4h10l4 4v12H3V8l4-4zm1 2L5 9v9h14V9l-3-3H8zm4 3a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"></path></svg>
+            </div>
+            <div class="feat-h">Drivetrain</div>
+            <p class="feat-p">
+              The drivetrain evolved from our first ladder-drive prototype into a fully integrated mecanum frame, improving packaging, rigidity, and maintainability while preserving smooth omnidirectional control.
+            </p>
+          </article>
+
+          <article class="feat reveal">
+            <div class="feat-icon" aria-hidden="true">
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M4 5h16v4H4V5zm2 6h12v2H6v-2zm-2 4h16v4H4v-4z"></path></svg>
+            </div>
+            <div class="feat-h">Intake + Transfer</div>
+            <p class="feat-p">
+              A dual-compliant pitching intake and compact transfer chain were tuned through iteration to handle approach angle errors, keep artifact flow stable, and reduce jams under match pressure.
+            </p>
+          </article>
+
+          <article class="feat reveal">
+            <div class="feat-icon" aria-hidden="true">
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M3 12h8l2-8 8 2-2 8H9l-2 8-4-1 2-9z"></path></svg>
+            </div>
+            <div class="feat-h">Shooter</div>
+            <p class="feat-p">
+              The launcher geometry and compression were refined across multiple versions to improve shot repeatability, reduce spin-up delay between cycles, and maintain accuracy from distance.
+            </p>
+          </article>
+
+          <article class="feat reveal">
+            <div class="feat-icon" aria-hidden="true">
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 4 6v6c0 5 3.4 9.7 8 10 4.6-.3 8-5 8-10V6l-8-4zm0 3.1L17 7.4v4.6c0 3.7-2.2 7.2-5 7.8-2.8-.6-5-4.1-5-7.8V7.4l5-2.3z"></path></svg>
+            </div>
+            <div class="feat-h">Localization</div>
+            <p class="feat-p">
+              Limelight AprilTag sensing is fused with GoBILDA odometry for robust field awareness, enabling automatic alignment and distance-aware shooting in both autonomous and TeleOp.
+            </p>
+          </article>
+
+          <article class="feat reveal">
+            <div class="feat-icon" aria-hidden="true">
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M3 3h18v4H3V3zm2 6h6v12H5V9zm8 0h6v6h-6V9zm0 8h6v4h-6v-4z"></path></svg>
+            </div>
+            <div class="feat-h">Autonomous</div>
+            <p class="feat-p">
+              Pedro Pathing and explicit state machines drive repeatable autonomous routes with recovery logic, giving us reliable multi-action cycles instead of fragile timing-only routines.
+            </p>
+          </article>
+
+          <article class="feat reveal">
+            <div class="feat-icon" aria-hidden="true">
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1 3 5v6c0 5.1 3.8 9.6 9 11 5.2-1.4 9-5.9 9-11V5l-9-4zm4 12h-3v3h-2v-3H8v-2h3V8h2v3h3v2z"></path></svg>
+            </div>
+            <div class="feat-h">Driver Experience</div>
+            <p class="feat-p">
+              Driver-centric controller mapping and macro actions keep controls predictable, so operators can focus on game awareness while automation handles repeatable timing-sensitive steps.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
 <!-- SHARP AI PAGE -->
 <div class="page" id="page-ai">
   <div class="page-content">
@@ -1530,8 +1649,8 @@
   const CMS_COLLECTION = 'siteContent';
   const CMS_DOC = 'main';
   const GITHUB_SYNC_ENDPOINT = 'REPLACE_WITH_GITHUB_SYNC_FUNCTION_URL';
-  const LAYOUT_CONTAINER_SELECTOR = '.awards, .hero-ctas, .counters, .pillars, .coaches-grid, .bio-grid, .sponsor-grid, .social-links';
-  const LAYOUT_ITEM_SELECTOR = '.award, .btn, .counter, .pillar, .coach-card, .bio-card, .sponsor-card, .social-link';
+  const LAYOUT_CONTAINER_SELECTOR = '.awards, .hero-ctas, .counters, .pillars, .coaches-grid, .bio-grid, .specs, .features-list, .sponsor-grid, .social-links';
+  const LAYOUT_ITEM_SELECTOR = '.award, .btn, .counter, .pillar, .coach-card, .bio-card, .spec-row, .feat, .sponsor-card, .social-link';
   const firebaseConfig = {
     apiKey: "AIzaSyCpjYZZ5ewUBuysfDa-zj9NG4UpyycpM3U",
     authDomain: "sharp-face-robotics-website.firebaseapp.com",
@@ -2268,6 +2387,46 @@
     }
   }
 
+  function mergeTemplateAdditions(targetRoot, templateRoot) {
+    if (!targetRoot || !templateRoot || !targetRoot.querySelector || !templateRoot.querySelector) {
+      return false;
+    }
+
+    let changed = false;
+
+    function syncNavFromTemplate(navSelector) {
+      const targetNav = targetRoot.querySelector(navSelector);
+      const sourceNav = templateRoot.querySelector(navSelector);
+      if (!targetNav || !sourceNav) {
+        return;
+      }
+
+      if (targetNav.innerHTML !== sourceNav.innerHTML) {
+        targetNav.innerHTML = sourceNav.innerHTML;
+        changed = true;
+      }
+    }
+
+    syncNavFromTemplate('.nav-links');
+    syncNavFromTemplate('.mobile-menu');
+
+    if (!targetRoot.querySelector('#page-robot')) {
+      const sourcePage = templateRoot.querySelector('#page-robot');
+      if (sourcePage) {
+        const pageClone = sourcePage.cloneNode(true);
+        const insertBeforePage = targetRoot.querySelector('#page-ai') || targetRoot.querySelector('#page-sponsors') || targetRoot.querySelector('#page-contact');
+        if (insertBeforePage && insertBeforePage.parentNode) {
+          insertBeforePage.parentNode.insertBefore(pageClone, insertBeforePage);
+        } else {
+          targetRoot.appendChild(pageClone);
+        }
+        changed = true;
+      }
+    }
+
+    return changed;
+  }
+
   function createPersistedMarkup(root) {
     const clone = root.cloneNode(true);
     cleanSiteRootForExport(clone);
@@ -2383,7 +2542,15 @@
 
       const data = snapshot.data();
       if (data && typeof data.html === 'string' && data.html.trim().length > 0) {
-        root.innerHTML = data.html;
+        const templateRoot = root.cloneNode(true);
+        const loadedRoot = document.createElement('div');
+        loadedRoot.innerHTML = data.html;
+        const migrated = mergeTemplateAdditions(loadedRoot, templateRoot);
+        if (migrated) {
+          console.info('Applied template migration to loaded CMS content.');
+        }
+
+        root.innerHTML = loadedRoot.innerHTML;
         sanitizeLoadedRuntimeState(root);
         updateAdminNavLabels();
       }
