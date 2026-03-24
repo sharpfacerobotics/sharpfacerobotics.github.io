@@ -563,7 +563,12 @@
     .feat-p { font-size: .88rem; color: var(--dim); line-height: 1.6; }
 
     /* AI */
-    .ai-card { background: var(--card); border: 1px solid var(--edge); padding: 2.5rem; display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center; }
+    .services-container {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+    .ai-card { background: var(--card); border: 1px solid var(--edge); padding: 2.5rem; display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center; position: relative; }
     @media (max-width:700px) { .ai-card { grid-template-columns: 1fr; padding: 1.5rem; } }
     .ai-copy { font-size: .96rem; color: var(--dim); line-height: 1.82; }
     .ai-copy strong { color: var(--text); font-weight: 700; }
@@ -571,6 +576,26 @@
     .ai-badge-icon { width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; background: rgba(82,219,212,.15); color: var(--cyan); }
     .ai-badge-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: .05em; line-height: 1; }
     .ai-badge-sub { font-family: 'Roboto Mono', monospace; font-size: .58rem; letter-spacing: .14em; text-transform: uppercase; color: var(--cyan); }
+    .coming-soon-badge {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: linear-gradient(135deg, var(--gold), rgba(200,169,78,.7));
+      color: #000;
+      font-family: 'Roboto Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: .4rem .9rem;
+      border-radius: 2px;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(200,169,78,.3);
+    }
+    .ai-badge img {
+      width: 64px;
+      height: 64px;
+      object-fit: contain;
+    }
 
     /* SPONSORS */
     .sponsor-intro {
@@ -878,7 +903,7 @@
       <a onclick="navigateTo('team')" data-page="team">Team</a>
       <a onclick="navigateTo('bios')" data-page="bios">Team Bios</a>
       <a onclick="navigateTo('robot')" data-page="robot">Robot</a>
-      <a onclick="navigateTo('ai')" data-page="ai">Sharp AI</a>
+      <a onclick="navigateTo('ai')" data-page="ai">Services</a>
       <a onclick="navigateTo('sponsors')" data-page="sponsors">Sponsors</a>
       <a onclick="navigateTo('contact')" data-page="contact">Contact</a>
       <button type="button" onclick="openAdminModal()" id="admin-nav-trigger">Admin Login</button>
@@ -1605,28 +1630,49 @@
   </div>
 </div>
 
-<!-- SHARP AI PAGE -->
+<!-- SERVICES PAGE -->
 <div class="page" id="page-ai">
   <div class="page-content">
     <section class="section">
       <div class="wrap">
         <div class="s-tag">Innovation</div>
-        <div class="s-h2">Sharp AI</div>
+        <div class="s-h2">Services</div>
         <div class="bar"></div>
-        <div class="ai-card reveal">
-          <div class="ai-copy">
-            <p>As a rookie team, we struggled to find AI tools tailored to FTC programming — so we built our own. <strong>Sharp</strong> is a large language model designed specifically to generate FTC-ready code, helping our team iterate faster and sharing that advantage with the wider robotics community.</p>
-            <a href="https://sharpai-2-7.vercel.app/" target="_blank" rel="noopener" class="btn btn-ghost" style="margin-top:1.5rem;">
-              Launch Sharp AI
-              <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"></path></svg>
-            </a>
-          </div>
-          <div class="ai-badge">
-            <div class="ai-badge-icon">
-              <svg class="icon" style="width:1.8rem;height:1.8rem" viewBox="0 0 24 24" fill="currentColor"><path d="M9 2v2H7a2 2 0 0 0-2 2v2H3v2h2v2H3v2h2v2a2 2 0 0 0 2 2h2v2h2v-2h2v2h2v-2h2a2 2 0 0 0 2-2v-2h2v-2h-2v-2h2V9h-2V7a2 2 0 0 0-2-2h-2V3h-2v2h-2V3H9zm-2 4h10v10H7V6zm2 2v6h6V8H9z"></path></svg>
+        
+        <div class="services-container">
+          <!-- Sharp AI Card -->
+          <div class="ai-card reveal">
+            <div class="ai-copy">
+              <p>As a rookie team, we struggled to find AI tools tailored to FTC programming — so we built our own. <strong>Sharp</strong> is a large language model designed specifically to generate FTC-ready code, helping our team iterate faster and sharing that advantage with the wider robotics community.</p>
+              <a href="https://sharpai-2-7.vercel.app/" target="_blank" rel="noopener" class="btn btn-ghost" style="margin-top:1.5rem;">
+                Launch Sharp AI
+                <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"></path></svg>
+              </a>
             </div>
-            <div class="ai-badge-name">Sharp</div>
-            <div class="ai-badge-sub">FTC Code LLM</div>
+            <div class="ai-badge">
+              <div class="ai-badge-icon">
+                <svg class="icon" style="width:1.8rem;height:1.8rem" viewBox="0 0 24 24" fill="currentColor"><path d="M9 2v2H7a2 2 0 0 0-2 2v2H3v2h2v2H3v2h2v2a2 2 0 0 0 2 2h2v2h2v-2h2v2h2v-2h2a2 2 0 0 0 2-2v-2h2v-2h-2v-2h2V9h-2V7a2 2 0 0 0-2-2h-2V3h-2v2h-2V3H9zm-2 4h10v10H7V6zm2 2v6h6V8H9z"></path></svg>
+              </div>
+              <div class="ai-badge-name">Sharp</div>
+              <div class="ai-badge-sub">FTC Code LLM</div>
+            </div>
+          </div>
+
+          <!-- Telemark Card -->
+          <div class="ai-card reveal">
+            <div class="coming-soon-badge">Coming Soon</div>
+            <div class="ai-copy">
+              <p><strong>Telemark</strong> is a website to help new members learn Java for FTC, with a built-in simulator. A structured, level-gated curriculum built by student engineers. From Blocks to Bézier curves — every concept hands-on.</p>
+              <a href="https://sharpfacerobotics.github.io/ftc-curriculum" target="_blank" rel="noopener" class="btn btn-ghost" style="margin-top:1.5rem;">
+                Visit Telemark
+                <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"></path></svg>
+              </a>
+            </div>
+            <div class="ai-badge">
+              <img src="assets/telemark.png" alt="Telemark Logo">
+              <div class="ai-badge-name">Telemark</div>
+              <div class="ai-badge-sub">Master FTC Programming</div>
+            </div>
           </div>
         </div>
       </div>
