@@ -1,7 +1,277 @@
-<?xml version='1.0' encoding='utf-8'?>
-<ns0:urlset xmlns:ns0="http://www.sitemaps.org/schemas/sitemap/0.9">
-<ns0:url>
-<ns0:loc>https://sharpfacerobotics.github.io/</ns0:loc>
-<ns0:lastmod>2026-03-24T04:21:19Z</ns0:lastmod>
-</ns0:url>
-</ns0:urlset>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://sharpfacerobotics.github.io/</loc>
+  <lastmod>2026-03-24T04:22:13+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/curriculum</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/simulator</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/login</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-01/prerequisites</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-01</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-02</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-03</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-04</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-05</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-06</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/simulator/index.html</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/dashboard</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-01/install-jdk</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-01/install-android-studio</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-01/configure-jdk</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-01/get-ftc-sdk</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-01/open-project</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-01/verify-build-config</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-01/first-opmode</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-01/connect-control-hub</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-01/verification-checklist</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-02/registering-programs</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-02/init-method</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-02/loop-lifecycle</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-02/start-and-stop</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-02/health-check-challenge</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-02/mastery-quiz</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-03/string-literals</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-03/double-precision</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-03/boolean-flags</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-03/int-datatypes</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-03/dynamic-power-challenge</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-03/mastery-quiz</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-04/button-toggles</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-04/joystick-scaling</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-04/trigger-inputs</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-04/sensitivity-curves</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-04/arcade-drive-challenge</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-04/mastery-quiz</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-05/if-statements</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-05/else-if-chaining</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-05/comparison-operators</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-05/logical-operators</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-05/intake-logic-challenge</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-05/mastery-quiz</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-06/opmode-active</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-06/for-loops</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-06/runtime-timing</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-06/hardware-arrays</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-06/nonblocking-timer</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://sharpfacerobotics.github.io/ftc-curriculum/docs/unit-06/mastery-quiz</loc>
+  <lastmod>2026-04-13T02:22:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+
+
+</urlset>
