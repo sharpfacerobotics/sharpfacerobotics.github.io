@@ -62,7 +62,7 @@
     .brand img { width: 30px; height: 30px; object-fit: contain; }
     .brand-t { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: .12em; line-height: 1; }
     .brand-t small { display: block; font-family: 'Roboto Mono', monospace; font-size: .52rem; letter-spacing: .2em; color: var(--cyan); margin-top: 3px; }
-    .nav-links { display: flex; gap: 1.8rem; }
+    .nav-links { display: flex; gap: 1.25rem; }
     .nav-links a,
     .nav-links button {
       font-family: 'Roboto Mono', monospace; font-size: .6rem; letter-spacing: .16em; 
@@ -73,11 +73,11 @@
     .nav-links button:hover { color: var(--cyan); }
     .nav-links a.active,
     .nav-links button.active { color: var(--cyan); }
-    @media (max-width:768px) { 
+    @media (max-width:920px) { 
       .nav-links { display: none; }
       .mobile-menu-btn { display: block; }
     }
-    @media (min-width:769px) {
+    @media (min-width:921px) {
       .mobile-menu-btn { display: none; }
     }
 
@@ -695,6 +695,101 @@
       margin-right: auto;
     }
 
+    /* SUPPORT */
+    .support-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 500px);
+      gap: 2.5rem;
+      align-items: start;
+    }
+    .support-copy {
+      background: var(--card);
+      border: 1px solid var(--edge);
+      padding: 2.4rem;
+    }
+    .support-logo {
+      width: 74px;
+      height: 74px;
+      object-fit: contain;
+      margin-bottom: 1.4rem;
+      filter: drop-shadow(0 0 22px rgba(82,219,212,.35));
+    }
+    .support-h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: .05em;
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+    .support-p {
+      color: var(--dim);
+      font-size: .96rem;
+      line-height: 1.8;
+      margin-bottom: 1.6rem;
+    }
+    .support-goal {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--edge);
+      border: 1px solid var(--edge);
+      margin-bottom: 1.7rem;
+    }
+    .support-goal div {
+      background: rgba(255,255,255,.025);
+      padding: 1rem 1.1rem;
+    }
+    .support-goal-label {
+      display: block;
+      font-family: 'Roboto Mono', monospace;
+      font-size: .58rem;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: .3rem;
+    }
+    .support-goal strong {
+      display: block;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      line-height: 1;
+      letter-spacing: .05em;
+      color: var(--cyan);
+      font-weight: 400;
+    }
+    .support-widget {
+      min-height: 560px;
+      background: #ffffff;
+      border: 1px solid rgba(82,219,212,.35);
+      padding: .75rem;
+      overflow: hidden;
+    }
+    .support-widget .gfm-embed {
+      width: 100%;
+      min-height: 520px;
+    }
+    .support-widget iframe {
+      width: 100% !important;
+      max-width: 100%;
+      border: 0;
+    }
+    @media (max-width: 840px) {
+      .support-layout {
+        grid-template-columns: 1fr;
+      }
+      .support-copy {
+        padding: 1.6rem;
+      }
+    }
+    @media (max-width: 520px) {
+      .support-goal {
+        grid-template-columns: 1fr;
+      }
+      .support-widget {
+        padding: .5rem;
+      }
+    }
+
     /* CONTACT */
     #contact { background: var(--surface); padding: 5.5rem 0; }
     .contact-in { max-width: 600px; margin: 0 auto; text-align: center; padding: 0 3rem; }
@@ -905,6 +1000,7 @@
       <a onclick="navigateTo('robot')" data-page="robot">Robot</a>
       <a onclick="navigateTo('ai')" data-page="ai">Services</a>
       <a onclick="navigateTo('sponsors')" data-page="sponsors">Sponsors</a>
+      <a onclick="navigateTo('support')" data-page="support">Support</a>
       <a onclick="navigateTo('contact')" data-page="contact">Contact</a>
       <button type="button" onclick="openAdminModal()" id="admin-nav-trigger">Admin Login</button>
     </div>
@@ -920,6 +1016,7 @@
   <a onclick="navigateTo('bios'); toggleMobileMenu();" data-page="bios">Team Bios</a>
   <a onclick="navigateTo('ai'); toggleMobileMenu();" data-page="ai">Sharp AI</a>
   <a onclick="navigateTo('sponsors'); toggleMobileMenu();" data-page="sponsors">Sponsors</a>
+  <a onclick="navigateTo('support'); toggleMobileMenu();" data-page="support">Support</a>
   <a onclick="navigateTo('contact'); toggleMobileMenu();" data-page="contact">Contact</a>
   <button type="button" onclick="openAdminModal(); toggleMobileMenu();" id="admin-nav-trigger-mobile">Admin Login</button>
 </div>
@@ -1663,7 +1760,7 @@
             <div class="coming-soon-badge">Coming Soon</div>
             <div class="ai-copy">
               <p><strong>Telemark</strong> is a website to help new members learn Java for FTC, with a built-in simulator. A structured, level-gated curriculum built by student engineers. From Blocks to Bézier curves — every concept hands-on.</p>
-              <a href="https://sharpfacerobotics.github.io/telemark" target="_blank" rel="noopener" class="btn btn-ghost" style="margin-top:1.5rem;">
+              <a href="https://sharpfacerobotics.github.io/ftc-curriculum" target="_blank" rel="noopener" class="btn btn-ghost" style="margin-top:1.5rem;">
                 Visit Telemark
                 <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"></path></svg>
               </a>
@@ -1750,6 +1847,48 @@
   </div>
 </div>
 
+<!-- SUPPORT PAGE -->
+<div class="page" id="page-support">
+  <div class="page-content">
+    <section class="section alt">
+      <div class="wrap">
+        <div class="s-tag">Emerald Invitational</div>
+        <div class="s-h2">Support Our Event</div>
+        <div class="bar"></div>
+
+        <div class="support-layout">
+          <div class="support-copy reveal">
+            <img class="support-logo" src="assets/SharpFace.png" alt="Sharp Face Robotics">
+            <h3 class="support-h3">Help Fund the Emerald Invitational</h3>
+            <p class="support-p">Sharp Face Robotics is raising $1,200 through GoFundMe for the Emerald Invitational FTC robotics event. Your contribution helps us create a stronger event experience for teams, volunteers, and students.</p>
+            <div class="support-goal" aria-label="Emerald Invitational fundraising details">
+              <div>
+                <span class="support-goal-label">Goal</span>
+                <strong>$1,200</strong>
+              </div>
+              <div>
+                <span class="support-goal-label">Platform</span>
+                <strong>GoFundMe</strong>
+              </div>
+            </div>
+            <a href="https://www.gofundme.com/f/support-emerald-invitational-ftc-robotics" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+              Donate on GoFundMe
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"></path></svg>
+            </a>
+          </div>
+
+          <div class="support-widget reveal" aria-label="GoFundMe fundraiser widget for the Emerald Invitational">
+            <div class="gfm-embed" data-url="https://www.gofundme.com/f/support-emerald-invitational-ftc-robotics/widget/large?sharesheet=undefined&amp;attribution_id=sl:63492217-44bc-4432-8804-0333cd3a27dc"></div>
+            <noscript>
+              <a href="https://www.gofundme.com/f/support-emerald-invitational-ftc-robotics">Donate to the Emerald Invitational on GoFundMe</a>
+            </noscript>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
 <!-- CONTACT PAGE -->
 <div class="page" id="page-contact">
   <div class="page-content">
@@ -1807,6 +1946,7 @@
 </div>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script defer id="gofundme-embed-script" src="https://www.gofundme.com/static/js/embed.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
@@ -1818,6 +1958,7 @@
   const CMS_LOAD_PREFERENCE_KEY = 'sfr-cms-load-enabled';
   const CMS_LOAD_DEFAULT = true;
   const GITHUB_SYNC_ENDPOINT = 'REPLACE_WITH_GITHUB_SYNC_FUNCTION_URL';
+  const GOFUNDME_EMBED_SCRIPT_SRC = 'https://www.gofundme.com/static/js/embed.js';
   const LAYOUT_CONTAINER_SELECTOR = '.awards, .hero-ctas, .counters, .pillars, .coaches-grid, .bio-grid, .specs, .features-list, .sponsor-grid, .social-links';
   const LAYOUT_ITEM_SELECTOR = '.award, .btn, .counter, .pillar, .coach-card, .bio-card, .spec-row, .feat, .sponsor-card, .social-link';
   const firebaseConfig = {
@@ -1840,6 +1981,7 @@
   let sourceTemplateHtml = '';
   let dragSource = null;
   let cmsLoadEnabled = CMS_LOAD_DEFAULT;
+  let goFundMeRefreshPending = false;
   const adminUi = {};
 
   function navigateTo(pageName) {
@@ -1862,6 +2004,10 @@
         });
       }, 100);
     }
+
+    if (pageName === 'support') {
+      setTimeout(refreshGoFundMeEmbeds, 100);
+    }
   }
 
   function setActiveNavLink(pageName) {
@@ -1878,6 +2024,29 @@
     if (menu) {
       menu.classList.toggle('open');
     }
+  }
+
+  function refreshGoFundMeEmbeds() {
+    const embeds = Array.from(document.querySelectorAll('.gfm-embed[data-url]'));
+    const emptyEmbed = embeds.some(embed => embed.children.length === 0);
+    if (!emptyEmbed || goFundMeRefreshPending) {
+      return;
+    }
+
+    goFundMeRefreshPending = true;
+    const loader = document.createElement('script');
+    loader.defer = true;
+    loader.src = GOFUNDME_EMBED_SCRIPT_SRC;
+    loader.dataset.gofundmeEmbedRefresh = 'true';
+    loader.addEventListener('load', () => {
+      goFundMeRefreshPending = false;
+      loader.remove();
+    });
+    loader.addEventListener('error', () => {
+      goFundMeRefreshPending = false;
+      loader.remove();
+    });
+    document.body.appendChild(loader);
   }
 
   function openAdminModal() {
@@ -2515,6 +2684,16 @@
     });
   }
 
+  function resetGoFundMeEmbeds(root) {
+    if (!root || !root.querySelectorAll) {
+      return;
+    }
+
+    root.querySelectorAll('.gfm-embed').forEach(embed => {
+      embed.innerHTML = '';
+    });
+  }
+
   function normalizeAdminNavButtons(root) {
     if (!root || !root.querySelector) {
       return;
@@ -2557,6 +2736,7 @@
     root.querySelectorAll('[contenteditable]').forEach(el => el.removeAttribute('contenteditable'));
     root.querySelectorAll('[spellcheck]').forEach(el => el.removeAttribute('spellcheck'));
     root.querySelectorAll('[draggable]').forEach(el => el.removeAttribute('draggable'));
+    resetGoFundMeEmbeds(root);
 
     const mobileMenu = root.querySelector('#mobile-menu');
     if (mobileMenu) {
@@ -2587,6 +2767,7 @@
     root.removeAttribute('data-image-editor-bound');
     root.querySelectorAll('.reveal.vis').forEach(el => el.classList.remove('vis'));
     root.querySelectorAll('img[title="Double-click to replace image source"]').forEach(el => el.removeAttribute('title'));
+    resetGoFundMeEmbeds(root);
 
     const tilt = root.querySelector('#tilt');
     if (tilt) {
@@ -2618,11 +2799,15 @@
     syncNavFromTemplate('.nav-links');
     syncNavFromTemplate('.mobile-menu');
 
-    if (!targetRoot.querySelector('#page-robot')) {
-      const sourcePage = templateRoot.querySelector('#page-robot');
+    function addPageFromTemplate(pageId, insertBeforeSelector) {
+      if (targetRoot.querySelector('#' + pageId)) {
+        return;
+      }
+
+      const sourcePage = templateRoot.querySelector('#' + pageId);
       if (sourcePage) {
         const pageClone = sourcePage.cloneNode(true);
-        const insertBeforePage = targetRoot.querySelector('#page-ai') || targetRoot.querySelector('#page-sponsors') || targetRoot.querySelector('#page-contact');
+        const insertBeforePage = targetRoot.querySelector(insertBeforeSelector);
         if (insertBeforePage && insertBeforePage.parentNode) {
           insertBeforePage.parentNode.insertBefore(pageClone, insertBeforePage);
         } else {
@@ -2631,6 +2816,9 @@
         changed = true;
       }
     }
+
+    addPageFromTemplate('page-robot', '#page-ai, #page-sponsors, #page-support, #page-contact');
+    addPageFromTemplate('page-support', '#page-contact');
 
     return changed;
   }
@@ -2761,6 +2949,7 @@
         root.innerHTML = loadedRoot.innerHTML;
         sanitizeLoadedRuntimeState(root);
         updateAdminNavLabels();
+        refreshGoFundMeEmbeds();
       }
     } catch (error) {
       console.error('Load error:', error);
@@ -2780,6 +2969,7 @@
     }
     initRevealObserver();
     initTilt();
+    refreshGoFundMeEmbeds();
     setActiveNavLink('home');
   }
 
