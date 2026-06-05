@@ -758,20 +758,50 @@
       font-weight: 400;
     }
     .support-widget {
-      min-height: 560px;
-      background: #ffffff;
+      background: var(--card);
       border: 1px solid rgba(82,219,212,.35);
-      padding: .75rem;
+      padding: 1rem;
       overflow: hidden;
     }
     .support-widget .gfm-embed {
       width: 100%;
-      min-height: 520px;
+    }
+    .support-widget .gfm-embed:empty {
+      display: none;
     }
     .support-widget iframe {
+      display: block;
       width: 100% !important;
       max-width: 100%;
+      min-height: 540px;
       border: 0;
+      background: #ffffff;
+    }
+    .support-widget-fallback {
+      padding: 2rem;
+      text-align: center;
+      color: var(--dim);
+    }
+    .support-widget-fallback strong {
+      display: block;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      line-height: 1;
+      letter-spacing: .05em;
+      color: var(--text);
+      font-weight: 400;
+      margin-bottom: .8rem;
+    }
+    .support-widget-fallback p {
+      margin: 0 auto 1.4rem;
+      max-width: 360px;
+      font-size: .92rem;
+      line-height: 1.7;
+    }
+    .support-widget .gfm-embed:not(:empty) + .support-widget-fallback {
+      border-top: 1px solid var(--edge);
+      margin-top: 1rem;
+      padding: 1.2rem 1rem .2rem;
     }
     @media (max-width: 840px) {
       .support-layout {
@@ -1878,7 +1908,12 @@
           </div>
 
           <div class="support-widget reveal" aria-label="GoFundMe fundraiser widget for the Emerald Invitational">
-            <div class="gfm-embed" data-url="https://www.gofundme.com/f/support-emerald-invitational-ftc-robotics/widget/large?sharesheet=undefined&amp;attribution_id=sl:63492217-44bc-4432-8804-0333cd3a27dc"></div>
+            <div class="gfm-embed" data-url="https://www.gofundme.com/f/support-emerald-invitational-ftc-robotics/widget/large?attribution_id=sl:63492217-44bc-4432-8804-0333cd3a27dc"></div>
+            <div class="support-widget-fallback">
+              <strong>Support the Emerald Invitational</strong>
+              <p>If the GoFundMe widget does not load in your browser, the fundraiser is still available directly on GoFundMe.</p>
+              <a href="https://www.gofundme.com/f/support-emerald-invitational-ftc-robotics" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">Open Fundraiser</a>
+            </div>
             <noscript>
               <a href="https://www.gofundme.com/f/support-emerald-invitational-ftc-robotics">Donate to the Emerald Invitational on GoFundMe</a>
             </noscript>
@@ -1945,8 +1980,6 @@
   </aside>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-<script defer id="gofundme-embed-script" src="https://www.gofundme.com/static/js/embed.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
@@ -2941,10 +2974,7 @@
         const templateRoot = root.cloneNode(true);
         const loadedRoot = document.createElement('div');
         loadedRoot.innerHTML = data.html;
-        const migrated = mergeTemplateAdditions(loadedRoot, templateRoot);
-        if (migrated) {
-          console.info('Applied template migration to loaded CMS content.');
-        }
+        mergeTemplateAdditions(loadedRoot, templateRoot);
 
         root.innerHTML = loadedRoot.innerHTML;
         sanitizeLoadedRuntimeState(root);
