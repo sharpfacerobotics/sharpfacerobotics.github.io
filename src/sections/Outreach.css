@@ -1,0 +1,48 @@
+.chart {
+  border: 1px solid var(--rule);
+  background: var(--ink-850);
+  padding: 1.25rem clamp(1rem, 2vw, 1.75rem) 1.5rem;
+}
+.chart__cap {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; padding-bottom: 1rem; margin-bottom: 0.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+.chart__toggle {
+  border: 1px solid var(--rule-strong); padding: 0.4rem 0.8rem;
+  color: var(--dim); transition: color .3s var(--ease), border-color .3s var(--ease);
+}
+.chart__toggle:hover { color: var(--teal); border-color: var(--rule-accent); }
+
+.chart__plot svg { width: 100%; height: auto; overflow: visible; }
+.chart__xlab {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em;
+  fill: var(--faint); transition: fill .2s var(--ease);
+}
+.chart__xlab.is-on { fill: var(--paper); }
+.chart__mile circle { transition: r .3s var(--ease); }
+
+.chart__read {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem 1.25rem;
+  min-height: 2.25rem; margin-top: 0.75rem; padding-top: 0.85rem;
+  border-top: 1px solid var(--rule);
+  font-family: var(--mono); font-size: 0.6875rem;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim);
+}
+.chart__read b { color: var(--paper); font-weight: 600; }
+.chart__read em { font-style: normal; }
+.chart__hint { color: var(--faint); }
+
+.chart__table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+.chart__table th, .chart__table td {
+  text-align: left; padding: 0.7rem 1rem 0.7rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.chart__table thead th {
+  font-family: var(--mono); font-size: 0.625rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--dim); font-weight: 500;
+}
+.chart__table tbody th { color: var(--paper); font-weight: 600; font-variant-numeric: tabular-nums; }
+.chart__table td { color: var(--body); }
+
+.chart__note { margin-top: 0.9rem; color: var(--faint); letter-spacing: 0.1em; text-transform: none; }

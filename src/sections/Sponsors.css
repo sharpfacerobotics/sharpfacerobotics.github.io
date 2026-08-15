@@ -1,0 +1,95 @@
+.tier { margin-bottom: clamp(1.75rem, 3.5vw, 2.75rem); }
+.tier__head {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem 1.25rem;
+  padding-bottom: 0.75rem; margin-bottom: 1rem;
+  border-bottom: 1px solid var(--rule);
+}
+.tier__label { color: var(--teal); }
+.tier__blurb { font-size: 0.875rem; color: var(--dim); }
+
+.tier__grid { display: grid; gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+/* the 1px gap + shared background is what draws the grid — no card shadows anywhere */
+.tier--principal    .tier__grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); }
+.tier--supporting   .tier__grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); }
+.tier--contributing .tier__grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); }
+
+.sp {
+  position: relative;
+  display: flex; align-items: center; gap: 1.1rem;
+  padding: 1.5rem 1.4rem;
+  background: var(--ink-850);
+  transition: background 0.4s var(--ease);
+}
+.sp:hover { background: var(--ink-700); }
+
+/* The old site put logos with baked-in white backgrounds straight onto black,
+   which read as grey stickers. A light frame is honest to the artwork and
+   makes every mark sit on the same ground. */
+.sp__frame {
+  flex: none;
+  position: relative;               /* definite containing block for the img */
+  /* pure white so the logos' own baked-in white backgrounds blend in
+     rather than showing as a lighter square inside the frame */
+  background: #fff;
+  border: 1px solid rgba(255,255,255,0.12);
+}
+/* Absolutely positioned against a definite box. Percentage heights do NOT
+   resolve for a centred grid item here, so `height:100%` (and even
+   `max-height:100%`) fall back to the PNG's intrinsic 1:1 ratio — a square
+   logo then overflows a wide frame, and because these PNGs have white
+   backgrounds baked in, the overflow is visible as a white cross. */
+.sp__frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0.5rem;
+  object-fit: contain;
+}
+
+/* Frames are sized so a SQUARE mark (Northrop, goBILDA, FIRST) still reads at a
+   decent size after `contain` letterboxes it to the frame height, while a WIDE
+   mark (Workday, Online Metals) fills the width. Roughly 3:2 is the compromise. */
+.tier--principal    .sp__frame { width: 9.5rem;  height: 6.25rem; }
+.tier--supporting   .sp__frame { width: 7rem;    height: 4.75rem; }
+.tier--contributing .sp__frame { width: 5.5rem;  height: 3.75rem; }
+
+.tier--principal .sp { padding: 2rem 1.75rem; }
+
+.sp__meta { display: grid; gap: 0.28rem; min-width: 0; }
+.sp__name {
+  font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--paper);
+}
+.tier--principal .sp__name { font-size: 0.8125rem; }
+.sp__note { font-size: 0.8125rem; line-height: 1.45; color: var(--dim); text-wrap: pretty; }
+
+.sp__ext {
+  position: absolute; top: 0.85rem; right: 0.95rem;
+  font-size: 0.8rem; color: var(--faint);
+  opacity: 0; transform: translate(-2px, 2px);
+  transition: opacity .35s var(--ease), transform .35s var(--ease), color .35s var(--ease);
+}
+.sp:hover .sp__ext { opacity: 1; transform: none; color: var(--teal); }
+.sp--static { cursor: default; }
+
+.sp-loop {
+  margin: clamp(2rem, 5vw, 3.5rem) 0;
+  padding-block: 1.5rem;
+  border-block: 1px solid var(--rule);
+  --logoloop-logoHeight: 26px;
+}
+.sp-loop img {
+  background: #fff;
+  padding: 5px 8px;
+  border-radius: 1px;
+}
+
+.become {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 1.75rem;
+  padding: clamp(1.75rem, 4vw, 2.75rem);
+  border: 1px solid var(--rule);
+  background: var(--ink-850);
+}
+.become .lede { max-width: 52ch; }
