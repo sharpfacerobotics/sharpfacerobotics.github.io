@@ -85,15 +85,10 @@ export default function Admin({ open, onClose }: { open: boolean; onClose: () =>
               </section>
 
               <section>
-                <h3 className="mono admin__legend">Sponsor tiers</h3>
+                <h3 className="mono admin__legend">Partners</h3>
                 {draft.sponsors.map((s, i) => (
                   <div className="admin__row admin__row--sp" key={s.name}>
                     <span className="admin__spname">{s.name}</span>
-                    <select aria-label={`${s.name} tier`} value={s.tier} onChange={e => setSponsor(i, { tier: e.target.value as typeof s.tier })}>
-                      <option value="principal">Principal</option>
-                      <option value="supporting">Supporting</option>
-                      <option value="contributing">Contributing</option>
-                    </select>
                     <input
                       aria-label={`${s.name} note`}
                       placeholder="What this partnership provides"

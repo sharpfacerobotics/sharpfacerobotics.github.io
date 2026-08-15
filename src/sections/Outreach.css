@@ -46,3 +46,6 @@
 .chart__table td { color: var(--body); }
 
 .chart__note { margin-top: 0.9rem; color: var(--faint); letter-spacing: 0.1em; text-transform: none; }
+
+.outreach__stat { color: var(--dim); margin-top: 1rem; }
+.outreach__stat b { color: var(--teal); font-weight: 600; font-variant-numeric: tabular-nums; }

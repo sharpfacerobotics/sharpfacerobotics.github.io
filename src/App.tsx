@@ -1,6 +1,7 @@
 import { Suspense, lazy, useState } from 'react';
 import Nav from '@/sections/Nav';
 import Hero from '@/sections/Hero';
+import PartnerStrip from '@/sections/PartnerStrip';
 import Team from '@/sections/Team';
 import Robot from '@/sections/Robot';
 import Bios from '@/sections/Bios';
@@ -23,6 +24,7 @@ export default function App() {
       <Nav onAdmin={() => setAdmin(true)} />
       <main>
         <Hero />
+        <PartnerStrip />
         <Team />
         <Robot />
         <Bios />

@@ -3,8 +3,11 @@ import { captain, coaches, members, type Member } from '@/data/team';
 import AnimatedContent from '@/components/reactbits/AnimatedContent';
 import './Bios.css';
 
-type Filter = 'All' | 'Mechanical' | 'Software';
-const FILTERS: Filter[] = ['All', 'Mechanical', 'Software'];
+type Filter = 'All' | 'Mechanical' | 'Software' | 'Outreach';
+const FILTERS: Filter[] = ['All', 'Mechanical', 'Software', 'Outreach'];
+
+const match = (m: Member, f: Filter) =>
+  f === 'All' ? true : f === 'Outreach' ? m.outreach : m.group === f;
 
 function Initials({ name }: { name: string }) {
   const i = name.split(' ').map(p => p[0]).slice(0, 2).join('');
@@ -21,6 +24,7 @@ function Card({ m }: { m: Member }) {
         <h4 className="bio__name">{m.name}</h4>
         <p className="mono-sm bio__meta">
           <span className={`bio__tag bio__tag--${m.group.toLowerCase()}`}>{m.group}</span>
+          {m.outreach && <span className="bio__tag bio__tag--outreach">Outreach</span>}
           <span>{m.grade}</span>
         </p>
         {m.favorite && <p className="bio__quote">“{m.favorite}”</p>}
@@ -31,7 +35,7 @@ function Card({ m }: { m: Member }) {
 
 export default function Bios() {
   const [f, setF] = useState<Filter>('All');
-  const list = f === 'All' ? members : members.filter(m => m.group === f);
+  const list = members.filter(m => match(m, f));
 
   return (
     <section className="band" id="bios">
@@ -76,7 +80,7 @@ export default function Bios() {
                 onClick={() => setF(x)}
               >
                 {x}
-                <em>{x === 'All' ? members.length : members.filter(m => m.group === x).length}</em>
+                <em>{members.filter(m => match(m, x)).length}</em>
               </button>
             ))}
           </div>

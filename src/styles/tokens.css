@@ -45,6 +45,9 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 * { margin: 0; padding: 0; }
+/* Vendored components (React Bits' LogoLoop) render <ul>/<li> and rely on the
+   host app stripping markers. Do it here so nothing shows stray bullets. */
+ul, ol { list-style: none; }
 
 html {
   -webkit-text-size-adjust: 100%;

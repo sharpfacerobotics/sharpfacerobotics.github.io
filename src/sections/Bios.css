@@ -55,6 +55,7 @@
 .bio__tag { padding: 0.15rem 0.4rem; border: 1px solid currentColor; }
 .bio__tag--mechanical { color: var(--amber); }
 .bio__tag--software { color: var(--teal); }
+.bio__tag--outreach { color: var(--dim); border-style: dashed; }
 .bio__quote {
   font-size: 0.875rem; line-height: 1.5; color: var(--dim);
   text-wrap: pretty; margin-top: 0.55rem;

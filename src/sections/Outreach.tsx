@@ -1,5 +1,6 @@
 import { useId, useMemo, useState } from 'react';
 import { outreach, RELATIVE_ONLY, unit, type OutreachPoint } from '@/data/outreach';
+import { members, outreachCount } from '@/data/team';
 import './Outreach.css';
 
 /* Validated against the dark surface #0b0d11 with the dataviz palette
@@ -48,6 +49,9 @@ export default function Outreach() {
           <p className="lede">
             A competition season is not one weekend. This is the rhythm of our outreach across
             a year — recruiting, build, league play, then the community work that carries into summer.
+          </p>
+          <p className="mono outreach__stat">
+            <b>{outreachCount}</b> of {members.length} on the build team also run outreach
           </p>
         </header>
 
