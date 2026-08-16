@@ -3,8 +3,6 @@ import { outreach, RELATIVE_ONLY, unit, type OutreachPoint } from '@/data/outrea
 import { members, outreachCount } from '@/data/team';
 import { Reveal } from '@/components/Motion';
 import GlassSurface from '@/components/reactbits/GlassSurface';
-import CircularGallery from '@/components/reactbits/CircularGallery';
-import { outreachPhotos } from '@/data/outreachPhotos';
 import './Outreach.css';
 
 /* Validated against the dark surface #0b0d11 with the dataviz palette
@@ -173,26 +171,6 @@ export default function Outreach() {
         </figure>
           </GlassSurface>
         </Reveal>
-
-        {/* React Bits CircularGallery — the team's own outreach photographs on a
-            draggable 3D carousel. Horizontal, so the tab still fits the viewport
-            without scrolling. */}
-        <div className="outreach__gallery">
-          <p className="mono outreach__gallery-label">
-            Out in the community
-            <span className="outreach__gallery-hint">drag</span>
-          </p>
-          <div className="outreach__gallery-stage">
-            <CircularGallery
-              items={outreachPhotos.map(p => ({ image: p.src, text: p.caption }))}
-              bend={1.6}
-              textColor="#b9c0cb"
-              borderRadius={0.06}
-              scrollSpeed={1.6}
-              scrollEase={0.06}
-            />
-          </div>
-        </div>
 
         {RELATIVE_ONLY && (
           <p className="chart__note mono-sm">
