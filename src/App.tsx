@@ -67,9 +67,9 @@ export default function App() {
       {rich && (
         <div className="swarm-layer" aria-hidden="true">
           <SwarmCursor
-            color="#4fe0d8" accentColor="#8b7bff" count={16} size={9} merge={0.55}
-            glow={0.5} opacity={0.5} spread={70} separation={26} speed={0.16}
-            wander={0.5} trail={0.7} scatterOnClick
+            color="#4fe0d8" accentColor="#8b7bff" count={9} size={5} merge={0.8}
+            glow={0.35} opacity={0.22} spread={26} separation={12} speed={0.3}
+            wander={0.22} trail={0.85} scatterOnClick
           />
         </div>
       )}

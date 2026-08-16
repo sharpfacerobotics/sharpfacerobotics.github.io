@@ -1,24 +1,33 @@
 .hero { padding-top: clamp(2.5rem, 6vh, 5rem); }
 
-.hero__in { display: grid; gap: 1.5rem; padding-bottom: clamp(2rem, 4vw, 3rem); }
+.hero__in {
+  display: grid; gap: 1.15rem; justify-items: center; text-align: center;
+  padding-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
 .hero__eyebrow { display: flex; align-items: center; gap: 0.6rem; }
 .hero__dot {
   flex: none; width: 7px; height: 7px; border-radius: 50%;
   background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft);
 }
-.hero__h1 { max-width: 16ch; }
+/* Each ParticleText canvas centres its glyphs in a taller box, so the two
+   lines sit far apart at their natural height. Pull them together. */
+.hero__h1 { max-width: none; width: 100%; display: grid; gap: 0; margin-block: 0.25rem; }
+.hero__h1 .hero__particles + .hero__particles { margin-top: -1.6rem; }
+.hero__particles {
+  display: block; width: 100%;
+  height: clamp(3rem, 7vw, 6.25rem);
+}
+.hero__particles canvas { width: 100% !important; height: 100% !important; }
 .hero__line { display: block; }
 
-.hero__meta {
-  display: grid; grid-template-columns: minmax(0, 1fr) auto;
-  gap: 2rem; align-items: end; margin-top: 0.5rem;
-}
-@media (max-width: 820px) { .hero__meta { grid-template-columns: 1fr; align-items: start; } }
-.hero__ctas { display: flex; flex-wrap: wrap; gap: 0.7rem; }
+.hero__meta { display: grid; justify-items: center; gap: 1.5rem; margin-top: 0.35rem; }
+
+.hero__ctas { display: flex; flex-wrap: wrap; gap: 0.7rem; justify-content: center; }
 
 /* ── the plate: image-first, full width, generous radius ─────────────── */
 /* capped near the source's native 1100px so it is never upscaled on screen */
 .hero__plate { position: relative; border-radius: var(--r-xl); max-width: 1120px; margin-inline: auto; }
+.hero__ripple, .hero__plate canvas { width: 100%; aspect-ratio: 1100 / 508; display: block; }
 .hero__plate img {
   width: 100%; aspect-ratio: 1100 / 508; object-fit: cover; object-position: center 42%;
   transition: transform 1200ms var(--ease);
@@ -31,7 +40,8 @@
   border-radius: var(--r-pill);
 }
 .hero__cap .mono-sm { color: var(--ink-2); }
-@media (max-width: 700px) { .hero__plate img { aspect-ratio: 4 / 3; } }
+@media (max-width: 700px) { .hero__ripple, .hero__plate canvas { width: 100%; aspect-ratio: 1100 / 508; display: block; }
+.hero__plate img { aspect-ratio: 4 / 3; } }
 
 /* ── stats ───────────────────────────────────────────────────────────── */
 .hero__stats {

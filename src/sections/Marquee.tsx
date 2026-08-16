@@ -8,7 +8,7 @@ export default function Marquee() {
       <CurvedLoop
         marqueeText="SHARP FACE ROBOTICS ✦ FTC 30450 ✦ DESIGN ✦ BUILD ✦ PROGRAM ✦ COMPETE ✦"
         speed={1.4}
-        curveAmount={220}
+        curveAmount={90}
         direction="left"
         interactive
         className="mq__text"
