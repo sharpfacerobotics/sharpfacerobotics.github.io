@@ -1,6 +1,8 @@
 import { team } from '@/data/site';
 import { members, coaches } from '@/data/team';
 import { Reveal, Spotlight } from '@/components/Motion';
+import SkewedCarousel from '@/components/SkewedCarousel';
+import { outreachPhotos } from '@/data/outreachPhotos';
 import './Team.css';
 
 const PILLARS = [
@@ -11,12 +13,18 @@ const PILLARS = [
 
 export default function Team() {
   return (
-    <section className="band fitview" id="team">
+    <section className="band" id="team">
       <div className="wrap">
         <header className="sec-head">
           <div className="sec-index"><b>01</b><span>Who we are</span></div>
           <h2 className="d2">A rookie team that wrote everything down</h2>
         </header>
+
+        {/* The team's own photographs, high on the page where they are the
+            first thing seen — a skewed drifting carousel, draggable. */}
+        <div className="team__reel">
+          <SkewedCarousel items={outreachPhotos} speed={38} skew={-7} rotate={-1.6} />
+        </div>
 
         <div className="team__grid">
           <div className="team__lead">

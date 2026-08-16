@@ -18,3 +18,8 @@
 
 /* Reveal renders the <li> itself, so the wrapper must not add a box. */
 .pillars-wrap { display: contents; }
+
+/* the photo reel is full-bleed within the section, above the copy */
+.team__reel {
+  margin: 0 calc(var(--gutter) * -1) clamp(1rem, 2.4vh, 2rem);
+}
