@@ -1,9 +1,11 @@
 import { services } from '@/data/site';
 import { Reveal, Spotlight } from '@/components/Motion';
+import SignOff from '@/components/SignOff';
 import './Services.css';
 
 export default function Services() {
   return (
+    <>
     <section className="band fitview" id="services">
       <div className="wrap">
         <header className="sec-head">
@@ -38,5 +40,7 @@ export default function Services() {
         </div></Spotlight>
       </div>
     </section>
+    <SignOff direction="left" />
+    </>
   );
 }

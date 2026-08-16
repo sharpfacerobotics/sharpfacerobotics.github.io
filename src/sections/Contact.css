@@ -43,36 +43,3 @@
   background: var(--accent-soft); color: var(--accent);
 }
 .contact__arrow { margin-left: auto; color: var(--ink-4); }
-
-/* ── closing sign-off ───────────────────────────────────────────────── */
-.signoff {
-  position: relative; z-index: 1;
-  margin-top: clamp(1.25rem, 3vh, 2.5rem);
-  padding-top: clamp(1rem, 2.2vh, 1.75rem);
-  border-top: 1px solid var(--glass-edge);
-}
-.signoff__in {
-  display: flex; flex-wrap: wrap; align-items: baseline;
-  justify-content: space-between; gap: 0.5rem 1.5rem;
-}
-.signoff__mark {
-  font-family: var(--display);
-  font-variation-settings: 'wdth' 104, 'wght' 720;
-  font-size: clamp(1.5rem, 3.4vw, 3rem);
-  line-height: 1; letter-spacing: -0.025em; color: var(--ink);
-}
-.signoff__accent { color: var(--accent); }
-.signoff__meta { color: var(--ink-4); }
-
-.signoff__loop {
-  margin-top: clamp(0.75rem, 1.8vh, 1.5rem);
-  padding-block: clamp(0.5rem, 1.2vh, 1rem);
-  border-top: 1px solid var(--glass-edge);
-  --logoloop-logoHeight: 22px;
-}
-.signoff__loop img {
-  filter: grayscale(1) brightness(1.7) contrast(0.95);
-  opacity: 0.5;
-  transition: filter 340ms var(--ease), opacity 340ms var(--ease);
-}
-.signoff__loop a:hover img, .signoff__loop li:hover img { filter: none; opacity: 1; }

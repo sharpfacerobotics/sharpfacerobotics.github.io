@@ -5,8 +5,7 @@ import { Magnetic } from '@/components/Motion';
 import { outreachPhotos } from '@/data/outreachPhotos';
 import { excludedPhotos } from '@/data/photoPicks';
 import PhotoWall from '@/components/PhotoWall';
-import LogoLoop from '@/components/reactbits/LogoLoop';
-import { sponsors } from '@/data/sponsors';
+import SignOff from '@/components/SignOff';
 import './Contact.css';
 
 const ICON = { Instagram, GitHub } as const;
@@ -25,6 +24,7 @@ export default function Contact() {
   };
 
   return (
+    <>
     <section className="band contact" id="contact">
       {/* A living wall of the team behind the copy — tiles cross-fade through
           the whole set and drift, so the closing section is never static. */}
@@ -65,31 +65,8 @@ export default function Contact() {
         </div>
       </div>
 
-      {/* Closing sign-off. Prospective sponsors land on this page, so the
-          partners run across the bottom of it — visibility where it counts. */}
-      <div className="signoff">
-        <div className="wrap signoff__in">
-          <p className="signoff__mark">
-            Sharp Face <span className="signoff__accent">Robotics</span>
-          </p>
-          <p className="mono signoff__meta">
-            FTC {team.number} · {team.season} · {team.city}
-          </p>
-        </div>
-        <div className="signoff__loop">
-          <LogoLoop
-            logos={sponsors.map(sp => ({ src: sp.logoColor, alt: sp.name, title: sp.name, href: sp.href ?? undefined }))}
-            speed={30}
-            direction="right"
-            logoHeight={22}
-            gap={56}
-            pauseOnHover
-            fadeOut
-            fadeOutColor="#07080b"
-            ariaLabel="Our partners"
-          />
-        </div>
-      </div>
     </section>
+    <SignOff direction="right" />
+    </>
   );
 }
