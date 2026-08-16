@@ -277,10 +277,22 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
    read as no panel at all. Give it the surface + edge; the component still
    supplies the refraction. */
 .gs .glass-surface {
+  position: relative;
   width: 100% !important; height: auto !important;
-  background: rgba(255,255,255,0.045);
+  background:
+    linear-gradient(165deg, rgba(255,255,255,0.085), rgba(255,255,255,0.02) 42%, rgba(255,255,255,0.05));
   border: 1px solid var(--glass-edge);
-  box-shadow: var(--lift-2), inset 0 1px 0 rgba(255,255,255,0.10);
+  box-shadow:
+    var(--lift-2),
+    inset 0 1px 0 rgba(255,255,255,0.22),
+    inset 0 -1px 0 rgba(0,0,0,0.3);
+}
+/* the diagonal specular that makes a panel read as glass rather than as a tint */
+.gs .glass-surface::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(255,255,255,0.16) 0%, transparent 34%,
+                                       transparent 68%, rgba(255,255,255,0.09) 100%);
 }
 .gs .glass-surface__content {
   width: 100%; height: auto;

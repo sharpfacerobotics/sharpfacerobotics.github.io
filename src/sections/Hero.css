@@ -66,7 +66,8 @@
   border-radius: var(--r-md); overflow: hidden;
   border: 1px solid var(--rule);
 }
-.hero__stat { background: rgba(18,20,27,0.55); padding: clamp(0.55rem, 1.1vh, 0.95rem) 1.35rem; display: grid; gap: 0.2rem; }
+.hero__stat { background: transparent; padding: clamp(0.55rem, 1.1vh, 0.95rem) 1.35rem; display: grid; gap: 0.2rem; }
+.hero__stat + .hero__stat { box-shadow: inset 1px 0 0 var(--glass-edge); }
 .hero__stat dd {
   font-family: var(--display); font-variation-settings: 'wght' 650;
   font-size: clamp(1.25rem, min(2.4vw, 3vh), 2rem); color: var(--ink); line-height: 1;
