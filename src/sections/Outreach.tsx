@@ -56,12 +56,12 @@ export default function Outreach() {
   const cur = active === null ? null : outreach[active];
 
   return (
-    <section className="band" id="outreach">
+    <section className="band fitview" id="outreach">
       <div className="wrap">
         <header className="sec-head">
           <div className="sec-index"><b>05</b><span>Outreach</span></div>
           <h2 className="d2">Where the season actually goes</h2>
-          <p className="lede">
+          <p className="lede outreach__lede">
             A competition season is not one weekend. This is the rhythm of our outreach across
             a year — recruiting, build, league play, then the community work that carries into summer.
           </p>

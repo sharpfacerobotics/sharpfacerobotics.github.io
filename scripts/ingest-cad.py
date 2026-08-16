@@ -74,6 +74,46 @@ for name in NAMES:
                     a = min(255, int(((lum - floor) / span) * 255 * 1.35))
                     op[x, y] = (*tint, a)
         mask = out.split()[3].point(lambda v: 255 if v > 48 else 0)
+
+        # Despeckle before measuring. A single stray dot in a corner (the
+        # generated renders both had one) inflates the bounding box and shoves
+        # the real subject off-centre inside its frame. Keep only blobs that are
+        # a meaningful fraction of the largest one.
+        mw, mh = mask.size
+        mp = mask.load()
+        seen = bytearray(mw * mh)
+        blobs = []
+        for sy in range(0, mh):
+            for sx in range(0, mw):
+                if mp[sx, sy] == 0 or seen[sy * mw + sx]:
+                    continue
+                stack, cells = [(sx, sy)], []
+                seen[sy * mw + sx] = 1
+                while stack:
+                    cx, cy = stack.pop()
+                    cells.append((cx, cy))
+                    for nx, ny in ((cx+1,cy),(cx-1,cy),(cx,cy+1),(cx,cy-1)):
+                        if 0 <= nx < mw and 0 <= ny < mh and not seen[ny*mw+nx] and mp[nx,ny]:
+                            seen[ny*mw+nx] = 1
+                            stack.append((nx, ny))
+                blobs.append(cells)
+        # An ABSOLUTE floor, not a fraction of the largest blob: an exploded
+        # drawing is legitimately made of many small separate pieces (buttons,
+        # triggers, PCB pads), and a proportional threshold deleted them —
+        # the controller lost its exploded parts and shrank to 565px.
+        # Measured on these renders: every real element is >=365px, and there
+        # are ~176 sub-200px specks. 200 keeps all the exploded parts and kills
+        # the dots that were inflating the box and shoving art off-centre.
+        MIN_BLOB = 200
+        dropped = 0
+        for b in blobs:
+            if len(b) < MIN_BLOB:
+                dropped += 1
+                for cx, cy in b:
+                    mp[cx, cy] = 0
+        if dropped:
+            print(f'    despeckled {dropped} stray dot(s) under {MIN_BLOB}px')
+
         bbox = mask.getbbox()
         if bbox:
             x0, y0, x1, y1 = bbox

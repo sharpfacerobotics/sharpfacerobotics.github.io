@@ -8,7 +8,7 @@ import './Hero.css';
 
 export default function Hero({ onTab }: { onTab: (t: 'robot' | 'contact') => void }) {
   return (
-    <header className="hero" id="top">
+    <header className="hero fitview" id="top">
       <div className="wrap hero__in">
         <p className="mono hero__eyebrow">
           <span className="hero__dot" aria-hidden="true" />
@@ -23,7 +23,7 @@ export default function Hero({ onTab }: { onTab: (t: 'robot' | 'contact') => voi
             text="SHARP FACE"
             fontFamily="Archivo, sans-serif"
             fontWeight={700}
-            fontSize={112}
+            fontSize="clamp(1.6rem, min(4.4vw, 5.6vh), 3.4rem)"
             color="#f2f4f7"
             highlightColor="#4fe0d8"
             particleSize={1.5}
@@ -41,7 +41,7 @@ export default function Hero({ onTab }: { onTab: (t: 'robot' | 'contact') => voi
             text="ROBOTICS"
             fontFamily="Archivo, sans-serif"
             fontWeight={700}
-            fontSize={112}
+            fontSize="clamp(1.6rem, min(4.4vw, 5.6vh), 3.4rem)"
             color="#4fe0d8"
             highlightColor="#a9f5f0"
             particleSize={1.5}

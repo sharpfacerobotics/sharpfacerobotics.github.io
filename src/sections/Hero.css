@@ -1,4 +1,8 @@
-.hero { padding-top: clamp(2.5rem, 6vh, 5rem); }
+/* Home also carries the partner strip below the hero. */
+.hero { padding-top: 0; --fit-chrome: 232px; }
+/* Everything on Home is sized off the viewport so the page needs no scroll:
+   the wordmark, the plate and the stat rail each take a share of the height. */
+.hero .hero__in { padding-bottom: clamp(0.75rem, 1.6vh, 1.5rem); gap: clamp(0.5rem, 1.2vh, 1.15rem); }
 
 .hero__in {
   display: grid; gap: 1.15rem; justify-items: center; text-align: center;
@@ -11,25 +15,37 @@
 }
 /* Each ParticleText canvas centres its glyphs in a taller box, so the two
    lines sit far apart at their natural height. Pull them together. */
-.hero__h1 { max-width: none; width: 100%; display: grid; gap: 0; margin-block: 0.25rem; }
-.hero__h1 .hero__particles + .hero__particles { margin-top: -1.6rem; }
-.hero__particles {
+.hero__h1 { max-width: none; width: 100%; display: grid; gap: 0; margin-block: 0; }
+/* no negative pull now that the type is sized to its canvas */
+.hero__h1 .hero__particles + .hero__particles { margin-top: 0; }
+/* ParticleText's own `.particle-text` rule sets the height and is loaded after
+   this file, so an equal-specificity selector lost. Scope it under .hero__h1. */
+/* ParticleText sets `height: 100%` AND `min-height: 240px`. Overriding height
+   alone did nothing — the min-height pinned both lines at 240px each (462px
+   total for the h1). The min-height is the rule that actually had to go. */
+.hero__h1 .hero__particles {
   display: block; width: 100%;
-  height: clamp(3rem, 7vw, 6.25rem);
+  height: clamp(2.25rem, min(6vw, 8vh), 4.75rem);
+  min-height: 0;
 }
-.hero__particles canvas { width: 100% !important; height: 100% !important; }
+.hero__particles > *,
+.hero__particles canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
 .hero__line { display: block; }
 
-.hero__meta { display: grid; justify-items: center; gap: 1.5rem; margin-top: 0.35rem; }
+.hero__meta { display: grid; justify-items: center; gap: clamp(0.75rem, 1.8vh, 1.5rem); margin-top: 0.25rem; }
 
 .hero__ctas { display: flex; flex-wrap: wrap; gap: 0.7rem; justify-content: center; }
 
 /* ── the plate: image-first, full width, generous radius ─────────────── */
 /* capped near the source's native 1100px so it is never upscaled on screen */
-.hero__plate { position: relative; border-radius: var(--r-xl); max-width: 1120px; margin-inline: auto; }
+.hero__plate { position: relative; border-radius: var(--r-xl); max-width: min(1120px, 25vh * 2.17); margin-inline: auto; }
 .hero__ripple, .hero__plate canvas { width: 100%; aspect-ratio: 1100 / 508; display: block; }
 .hero__plate img {
-  width: 100%; aspect-ratio: 1100 / 508; object-fit: cover; object-position: center 42%;
+  width: 100%; aspect-ratio: 1100 / 508; max-height: 42vh; object-fit: cover; object-position: center 42%;
   transition: transform 1200ms var(--ease);
 }
 .hero__plate:hover img { transform: scale(1.02); }
@@ -45,16 +61,20 @@
 
 /* ── stats ───────────────────────────────────────────────────────────── */
 .hero__stats {
+  margin-top: clamp(0.6rem, 1.3vh, 1.4rem);
   display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));
   gap: 1px; margin-top: clamp(1.5rem, 3vw, 2.5rem);
   background: var(--rule);
   border-radius: var(--r-md); overflow: hidden;
   border: 1px solid var(--rule);
 }
-.hero__stat { background: var(--card); padding: 1.15rem 1.35rem; display: grid; gap: 0.3rem; }
+.hero__stat { background: var(--card); padding: clamp(0.55rem, 1.1vh, 0.95rem) 1.35rem; display: grid; gap: 0.2rem; }
 .hero__stat dd {
   font-family: var(--display); font-variation-settings: 'wght' 650;
-  font-size: clamp(1.5rem, 2.4vw, 2rem); color: var(--ink); line-height: 1;
+  font-size: clamp(1.25rem, min(2.4vw, 3vh), 2rem); color: var(--ink); line-height: 1;
 }
 .hero__stat--sm { font-size: clamp(1rem, 1.4vw, 1.15rem) !important; line-height: 1.2 !important; }
 .tab { font-variant-numeric: tabular-nums; }
+
+/* wider measure keeps the lede to two lines, which the viewport budget needs */
+.hero__meta .lede { max-width: 74ch; font-size: clamp(0.95rem, 0.9rem + 0.3vw, 1.0625rem); }

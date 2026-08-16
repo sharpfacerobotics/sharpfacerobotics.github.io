@@ -1,10 +1,10 @@
 import { Suspense, lazy, useCallback, useEffect, useState } from 'react';
 import SwarmCursor from '@/components/reactbits/SwarmCursor';
 import Backdrop from '@/components/Backdrop';
+import GlassSurface from '@/components/reactbits/GlassSurface';
 import Nav, { TABS, type TabId } from '@/sections/Nav';
 import Hero from '@/sections/Hero';
 import PartnerStrip from '@/sections/PartnerStrip';
-import Marquee from '@/sections/Marquee';
 import Team from '@/sections/Team';
 import Robot from '@/sections/Robot';
 import Bios from '@/sections/Bios';
@@ -21,6 +21,8 @@ export default function App() {
   const [admin, setAdmin] = useState(false);
   const [tab, setTab] = useState<TabId>('home');
   const [phase, setPhase] = useState<'in' | 'out'>('in');
+  const [dir, setDir] = useState<1 | -1>(1);
+  const [wipe, setWipe] = useState(false);
   /* Heavy pointer effects are desktop-only: a swarm following a finger is
      meaningless on touch and costs a frame budget phones do not have. */
   const [rich, setRich] = useState(false);
@@ -47,6 +49,11 @@ export default function App() {
 
   const go = useCallback((next: TabId) => {
     if (next === tab) { window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
+    const from = TABS.findIndex(t => t.id === tab);
+    const to = TABS.findIndex(t => t.id === next);
+    setDir(to > from ? 1 : -1);
+    setWipe(true);
+    window.setTimeout(() => setWipe(false), 620);
     setPhase('out');
     window.setTimeout(() => {
       setTab(next);
@@ -77,8 +84,22 @@ export default function App() {
       <a className="skip" href="#main">Skip to content</a>
       <Nav tab={tab} onTab={go} onAdmin={() => setAdmin(true)} />
 
-      <main id="main" className={`view view--${phase}`} key={tab}>
-        {tab === 'home' && <><Hero onTab={go} /><PartnerStrip /><Marquee /></>}
+      {/* React Bits GlassSurface as a real refracting wipe across the tab
+          change — it sweeps the direction you moved along the tab bar. */}
+      {wipe && (
+        <div className={`wipe wipe--${dir > 0 ? 'fwd' : 'back'}`} aria-hidden="true">
+          <GlassSurface
+            width="46%" height="100%" borderRadius={0}
+            blur={12} displace={1.6} distortionScale={-190}
+            redOffset={3} greenOffset={11} blueOffset={19}
+            brightness={62} opacity={0.85} backgroundOpacity={0.05} saturation={1.5}
+            className="wipe__pane"
+          />
+        </div>
+      )}
+
+      <main id="main" className={`view view--${phase} view--${dir > 0 ? 'fwd' : 'back'}`} key={tab}>
+        {tab === 'home' && <><Hero onTab={go} /><PartnerStrip /></>}
         {tab === 'team' && <Team />}
         {tab === 'robot' && <Robot />}
         {tab === 'roster' && <Bios />}

@@ -3,7 +3,7 @@
   background: var(--glass);
   backdrop-filter: blur(14px);
 }
-.strip__in { display: flex; align-items: center; gap: 2rem; padding-block: 1.35rem; }
+.strip__in { display: flex; align-items: center; gap: 2rem; padding-block: clamp(0.6rem, 1.3vh, 1.2rem); }
 .strip__label { flex: none; color: var(--ink-4); }
 
 .strip__mask {
