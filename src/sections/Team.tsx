@@ -3,6 +3,7 @@ import { members, coaches } from '@/data/team';
 import { Reveal, Spotlight } from '@/components/Motion';
 import SkewedCarousel from '@/components/SkewedCarousel';
 import { outreachPhotos } from '@/data/outreachPhotos';
+import { excludedPhotos } from '@/data/photoPicks';
 import './Team.css';
 
 const PILLARS = [
@@ -23,7 +24,7 @@ export default function Team() {
         {/* The team's own photographs, high on the page where they are the
             first thing seen — a skewed drifting carousel, draggable. */}
         <div className="team__reel">
-          <SkewedCarousel items={outreachPhotos} speed={38} skew={-7} rotate={-1.6} />
+          <SkewedCarousel items={outreachPhotos.filter(p => !excludedPhotos.includes(p.src))} speed={38} skew={-7} rotate={-1.6} />
         </div>
 
         <div className="team__grid">

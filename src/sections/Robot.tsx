@@ -1,7 +1,7 @@
 import { team, specs, subsystems } from '@/data/site';
 import { Reveal, Spotlight } from '@/components/Motion';
 import RobotScroll from './RobotScroll';
-import { outreachPhotos } from '@/data/outreachPhotos';
+import { robotPhotos } from '@/data/photoPicks';
 import './Robot.css';
 
 export default function Robot() {
@@ -26,9 +26,9 @@ export default function Robot() {
         <Reveal className="robot__top">
           {/* KG in the field, next to the numbers that describe it */}
           <div className="robot__shots">
-            {outreachPhotos.slice(0, 4).map(ph => (
-              <figure key={ph.src} className="robot__shot">
-                <img src={ph.src} alt="" loading="lazy" />
+            {robotPhotos.map(src => (
+              <figure key={src} className="robot__shot">
+                <img src={src} alt="" loading="lazy" />
               </figure>
             ))}
           </div>

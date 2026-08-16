@@ -21,7 +21,7 @@
 .chart__plot svg {
   width: 100%; height: auto; display: block; overflow: visible;
   /* cap against the viewport so the whole section fits without scrolling */
-  max-height: clamp(14rem, 40vh, 26rem);
+  max-height: clamp(8rem, 34vh, 24rem);
 }
 .chart__plot { padding-block: 0.5rem; }
 .chart__xlab {

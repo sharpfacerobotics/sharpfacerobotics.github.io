@@ -3,6 +3,7 @@ import { team, socials } from '@/data/site';
 import { Instagram, GitHub } from '@/components/Icons';
 import { Magnetic } from '@/components/Motion';
 import { outreachPhotos } from '@/data/outreachPhotos';
+import { excludedPhotos } from '@/data/photoPicks';
 import PhotoWall from '@/components/PhotoWall';
 import './Contact.css';
 
@@ -25,7 +26,7 @@ export default function Contact() {
     <section className="band contact" id="contact">
       {/* A living wall of the team behind the copy — tiles cross-fade through
           the whole set and drift, so the closing section is never static. */}
-      <PhotoWall photos={outreachPhotos.map(p => p.src)} tiles={12} interval={5200} className="contact__wall" />
+      <PhotoWall photos={outreachPhotos.map(p => p.src).filter(s => !excludedPhotos.includes(s))} tiles={12} interval={5200} className="contact__wall" />
       <div className="wrap contact__in">
         <div className="contact__lead">
           <div className="sec-index"><b>07</b><span>Contact</span></div>
