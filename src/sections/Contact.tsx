@@ -3,6 +3,7 @@ import { team, socials } from '@/data/site';
 import { Instagram, GitHub } from '@/components/Icons';
 import { Magnetic } from '@/components/Motion';
 import { outreachPhotos } from '@/data/outreachPhotos';
+import PhotoWall from '@/components/PhotoWall';
 import './Contact.css';
 
 const ICON = { Instagram, GitHub } as const;
@@ -22,13 +23,9 @@ export default function Contact() {
 
   return (
     <section className="band contact" id="contact">
-      {/* a quiet mosaic of the team behind the copy — the closing image of the
-          site should be the people, not an empty ground */}
-      <div className="contact__mosaic" aria-hidden="true">
-        {outreachPhotos.slice(0, 12).map(ph => (
-          <span key={ph.src} style={{ backgroundImage: `url(${ph.src})` }} />
-        ))}
-      </div>
+      {/* A living wall of the team behind the copy — tiles cross-fade through
+          the whole set and drift, so the closing section is never static. */}
+      <PhotoWall photos={outreachPhotos.map(p => p.src)} tiles={12} interval={2600} className="contact__wall" />
       <div className="wrap contact__in">
         <div className="contact__lead">
           <div className="sec-index"><b>07</b><span>Contact</span></div>
