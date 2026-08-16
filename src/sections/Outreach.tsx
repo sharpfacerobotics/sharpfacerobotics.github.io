@@ -76,8 +76,8 @@ export default function Outreach() {
         <Reveal className="gs">
           <GlassSurface
             width="100%" height="auto" borderRadius={24}
-            blur={16} displace={1.2} distortionScale={-170}
-            redOffset={3} greenOffset={10} blueOffset={17}
+            blur={8} displace={0.4} distortionScale={-28}
+            redOffset={0} greenOffset={1} blueOffset={2}
             brightness={64} opacity={0.9} backgroundOpacity={0.05} saturation={1.55}
           >
           <figure className="chart ticked" ref={figRef as never}>

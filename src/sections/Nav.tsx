@@ -87,11 +87,17 @@ export default function Nav({ tab, onTab, onAdmin }: { tab: TabId; onTab: (t: Ta
           {pill && (
             <li className="nav__pill" aria-hidden="true"
                 style={{ transform: `translateX(${pill.x}px)`, width: pill.w }}>
+              {/* Gentle. A strong displacement over a near-uniform dark
+                  backdrop just drags the bar's own edges into smears, and the
+                  RGB offsets split them into rainbow fringes — it reads as a
+                  dirty lens, not glass. Displacement and chroma are off here;
+                  the component runs as a clean blur and the pill's edge light,
+                  tint and sheen carry the glass. */}
               <GlassSurface
                 width="100%" height="100%" borderRadius={999}
-                blur={10} displace={0.8} distortionScale={-140}
-                redOffset={2} greenOffset={7} blueOffset={12}
-                brightness={70} opacity={0.92} backgroundOpacity={0.14} saturation={1.6}
+                blur={6} displace={0} distortionScale={0}
+                redOffset={0} greenOffset={0} blueOffset={0}
+                brightness={62} opacity={0.6} backgroundOpacity={0.04} saturation={1.3}
                 className="nav__pill-glass"
               />
             </li>

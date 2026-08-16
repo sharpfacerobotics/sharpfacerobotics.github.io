@@ -114,8 +114,8 @@ export default function Bios() {
         <div className="roster__wheel gs">
           <GlassSurface
             width="100%" height="auto" borderRadius={24}
-            blur={14} displace={1} distortionScale={-150}
-            redOffset={2} greenOffset={8} blueOffset={14}
+            blur={8} displace={0.4} distortionScale={-28}
+            redOffset={0} greenOffset={1} blueOffset={2}
             brightness={62} opacity={0.9} backgroundOpacity={0.06} saturation={1.5}
           >
           <p className="mono roster__wheel-label">

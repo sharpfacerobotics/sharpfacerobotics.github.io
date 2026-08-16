@@ -45,7 +45,7 @@
 .nav__pill {
   position: absolute; top: 0; left: 0; height: 100%; z-index: 0;
   pointer-events: none; border-radius: var(--r-pill); overflow: hidden;
-  background: linear-gradient(160deg, rgba(79,224,216,0.22), rgba(139,123,255,0.14));
+  background: linear-gradient(160deg, rgba(79,224,216,0.16), rgba(139,123,255,0.10));
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,0.45),
     inset 0 -1px 0 rgba(0,0,0,0.35),
@@ -58,7 +58,7 @@
 /* the moving highlight that sells it as a lens */
 .nav__pill::after {
   content: ''; position: absolute; inset: 0; border-radius: inherit;
-  background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.30) 48%, transparent 62%);
+  background: linear-gradient(115deg, transparent 34%, rgba(255,255,255,0.16) 50%, transparent 64%);
   animation: pill-sheen 3.6s var(--ease) infinite;
 }
 @keyframes pill-sheen { 0%,68% { transform: translateX(-120%); } 100% { transform: translateX(120%); } }
