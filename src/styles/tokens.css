@@ -266,3 +266,28 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 @media (max-height: 720px), (max-width: 820px) {
   .fitview { min-height: 0; align-content: start; }
 }
+
+/* =========================================================
+   Real GlassSurface panels. The component wraps children in
+   .glass-surface__content, which must flow normally for the
+   panel to size to its content.
+   ========================================================= */
+.gs { width: 100%; }
+/* GlassSurface's own fill is nearly invisible at these settings, so the panel
+   read as no panel at all. Give it the surface + edge; the component still
+   supplies the refraction. */
+.gs .glass-surface {
+  width: 100% !important; height: auto !important;
+  background: rgba(255,255,255,0.045);
+  border: 1px solid var(--glass-edge);
+  box-shadow: var(--lift-2), inset 0 1px 0 rgba(255,255,255,0.10);
+}
+.gs .glass-surface__content {
+  width: 100%; height: auto;
+  display: block; position: static;
+  padding: clamp(0.9rem, 1.8vh, 1.5rem) clamp(1rem, 2.2vw, 1.75rem);
+}
+
+/* the glass panel supplies the surface; wrapped content sits inside its padding */
+.gs > .glass-surface { padding: 0; }
+.gs .glass-surface__content > * { width: 100%; }

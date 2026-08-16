@@ -4,6 +4,7 @@ import ParticleText from '@/components/reactbits/ParticleText';
 import Counter from '@/components/reactbits/Counter';
 import RippleDistortion from '@/components/reactbits/RippleDistortion';
 import { Magnetic } from '@/components/Motion';
+import GlassSurface from '@/components/reactbits/GlassSurface';
 import './Hero.css';
 
 export default function Hero({ onTab }: { onTab: (t: 'robot' | 'contact') => void }) {
@@ -97,7 +98,13 @@ export default function Hero({ onTab }: { onTab: (t: 'robot' | 'contact') => voi
         </figure>
       </div>
 
-      <div className="wrap">
+      <div className="wrap gs">
+        <GlassSurface
+          width="100%" height="auto" borderRadius={16}
+          blur={12} displace={1} distortionScale={-150}
+          redOffset={2} greenOffset={8} blueOffset={14}
+          brightness={62} opacity={0.9} backgroundOpacity={0.05} saturation={1.5}
+        >
         <dl className="hero__stats">
           <div className="hero__stat">
             <dt className="mono-sm">Build team</dt>
@@ -117,6 +124,7 @@ export default function Hero({ onTab }: { onTab: (t: 'robot' | 'contact') => voi
             </div>
           ))}
         </dl>
+        </GlassSurface>
       </div>
     </header>
   );

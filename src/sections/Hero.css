@@ -8,7 +8,7 @@
   display: grid; gap: 1.15rem; justify-items: center; text-align: center;
   padding-bottom: clamp(1.5rem, 3vw, 2.5rem);
 }
-.hero__eyebrow { display: flex; align-items: center; gap: 0.6rem; margin-top: clamp(0.5rem, 1.4vh, 1.25rem); }
+.hero__eyebrow { display: flex; align-items: center; gap: 0.6rem; margin-top: clamp(1.5rem, 3.4vh, 3rem); }
 .hero__dot {
   flex: none; width: 7px; height: 7px; border-radius: 50%;
   background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft);
@@ -69,7 +69,7 @@
   border-radius: var(--r-md); overflow: hidden;
   border: 1px solid var(--rule);
 }
-.hero__stat { background: var(--card); padding: clamp(0.55rem, 1.1vh, 0.95rem) 1.35rem; display: grid; gap: 0.2rem; }
+.hero__stat { background: rgba(18,20,27,0.55); padding: clamp(0.55rem, 1.1vh, 0.95rem) 1.35rem; display: grid; gap: 0.2rem; }
 .hero__stat dd {
   font-family: var(--display); font-variation-settings: 'wght' 650;
   font-size: clamp(1.25rem, min(2.4vw, 3vh), 2rem); color: var(--ink); line-height: 1;
@@ -79,3 +79,7 @@
 
 /* wider measure keeps the lede to two lines, which the viewport budget needs */
 .hero__meta .lede { max-width: 74ch; font-size: clamp(0.95rem, 0.9rem + 0.3vw, 1.0625rem); }
+
+/* the hero stat rail is a tight bar, not a padded panel */
+.hero .gs .glass-surface__content { padding: 0; }
+.hero .gs .glass-surface { border-radius: var(--r-md); }

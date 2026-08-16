@@ -75,9 +75,7 @@
   margin-top: clamp(1rem, 2.4vh, 2rem);
   display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
   gap: 1.75rem;
-  padding: clamp(1rem, 2.2vh, 1.75rem) clamp(1.25rem, 3vw, 2rem);
-  border: 1px solid var(--rule);
-  background: var(--glass);
-  backdrop-filter: blur(16px);
+  padding: 0;
+  background: transparent;
 }
 .become .lede { max-width: 52ch; }

@@ -1,6 +1,7 @@
 import { sponsors, type Sponsor } from '@/data/sponsors';
 import { Reveal, Spotlight } from '@/components/Motion';
 import BorderGlow from '@/components/reactbits/BorderGlow';
+import GlassSurface from '@/components/reactbits/GlassSurface';
 import './Sponsors.css';
 
 function Mark({ s }: { s: Sponsor }) {
@@ -66,8 +67,14 @@ export default function Sponsors() {
         </Spotlight>
       </div>
 
-      <div className="wrap">
-        <div className="become ticked">
+      <div className="wrap gs">
+        <GlassSurface
+          width="100%" height="auto" borderRadius={24}
+          blur={14} displace={1.1} distortionScale={-160}
+          redOffset={2} greenOffset={9} blueOffset={16}
+          brightness={64} opacity={0.9} backgroundOpacity={0.06} saturation={1.5}
+        >
+        <div className="become">
           <div>
             <h3 className="d3">Support the team</h3>
             <p className="lede" style={{ marginTop: '0.65rem' }}>
@@ -77,6 +84,7 @@ export default function Sponsors() {
           </div>
           <a className="btn btn--solid" href="#contact">Talk to us</a>
         </div>
+        </GlassSurface>
       </div>
     </section>
   );

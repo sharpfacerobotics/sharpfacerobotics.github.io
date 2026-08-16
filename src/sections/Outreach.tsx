@@ -2,6 +2,7 @@ import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { outreach, RELATIVE_ONLY, unit, type OutreachPoint } from '@/data/outreach';
 import { members, outreachCount } from '@/data/team';
 import { Reveal } from '@/components/Motion';
+import GlassSurface from '@/components/reactbits/GlassSurface';
 import './Outreach.css';
 
 /* Validated against the dark surface #0b0d11 with the dataviz palette
@@ -70,7 +71,14 @@ export default function Outreach() {
           </p>
         </header>
 
-        <Reveal><figure className="chart ticked" ref={figRef as never}>
+        <Reveal className="gs">
+          <GlassSurface
+            width="100%" height="auto" borderRadius={24}
+            blur={16} displace={1.2} distortionScale={-170}
+            redOffset={3} greenOffset={10} blueOffset={17}
+            brightness={64} opacity={0.9} backgroundOpacity={0.05} saturation={1.55}
+          >
+          <figure className="chart ticked" ref={figRef as never}>
           <figcaption className="chart__cap">
             <span className="mono">Outreach activity · by month</span>
           </figcaption>
@@ -160,7 +168,9 @@ export default function Outreach() {
                 )}
               </div>
             </div>
-        </figure></Reveal>
+        </figure>
+          </GlassSurface>
+        </Reveal>
 
         {RELATIVE_ONLY && (
           <p className="chart__note mono-sm">

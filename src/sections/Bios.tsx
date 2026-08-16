@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { captain, coaches, members, type Member } from '@/data/team';
 import ChromaGrid from '@/components/reactbits/ChromaGrid';
 import GlareHover from '@/components/reactbits/GlareHover';
+import GlassSurface from '@/components/reactbits/GlassSurface';
 import { Reveal } from '@/components/Motion';
 import OptionWheel from '@/components/reactbits/OptionWheel';
 import './Bios.css';
@@ -110,7 +111,13 @@ export default function Bios() {
         {/* ── Working groups ─────────────────────────────────────── */}
         <div className="roster__body">
         {/* React Bits OptionWheel — a physical dial for the working groups. */}
-        <div className="roster__wheel">
+        <div className="roster__wheel gs">
+          <GlassSurface
+            width="100%" height="auto" borderRadius={24}
+            blur={14} displace={1} distortionScale={-150}
+            redOffset={2} greenOffset={8} blueOffset={14}
+            brightness={62} opacity={0.9} backgroundOpacity={0.06} saturation={1.5}
+          >
           <p className="mono roster__wheel-label">
             Show
             <span className="roster__wheel-hint">drag</span>
@@ -149,6 +156,7 @@ export default function Bios() {
           <p className="mono-sm roster__wheel-keys">
             <kbd>←</kbd><kbd>→</kbd> arrow keys
           </p>
+          </GlassSurface>
         </div>
 
         <div className="roster__groups">
