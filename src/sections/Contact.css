@@ -7,17 +7,17 @@
 .contact__mail {
   display: grid; gap: 0.15rem; text-align: left;
   padding: 0.9rem 1.25rem;
-  border: 1px solid var(--glass-edge); background: var(--glass-strong);
+  border: 1px solid var(--rule); background: var(--glass-strong);
   position: relative;
   transition: border-color .35s var(--ease), background .35s var(--ease);
 }
-.contact__mail:hover { border-color: var(--teal); background: var(--ink-700); }
+.contact__mail:hover { border-color: var(--accent); background: var(--paper-2); }
 .contact__mail b {
   font-family: var(--mono); font-size: 0.9375rem; letter-spacing: 0.02em;
-  color: var(--paper); font-weight: 500;
+  color: var(--ink); font-weight: 500;
 }
-.contact__copy { color: var(--teal); position: absolute; top: 0.7rem; right: 1rem; font-size: 0.5625rem; }
+.contact__copy { color: var(--accent); position: absolute; top: 0.7rem; right: 1rem; font-size: 0.5625rem; }
 
 .contact__social { list-style: none; display: flex; gap: 1.5rem; margin-top: 2.5rem; }
-.contact__social a { color: var(--dim); transition: color .3s var(--ease); }
-.contact__social a:hover { color: var(--teal); }
+.contact__social a { color: var(--ink-3); transition: color .3s var(--ease); }
+.contact__social a:hover { color: var(--accent); }

@@ -1,106 +1,76 @@
 import { team, awards } from '@/data/site';
 import { members } from '@/data/team';
 import SplitText from '@/components/reactbits/SplitText';
-import ShinyText from '@/components/reactbits/ShinyText';
-import GlowButton from '@/components/GlowButton';
-import GlassSurface from '@/components/reactbits/GlassSurface';
 import CountUp from '@/components/reactbits/CountUp';
+import { Magnetic } from '@/components/Motion';
 import './Hero.css';
 
 export default function Hero({ onTab }: { onTab: (t: 'robot' | 'contact') => void }) {
   return (
     <header className="hero" id="top">
       <div className="wrap hero__in">
-        <div className="hero__copy">
-          <p className="mono hero__eyebrow">
-            <span className="hero__dot" aria-hidden="true" />
-            <ShinyText text={`FTC ${team.number} · ${team.school} · ${team.city}`} speed={4} />
+        <p className="mono hero__eyebrow">
+          <span className="hero__dot" aria-hidden="true" />
+          FTC {team.number} · {team.school} · {team.city}
+        </p>
+
+        <h1 className="d1 hero__h1">
+          <SplitText
+            text="Sharp Face Robotics"
+            tag="span"
+            className="hero__line"
+            splitType="words"
+            delay={70}
+            duration={0.9}
+            ease="power4.out"
+            from={{ opacity: 0, y: 46 }}
+            to={{ opacity: 1, y: 0 }}
+            threshold={0.05}
+          />
+        </h1>
+
+        <div className="hero__meta">
+          <p className="lede">
+            A FIRST Tech Challenge team at {team.school} in Dublin, California. We design,
+            build and program a competition robot every season — and write down what we
+            learn so the next team does not start from zero.
           </p>
-
-          <h1 className="d1 hero__h1">
-            <SplitText
-              text="Sharp Face"
-              tag="span"
-              className="hero__line"
-              splitType="chars"
-              delay={28}
-              duration={0.85}
-              ease="power4.out"
-              from={{ opacity: 0, y: 64, rotateX: -70 }}
-              to={{ opacity: 1, y: 0, rotateX: 0 }}
-              threshold={0.05}
-            />
-            <SplitText
-              text="Robotics"
-              tag="span"
-              className="hero__line hero__line--iris"
-              splitType="chars"
-              delay={34}
-              duration={0.9}
-              ease="power4.out"
-              from={{ opacity: 0, y: 64, rotateX: -70 }}
-              to={{ opacity: 1, y: 0, rotateX: 0 }}
-              threshold={0.05}
-            />
-          </h1>
-
-          <p className="lede hero__lede">
-            We are a FIRST Tech Challenge team from {team.school} in Dublin, California.
-            We design, build and program a competition robot every season — and we write
-            down what we learn so the next team does not start from zero.
-          </p>
-
           <div className="hero__ctas">
-            <GlowButton onClick={() => onTab('robot')}>See the robot</GlowButton>
-            <GlowButton onClick={() => onTab('contact')} tone="violet">Get in touch</GlowButton>
+            <Magnetic><button className="btn btn--solid" onClick={() => onTab('robot')}>See the robot</button></Magnetic>
+            <Magnetic><button className="btn" onClick={() => onTab('contact')}>Get in touch</button></Magnetic>
           </div>
         </div>
+      </div>
 
-        <figure className="plate">
-          <div className="plate__frame pane">
-            <img src="/assets/team.png" alt="The Sharp Face Robotics team with their robot" />
-            <span className="plate__sheen" aria-hidden="true" />
-          </div>
-          <figcaption className="plate__cap mono-sm">
-            <span>Team {team.number}</span>
-            <span>{team.season}</span>
+      {/* The plate is the hero — cosmos leads with the image, full width. */}
+      <div className="wrap">
+        <figure className="hero__plate card">
+          <img src="/assets/team.png" alt="The Sharp Face Robotics team with their robot" />
+          <figcaption className="hero__cap glass glass--spec">
+            <span className="mono-sm">Team {team.number}</span>
+            <span className="mono-sm">{team.season}</span>
           </figcaption>
         </figure>
       </div>
 
-      <GlassSurface
-        width="100%"
-        height={92}
-        borderRadius={0}
-        blur={14}
-        displace={1.2}
-        distortionScale={-160}
-        redOffset={2}
-        greenOffset={8}
-        blueOffset={14}
-        brightness={58}
-        opacity={0.9}
-        backgroundOpacity={0.06}
-        saturation={1.4}
-        className="readout"
-      >
-        <div className="wrap readout__in">
-          <div className="readout__cell">
-            <span className="mono-sm">Roster</span>
-            <b><CountUp to={members.length} duration={1.2} className="tab" /> on the build team</b>
+      <div className="wrap">
+        <dl className="hero__stats">
+          <div className="hero__stat">
+            <dt className="mono-sm">Build team</dt>
+            <dd><CountUp to={members.length} duration={1.2} className="tab" /></dd>
           </div>
-          <div className="readout__cell">
-            <span className="mono-sm">Robot</span>
-            <b>{team.robot}</b>
+          <div className="hero__stat">
+            <dt className="mono-sm">Robot</dt>
+            <dd>{team.robot}</dd>
           </div>
           {awards.map(a => (
-            <div className="readout__cell" key={a.title}>
-              <span className="mono-sm">{a.detail}</span>
-              <b>{a.title}</b>
+            <div className="hero__stat" key={a.title}>
+              <dt className="mono-sm">{a.detail}</dt>
+              <dd className="hero__stat--sm">{a.title}</dd>
             </div>
           ))}
-        </div>
-      </GlassSurface>
+        </dl>
+      </div>
     </header>
   );
 }

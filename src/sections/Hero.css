@@ -1,72 +1,49 @@
-.hero { position: relative; overflow: hidden; }
+.hero { padding-top: clamp(2.5rem, 6vh, 5rem); }
 
-.hero__in {
-  position: relative; z-index: 2;
-  display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-  gap: clamp(2rem, 5vw, 4.5rem);
-  align-items: center;
-  padding-block: clamp(3.5rem, 8vh, 6rem) clamp(2.5rem, 6vh, 4rem);
-}
-@media (max-width: 940px) { .hero__in { grid-template-columns: 1fr; padding-block: 3rem 2.5rem; } }
-
-.hero__eyebrow { display: flex; align-items: center; gap: 0.65rem; color: var(--dim); }
+.hero__in { display: grid; gap: 1.5rem; padding-bottom: clamp(2rem, 4vw, 3rem); }
+.hero__eyebrow { display: flex; align-items: center; gap: 0.6rem; }
 .hero__dot {
   flex: none; width: 7px; height: 7px; border-radius: 50%;
-  background: var(--teal);
-  box-shadow: 0 0 0 3px rgba(63,208,201,0.16), 0 0 14px 2px rgba(63,208,201,0.75);
-  align-self: flex-start; margin-top: 0.5em;
+  background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft);
 }
-
-.hero__h1 { margin: 1.35rem 0 1.6rem; perspective: 800px; }
+.hero__h1 { max-width: 16ch; }
 .hero__line { display: block; }
-/* NOTE: do NOT use background-clip:text here. SplitText wraps every character
-   in a transformed span, and a transform on a descendant breaks the ancestor's
-   background-clip painting — the text renders fully transparent. */
-/* No text-shadow: SplitText's wrapper sets `overflow: hidden` for the character
-   reveal, which clips any glow into a hard rectangle around the line. */
-.hero__line--iris { color: var(--teal); }
-.hero__lede { max-width: 44ch; }
 
-.hero__ctas { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2.25rem; }
-/* StarBorder ships its own chrome; align its inner label with our type system */
-.sb .star-border-inner,
-.sb > div:last-child {
-  font-family: var(--mono); font-size: 0.6875rem;
-  letter-spacing: 0.16em; text-transform: uppercase;
+.hero__meta {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2rem; align-items: end; margin-top: 0.5rem;
 }
+@media (max-width: 820px) { .hero__meta { grid-template-columns: 1fr; align-items: start; } }
+.hero__ctas { display: flex; flex-wrap: wrap; gap: 0.7rem; }
 
-/* --- photographic plate ------------------------------------------ */
-.plate { position: relative; }
-.plate__frame { position: relative; overflow: hidden; }
-.plate__frame img {
-  width: 100%; aspect-ratio: 16 / 9; object-fit: cover;
-  filter: saturate(0.95) contrast(1.06);
+/* ── the plate: image-first, full width, generous radius ─────────────── */
+.hero__plate { position: relative; border-radius: var(--r-xl); }
+.hero__plate img {
+  width: 100%; aspect-ratio: 21 / 9; object-fit: cover;
+  transition: transform 1200ms var(--ease);
 }
-/* a slow diagonal sheen — reads as glass over the photograph */
-.plate__sheen {
-  position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(115deg, transparent 38%, rgba(255,255,255,0.16) 48%, transparent 58%);
-  transform: translateX(-100%);
-  animation: sheen 7s var(--ease) infinite;
+.hero__plate:hover img { transform: scale(1.02); }
+.hero__cap {
+  position: absolute; left: 1rem; right: 1rem; bottom: 1rem;
+  display: flex; justify-content: space-between; gap: 1rem;
+  padding: 0.7rem 1.1rem;
+  border-radius: var(--r-pill);
 }
-@keyframes sheen { 0%,72% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
-@media (prefers-reduced-motion: reduce) { .plate__sheen { animation: none; opacity: 0; } }
+.hero__cap .mono-sm { color: var(--ink-2); }
+@media (max-width: 700px) { .hero__plate img { aspect-ratio: 4 / 3; } }
 
-.plate__cap { display: flex; justify-content: space-between; gap: 1rem; margin-top: 0.7rem; color: var(--faint); }
-
-/* --- readout ------------------------------------------------------ */
-/* GlassSurface renders its own container; make it span and sit above the field */
-.readout { position: relative; z-index: 2; width: 100%; }
-.readout .glass-surface__content { width: 100%; display: block; }
-.readout__in { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); }
-.readout__cell { display: grid; gap: 0.3rem; padding: 1.2rem 1.5rem 1.2rem 0; }
-.readout__cell + .readout__cell { border-left: 1px solid var(--glass-edge); padding-left: 1.5rem; }
-@media (max-width: 640px) {
-  .readout__cell + .readout__cell { border-left: 0; border-top: 1px solid var(--glass-edge); padding-left: 0; }
+/* ── stats ───────────────────────────────────────────────────────────── */
+.hero__stats {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));
+  gap: 1px; margin-top: clamp(1.5rem, 3vw, 2.5rem);
+  background: var(--rule);
+  border-radius: var(--r-md); overflow: hidden;
+  border: 1px solid var(--rule);
 }
-.readout__cell b {
-  font-family: var(--display); font-variation-settings: 'wdth' 106, 'wght' 650;
-  font-size: clamp(1rem, 1.6vw, 1.25rem); color: var(--paper); line-height: 1.15;
+.hero__stat { background: var(--card); padding: 1.15rem 1.35rem; display: grid; gap: 0.3rem; }
+.hero__stat dd {
+  font-family: var(--display); font-variation-settings: 'wght' 650;
+  font-size: clamp(1.5rem, 2.4vw, 2rem); color: var(--ink); line-height: 1;
 }
+.hero__stat--sm { font-size: clamp(1rem, 1.4vw, 1.15rem) !important; line-height: 1.2 !important; }
 .tab { font-variant-numeric: tabular-nums; }

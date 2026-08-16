@@ -1,10 +1,10 @@
 .strip {
-  border-block: 1px solid var(--glass-edge);
+  border-block: 1px solid var(--rule);
   background: var(--glass);
   backdrop-filter: blur(14px);
 }
 .strip__in { display: flex; align-items: center; gap: 2rem; padding-block: 1.35rem; }
-.strip__label { flex: none; color: var(--faint); }
+.strip__label { flex: none; color: var(--ink-4); }
 
 .strip__mask {
   flex: 1; min-width: 0; overflow: hidden;
@@ -28,10 +28,10 @@
   transition: opacity 300ms var(--ease), transform 300ms var(--ease);
 }
 .strip__color { position: absolute; inset: 0; opacity: 0; }
-.strip__mono  { opacity: 0.85; }
+.strip__mono  { opacity: 0.55; }
 .strip__item a:hover .strip__mono  { opacity: 0; transform: scale(1.06); }
 .strip__item a:hover .strip__color { opacity: 1; transform: scale(1.06); }
-.strip__item a:focus-visible { outline: 2px solid var(--teal); outline-offset: 6px; }
+.strip__item a:focus-visible { outline: 2px solid var(--accent); outline-offset: 6px; }
 
 @media (max-width: 700px) {
   .strip__in { flex-direction: column; align-items: stretch; gap: 0.85rem; }

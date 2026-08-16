@@ -1,52 +1,40 @@
+/* A light ground with two very slow warm/cool washes and a pointer light.
+   Subtle enough that the glass has something to refract without becoming
+   the loudest thing on the page. */
 .bd {
   position: fixed; inset: 0; z-index: -1;
   pointer-events: none;
-  background:
-    radial-gradient(120% 90% at 50% -20%, #101725 0%, transparent 55%),
-    #06070a;
+  background: var(--paper);
   overflow: hidden;
 }
-
-/* two very slow drifts — the movement should be almost subliminal */
 .bd__drift {
-  position: absolute;
-  width: 60vw; height: 60vw;
-  border-radius: 50%;
-  filter: blur(120px);
-  opacity: 0.22;
-  will-change: transform;
+  position: absolute; width: 58vw; height: 58vw; border-radius: 50%;
+  filter: blur(110px); opacity: 0.55; will-change: transform;
 }
 .bd__drift--a {
-  background: radial-gradient(circle, #126a68 0%, transparent 70%);
-  top: -18vw; left: -10vw;
-  animation: drift-a 34s ease-in-out infinite alternate;
+  background: radial-gradient(circle, #cfe6e2 0%, transparent 70%);
+  top: -16vw; left: -8vw;
+  animation: drift-a 38s ease-in-out infinite alternate;
 }
 .bd__drift--b {
-  background: radial-gradient(circle, #2d2668 0%, transparent 70%);
-  bottom: -22vw; right: -12vw;
-  animation: drift-b 41s ease-in-out infinite alternate;
+  background: radial-gradient(circle, #e8ddd0 0%, transparent 70%);
+  bottom: -20vw; right: -10vw;
+  animation: drift-b 45s ease-in-out infinite alternate;
 }
-@keyframes drift-a { to { transform: translate3d(14vw, 8vw, 0) scale(1.15); } }
-@keyframes drift-b { to { transform: translate3d(-12vw, -9vw, 0) scale(1.1); } }
+@keyframes drift-a { to { transform: translate3d(12vw, 7vw, 0) scale(1.14); } }
+@keyframes drift-b { to { transform: translate3d(-10vw, -8vw, 0) scale(1.1); } }
 
-/* one soft light tracking the cursor — the whole "interactive background" */
 .bd__pointer {
   position: absolute; inset: 0;
-  background: radial-gradient(
-    46vw circle at var(--px, 50%) var(--py, 30%),
-    rgba(63, 208, 201, 0.055),
-    transparent 62%
-  );
-  transition: background 700ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  background: radial-gradient(42vw circle at var(--px, 50%) var(--py, 30%),
+    rgba(15, 125, 120, 0.055), transparent 62%);
+  transition: background 800ms var(--ease-soft);
 }
-
-/* grain kills the banding you always get across a big dark gradient */
 .bd__grain {
-  position: absolute; inset: -50%;
-  opacity: 0.16;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  position: absolute; inset: -50%; opacity: 0.30;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
 }
-
 @media (prefers-reduced-motion: reduce) {
   .bd__drift { animation: none; }
   .bd__pointer { transition: none; }

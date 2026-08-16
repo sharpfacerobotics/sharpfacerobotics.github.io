@@ -13,8 +13,8 @@
   display: grid; gap: 0.55rem;
 }
 .pillars > *:first-child .pillar { border-top: 0; padding-top: 0; }
-.pillar__k { color: var(--teal); }
-.pillar p { color: var(--dim); max-width: 54ch; text-wrap: pretty; }
+.pillar__k { color: var(--accent); }
+.pillar p { color: var(--ink-3); max-width: 54ch; text-wrap: pretty; }
 
 /* Reveal renders the <li> itself, so the wrapper must not add a box. */
 .pillars-wrap { display: contents; }

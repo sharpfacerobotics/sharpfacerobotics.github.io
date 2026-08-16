@@ -2,18 +2,20 @@
 .rw { position: relative; height: 620vh; }
 .rw__pin {
   position: sticky; top: 0;
-  height: 100vh;
-  display: grid; align-items: center;
+  height: 100svh;
+  /* grid-template-rows: 1fr pins the row to the viewport height. With a plain
+     auto row the stage grows to its content and slides out of the pin. */
+  display: grid; grid-template-rows: 1fr;
   overflow: hidden;
 }
 
 .rw__progress {
-  position: absolute; top: 68px; left: 0; right: 0; height: 2px;
-  background: var(--glass-edge); z-index: 3;
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: transparent; z-index: 3;
 }
 .rw__progress span {
   display: block; height: 100%;
-  background: linear-gradient(90deg, var(--teal), var(--violet));
+  background: var(--accent);
   transform-origin: left; transform: scaleX(0);
   transition: transform 120ms linear;
 }
@@ -22,13 +24,22 @@
   display: grid;
   grid-template-columns: minmax(0, 1.5fr) minmax(0, 0.5fr);
   gap: clamp(1.5rem, 5vw, 5rem);
-  align-items: center;
-  width: 100%; height: 100%;
-  padding: 5.5rem clamp(1rem, 3vw, 3rem) 2.5rem;
+  /* stretch, not center: the art box must fill the row or it collapses to
+     zero height and the absolutely-positioned images resolve to 0. */
+  align-items: stretch;
+  width: 100%; height: 100%; min-height: 0;
+  padding: 6.5rem clamp(1rem, 3vw, 3rem) 2.5rem;
 }
 
 /* ── art ─────────────────────────────────────────────────────────────── */
-.rw__art { position: relative; height: 100%; min-height: 0; display: grid; place-items: center; }
+.rw__art {
+  position: relative; height: 100%; min-height: 0; overflow: hidden;
+  /* An explicit 100% row is the key: the six stacked renders share one cell,
+     so an auto row would size to the tallest and burst the pin, while a
+     collapsed row makes max-height:100% resolve to zero. */
+  display: grid; grid-template-rows: 100%; grid-template-columns: 100%;
+  place-items: center;
+}
 .rw__img {
   grid-area: 1 / 1;
   max-width: 100%; max-height: 100%;
@@ -46,22 +57,22 @@
 .rw__grid {
   position: absolute; inset: 0; z-index: -1; pointer-events: none;
   background-image:
-    linear-gradient(to right, rgba(255,255,255,0.045) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,0.045) 1px, transparent 1px);
+    linear-gradient(to right, rgba(20,22,27,0.055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(20,22,27,0.055) 1px, transparent 1px);
   background-size: 72px 72px;
   mask-image: radial-gradient(ellipse 62% 58% at 50% 50%, #000 25%, transparent 76%);
 }
 
 /* ── panel ───────────────────────────────────────────────────────────── */
-.rw__panel { display: grid; gap: 2rem; align-content: center; }
+.rw__panel { display: grid; gap: 1.5rem; align-content: center; min-height: 0; }
 
 .rw__rail { display: grid; gap: 0.15rem; }
 .rw__rail li {
   display: flex; align-items: center; gap: 0.9rem;
-  padding: 0.35rem 0; color: var(--faint);
+  padding: 0.35rem 0; color: var(--ink-4);
   transition: color 320ms var(--ease);
 }
-.rw__rail li.is-on { color: var(--teal); }
+.rw__rail li.is-on { color: var(--accent); }
 .rw__mark {
   width: 22px; height: 1px; background: currentColor; flex: none;
   transition: width 340ms var(--ease);
@@ -71,23 +82,23 @@
 .rw__copy { display: grid; gap: 0.65rem; animation: rw-in 460ms var(--ease) both; }
 @keyframes rw-in { from { opacity: 0; transform: translateY(12px); } }
 
-.rw__idx { color: var(--teal); font-variant-numeric: tabular-nums; }
-.rw__idx i { font-style: normal; color: var(--faint); margin: 0 0.3rem; }
+.rw__idx { color: var(--accent); font-variant-numeric: tabular-nums; }
+.rw__idx i { font-style: normal; color: var(--ink-4); margin: 0 0.3rem; }
 .rw__title {
   font-family: var(--display); font-variation-settings: 'wdth' 106, 'wght' 700;
   font-size: clamp(1.5rem, 2.6vw, 2.3rem); line-height: 1.05;
-  color: var(--paper); letter-spacing: -0.015em;
+  color: var(--ink); letter-spacing: -0.015em;
 }
-.rw__body { color: var(--dim); max-width: 42ch; text-wrap: pretty; }
+.rw__body { color: var(--ink-3); max-width: 42ch; text-wrap: pretty; }
 
 .rw__spec {
   margin-top: 0.3rem; padding-top: 0.9rem;
-  border-top: 1px solid var(--glass-edge);
+  border-top: 1px solid var(--rule);
   display: grid; gap: 0.25rem;
 }
-.rw__spec dt { color: var(--faint); }
-.rw__spec dd { color: var(--paper); font-size: 0.9375rem; }
-.rw__hint { color: var(--faint); }
+.rw__spec dt { color: var(--ink-4); }
+.rw__spec dd { color: var(--ink); font-size: 0.9375rem; }
+.rw__hint { color: var(--ink-4); }
 
 @media (max-width: 900px) {
   .rw { height: 520vh; }

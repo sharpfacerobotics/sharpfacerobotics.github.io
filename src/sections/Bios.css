@@ -2,10 +2,10 @@
 .tier__head {
   display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem 1.25rem;
   padding-bottom: 0.7rem; margin-bottom: 1.25rem;
-  border-bottom: 1px solid var(--glass-edge);
+  border-bottom: 1px solid var(--rule);
 }
-.tier__blurb { font-size: 0.875rem; color: var(--dim); }
-.tier__count { margin-left: auto; color: var(--faint); font-variant-numeric: tabular-nums; }
+.tier__blurb { font-size: 0.875rem; color: var(--ink-3); }
+.tier__count { margin-left: auto; color: var(--ink-4); font-variant-numeric: tabular-nums; }
 
 .lead-row {
   display: grid; gap: 1rem;
@@ -16,9 +16,9 @@
 .lead__img { flex: none; width: 6rem; }
 .lead__img img {
   width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: center 22%;
-  border: 1px solid var(--glass-edge);
+  border: 1px solid var(--rule);
 }
-.lead__role { color: var(--teal); margin-bottom: 0.35rem; }
+.lead__role { color: var(--accent); margin-bottom: 0.35rem; }
 .lead__grade { margin-top: 0.3rem; }
 
 /* ChromaGrid hardcodes `repeat(var(--cols), 320px)` and a 320px card width,
@@ -63,15 +63,15 @@
 /* clamp the quote so cards settle to a common height */
 .bios__chroma .location {
   text-transform: none; letter-spacing: 0; font-family: var(--sans);
-  font-size: 0.8125rem; line-height: 1.4; color: var(--dim);
+  font-size: 0.8125rem; line-height: 1.4; color: var(--ink-3);
   display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
   overflow: hidden;
 }
-.bios__chroma .handle { color: var(--faint); }
-.bios__chroma .role { color: var(--teal); }
+.bios__chroma .handle { color: var(--ink-4); }
+.bios__chroma .role { color: var(--accent); }
 
 .bio__name {
   font-family: var(--display); font-variation-settings: 'wdth' 104, 'wght' 650;
-  font-size: 1.0625rem; color: var(--paper); line-height: 1.2;
+  font-size: 1.0625rem; color: var(--ink); line-height: 1.2;
 }
-.bio__quote { font-size: 0.875rem; line-height: 1.5; color: var(--dim); text-wrap: pretty; margin-top: 0.4rem; }
+.bio__quote { font-size: 0.875rem; line-height: 1.5; color: var(--ink-3); text-wrap: pretty; margin-top: 0.4rem; }

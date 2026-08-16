@@ -1,6 +1,6 @@
 .robot__sub {
   font-family: var(--mono); font-size: 0.875rem; letter-spacing: 0.1em;
-  color: var(--faint); text-transform: uppercase;
+  color: var(--ink-4); text-transform: uppercase;
   font-variation-settings: normal; vertical-align: middle;
 }
 
@@ -20,11 +20,11 @@
 
 .subsys {
   display: grid; gap: 1px;
-  background: var(--glass-edge); border: 1px solid var(--glass-edge);
+  background: var(--rule); border: 1px solid var(--rule);
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
 }
 .subsys__card {
-  background: rgba(12, 14, 19, 0.55);
+  background: var(--card);
   backdrop-filter: blur(12px);
   display: grid; grid-template-rows: auto 1fr;
   overflow: hidden;
@@ -34,7 +34,7 @@
   aspect-ratio: 16 / 10;
   display: grid; place-items: center;
   padding: 1.1rem;
-  border-bottom: 1px solid var(--glass-edge);
+  border-bottom: 1px solid var(--rule);
   background:
     radial-gradient(120% 100% at 50% 0%, rgba(63,208,201,0.06), transparent 70%);
   overflow: hidden;
@@ -49,21 +49,21 @@
 .subsys__card:hover .subsys__art img { transform: scale(1.07); opacity: 1; }
 
 .subsys__text { padding: 1.35rem 1.4rem 1.6rem; display: grid; gap: 0.45rem; align-content: start; }
-.subsys__n { color: var(--teal); }
-.subsys__text p { color: var(--dim); font-size: 0.9375rem; text-wrap: pretty; }
+.subsys__n { color: var(--accent); }
+.subsys__text p { color: var(--ink-3); font-size: 0.9375rem; text-wrap: pretty; }
 
 .robot__specs { padding: 0.4rem 1.4rem; }
 
 /* MagicBento owns its own grid; give it our surface language. */
 .robot__bento .magic-bento-card {
-  background: rgba(14, 17, 24, 0.55) !important;
+  background: var(--card) !important;
   backdrop-filter: blur(14px);
-  border-color: var(--glass-edge) !important;
+  border-color: var(--rule) !important;
   border-radius: 2px !important;
 }
-.robot__bento .magic-bento-card__label { font-family: var(--mono); font-size: 0.625rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal); }
+.robot__bento .magic-bento-card__label { font-family: var(--mono); font-size: 0.625rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); }
 .robot__bento .magic-bento-card__title {
   font-family: var(--display); font-variation-settings: 'wdth' 104, 'wght' 650;
-  font-size: 1.15rem; color: var(--paper);
+  font-size: 1.15rem; color: var(--ink);
 }
-.robot__bento .magic-bento-card__description { color: var(--dim); font-size: 0.9rem; line-height: 1.55; }
+.robot__bento .magic-bento-card__description { color: var(--ink-3); font-size: 0.9rem; line-height: 1.55; }

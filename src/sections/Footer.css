@@ -1,7 +1,7 @@
-.foot { border-top: 1px solid var(--rule); background: var(--ink-900); }
+.foot { border-top: 1px solid var(--rule); background: var(--paper); }
 .foot__in {
   display: flex; flex-wrap: wrap; gap: 0.75rem 2rem;
   justify-content: space-between; align-items: center;
   padding-block: 2rem;
 }
-.foot__colophon { color: var(--faint); }
+.foot__colophon { color: var(--ink-4); }

@@ -2,19 +2,19 @@
    background draws the grid; there are no card shadows anywhere on this site. */
 .sp-grid {
   display: grid; gap: 1px;
-  background: var(--glass-edge); border: 1px solid var(--glass-edge);
+  background: var(--rule); border: 1px solid var(--rule);
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
 }
 
 .sp {
   position: relative;
   display: flex; align-items: center; gap: 1.15rem;
-  padding: 1.5rem 1.4rem;
-  background: rgba(12,14,19,0.55);
+  padding: 1.6rem 1.5rem;
+  background: var(--card);
   backdrop-filter: blur(12px);
   transition: background 0.4s var(--ease);
 }
-.sp:hover { background: rgba(63,208,201,0.09); }
+.sp:hover { background: #fff; }
 
 /* The old site dropped logos with baked-in white backgrounds straight onto
    black, so they read as grey stickers. A white frame puts every mark on the
@@ -40,7 +40,7 @@
   object-fit: contain;
   transition: opacity 340ms var(--ease), transform 340ms var(--ease);
 }
-.sp__mono  { opacity: 0.95; }
+.sp__mono  { opacity: 0.72; }
 .sp__color { opacity: 0; }
 .sp:hover .sp__mono  { opacity: 0; transform: scale(1.04); }
 .sp:hover .sp__color { opacity: 1; transform: scale(1.04); }
@@ -48,17 +48,17 @@
 .sp__meta { display: grid; gap: 0.3rem; min-width: 0; }
 .sp__name {
   font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.16em;
-  text-transform: uppercase; color: var(--paper);
+  text-transform: uppercase; color: var(--ink);
 }
-.sp__note { font-size: 0.8125rem; line-height: 1.45; color: var(--dim); text-wrap: pretty; }
+.sp__note { font-size: 0.8125rem; line-height: 1.45; color: var(--ink-3); text-wrap: pretty; }
 
 .sp__ext {
   position: absolute; top: 0.85rem; right: 0.95rem;
-  font-size: 0.8rem; color: var(--faint);
+  font-size: 0.8rem; color: var(--ink-4);
   opacity: 0; transform: translate(-2px, 2px);
   transition: opacity .35s var(--ease), transform .35s var(--ease), color .35s var(--ease);
 }
-.sp:hover .sp__ext { opacity: 1; transform: none; color: var(--teal); }
+.sp:hover .sp__ext { opacity: 1; transform: none; color: var(--accent); }
 .sp--static { cursor: default; }
 
 .sp-loop {
@@ -73,7 +73,7 @@
   display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
   gap: 1.75rem;
   padding: clamp(1.75rem, 4vw, 2.75rem);
-  border: 1px solid var(--glass-edge);
+  border: 1px solid var(--rule);
   background: var(--glass);
   backdrop-filter: blur(16px);
 }

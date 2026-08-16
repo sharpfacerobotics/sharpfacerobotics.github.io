@@ -7,8 +7,8 @@ import './Outreach.css';
 /* Validated against the dark surface #0b0d11 with the dataviz palette
    validator: lightness band, chroma floor, CVD separation (ΔE 15.2 protan),
    normal-vision floor (ΔE 21.9) and 3:1 contrast all pass. */
-const SERIES = '#22a09a';
-const MARK = '#c8761d';
+const SERIES = '#0f7d78';
+const MARK = '#b4611a';
 
 const W = 1000;
 const H = 340;
@@ -95,7 +95,7 @@ export default function Outreach() {
                     key={t}
                     x1={PAD.l} x2={W - PAD.r}
                     y1={PAD.t + t * ih} y2={PAD.t + t * ih}
-                    stroke="rgba(255,255,255,0.07)" strokeWidth="1"
+                    stroke="rgba(20,22,27,0.10)" strokeWidth="1"
                     strokeDasharray={t === 1 ? undefined : '2 6'}
                   />
                 ))}
@@ -108,7 +108,7 @@ export default function Outreach() {
                   p.milestone ? (
                     <g key={p.month} className="chart__mile" style={{ '--mi': i } as React.CSSProperties}>
                       <line x1={x(i)} x2={x(i)} y1={y(p.weight)} y2={PAD.t + ih} stroke={MARK} strokeWidth="1" strokeDasharray="2 4" opacity="0.5" />
-                      <circle cx={x(i)} cy={y(p.weight)} r="5" fill="#0b0d11" stroke={MARK} strokeWidth="2.5" />
+                      <circle cx={x(i)} cy={y(p.weight)} r="5" fill="#fff" stroke={MARK} strokeWidth="2.5" />
                     </g>
                   ) : null
                 )}
@@ -128,8 +128,8 @@ export default function Outreach() {
 
                 {active !== null && (
                   <g pointerEvents="none">
-                    <line x1={x(active)} x2={x(active)} y1={PAD.t} y2={PAD.t + ih} stroke="rgba(255,255,255,0.28)" strokeWidth="1" />
-                    <circle cx={x(active)} cy={y(outreach[active].weight)} r="5.5" fill={SERIES} stroke="#0b0d11" strokeWidth="2" />
+                    <line x1={x(active)} x2={x(active)} y1={PAD.t} y2={PAD.t + ih} stroke="rgba(20,22,27,0.30)" strokeWidth="1" />
+                    <circle cx={x(active)} cy={y(outreach[active].weight)} r="5.5" fill={SERIES} stroke="#fff" strokeWidth="2" />
                   </g>
                 )}
 
