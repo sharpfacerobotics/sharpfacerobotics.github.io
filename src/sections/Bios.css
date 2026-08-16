@@ -1,3 +1,20 @@
+/* Leadership is tier 01 when the wheel is on "Everyone". grid-template-rows
+   0fr -> 1fr is the one way to animate to auto height without a fixed max. */
+.lead-wrap {
+  display: grid; grid-template-rows: 0fr;
+  opacity: 0; transform: translateY(-14px);
+  transition: grid-template-rows 520ms var(--ease), opacity 380ms var(--ease),
+              transform 520ms var(--ease);
+}
+.lead-wrap.is-open { grid-template-rows: 1fr; opacity: 1; transform: none; }
+.lead-wrap__inner { overflow: hidden; min-height: 0; }
+/* height 0 alone still leaves the block focusable and readable by a screen
+   reader; take it out of the tree once the collapse has finished. */
+.lead-wrap:not(.is-open) .lead-wrap__inner { visibility: hidden; transition: visibility 0s 520ms; }
+@media (prefers-reduced-motion: reduce) {
+  .lead-wrap { transition: none; }
+}
+
 .tier { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
 .tier__head {
   display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem 1.25rem;
@@ -80,16 +97,15 @@
 /* A real grid column, not a float: floating made the dial overlay the first
    card instead of reserving space for itself. */
 .roster__body {
-  display: grid; grid-template-columns: 12.5rem minmax(0, 1fr);
+  display: grid; grid-template-columns: 11rem minmax(0, 1fr);
   gap: clamp(1.25rem, 2.5vw, 2.25rem); align-items: start;
 }
 .roster__groups { min-width: 0; }
 
 .roster__wheel {
-  position: relative;
   position: sticky; top: 7rem;
-  display: grid; gap: 0.5rem;
-  padding: 1rem 0.75rem 1.25rem;
+  display: grid; gap: 0.45rem;
+  padding: 0.85rem 0.6rem 0.9rem;
   border: 1px solid var(--glass-edge);
   border-radius: var(--r-lg);
   background: var(--glass);
@@ -108,9 +124,9 @@
 
 /* the band marks the live slot — the single clearest "this is a dial" cue */
 .roster__wheel-band {
-  position: absolute; left: 0.5rem; right: 0.5rem;
+  position: absolute; left: 0.1rem; right: 0.1rem;
   top: 50%; transform: translateY(-50%);
-  height: 2.5rem; pointer-events: none;
+  height: 2.1rem; pointer-events: none;
   border-radius: var(--r-sm);
   border-block: 1px solid var(--accent-soft);
   background: linear-gradient(90deg, rgba(79,224,216,0.10), rgba(79,224,216,0.02));
@@ -120,8 +136,8 @@
   color: var(--ink-4); pointer-events: none;
   animation: wheel-nudge 2.4s var(--ease) infinite;
 }
-.roster__wheel-arrow--up { top: 2.4rem; }
-.roster__wheel-arrow--down { bottom: 0.9rem; animation-delay: 1.2s; }
+.roster__wheel-arrow--up { top: -0.15rem; }
+.roster__wheel-arrow--down { bottom: -0.15rem; animation-delay: 1.2s; }
 @keyframes wheel-nudge {
   0%, 100% { opacity: 0.3; transform: translate(-50%, 0); }
   50%      { opacity: 0.85; }
@@ -130,10 +146,25 @@
 .roster__wheel-arrow--down { --d: 3px; }
 @media (prefers-reduced-motion: reduce) { .roster__wheel-arrow { animation: none; opacity: 0.5; } }
 /* the dial fills its container height, so it needs a real column */
-.roster__wheel-ctl { height: 230px; width: 100%; }
+/* the stage is the positioning context, so the band and chevrons line up with
+   the wheel's own centre instead of the panel's (they were 12px out) */
+.roster__wheel-stage { position: relative; }
+.roster__wheel-ctl { height: 168px; width: 100%; }
+
+/* keyboard hint — the component already handles ArrowUp/ArrowDown */
+.roster__wheel-keys {
+  display: flex; align-items: center; gap: 0.3rem;
+  justify-content: center; color: var(--ink-4);
+  font-size: 0.5625rem; letter-spacing: 0.08em;
+}
+.roster__wheel-keys kbd {
+  font-family: var(--mono); font-size: 0.625rem; line-height: 1;
+  padding: 0.15rem 0.3rem; border-radius: 4px;
+  border: 1px solid var(--rule); background: var(--paper-2); color: var(--ink-3);
+}
 
 @media (max-width: 900px) {
   .roster__body { grid-template-columns: 1fr; }
   .roster__wheel { position: static; }
-  .roster__wheel-ctl { height: 170px; }
+  .roster__wheel-ctl { height: 150px; }
 }

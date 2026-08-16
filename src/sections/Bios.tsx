@@ -42,6 +42,7 @@ const WHEEL = ['Everyone', 'Mechanical', 'Software', 'Outreach'] as const;
 export default function Bios() {
   const [pick, setPick] = useState<string>('Everyone');
   const shown = GROUPS.filter(g => pick === 'Everyone' || g.key === pick);
+  const showLeadership = pick === 'Everyone';
 
   return (
     <section className="band" id="roster">
@@ -51,8 +52,9 @@ export default function Bios() {
           <h2 className="d2">The people who build it</h2>
         </header>
 
-        {/* ── Leadership ─────────────────────────────────────────── */}
-        <Reveal>
+        {/* ── Leadership: tier 01 when the wheel is on Everyone ─────── */}
+        <div className={`lead-wrap${showLeadership ? ' is-open' : ''}`} aria-hidden={!showLeadership}>
+          <div className="lead-wrap__inner">
           <div className="tier">
             <div className="tier__head">
               <h3 className="mono tier__label" style={{ color: '#8b7bff' }}>Leadership</h3>
@@ -82,7 +84,8 @@ export default function Bios() {
               ))}
             </div>
           </div>
-        </Reveal>
+          </div>
+        </div>
 
         {/* ── Working groups ─────────────────────────────────────── */}
         <div className="roster__body">
@@ -90,8 +93,9 @@ export default function Bios() {
         <div className="roster__wheel">
           <p className="mono roster__wheel-label">
             Show
-            <span className="roster__wheel-hint">scroll</span>
+            <span className="roster__wheel-hint">drag</span>
           </p>
+          <div className="roster__wheel-stage">
           <OptionWheel
             items={[...WHEEL]}
             defaultSelected={0}
@@ -100,8 +104,8 @@ export default function Bios() {
             activeColor="#4fe0d8"
             /* fontSize is in REM and spacing is a MULTIPLIER
                (rowH = fontSize * spacing * 16px), not pixels. */
-            fontSize={1.05}
-            spacing={1.9}
+            fontSize={0.95}
+            spacing={1.85}
             curve={18}
             tilt={12}
             blur={1.2}
@@ -112,8 +116,7 @@ export default function Bios() {
             draggable
             className="roster__wheel-ctl"
           />
-          {/* affordances: a selection band and chevrons, so it reads as a dial
-              rather than as a stray label */}
+          {/* affordances live inside the stage so they centre on the wheel */}
           <span className="roster__wheel-band" aria-hidden="true" />
           <span className="roster__wheel-arrow roster__wheel-arrow--up" aria-hidden="true">
             <svg viewBox="0 0 16 16" width="14" height="14"><path d="M4 10l4-4 4 4" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
@@ -121,6 +124,10 @@ export default function Bios() {
           <span className="roster__wheel-arrow roster__wheel-arrow--down" aria-hidden="true">
             <svg viewBox="0 0 16 16" width="14" height="14"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
           </span>
+          </div>
+          <p className="mono-sm roster__wheel-keys">
+            <kbd>↑</kbd><kbd>↓</kbd> arrow keys
+          </p>
         </div>
 
         <div className="roster__groups">
