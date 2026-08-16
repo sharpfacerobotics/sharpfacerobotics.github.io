@@ -9,7 +9,7 @@
 }
 .chart__cap {
   display: flex; align-items: center; justify-content: space-between;
-  gap: 1rem; padding-bottom: 1rem; margin-bottom: 0.5rem;
+  gap: 1rem; padding-bottom: 0.5rem; margin-bottom: 0.25rem;
   border-bottom: 1px solid var(--rule);
 }
 .chart__toggle {
@@ -21,7 +21,7 @@
 .chart__plot svg {
   width: 100%; height: auto; display: block; overflow: visible;
   /* cap against the viewport so the whole section fits without scrolling */
-  max-height: clamp(12rem, 34vh, 22rem);
+  max-height: clamp(8rem, 21vh, 14rem);
 }
 .chart__plot { padding-block: 0.5rem; }
 .chart__xlab {
@@ -33,7 +33,7 @@
 
 .chart__read {
   display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem 1.25rem;
-  min-height: 2.25rem; margin-top: 0.75rem; padding-top: 0.85rem;
+  min-height: 1.4rem; margin-top: 0.45rem; padding-top: 0.5rem;
   border-top: 1px solid var(--rule);
   font-family: var(--mono); font-size: 0.6875rem;
   letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3);
@@ -54,7 +54,7 @@
 .chart__table tbody th { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
 .chart__table td { color: var(--ink-2); }
 
-.chart__note { margin-top: 0.9rem; color: var(--ink-4); letter-spacing: 0.1em; text-transform: none; }
+.chart__note { margin-top: 0.5rem; color: var(--ink-4); letter-spacing: 0.1em; text-transform: none; }
 
 .outreach__stat { color: var(--ink-3); margin-top: 1rem; }
 .outreach__stat b { color: var(--accent); font-weight: 600; font-variant-numeric: tabular-nums; }
@@ -97,7 +97,7 @@
 
 /* the section owns its vertical rhythm via .fitview */
 .band.fitview .sec-head { margin-bottom: clamp(0.75rem, 1.6vh, 1.4rem); gap: 0.6rem; }
-.band.fitview .outreach__stat { margin-top: clamp(0.5rem, 1.2vh, 1rem); }
+.band.fitview .outreach__stat { margin-top: 0.3rem; }
 
 /* wider measure = fewer lines = the section fits the viewport */
 .outreach__lede { max-width: 78ch; }
@@ -141,3 +141,23 @@
   .chart__spark, .chart__mile circle { animation: none !important; }
   .chart__spark { display: none; }
 }
+
+/* ── photo carousel ─────────────────────────────────────────────────── */
+.outreach__gallery { margin-top: clamp(0.5rem, 1.2vh, 1rem); display: grid; gap: 0.5rem; }
+.outreach__gallery-label {
+  display: flex; align-items: center; gap: 0.65rem;
+  color: var(--ink-4);
+}
+.outreach__gallery-hint {
+  font-size: 0.5rem; letter-spacing: 0.14em; color: var(--accent);
+  border: 1px solid currentColor; border-radius: var(--r-pill);
+  padding: 0.12rem 0.4rem;
+}
+.outreach__gallery-stage {
+  position: relative;
+  height: clamp(11rem, 26vh, 18rem);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+.outreach__gallery-stage > * { width: 100%; height: 100%; }
+.outreach__gallery-stage canvas { display: block; width: 100% !important; height: 100% !important; }

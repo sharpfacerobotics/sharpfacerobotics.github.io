@@ -1,0 +1,86 @@
+#!/usr/bin/env python3
+"""
+Extract the actual photograph out of an album-app screenshot.
+
+The supplied files are screen grabs of a photo viewer: dark chrome around the
+edges, a title bar, a sidebar and a thumbnail filmstrip. The photo itself is the
+one bright rectangle in the middle. Find it by row/column brightness and crop to
+it, then write a web-sized JPEG.
+"""
+from PIL import Image
+import os, glob
+
+SRC = 'incoming/photos/roboticsteam'
+OUT = 'public/assets/outreach'
+os.makedirs(OUT, exist_ok=True)
+
+def brightness_profile(im, axis):
+    w, h = im.size
+    px = im.load()
+    step = 2
+    prof = []
+    if axis == 'x':
+        for x in range(w):
+            tot = n = 0
+            for y in range(0, h, max(1, h // 160)):
+                r, g, b = px[x, y]; tot += (r*299 + g*587 + b*114)//1000; n += 1
+            prof.append(tot / max(1, n))
+    else:
+        for y in range(h):
+            tot = n = 0
+            for x in range(0, w, max(1, w // 160)):
+                r, g, b = px[x, y]; tot += (r*299 + g*587 + b*114)//1000; n += 1
+            prof.append(tot / max(1, n))
+    return prof
+
+def longest_bright_run(prof, thresh):
+    best = (0, 0, 0)
+    s = None
+    for i, v in enumerate(prof):
+        if v >= thresh:
+            if s is None: s = i
+        else:
+            if s is not None:
+                if i - s > best[0]: best = (i - s, s, i)
+                s = None
+    if s is not None and len(prof) - s > best[0]:
+        best = (len(prof) - s, s, len(prof))
+    return best[1], best[2]
+
+kept = 0
+for f in sorted(glob.glob(f'{SRC}/*')):
+    if os.path.basename(f).startswith('.'): continue
+    im = Image.open(f).convert('RGB')
+    w, h = im.size
+
+    # the UI screenshots the user also dropped in are wide slivers — skip them
+    if h < 600 or w / h > 2.2:
+        print(f'  skip (UI grab)  {os.path.basename(f)}  {w}x{h}')
+        continue
+
+    # ignore the filmstrip band at the bottom when profiling rows
+    body = im.crop((0, 0, w, int(h * 0.93)))
+    xs = brightness_profile(body, 'x')
+    ys = brightness_profile(body, 'y')
+    thresh = max(38.0, (sum(xs) / len(xs)) * 0.55)
+    x0, x1 = longest_bright_run(xs, thresh)
+    y0, y1 = longest_bright_run(ys, thresh)
+
+    if (x1 - x0) < w * 0.4 or (y1 - y0) < h * 0.3:
+        print(f'  skip (no photo) {os.path.basename(f)}')
+        continue
+
+    pad = 3
+    crop = im.crop((x0 + pad, y0 + pad, x1 - pad, y1 - pad))
+    # web size: cap the long edge
+    cw, ch = crop.size
+    cap = 1600
+    if max(cw, ch) > cap:
+        s = cap / max(cw, ch)
+        crop = crop.resize((int(cw * s), int(ch * s)), Image.LANCZOS)
+    kept += 1
+    name = f'outreach-{kept:02d}.jpg'
+    crop.save(f'{OUT}/{name}', quality=88, optimize=True)
+    print(f'  {name}  {crop.size[0]}x{crop.size[1]}   from {w}x{h}')
+
+print(f'\n{kept} photo(s) extracted to {OUT}/')
