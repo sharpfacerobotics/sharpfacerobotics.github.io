@@ -28,7 +28,7 @@
   transition: opacity 300ms var(--ease), transform 300ms var(--ease);
 }
 .strip__color { position: absolute; inset: 0; opacity: 0; }
-.strip__mono  { opacity: 0.58; }
+.strip__mono  { opacity: 0.85; }
 .strip__item a:hover .strip__mono  { opacity: 0; transform: scale(1.06); }
 .strip__item a:hover .strip__color { opacity: 1; transform: scale(1.06); }
 .strip__item a:focus-visible { outline: 2px solid var(--teal); outline-offset: 6px; }

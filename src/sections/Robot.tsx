@@ -1,19 +1,9 @@
 import { team, specs, subsystems } from '@/data/site';
-import MagicBento from '@/components/reactbits/MagicBento';
-import { Reveal } from '@/components/Motion';
+import { Reveal, Spotlight } from '@/components/Motion';
 import RobotScroll from './RobotScroll';
 import './Robot.css';
 
 export default function Robot() {
-  /* MagicBento renders the spotlight/particle/tilt grid; feed it the real
-     subsystems instead of its shipped demo data. */
-  const cards = subsystems.map(s => ({
-    label: s.n,
-    title: s.h,
-    description: s.p,
-    color: 'rgba(14, 17, 24, 0.62)',
-  }));
-
   return (
     <section className="robot-tab" id="robot">
       <RobotScroll />
@@ -33,20 +23,6 @@ export default function Robot() {
         </header>
 
         <Reveal className="robot__top">
-          <figure className="robot__plate">
-            <div className="plate__frame">
-              <img
-                src="/assets/explodedCad-cutout.png"
-                alt="Exploded CAD view of robot KG showing the shooter, transfer, intake, drivetrain and electronics assemblies."
-                loading="lazy"
-              />
-            </div>
-            <figcaption className="plate__cap mono-sm">
-              <span>Exploded assembly</span>
-              <span>{team.robot}</span>
-            </figcaption>
-          </figure>
-
           <dl className="spec-list robot__specs pane">
             {specs.map(s => (
               <div className="spec" key={s.k}>
@@ -57,21 +33,24 @@ export default function Robot() {
           </dl>
         </Reveal>
 
-        <Reveal className="robot__bento" delay={80}>
-          <MagicBento
-            cards={cards}
-            textAutoHide={false}
-            enableStars
-            enableSpotlight
-            enableBorderGlow
-            enableTilt
-            enableMagnetism
-            clickEffect
-            spotlightRadius={340}
-            particleCount={10}
-            glowColor="63, 208, 201"
-          />
-        </Reveal>
+        {/* Every card carries the CAD image of the assembly it describes, so
+            the reader can see which part is being talked about. */}
+        <Spotlight>
+          <ol className="subsys">
+            {subsystems.map((sub, i) => (
+              <Reveal as="li" className="subsys__card" key={sub.n} delay={i * 55}>
+                <figure className="subsys__art">
+                  <img src={sub.img} alt={`${sub.h} assembly`} loading="lazy" />
+                </figure>
+                <div className="subsys__text">
+                  <span className="mono subsys__n">{sub.n}</span>
+                  <h3 className="d3">{sub.h}</h3>
+                  <p>{sub.p}</p>
+                </div>
+              </Reveal>
+            ))}
+          </ol>
+        </Spotlight>
       </div></div>
     </section>
   );

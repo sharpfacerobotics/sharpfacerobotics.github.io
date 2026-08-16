@@ -4,11 +4,7 @@
   font-variation-settings: normal; vertical-align: middle;
 }
 
-.robot__top {
-  display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-  gap: clamp(2rem, 4.5vw, 4rem); align-items: start;
-  margin-bottom: clamp(3rem, 6vw, 5rem);
-}
+.robot__top { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
 @media (max-width: 900px) { .robot__top { grid-template-columns: 1fr; } }
 
 
@@ -20,6 +16,42 @@
   aspect-ratio: auto; object-fit: contain; padding: 0;
   max-height: 30rem; margin-inline: auto;
 }
+.robot__specs { padding: 0.4rem 1.4rem; }
+
+.subsys {
+  display: grid; gap: 1px;
+  background: var(--glass-edge); border: 1px solid var(--glass-edge);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+}
+.subsys__card {
+  background: rgba(12, 14, 19, 0.55);
+  backdrop-filter: blur(12px);
+  display: grid; grid-template-rows: auto 1fr;
+  overflow: hidden;
+}
+.subsys__art {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  display: grid; place-items: center;
+  padding: 1.1rem;
+  border-bottom: 1px solid var(--glass-edge);
+  background:
+    radial-gradient(120% 100% at 50% 0%, rgba(63,208,201,0.06), transparent 70%);
+  overflow: hidden;
+}
+.subsys__art img {
+  /* width/height 100% + contain guarantees a fit inside the padded box;
+     max-* alone lets a very tall render (the whole-robot crop) overflow. */
+  width: 100%; height: 100%; object-fit: contain;
+  opacity: 0.9;
+  transition: transform 520ms var(--ease), opacity 320ms var(--ease);
+}
+.subsys__card:hover .subsys__art img { transform: scale(1.07); opacity: 1; }
+
+.subsys__text { padding: 1.35rem 1.4rem 1.6rem; display: grid; gap: 0.45rem; align-content: start; }
+.subsys__n { color: var(--teal); }
+.subsys__text p { color: var(--dim); font-size: 0.9375rem; text-wrap: pretty; }
+
 .robot__specs { padding: 0.4rem 1.4rem; }
 
 /* MagicBento owns its own grid; give it our surface language. */

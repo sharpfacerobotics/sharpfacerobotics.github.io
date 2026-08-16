@@ -35,7 +35,6 @@ function buildPath(pts: OutreachPoint[]) {
 export default function Outreach() {
   const gid = useId().replace(/:/g, '');
   const [active, setActive] = useState<number | null>(null);
-  const [table, setTable] = useState(false);
   /* The line draws itself and the area lifts when the section first appears,
      so entering the tab shows the shape being built rather than a static plot. */
   const [drawn, setDrawn] = useState(false);
@@ -74,32 +73,8 @@ export default function Outreach() {
         <Reveal><figure className="chart ticked" ref={figRef as never}>
           <figcaption className="chart__cap">
             <span className="mono">Outreach activity · by month</span>
-            <button
-              className="chart__toggle mono"
-              onClick={() => setTable(t => !t)}
-              aria-pressed={table}
-            >
-              {table ? 'Show chart' : 'Show table'}
-            </button>
           </figcaption>
 
-          {table ? (
-            <table className="chart__table">
-              <caption className="sr-only">Outreach phase by month. Relative activity only; no counts are published.</caption>
-              <thead>
-                <tr><th scope="col">Month</th><th scope="col">Phase</th><th scope="col">Milestone</th></tr>
-              </thead>
-              <tbody>
-                {outreach.map(p => (
-                  <tr key={p.month}>
-                    <th scope="row">{p.month}</th>
-                    <td>{p.phase}</td>
-                    <td>{p.milestone ?? '—'}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          ) : (
             <div className={`chart__plot${drawn ? ' is-drawn' : ''}`}>
               <svg
                 viewBox={`0 0 ${W} ${H}`}
@@ -183,7 +158,6 @@ export default function Outreach() {
                 )}
               </div>
             </div>
-          )}
         </figure></Reveal>
 
         {RELATIVE_ONLY && (

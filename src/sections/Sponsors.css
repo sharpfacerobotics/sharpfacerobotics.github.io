@@ -40,7 +40,7 @@
   object-fit: contain;
   transition: opacity 340ms var(--ease), transform 340ms var(--ease);
 }
-.sp__mono  { opacity: 0.72; }
+.sp__mono  { opacity: 0.95; }
 .sp__color { opacity: 0; }
 .sp:hover .sp__mono  { opacity: 0; transform: scale(1.04); }
 .sp:hover .sp__color { opacity: 1; transform: scale(1.04); }
