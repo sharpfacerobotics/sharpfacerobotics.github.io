@@ -17,9 +17,10 @@
 .hero__ctas { display: flex; flex-wrap: wrap; gap: 0.7rem; }
 
 /* ── the plate: image-first, full width, generous radius ─────────────── */
-.hero__plate { position: relative; border-radius: var(--r-xl); }
+/* capped near the source's native 1100px so it is never upscaled on screen */
+.hero__plate { position: relative; border-radius: var(--r-xl); max-width: 1120px; margin-inline: auto; }
 .hero__plate img {
-  width: 100%; aspect-ratio: 21 / 9; object-fit: cover;
+  width: 100%; aspect-ratio: 1100 / 508; object-fit: cover; object-position: center 42%;
   transition: transform 1200ms var(--ease);
 }
 .hero__plate:hover img { transform: scale(1.02); }
