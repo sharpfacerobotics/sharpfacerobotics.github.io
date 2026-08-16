@@ -1,30 +1,25 @@
-.coaches {
-  padding: 1.5rem 1.75rem;
-  margin-bottom: clamp(2rem, 4vw, 3rem);
-  display: grid; gap: 1.1rem;
+.tier { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+.tier__head {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem 1.25rem;
+  padding-bottom: 0.7rem; margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--glass-edge);
 }
-.coaches__label { color: var(--teal); }
-.coaches__grid {
-  display: grid; gap: 1.25rem 2.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
-}
-.coach { border-left: 2px solid var(--glass-edge); padding-left: 1rem; }
+.tier__blurb { font-size: 0.875rem; color: var(--dim); }
+.tier__count { margin-left: auto; color: var(--faint); font-variant-numeric: tabular-nums; }
 
-.bios__bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.75rem; }
-.bios__filters {
-  display: flex; gap: 1px; background: var(--glass-edge);
+.lead-row {
+  display: grid; gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+}
+.lead { display: flex; gap: 1.25rem; align-items: center; padding: 1.35rem; }
+.lead--coach { align-items: start; }
+.lead__img { flex: none; width: 6rem; }
+.lead__img img {
+  width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: center 22%;
   border: 1px solid var(--glass-edge);
-  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
 }
-.bios__filter {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  padding: 0.6rem 1rem; background: rgba(12,14,19,0.6); color: var(--dim);
-  transition: color .3s var(--ease), background .3s var(--ease);
-}
-.bios__filter em { font-style: normal; color: var(--faint); font-variant-numeric: tabular-nums; }
-.bios__filter:hover { color: var(--paper); }
-.bios__filter.is-on { background: rgba(63,208,201,0.14); color: var(--teal); }
-.bios__filter.is-on em { color: var(--teal); }
+.lead__role { color: var(--teal); margin-bottom: 0.35rem; }
+.lead__grade { margin-top: 0.3rem; }
 
 /* ChromaGrid hardcodes `repeat(var(--cols), 320px)` and a 320px card width,
    which neither fills nor fits our container. Override to a fluid grid and let

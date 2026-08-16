@@ -15,8 +15,10 @@ export default function Robot() {
   }));
 
   return (
-    <section className="band" id="robot">
-      <div className="wrap">
+    <section className="robot-tab" id="robot">
+      <RobotScroll />
+
+      <div className="band"><div className="wrap">
         <header className="sec-head">
           <div className="sec-index"><b>02</b><span>The robot</span></div>
           <h2 className="d2">
@@ -29,8 +31,6 @@ export default function Robot() {
             and a tuned single-flywheel launcher.
           </p>
         </header>
-
-        <RobotScroll />
 
         <Reveal className="robot__top">
           <figure className="robot__plate">
@@ -72,7 +72,7 @@ export default function Robot() {
             glowColor="63, 208, 201"
           />
         </Reveal>
-      </div>
+      </div></div>
     </section>
   );
 }

@@ -6,7 +6,8 @@ function Mark({ s }: { s: Sponsor }) {
   const inner = (
     <>
       <span className="sp__frame">
-        <img src={s.logo} alt="" loading="lazy" />
+        <img className="sp__mono" src={s.logo} alt="" loading="lazy" />
+        <img className="sp__color" src={s.logoColor} alt="" loading="lazy" aria-hidden="true" />
       </span>
       <span className="sp__meta">
         <span className="sp__name">{s.name}</span>

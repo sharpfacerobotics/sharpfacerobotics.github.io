@@ -1,4 +1,4 @@
-import { useId, useMemo, useState } from 'react';
+import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { outreach, RELATIVE_ONLY, unit, type OutreachPoint } from '@/data/outreach';
 import { members, outreachCount } from '@/data/team';
 import { Reveal } from '@/components/Motion';
@@ -36,6 +36,21 @@ export default function Outreach() {
   const gid = useId().replace(/:/g, '');
   const [active, setActive] = useState<number | null>(null);
   const [table, setTable] = useState(false);
+  /* The line draws itself and the area lifts when the section first appears,
+     so entering the tab shows the shape being built rather than a static plot. */
+  const [drawn, setDrawn] = useState(false);
+  const figRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { setDrawn(true); return; }
+    const el = figRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) { setDrawn(true); io.disconnect(); }
+    }, { threshold: 0.25 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
   const { d, x, y, area } = useMemo(() => buildPath(outreach), []);
   const ih = H - PAD.t - PAD.b;
 
@@ -56,7 +71,7 @@ export default function Outreach() {
           </p>
         </header>
 
-        <Reveal><figure className="chart ticked">
+        <Reveal><figure className="chart ticked" ref={figRef as never}>
           <figcaption className="chart__cap">
             <span className="mono">Outreach activity · by month</span>
             <button
@@ -85,7 +100,7 @@ export default function Outreach() {
               </tbody>
             </table>
           ) : (
-            <div className="chart__plot">
+            <div className={`chart__plot${drawn ? ' is-drawn' : ''}`}>
               <svg
                 viewBox={`0 0 ${W} ${H}`}
                 role="img"
@@ -110,13 +125,13 @@ export default function Outreach() {
                   />
                 ))}
 
-                <path d={area} fill={`url(#fill-${gid})`} />
-                <path d={d} fill="none" stroke={SERIES} strokeWidth="2.5" strokeLinecap="round" />
+                <path className="chart__area" d={area} fill={`url(#fill-${gid})`} />
+                <path className="chart__line" d={d} fill="none" stroke={SERIES} strokeWidth="2.5" strokeLinecap="round" pathLength={1} />
 
                 {/* milestones get the second validated hue + a direct label */}
                 {outreach.map((p, i) =>
                   p.milestone ? (
-                    <g key={p.month} className="chart__mile">
+                    <g key={p.month} className="chart__mile" style={{ '--mi': i } as React.CSSProperties}>
                       <line x1={x(i)} x2={x(i)} y1={y(p.weight)} y2={PAD.t + ih} stroke={MARK} strokeWidth="1" strokeDasharray="2 4" opacity="0.5" />
                       <circle cx={x(i)} cy={y(p.weight)} r="5" fill="#0b0d11" stroke={MARK} strokeWidth="2.5" />
                     </g>
