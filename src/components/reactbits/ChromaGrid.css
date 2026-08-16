@@ -109,8 +109,9 @@
   inset: 0;
   pointer-events: none;
   z-index: 3;
-  backdrop-filter: grayscale(1);
-  background: rgba(0, 0, 0, 0.001);
+  /* LOCAL: was grayscale(1) — it desaturated every portrait. A gentle dim
+     keeps the spotlight readable without draining the photographs. */
+  background: rgba(4, 5, 8, 0.34);
 
   mask-image: radial-gradient(
     circle var(--r) at var(--x) var(--y),
@@ -141,8 +142,9 @@
   inset: 0;
   pointer-events: none;
   z-index: 4;
-  backdrop-filter: grayscale(1);
-  background: rgba(0, 0, 0, 0.001);
+  /* LOCAL: was grayscale(1) — it desaturated every portrait. A gentle dim
+     keeps the spotlight readable without draining the photographs. */
+  background: rgba(4, 5, 8, 0.34);
 
   mask-image: radial-gradient(
     circle var(--r) at var(--x) var(--y),

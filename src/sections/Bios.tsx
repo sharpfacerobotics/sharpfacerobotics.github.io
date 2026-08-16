@@ -88,7 +88,10 @@ export default function Bios() {
         <div className="roster__body">
         {/* React Bits OptionWheel — a physical dial for the working groups. */}
         <div className="roster__wheel">
-          <p className="mono roster__wheel-label">Show</p>
+          <p className="mono roster__wheel-label">
+            Show
+            <span className="roster__wheel-hint">scroll</span>
+          </p>
           <OptionWheel
             items={[...WHEEL]}
             defaultSelected={0}
@@ -109,6 +112,15 @@ export default function Bios() {
             draggable
             className="roster__wheel-ctl"
           />
+          {/* affordances: a selection band and chevrons, so it reads as a dial
+              rather than as a stray label */}
+          <span className="roster__wheel-band" aria-hidden="true" />
+          <span className="roster__wheel-arrow roster__wheel-arrow--up" aria-hidden="true">
+            <svg viewBox="0 0 16 16" width="14" height="14"><path d="M4 10l4-4 4 4" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
+          </span>
+          <span className="roster__wheel-arrow roster__wheel-arrow--down" aria-hidden="true">
+            <svg viewBox="0 0 16 16" width="14" height="14"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
+          </span>
         </div>
 
         <div className="roster__groups">

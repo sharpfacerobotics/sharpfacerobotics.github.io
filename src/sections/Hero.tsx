@@ -85,6 +85,7 @@ export default function Hero({ onTab }: { onTab: (t: 'robot' | 'contact') => voi
             dispersion={0.3}
             glint={0.25}
             highlightColor="#4fe0d8"
+            grayscale={false}
             trigger="hover"
             quality="high"
             className="hero__ripple"

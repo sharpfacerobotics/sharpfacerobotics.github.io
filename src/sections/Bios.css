@@ -86,6 +86,7 @@
 .roster__groups { min-width: 0; }
 
 .roster__wheel {
+  position: relative;
   position: sticky; top: 7rem;
   display: grid; gap: 0.5rem;
   padding: 1rem 0.75rem 1.25rem;
@@ -94,7 +95,40 @@
   background: var(--glass);
   backdrop-filter: blur(16px);
 }
-.roster__wheel-label { color: var(--ink-4); padding-left: 0.6rem; }
+.roster__wheel-label {
+  display: flex; align-items: center; justify-content: space-between;
+  color: var(--ink-4); padding-inline: 0.6rem;
+}
+.roster__wheel-hint {
+  font-size: 0.5rem; letter-spacing: 0.14em;
+  color: var(--accent); opacity: 0.85;
+  border: 1px solid currentColor; border-radius: var(--r-pill);
+  padding: 0.15rem 0.4rem;
+}
+
+/* the band marks the live slot — the single clearest "this is a dial" cue */
+.roster__wheel-band {
+  position: absolute; left: 0.5rem; right: 0.5rem;
+  top: 50%; transform: translateY(-50%);
+  height: 2.5rem; pointer-events: none;
+  border-radius: var(--r-sm);
+  border-block: 1px solid var(--accent-soft);
+  background: linear-gradient(90deg, rgba(79,224,216,0.10), rgba(79,224,216,0.02));
+}
+.roster__wheel-arrow {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  color: var(--ink-4); pointer-events: none;
+  animation: wheel-nudge 2.4s var(--ease) infinite;
+}
+.roster__wheel-arrow--up { top: 2.4rem; }
+.roster__wheel-arrow--down { bottom: 0.9rem; animation-delay: 1.2s; }
+@keyframes wheel-nudge {
+  0%, 100% { opacity: 0.3; transform: translate(-50%, 0); }
+  50%      { opacity: 0.85; }
+}
+.roster__wheel-arrow--up   { --d: -3px; }
+.roster__wheel-arrow--down { --d: 3px; }
+@media (prefers-reduced-motion: reduce) { .roster__wheel-arrow { animation: none; opacity: 0.5; } }
 /* the dial fills its container height, so it needs a real column */
 .roster__wheel-ctl { height: 230px; width: 100%; }
 
