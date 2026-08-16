@@ -44,7 +44,16 @@
 /* flex:none — without it the wrapper's flex-basis follows the image's intrinsic
    height and aspect-ratio is ignored, so 14 differently-shaped photos produce
    14 different card heights. */
-.bios__chroma .chroma-img-wrapper { flex: none; aspect-ratio: 4 / 5; height: auto; }
+.bios__chroma .chroma-img-wrapper {
+  flex: none !important;
+  aspect-ratio: 3 / 4 !important;
+  height: auto !important;
+  overflow: hidden;
+}
+.bios__chroma .chroma-img-wrapper img {
+  width: 100% !important; height: 100% !important;
+  object-fit: cover !important; object-position: center 22%;
+}
 .bios__chroma .chroma-img-wrapper img { width: 100%; height: 100%; object-fit: cover; }
 /* the shipped footer is `1fr auto`, which squeezes names onto two lines */
 .bios__chroma .chroma-info {

@@ -1,5 +1,6 @@
 import { team, specs, subsystems } from '@/data/site';
 import MagicBento from '@/components/reactbits/MagicBento';
+import { Reveal } from '@/components/Motion';
 import './Robot.css';
 
 export default function Robot() {
@@ -28,9 +29,9 @@ export default function Robot() {
           </p>
         </header>
 
-        <div className="robot__top">
+        <Reveal className="robot__top">
           <figure className="robot__plate">
-            <div className="plate__frame pane">
+            <div className="plate__frame">
               <img
                 src="/assets/explodedCad.png"
                 alt="Exploded CAD view of robot KG showing the shooter, transfer, intake, drivetrain and electronics assemblies."
@@ -51,9 +52,9 @@ export default function Robot() {
               </div>
             ))}
           </dl>
-        </div>
+        </Reveal>
 
-        <div className="robot__bento">
+        <Reveal className="robot__bento" delay={80}>
           <MagicBento
             cards={cards}
             textAutoHide={false}
@@ -67,7 +68,7 @@ export default function Robot() {
             particleCount={10}
             glowColor="63, 208, 201"
           />
-        </div>
+        </Reveal>
       </div>
     </section>
   );

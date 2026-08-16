@@ -2,7 +2,7 @@ import { team, awards } from '@/data/site';
 import { members } from '@/data/team';
 import SplitText from '@/components/reactbits/SplitText';
 import ShinyText from '@/components/reactbits/ShinyText';
-import StarBorder from '@/components/reactbits/StarBorder';
+import GlowButton from '@/components/GlowButton';
 import GlassSurface from '@/components/reactbits/GlassSurface';
 import CountUp from '@/components/reactbits/CountUp';
 import './Hero.css';
@@ -51,12 +51,8 @@ export default function Hero() {
           </p>
 
           <div className="hero__ctas">
-            <StarBorder as="a" href="#robot" color="#3fd0c9" speed="5s" thickness={2} className="sb">
-              See the robot
-            </StarBorder>
-            <StarBorder as="a" href="#contact" color="#8b7bff" speed="6s" thickness={2} className="sb">
-              Get in touch
-            </StarBorder>
+            <GlowButton href="#robot">See the robot</GlowButton>
+            <GlowButton href="#contact" tone="violet">Get in touch</GlowButton>
           </div>
         </div>
 

@@ -1,6 +1,6 @@
 import { team } from '@/data/site';
 import { members, coaches } from '@/data/team';
-import AnimatedContent from '@/components/reactbits/AnimatedContent';
+import { Reveal, Spotlight } from '@/components/Motion';
 import './Team.css';
 
 const PILLARS = [
@@ -34,17 +34,15 @@ export default function Team() {
             </dl>
           </div>
 
-          <ol className="pillars">
+          <Spotlight className="pillars-wrap"><ol className="pillars">
             {PILLARS.map((p, i) => (
-              <AnimatedContent key={p.k} distance={40} direction="vertical" duration={0.7} delay={i * 0.08} threshold={0.15}>
-                <li className="pillar">
+              <Reveal key={p.k} as="li" className="pillar" delay={i * 70}>
                   <span className="mono pillar__k">{p.k}</span>
                   <h3 className="d3">{p.h}</h3>
                   <p>{p.p}</p>
-                </li>
-              </AnimatedContent>
+              </Reveal>
             ))}
-          </ol>
+          </ol></Spotlight>
         </div>
       </div>
     </section>

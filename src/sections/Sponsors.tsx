@@ -1,4 +1,5 @@
 import { sponsors, type Sponsor } from '@/data/sponsors';
+import { Reveal, Spotlight } from '@/components/Motion';
 import './Sponsors.css';
 
 function Mark({ s }: { s: Sponsor }) {
@@ -38,9 +39,13 @@ export default function Sponsors() {
           </p>
         </header>
 
-        <div className="sp-grid">
-          {sponsors.map(s => <Mark key={s.name} s={s} />)}
-        </div>
+        <Spotlight>
+          <div className="sp-grid">
+            {sponsors.map((s, i) => (
+              <Reveal key={s.name} delay={i * 45} y={14}><Mark s={s} /></Reveal>
+            ))}
+          </div>
+        </Spotlight>
       </div>
 
       <div className="wrap">

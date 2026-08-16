@@ -43,6 +43,25 @@ export default function Nav({ onAdmin }: { onAdmin: () => void }) {
     return () => { document.body.style.overflow = ''; };
   }, [open]);
 
+  /* Admin is staff-only, so it is no longer advertised in the public nav.
+     Reachable via #admin or ⌘/Ctrl-Shift-A. */
+  useEffect(() => {
+    const viaHash = () => { if (window.location.hash === '#admin') onAdmin(); };
+    viaHash();
+    const onKey = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.key.toLowerCase() === 'a') {
+        e.preventDefault();
+        onAdmin();
+      }
+    };
+    window.addEventListener('hashchange', viaHash);
+    window.addEventListener('keydown', onKey);
+    return () => {
+      window.removeEventListener('hashchange', viaHash);
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [onAdmin]);
+
   return (
     <nav className={`nav${stuck ? ' is-stuck' : ''}`} aria-label="Primary">
       <div className="wrap nav__in">
@@ -65,7 +84,6 @@ export default function Nav({ onAdmin }: { onAdmin: () => void }) {
         </ul>
 
         <div className="nav__end">
-          <button className="mono nav__admin" onClick={onAdmin}>Admin</button>
           <button
             className="nav__burger"
             aria-expanded={open}

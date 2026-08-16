@@ -1,6 +1,7 @@
 import { useId, useMemo, useState } from 'react';
 import { outreach, RELATIVE_ONLY, unit, type OutreachPoint } from '@/data/outreach';
 import { members, outreachCount } from '@/data/team';
+import { Reveal } from '@/components/Motion';
 import './Outreach.css';
 
 /* Validated against the dark surface #0b0d11 with the dataviz palette
@@ -55,7 +56,7 @@ export default function Outreach() {
           </p>
         </header>
 
-        <figure className="chart ticked">
+        <Reveal><figure className="chart ticked">
           <figcaption className="chart__cap">
             <span className="mono">Outreach activity · by month</span>
             <button
@@ -168,7 +169,7 @@ export default function Outreach() {
               </div>
             </div>
           )}
-        </figure>
+        </figure></Reveal>
 
         {RELATIVE_ONLY && (
           <p className="chart__note mono-sm">

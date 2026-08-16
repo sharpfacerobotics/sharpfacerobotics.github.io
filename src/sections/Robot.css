@@ -12,21 +12,27 @@
 @media (max-width: 900px) { .robot__top { grid-template-columns: 1fr; } }
 
 
-/* the CAD render is portrait — drop the shared 16/9 plate ratio */
-.robot__plate .plate__frame img { aspect-ratio: auto; object-fit: contain; padding: 1.25rem; max-height: 30rem; }
+/* The CAD export is portrait AND has a baked-in black background, which reads
+   as a hard black box on a dark page. `screen` drops pure black to nothing and
+   keeps the white line art. */
+.robot__plate .plate__frame { background: transparent; border-color: transparent; }
+.robot__plate .plate__frame img {
+  aspect-ratio: auto; object-fit: contain; padding: 0;
+  max-height: 30rem; margin-inline: auto;
+  mix-blend-mode: screen;
+}
 .robot__specs { padding: 0.4rem 1.4rem; }
 
 /* MagicBento owns its own grid; give it our surface language. */
-.robot__bento .card {
+.robot__bento .magic-bento-card {
   background: rgba(14, 17, 24, 0.55) !important;
-  backdrop-filter: blur(14px) saturate(1.3);
-  -webkit-backdrop-filter: blur(14px) saturate(1.3);
+  backdrop-filter: blur(14px);
   border-color: var(--glass-edge) !important;
   border-radius: 2px !important;
 }
-.robot__bento .card__label { font-family: var(--mono); font-size: 0.625rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal); }
-.robot__bento .card__title {
+.robot__bento .magic-bento-card__label { font-family: var(--mono); font-size: 0.625rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal); }
+.robot__bento .magic-bento-card__title {
   font-family: var(--display); font-variation-settings: 'wdth' 104, 'wght' 650;
   font-size: 1.15rem; color: var(--paper);
 }
-.robot__bento .card__description { color: var(--dim); font-size: 0.9rem; line-height: 1.55; }
+.robot__bento .magic-bento-card__description { color: var(--dim); font-size: 0.9rem; line-height: 1.55; }

@@ -1,12 +1,11 @@
 .nav {
   position: sticky; top: 0; z-index: 60;
   border-bottom: 1px solid transparent;
-  transition: background .4s var(--ease), border-color .4s var(--ease);
+  transition: background .22s var(--ease), border-color .22s var(--ease);
 }
 .nav.is-stuck {
-  background: rgba(10, 12, 17, 0.55);
-  backdrop-filter: blur(20px) saturate(1.7);
-  -webkit-backdrop-filter: blur(20px) saturate(1.7);
+  background: rgba(10, 12, 17, 0.88);
+  backdrop-filter: blur(20px);
   border-bottom-color: var(--glass-edge);
 }
 .nav__in { display: flex; align-items: center; gap: 2rem; height: 68px; }
@@ -49,8 +48,7 @@
 .nav__sheet {
   position: fixed; inset: 68px 0 0; z-index: 59;
   background: rgba(8,9,12,0.82);
-  backdrop-filter: blur(24px) saturate(1.5);
-  -webkit-backdrop-filter: blur(24px) saturate(1.5);
+  backdrop-filter: blur(24px);
   border-top: 1px solid var(--rule);
   display: grid; align-content: start;
   overflow-y: auto;
