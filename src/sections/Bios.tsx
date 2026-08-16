@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { captain, coaches, members, type Member } from '@/data/team';
 import ChromaGrid from '@/components/reactbits/ChromaGrid';
+import GlareHover from '@/components/reactbits/GlareHover';
 import { Reveal } from '@/components/Motion';
 import OptionWheel from '@/components/reactbits/OptionWheel';
 import './Bios.css';
@@ -43,6 +44,25 @@ export default function Bios() {
   const [pick, setPick] = useState<string>('Everyone');
   const shown = GROUPS.filter(g => pick === 'Everyone' || g.key === pick);
   const showLeadership = pick === 'Everyone';
+
+  /* OptionWheel only handles keys while it holds focus, so the arrows did
+     nothing unless you had clicked the dial first. Drive the group from
+     Left/Right at the page level instead — no focus required. */
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      const t = e.target as HTMLElement | null;
+      if (t && /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)) return;
+      e.preventDefault();
+      setPick(cur => {
+        const i = WHEEL.indexOf(cur as (typeof WHEEL)[number]);
+        const n = (i + (e.key === 'ArrowRight' ? 1 : -1) + WHEEL.length) % WHEEL.length;
+        return WHEEL[n];
+      });
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
 
   return (
     <section className="band" id="roster">
@@ -98,7 +118,8 @@ export default function Bios() {
           <div className="roster__wheel-stage">
           <OptionWheel
             items={[...WHEEL]}
-            defaultSelected={0}
+            key={pick}
+            defaultSelected={Math.max(0, WHEEL.indexOf(pick as (typeof WHEEL)[number]))}
             onChange={(_i, item) => setPick(item)}
             textColor="#6d7583"
             activeColor="#4fe0d8"
@@ -126,7 +147,7 @@ export default function Bios() {
           </span>
           </div>
           <p className="mono-sm roster__wheel-keys">
-            <kbd>↑</kbd><kbd>↓</kbd> arrow keys
+            <kbd>←</kbd><kbd>→</kbd> arrow keys
           </p>
         </div>
 
@@ -142,6 +163,15 @@ export default function Bios() {
                   <p className="tier__blurb">{g.blurb}</p>
                   <span className="mono tier__count">{String(list.length).padStart(2, '0')}</span>
                 </div>
+                {/* React Bits GlareHover — a light sweep across the group,
+                    which gives the now-smaller cards life without needing space. */}
+                <GlareHover
+                  width="100%" height="auto" background="transparent"
+                  borderRadius="16px" borderColor="transparent"
+                  glareColor="#ffffff" glareOpacity={0.14} glareAngle={-32}
+                  glareSize={220} transitionDuration={900} playOnce={false}
+                  className="bios__glare"
+                >
                 <ChromaGrid
                   items={list.map(m => toItem(m, g.tint))}
                   className="bios__chroma"
@@ -149,6 +179,7 @@ export default function Bios() {
                   damping={0.42}
                   fadeOut={0.55}
                 />
+                </GlareHover>
               </div>
             </Reveal>
           );

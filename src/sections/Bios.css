@@ -2,7 +2,7 @@
    0fr -> 1fr is the one way to animate to auto height without a fixed max. */
 .lead-wrap {
   display: grid; grid-template-rows: 0fr;
-  opacity: 0; transform: translateY(-14px);
+  opacity: 0; transform: translateY(-42px);
   transition: grid-template-rows 520ms var(--ease), opacity 380ms var(--ease),
               transform 520ms var(--ease);
 }
@@ -42,8 +42,8 @@
    which neither fills nor fits our container. Override to a fluid grid and let
    the cards flex; the component's spotlight logic is unaffected. */
 .bios__chroma {
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr)) !important;
-  gap: 1rem !important;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 10.5rem), 1fr)) !important;
+  gap: 0.7rem !important;
   justify-content: stretch !important;
   padding: 0 !important;
 }
@@ -70,17 +70,17 @@
 /* the shipped footer is `1fr auto`, which squeezes names onto two lines */
 .bios__chroma .chroma-info {
   grid-template-columns: 1fr !important;
-  gap: 0.2rem !important;
-  padding: 0.85rem 1rem 1rem;
+  gap: 0.12rem !important;
+  padding: 0.6rem 0.7rem 0.75rem;
 }
-.bios__chroma .name { font-family: var(--display); font-variation-settings: 'wdth' 104, 'wght' 650; font-size: 1rem; }
-.bios__chroma .role, .bios__chroma .handle, .bios__chroma .location {
-  font-family: var(--mono); font-size: 0.625rem; letter-spacing: 0.12em; text-transform: uppercase;
+.bios__chroma .name { font-family: var(--display); font-variation-settings: 'wdth' 104, 'wght' 650; font-size: 0.8125rem; line-height: 1.2; }
+.bios__chroma .role, .bios__chroma .handle {
+  font-family: var(--mono); font-size: 0.5rem; letter-spacing: 0.1em; text-transform: uppercase;
 }
 /* clamp the quote so cards settle to a common height */
 .bios__chroma .location {
   text-transform: none; letter-spacing: 0; font-family: var(--sans);
-  font-size: 0.8125rem; line-height: 1.4; color: var(--ink-3);
+  font-size: 0.6875rem; line-height: 1.35; color: var(--ink-3);
   display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -168,3 +168,7 @@
   .roster__wheel { position: static; }
   .roster__wheel-ctl { height: 150px; }
 }
+
+/* GlareHover wraps the grid; it must not impose its own box or clip the cards */
+.bios__glare { display: block; width: 100%; height: auto !important; }
+.bios__glare > * { position: static !important; }

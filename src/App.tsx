@@ -1,5 +1,4 @@
 import { Suspense, lazy, useCallback, useEffect, useState } from 'react';
-import SwarmCursor from '@/components/reactbits/SwarmCursor';
 import Backdrop from '@/components/Backdrop';
 import GlassSurface from '@/components/reactbits/GlassSurface';
 import Nav, { TABS, type TabId } from '@/sections/Nav';
@@ -23,18 +22,6 @@ export default function App() {
   const [phase, setPhase] = useState<'in' | 'out'>('in');
   const [dir, setDir] = useState<1 | -1>(1);
   const [wipe, setWipe] = useState(false);
-  /* Heavy pointer effects are desktop-only: a swarm following a finger is
-     meaningless on touch and costs a frame budget phones do not have. */
-  const [rich, setRich] = useState(false);
-
-  useEffect(() => {
-    setRich(
-      window.matchMedia('(hover: hover)').matches &&
-      window.matchMedia('(min-width: 1000px)').matches &&
-      !window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    );
-  }, []);
-
   useEffect(() => {
     const fromHash = () => {
       const h = window.location.hash.replace('#', '');
@@ -67,19 +54,6 @@ export default function App() {
 
   return (
     <>
-      {/* React Bits SwarmCursor as a SIBLING overlay, never a wrapper: its
-          children slot is `position:absolute; inset:0; place-items:center;
-          pointer-events:none`, which would centre the whole document and make
-          every link dead. Rendered childless over a fixed layer instead. */}
-      {rich && (
-        <div className="swarm-layer" aria-hidden="true">
-          <SwarmCursor
-            color="#4fe0d8" accentColor="#8b7bff" count={9} size={5} merge={0.8}
-            glow={0.35} opacity={0.22} spread={26} separation={12} speed={0.3}
-            wander={0.22} trail={0.85} scatterOnClick
-          />
-        </div>
-      )}
       <Backdrop />
       <a className="skip" href="#main">Skip to content</a>
       <Nav tab={tab} onTab={go} onAdmin={() => setAdmin(true)} />
