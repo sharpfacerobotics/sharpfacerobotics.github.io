@@ -5,7 +5,12 @@ import { Suspense, lazy, useEffect, useState } from 'react';
 import SkewedCarousel from '@/components/SkewedCarousel';
 
 /* three.js — its own chunk, desktop only. */
-const FluidGlass = lazy(() => import('@/components/reactbits/FluidGlass'));
+const FluidGlass = lazy(async () => {
+  const mod = await import('@/components/reactbits/FluidGlass');
+  // hand the scene every photograph before it mounts
+  mod.setLensPhotos(outreachPhotos.map(p => p.src));
+  return mod;
+});
 import { outreachPhotos } from '@/data/outreachPhotos';
 import './Team.css';
 
@@ -71,7 +76,7 @@ export default function Team() {
             real glass lens across them. */}
         {rich && (
           <Reveal className="team__lens">
-            <p className="mono team__lens-label">Drag the lens across the team</p>
+            <p className="mono team__lens-label">Drag the lens · {outreachPhotos.length} photos</p>
             <div className="team__lens-stage">
               <Suspense fallback={null}>
                 <FluidGlass

@@ -258,6 +258,11 @@ function NavItems({ items }: { items: NavItem[] }) {
   );
 }
 
+/* Supplied at module scope so the r3f scene can read it without prop drilling
+   through ModeWrapper. */
+let lensPhotos: string[] = [];
+export function setLensPhotos(list: string[]) { lensPhotos = list; }
+
 function Images() {
   const group = useRef<ZoomGroup>(null!);
   const data = useScroll();
@@ -273,11 +278,18 @@ function Images() {
 
   return (
     <group ref={group}>
-      <Image position={[-2, 0, 0]} scale={[3, height / 1.1]} url="/assets/hi/team.jpg" />
-      <Image position={[2, 0, 3]} scale={3} url="/assets/hi/varun.jpg" />
-      <Image position={[-2.05, -height, 6]} scale={[1, 3]} url="/assets/hi/arnav.jpg" />
-      <Image position={[-0.6, -height, 9]} scale={[1, 2]} url="/assets/hi/guhan.jpg" />
-      <Image position={[0.75, -height, 10.5]} scale={1.5} url="/assets/hi/kevin.jpg" />
+      {/* LOCAL: every supplied team photograph, laid out deterministically
+          down the scroll depth instead of five hardcoded demo images. */}
+      {lensPhotos.map((url, i) => {
+        const col = i % 3;                     // -1 | 0 | 1 across
+        const row = Math.floor(i / 3);
+        const x = (col - 1) * 2.15 + (row % 2 ? 0.55 : -0.35);
+        const y = -height * row * 0.92;
+        const z = 0.6 * i;
+        const w = 2.4 + ((i * 7) % 5) * 0.22;  // varied, but stable per index
+        const h = w * (0.66 + ((i * 3) % 4) * 0.07);
+        return <Image key={url} position={[x, y, z]} scale={[w, h]} url={url} />;
+      })}
     </group>
   );
 }

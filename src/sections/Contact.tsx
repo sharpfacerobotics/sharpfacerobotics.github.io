@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { team, socials } from '@/data/site';
 import { Instagram, GitHub } from '@/components/Icons';
 import { Magnetic } from '@/components/Motion';
+import { outreachPhotos } from '@/data/outreachPhotos';
 import './Contact.css';
 
 const ICON = { Instagram, GitHub } as const;
@@ -21,6 +22,13 @@ export default function Contact() {
 
   return (
     <section className="band contact" id="contact">
+      {/* a quiet mosaic of the team behind the copy — the closing image of the
+          site should be the people, not an empty ground */}
+      <div className="contact__mosaic" aria-hidden="true">
+        {outreachPhotos.slice(0, 12).map(ph => (
+          <span key={ph.src} style={{ backgroundImage: `url(${ph.src})` }} />
+        ))}
+      </div>
       <div className="wrap contact__in">
         <div className="contact__lead">
           <div className="sec-index"><b>07</b><span>Contact</span></div>
