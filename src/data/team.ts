@@ -20,7 +20,7 @@ export const captain = {
   title: "Team Captain",
   grade: "Senior",
   favorite: "Crashing into the Fadhil wall with no regret",
-  photo: "/assets/varun.png",
+  photo: "/assets/hi/varun.jpg",
 };
 
 export const coaches = [
@@ -43,7 +43,7 @@ export const members: Member[] = [
     "grade": "Junior",
     "favorite": "Being able to help the team from the ground up, learn engineering skills, meeting people from different teams and their approach to the season",
     "outreach": true,
-    "photo": "/assets/guhan.png"
+    "photo": "/assets/hi/guhan.jpg"
   },
   {
     "name": "Rithik Kesani",
@@ -51,7 +51,7 @@ export const members: Member[] = [
     "grade": "Sophomore",
     "favorite": "Designing and building the robot",
     "outreach": false,
-    "photo": "/assets/rithik.png"
+    "photo": "/assets/hi/rithik.jpg"
   },
   {
     "name": "Vivaan Brar",
@@ -59,7 +59,7 @@ export const members: Member[] = [
     "grade": "Sophomore",
     "favorite": "The challenge and how it forced us to improvise solutions quickly. Last years challenge was a great learning experience for a rookie team and we are preparing to do our best this season",
     "outreach": true,
-    "photo": "/assets/vivaan.png"
+    "photo": "/assets/hi/vivaan.jpg"
   },
   {
     "name": "Kevin Sun",
@@ -67,7 +67,7 @@ export const members: Member[] = [
     "grade": "Junior",
     "favorite": "Watching the bot successfully have a 12 ball auto",
     "outreach": false,
-    "photo": "/assets/kevin.png"
+    "photo": "/assets/hi/kevin.jpg"
   },
   {
     "name": "Deep Shah",
@@ -75,7 +75,7 @@ export const members: Member[] = [
     "grade": "Junior",
     "favorite": "Learning throughout the season with my peers as well as creating nicknames for the entire team",
     "outreach": true,
-    "photo": "/assets/deep.png"
+    "photo": "/assets/hi/deep.jpg"
   },
   {
     "name": "Hussam Bajwa",
@@ -83,7 +83,7 @@ export const members: Member[] = [
     "grade": "Junior",
     "favorite": "Meeting other teams and cheering on our team during games",
     "outreach": true,
-    "photo": "/assets/hussam.png"
+    "photo": "/assets/hi/hussam.jpg"
   },
   {
     "name": "Fadhil Kudbudeen",
@@ -99,7 +99,7 @@ export const members: Member[] = [
     "grade": "Senior",
     "favorite": "Programming donut routes",
     "outreach": false,
-    "photo": "/assets/arnav.png"
+    "photo": "/assets/hi/arnav.jpg"
   },
   {
     "name": "Gautham Ramalingam",
@@ -123,7 +123,7 @@ export const members: Member[] = [
     "grade": "Sophomore",
     "favorite": "Joining a competetive yet friendly community",
     "outreach": false,
-    "photo": "/assets/alex.png"
+    "photo": "/assets/hi/alex.jpg"
   },
   {
     "name": "Ryan Hoang",
@@ -139,7 +139,7 @@ export const members: Member[] = [
     "grade": "Sophomore",
     "favorite": "Seeing the robot make a shot",
     "outreach": false,
-    "photo": "/assets/david.png"
+    "photo": "/assets/hi/david.jpg"
   },
   {
     "name": "Ishita Singh",

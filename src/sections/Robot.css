@@ -1,3 +1,5 @@
+.robot-tab > .rw { margin-top: 0; }
+.robot-tab .band:first-child { padding-top: var(--band); }
 .robot__sub {
   font-family: var(--mono); font-size: 0.875rem; letter-spacing: 0.1em;
   color: var(--ink-4); text-transform: uppercase;

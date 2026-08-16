@@ -1,23 +1,42 @@
-.contact { position: relative; overflow: hidden; background: var(--glass); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
-.contact__in { position: relative; max-width: 62rem; }
-.contact__h { margin: 1.25rem 0 1.25rem; }
-.contact__p { max-width: 50ch; }
+.contact__in {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 26rem);
+  gap: clamp(1.75rem, 4vw, 4rem); align-items: start;
+}
+@media (max-width: 900px) { .contact__in { grid-template-columns: 1fr; } }
 
-.contact__actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2.25rem; align-items: stretch; }
+.contact__lead { display: grid; gap: 1rem; }
+.contact__h { max-width: 16ch; }
+
+.contact__panel { padding: 1.5rem; display: grid; gap: 0.9rem; }
+
 .contact__mail {
-  display: grid; gap: 0.15rem; text-align: left;
-  padding: 0.9rem 1.25rem;
-  border: 1px solid var(--rule); background: var(--glass-strong);
-  position: relative;
-  transition: border-color .35s var(--ease), background .35s var(--ease);
+  position: relative; display: grid; gap: 0.2rem; text-align: left;
+  padding: 1rem 1.2rem; width: 100%;
+  border: 1px solid var(--rule); border-radius: var(--r-md);
+  background: var(--card);
+  transition: border-color 300ms var(--ease), background 300ms var(--ease);
 }
 .contact__mail:hover { border-color: var(--accent); background: var(--paper-2); }
 .contact__mail b {
-  font-family: var(--mono); font-size: 0.9375rem; letter-spacing: 0.02em;
-  color: var(--ink); font-weight: 500;
+  font-family: var(--mono); font-size: 0.9375rem; color: var(--ink); font-weight: 500;
+  overflow-wrap: anywhere;
 }
-.contact__copy { color: var(--accent); position: absolute; top: 0.7rem; right: 1rem; font-size: 0.5625rem; }
+.contact__copy { position: absolute; top: 0.85rem; right: 1rem; color: var(--accent); font-size: 0.5625rem; }
+.contact__copy.is-on { color: var(--accent); }
+.contact__mailto { justify-self: start; }
 
-.contact__social { list-style: none; display: flex; gap: 1.5rem; margin-top: 2.5rem; }
-.contact__social a { color: var(--ink-3); transition: color .3s var(--ease); }
-.contact__social a:hover { color: var(--accent); }
+.contact__social { display: grid; gap: 0.5rem; margin-top: 0.35rem; }
+.contact__social a {
+  display: flex; align-items: center; gap: 0.85rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--rule); border-radius: var(--r-md);
+  color: var(--ink-2);
+  transition: border-color 300ms var(--ease), color 300ms var(--ease), transform 300ms var(--ease);
+}
+.contact__social a:hover { border-color: var(--accent); color: var(--ink); transform: translateX(3px); }
+.contact__ico {
+  display: grid; place-items: center; flex: none;
+  width: 38px; height: 38px; border-radius: var(--r-pill);
+  background: var(--accent-soft); color: var(--accent);
+}
+.contact__arrow { margin-left: auto; color: var(--ink-4); }

@@ -1,20 +1,21 @@
 /* One flat grid — no tiers, no size hierarchy. The 1px gap over a shared
    background draws the grid; there are no card shadows anywhere on this site. */
 .sp-grid {
-  display: grid; gap: 1px;
-  background: var(--rule); border: 1px solid var(--rule);
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  display: grid; gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 21rem), 1fr));
 }
 
 .sp {
   position: relative;
   display: flex; align-items: center; gap: 1.15rem;
-  padding: 1.6rem 1.5rem;
+  padding: 1.5rem;
+  border-radius: var(--r-md);
+  border: 1px solid var(--rule);
   background: var(--card);
   backdrop-filter: blur(12px);
-  transition: background 0.4s var(--ease);
+  transition: background .4s var(--ease), border-color .4s var(--ease), transform .4s var(--ease), box-shadow .4s var(--ease);
 }
-.sp:hover { background: #fff; }
+.sp:hover { background: var(--paper-2); border-color: var(--rule-strong); transform: translateY(-3px); box-shadow: var(--lift-2); }
 
 /* The old site dropped logos with baked-in white backgrounds straight onto
    black, so they read as grey stickers. A white frame puts every mark on the
@@ -22,7 +23,7 @@
 .sp__frame {
   flex: none;
   position: relative;              /* definite containing block for the img */
-  width: 7.5rem; height: 5rem;
+  width: 6.5rem; height: 4.25rem;
   background: transparent;
   border: 0;
 }

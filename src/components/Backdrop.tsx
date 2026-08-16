@@ -1,13 +1,11 @@
 import { useEffect, useRef } from 'react';
+import Aurora from '@/components/reactbits/Aurora';
 import './Backdrop.css';
 
-/* Replaces the LiquidChrome field. That was a churning WebGL smear — busy,
-   expensive, and it fought every panel on top of it.
-
-   This is the Linear/Stripe approach instead: a near-black ground, two very
-   slow low-opacity drifts, a fine grain plate to kill gradient banding, and
-   one soft light that follows the pointer. Cheap, calm, and it reads as depth
-   rather than decoration. */
+/* React Bits' Aurora, run deliberately quiet: low amplitude, low blend, and
+   masked to the top of the page so it reads as atmosphere behind the content
+   rather than as the content. A pointer light and a grain plate sit over it —
+   the grain is what stops a big dark gradient from banding. */
 export default function Backdrop() {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -16,7 +14,6 @@ export default function Backdrop() {
     if (!el) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     if (!window.matchMedia('(hover: hover)').matches) return;
-
     let raf = 0;
     const move = (e: PointerEvent) => {
       cancelAnimationFrame(raf);
@@ -26,16 +23,14 @@ export default function Backdrop() {
       });
     };
     window.addEventListener('pointermove', move, { passive: true });
-    return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener('pointermove', move);
-    };
+    return () => { cancelAnimationFrame(raf); window.removeEventListener('pointermove', move); };
   }, []);
 
   return (
     <div className="bd" ref={ref} aria-hidden="true">
-      <div className="bd__drift bd__drift--a" />
-      <div className="bd__drift bd__drift--b" />
+      <div className="bd__aurora">
+        <Aurora colorStops={['#0e5d5a', '#4fe0d8', '#5b4bd6']} amplitude={0.9} blend={0.42} speed={0.4} />
+      </div>
       <div className="bd__pointer" />
       <div className="bd__grain" />
     </div>

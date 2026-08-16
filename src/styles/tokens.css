@@ -9,45 +9,42 @@
    ========================================================= */
 
 :root {
-  /* --- ground: warm paper, not clinical white -------------------- */
-  --paper:      #f3f1ec;
-  --paper-2:    #eceae4;
-  --card:       #ffffff;
+  /* --- ground: ink, not pure black -------------------------------- */
+  --paper:      #07080b;   /* page ground */
+  --paper-2:    #0d0f14;   /* recessed */
+  --card:       #12141b;   /* raised surface */
 
-  /* --- ink -------------------------------------------------------- */
-  --ink:        #14161b;
-  --ink-2:      #3b4048;
-  --ink-3:      #6c727d;
-  --ink-4:      #9aa0aa;
+  /* --- type ------------------------------------------------------- */
+  --ink:        #f2f4f7;   /* headings */
+  --ink-2:      #b9c0cb;   /* body */
+  --ink-3:      #8e96a4;   /* secondary */
+  --ink-4:      #6d7583;   /* captions  (4.6:1 on --card, above AA) */
 
-  /* --- one restrained accent ------------------------------------- */
-  --accent:     #0f7d78;
-  --accent-2:   #0a5f5b;
-  --accent-soft:rgba(15, 125, 120, 0.10);
-  --warn:       #b4611a;
+  /* --- one restrained accent + a cool partner ---------------------- */
+  --accent:     #4fe0d8;
+  --accent-2:   #8b7bff;
+  --accent-soft:rgba(79, 224, 216, 0.14);
+  --warn:       #f0a03c;
 
-  /* --- rules & shadow: hairlines and soft lift, never glow -------- */
-  --rule:        rgba(20, 22, 27, 0.10);
-  --rule-strong: rgba(20, 22, 27, 0.20);
-  --lift-1: 0 1px 2px rgba(20,22,27,0.05), 0 2px 8px rgba(20,22,27,0.04);
-  --lift-2: 0 2px 6px rgba(20,22,27,0.07), 0 12px 32px rgba(20,22,27,0.08);
-  --lift-3: 0 8px 24px rgba(20,22,27,0.10), 0 28px 60px rgba(20,22,27,0.12);
+  --rule:        rgba(255, 255, 255, 0.10);
+  --rule-strong: rgba(255, 255, 255, 0.22);
+  --lift-1: 0 1px 2px rgba(0,0,0,0.4);
+  --lift-2: 0 4px 16px rgba(0,0,0,0.45);
+  --lift-3: 0 12px 44px rgba(0,0,0,0.55);
 
-  /* --- liquid glass ---------------------------------------------- */
-  --glass:      rgba(255, 255, 255, 0.62);
-  --glass-2:    rgba(255, 255, 255, 0.78);
-  --glass-edge: rgba(255, 255, 255, 0.85);
-  --glass-line: rgba(20, 22, 27, 0.08);
-  --glass-blur: 24px;
+  /* --- liquid glass ------------------------------------------------ */
+  --glass:      rgba(255, 255, 255, 0.05);
+  --glass-2:    rgba(255, 255, 255, 0.08);
+  --glass-edge: rgba(255, 255, 255, 0.14);
+  --glass-line: rgba(255, 255, 255, 0.08);
+  --glass-blur: 22px;
 
-  /* --- radius: cosmos is generously rounded ----------------------- */
   --r-sm: 10px;
   --r-md: 16px;
   --r-lg: 24px;
   --r-xl: 32px;
   --r-pill: 999px;
 
-  /* --- typefaces --------------------------------------------------- */
   --display: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
   --sans:    'Archivo', 'Helvetica Neue', Arial, sans-serif;
   --mono:    'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -85,7 +82,7 @@ body {
   overflow-x: hidden;
 }
 
-::selection { background: var(--accent); color: #fff; }
+::selection { background: var(--accent); color: #04211f; }
 a { color: inherit; text-decoration: none; }
 img, svg, video { display: block; max-width: 100%; }
 button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
@@ -121,6 +118,10 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
    ========================================================= */
 .wrap { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gutter); }
 .band { padding-block: var(--band); position: relative; }
+/* The nav floats over the content, so the first band of any tab needs
+   headroom or its heading sits behind the pill. */
+.view > section:first-child > .band:first-child,
+.view > section:first-child.band { padding-top: calc(var(--band) + 2rem); }
 
 .sec-head { display: grid; gap: 1rem; margin-bottom: clamp(1.75rem, 3.2vw, 2.75rem); }
 .sec-index { display: flex; align-items: center; gap: 0.9rem; font-family: var(--mono);
@@ -137,15 +138,15 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   border: 1px solid var(--glass-edge);
   box-shadow:
     var(--lift-2),
-    inset 0 1px 0 rgba(255,255,255,0.9),
-    inset 0 -1px 0 rgba(20,22,27,0.04);
+    inset 0 1px 0 rgba(255,255,255,0.16),
+    inset 0 -1px 0 rgba(0,0,0,0.35);
   border-radius: var(--r-lg);
 }
 /* the specular sweep that makes glass read as glass */
 .glass--spec { position: relative; overflow: hidden; }
 .glass--spec::after {
   content: ''; position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(135deg, rgba(255,255,255,0.55) 0%, transparent 34%, transparent 66%, rgba(255,255,255,0.28) 100%);
+  background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, transparent 34%, transparent 66%, rgba(255,255,255,0.10) 100%);
   mix-blend-mode: overlay;
 }
 
@@ -173,8 +174,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   transition: transform 300ms var(--ease), box-shadow 300ms var(--ease), background 300ms var(--ease);
 }
 .btn:hover { transform: translateY(-2px); box-shadow: var(--lift-2); }
-.btn--solid { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-.btn--solid:hover { background: #000; }
+.btn--solid { background: var(--accent); color: #04211f; border-color: var(--accent); font-weight: 600; }
+.btn--solid:hover { background: #6bece5; }
 
 .spec {
   display: grid; grid-template-columns: minmax(9rem, 14rem) 1fr;

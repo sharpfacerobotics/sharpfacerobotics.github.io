@@ -19,14 +19,14 @@ const specOf = (k: string) => specs.find(s => s.k === k);
 const subOf = (i: number) => subsystems[i];
 
 const STOPS: Stop[] = [
-  { key: 'Whole robot', img: '/assets/robot-ink/whole.png', title: 'KG, exploded',
+  { key: 'Whole robot', img: '/assets/robot/whole.png', title: 'KG, exploded',
     body: 'Every assembly separated along its build axis. Scroll to walk through them one at a time.' },
-  { key: 'Intake', img: '/assets/robot-ink/intake.png', title: subOf(1).h, body: subOf(1).p, spec: 'Intake' },
-  { key: 'Transfer', img: '/assets/robot-ink/transfer.png', title: 'Transfer path',
+  { key: 'Intake', img: '/assets/robot/intake.png', title: subOf(1).h, body: subOf(1).p, spec: 'Intake' },
+  { key: 'Transfer', img: '/assets/robot/transfer.png', title: 'Transfer path',
     body: 'A short handoff from intake to launcher: flicker plus a passive ramp, kept compact so nothing stalls between stages.', spec: 'Transfer' },
-  { key: 'Launcher', img: '/assets/robot-ink/launcher.png', title: subOf(2).h, body: subOf(2).p, spec: 'Launcher' },
-  { key: 'Drivetrain', img: '/assets/robot-ink/drivetrain.png', title: subOf(0).h, body: subOf(0).p, spec: 'Drivebase' },
-  { key: 'Electronics', img: '/assets/robot-ink/electronics.png', title: subOf(5).h, body: subOf(5).p, spec: 'Controls' },
+  { key: 'Launcher', img: '/assets/robot/launcher.png', title: subOf(2).h, body: subOf(2).p, spec: 'Launcher' },
+  { key: 'Drivetrain', img: '/assets/robot/drivetrain.png', title: subOf(0).h, body: subOf(0).p, spec: 'Drivebase' },
+  { key: 'Electronics', img: '/assets/robot/electronics.png', title: subOf(5).h, body: subOf(5).p, spec: 'Controls' },
 ];
 
 export default function RobotScroll() {

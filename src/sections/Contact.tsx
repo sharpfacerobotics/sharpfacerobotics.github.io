@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import { team, socials } from '@/data/site';
+import { Instagram, GitHub } from '@/components/Icons';
+import { Magnetic } from '@/components/Motion';
 import './Contact.css';
+
+const ICON = { Instagram, GitHub } as const;
 
 export default function Contact() {
   const [copied, setCopied] = useState(false);
@@ -17,35 +21,40 @@ export default function Contact() {
 
   return (
     <section className="band contact" id="contact">
-      <div className="gridfield" aria-hidden="true" />
       <div className="wrap contact__in">
-        <div className="sec-index"><b>07</b><span>Contact</span></div>
-        <h2 className="d2 contact__h">
-          Sponsor us, mentor us,<br />or bring your team by.
-        </h2>
-        <p className="lede contact__p">
-          We answer everything — sponsorship, collaborations with other teams, or students
-          at {team.school} who want in next season.
-        </p>
-
-        <div className="contact__actions">
-          <button className="contact__mail ticked" onClick={copy}>
-            <span className="mono-sm">Email</span>
-            <b>{team.email}</b>
-            <span className="mono contact__copy">{copied ? 'Copied' : 'Copy'}</span>
-          </button>
-          <a className="btn" href={`mailto:${team.email}`}>Open mail app</a>
+        <div className="contact__lead">
+          <div className="sec-index"><b>07</b><span>Contact</span></div>
+          <h2 className="d2 contact__h">Sponsor us, mentor us, or bring your team by.</h2>
+          <p className="lede">
+            We answer everything — sponsorship, collaborations with other teams, and students
+            at {team.school} who want in next season.
+          </p>
         </div>
 
-        <ul className="contact__social">
-          {socials.map(s => (
-            <li key={s.label}>
-              <a className="mono" href={s.href} target="_blank" rel="noopener noreferrer">
-                {s.label} <span aria-hidden="true">↗</span>
-              </a>
-            </li>
-          ))}
-        </ul>
+        <div className="contact__panel glass glass--spec">
+          <button className="contact__mail" onClick={copy}>
+            <span className="mono-sm">Email</span>
+            <b>{team.email}</b>
+            <span className={`mono contact__copy${copied ? ' is-on' : ''}`}>{copied ? 'Copied' : 'Copy'}</span>
+          </button>
+
+          <Magnetic><a className="btn btn--solid contact__mailto" href={`mailto:${team.email}`}>Open mail app</a></Magnetic>
+
+          <ul className="contact__social">
+            {socials.map(s => {
+              const Icon = ICON[s.label as keyof typeof ICON];
+              return (
+                <li key={s.label}>
+                  <a href={s.href} target="_blank" rel="noopener noreferrer">
+                    <span className="contact__ico">{Icon ? <Icon size={20} /> : null}</span>
+                    <span className="mono">{s.label}</span>
+                    <span className="contact__arrow" aria-hidden="true">↗</span>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </div>
     </section>
   );

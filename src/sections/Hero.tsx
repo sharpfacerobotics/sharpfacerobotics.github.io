@@ -45,7 +45,7 @@ export default function Hero({ onTab }: { onTab: (t: 'robot' | 'contact') => voi
       {/* The plate is the hero — cosmos leads with the image, full width. */}
       <div className="wrap">
         <figure className="hero__plate card">
-          <img src="/assets/team.png" alt="The Sharp Face Robotics team with their robot" />
+          <img src="/assets/hi/team.jpg" alt="The Sharp Face Robotics team with their robot" />
           <figcaption className="hero__cap glass glass--spec">
             <span className="mono-sm">Team {team.number}</span>
             <span className="mono-sm">{team.season}</span>
