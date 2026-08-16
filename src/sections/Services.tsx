@@ -1,20 +1,8 @@
 import { services } from '@/data/site';
-import { Suspense, lazy, useEffect, useState } from 'react';
 import { Reveal, Spotlight } from '@/components/Motion';
-
-/* three.js — keep it out of the main bundle and off phones. */
-const FluidGlass = lazy(() => import('@/components/reactbits/FluidGlass'));
 import './Services.css';
 
 export default function Services() {
-  const [rich, setRich] = useState(false);
-  useEffect(() => {
-    setRich(
-      window.matchMedia('(min-width: 1000px)').matches &&
-      !window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    );
-  }, []);
-
   return (
     <section className="band fitview" id="services">
       <div className="wrap">
@@ -48,27 +36,6 @@ export default function Services() {
             </Reveal>
           ))}
         </div></Spotlight>
-
-        {/* React Bits FluidGlass — a real glass lens you drag across the team's
-            own photographs. The shipped component renders React Bits' demo
-            images; it is repointed at our media. */}
-        {rich && (
-          <Reveal className="svc__lens">
-            <p className="mono svc__lens-label">Drag the lens</p>
-            <div className="svc__lens-stage">
-              <Suspense fallback={null}>
-                <FluidGlass
-                  mode="lens"
-                  lensProps={{
-                    scale: 0.26, ior: 1.15, thickness: 5, chromaticAberration: 0.1,
-                    anisotropy: 0.01, transmission: 1, roughness: 0,
-                    color: '#ffffff', attenuationColor: '#4fe0d8', attenuationDistance: 0.6,
-                  }}
-                />
-              </Suspense>
-            </div>
-          </Reveal>
-        )}
       </div>
     </section>
   );
