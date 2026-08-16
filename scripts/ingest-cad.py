@@ -22,7 +22,10 @@ import os, sys, glob
 SRC = 'incoming'
 OUT_WHITE, OUT_INK = 'public/assets/robot', 'public/assets/robot-ink'
 PAD = 26
-NAMES = ['intake', 'transfer', 'launcher', 'drivetrain', 'electronics', 'whole']
+NAMES = ['intake', 'transfer', 'launcher', 'drivetrain', 'electronics', 'whole',
+         # generated in the same line-art style for the two behaviours that
+         # have no single physical assembly
+         'autonomous', 'driver']
 
 os.makedirs(OUT_WHITE, exist_ok=True)
 os.makedirs(OUT_INK, exist_ok=True)
@@ -37,6 +40,24 @@ for name in NAMES:
     w, h = im.size
     px = im.load()
 
+    # These are JPEGs, so the "black" field is not actually 0 — the electronics
+    # render sits at luminance ~10, which sailed over a fixed cutoff and left the
+    # whole background as a grey wash. Measure the real floor per image and key
+    # above it instead of assuming pure black.
+    # Sample the whole border ring and take the MEDIAN. Six corner probes are
+    # fragile: one landing on a stroke or a vignette skewed the estimate to 89
+    # and 170 on two renders, which keyed most of the drawing away.
+    ring = []
+    step = max(1, min(w, h) // 120)
+    for x in range(0, w, step):
+        ring.append(px[x, 0]); ring.append(px[x, h - 1])
+    for y in range(0, h, step):
+        ring.append(px[0, y]); ring.append(px[w - 1, y])
+    ring_lum = sorted((r * 299 + g * 587 + b * 114) // 1000 for r, g, b in ring)
+    bg_lum = ring_lum[len(ring_lum) // 2]
+    floor = bg_lum + 6
+    span = max(1, 255 - floor)
+
     size = None
     for out_dir, tint in ((OUT_WHITE, (255, 255, 255)), (OUT_INK, (18, 20, 26))):
         out = Image.new('RGBA', (w, h))
@@ -45,7 +66,13 @@ for name in NAMES:
             for x in range(w):
                 r, g, b = px[x, y]
                 lum = (r * 299 + g * 587 + b * 114) // 1000
-                op[x, y] = (0, 0, 0, 0) if lum < 8 else (*tint, min(255, int(lum * 1.12)))
+                if lum <= floor:
+                    op[x, y] = (0, 0, 0, 0)
+                else:
+                    # rescale so the key point maps to fully transparent and the
+                    # brightest ink stays fully opaque
+                    a = min(255, int(((lum - floor) / span) * 255 * 1.35))
+                    op[x, y] = (*tint, a)
         mask = out.split()[3].point(lambda v: 255 if v > 48 else 0)
         bbox = mask.getbbox()
         if bbox:
@@ -54,7 +81,7 @@ for name in NAMES:
                             min(w, x1 + PAD), min(h, y1 + PAD)))
         out.save(f'{out_dir}/{name}.png', optimize=True)
         size = out.size
-    print(f'  {name:12s} {os.path.basename(src):22s} -> {size[0]}x{size[1]}')
+    print(f'  {name:12s} {os.path.basename(src):22s} bg~{bg_lum:<3} -> {size[0]}x{size[1]}')
     found += 1
 
 if not found:

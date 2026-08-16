@@ -30,8 +30,8 @@ export const subsystems = [
   { n: '02', img: '/assets/robot/transfer.png',    h: 'Intake + transfer', p: 'A dual-compliant pitching intake and compact transfer chain, tuned through iteration to absorb approach-angle error and stop jamming under match pressure.' },
   { n: '03', img: '/assets/robot/launcher.png',    h: 'Shooter',           p: 'Launcher geometry and compression refined across several versions for shot repeatability, shorter spin-up between cycles, and accuracy from distance.' },
   { n: '04', img: '/assets/robot/electronics.png', h: 'Localization',      p: 'Limelight AprilTag sensing fused with GoBILDA odometry for field awareness — automatic alignment and distance-aware shooting in both auto and TeleOp.' },
-  { n: '05', img: '/assets/robot/whole.png',       h: 'Autonomous',        p: 'Pedro Pathing and explicit state machines drive repeatable routes with recovery logic, instead of fragile timing-only routines.' },
-  { n: '06', img: '/assets/robot/electronics.png', h: 'Driver experience', p: 'Driver-centric mapping and macros keep controls predictable, so operators watch the game while automation handles the timing-sensitive steps.' },
+  { n: '05', img: '/assets/robot/autonomous.png',  h: 'Autonomous',        p: 'Pedro Pathing and explicit state machines drive repeatable routes with recovery logic, instead of fragile timing-only routines.' },
+  { n: '06', img: '/assets/robot/driver.png',      h: 'Driver experience', p: 'Driver-centric mapping and macros keep controls predictable, so operators watch the game while automation handles the timing-sensitive steps.' },
 ];
 
 export const services = [
