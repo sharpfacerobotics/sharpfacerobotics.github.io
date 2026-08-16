@@ -1,17 +1,16 @@
-import ScrollVelocity from '@/components/reactbits/ScrollVelocity';
+import CurvedLoop from '@/components/reactbits/CurvedLoop';
 import './Marquee.css';
 
-/* Scroll-reactive band. Speed and direction respond to scroll velocity,
-   so it registers as a physical thing rather than a looping GIF. */
+/* React Bits CurvedLoop — the wordmark runs along a curve and can be dragged. */
 export default function Marquee() {
   return (
     <div className="mq" aria-hidden="true">
-      <ScrollVelocity
-        texts={['SHARP FACE ROBOTICS — FTC 30450 — ', 'DESIGN · BUILD · PROGRAM · COMPETE — ']}
-        velocity={58}
-        damping={48}
-        stiffness={340}
-        numCopies={6}
+      <CurvedLoop
+        marqueeText="SHARP FACE ROBOTICS ✦ FTC 30450 ✦ DESIGN ✦ BUILD ✦ PROGRAM ✦ COMPETE ✦"
+        speed={1.4}
+        curveAmount={220}
+        direction="left"
+        interactive
         className="mq__text"
       />
     </div>

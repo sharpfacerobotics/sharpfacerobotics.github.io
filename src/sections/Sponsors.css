@@ -5,17 +5,18 @@
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 21rem), 1fr));
 }
 
+/* BorderGlow supplies the surface and the edge; the inner card is transparent. */
+.sp-glow { height: 100%; }
 .sp {
   position: relative;
   display: flex; align-items: center; gap: 1.15rem;
   padding: 1.5rem;
   border-radius: var(--r-md);
-  border: 1px solid var(--rule);
-  background: var(--card);
+  background: transparent;
   backdrop-filter: blur(12px);
   transition: background .4s var(--ease), border-color .4s var(--ease), transform .4s var(--ease), box-shadow .4s var(--ease);
 }
-.sp:hover { background: var(--paper-2); border-color: var(--rule-strong); transform: translateY(-3px); box-shadow: var(--lift-2); }
+.sp:hover { transform: translateY(-2px); }
 
 /* The old site dropped logos with baked-in white backgrounds straight onto
    black, so they read as grey stickers. A white frame puts every mark on the

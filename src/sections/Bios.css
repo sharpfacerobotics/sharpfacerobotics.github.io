@@ -75,3 +75,31 @@
   font-size: 1.0625rem; color: var(--ink); line-height: 1.2;
 }
 .bio__quote { font-size: 0.875rem; line-height: 1.5; color: var(--ink-3); text-wrap: pretty; margin-top: 0.4rem; }
+
+/* OptionWheel needs a fixed height or it collapses; give it a glass rail. */
+/* A real grid column, not a float: floating made the dial overlay the first
+   card instead of reserving space for itself. */
+.roster__body {
+  display: grid; grid-template-columns: 12.5rem minmax(0, 1fr);
+  gap: clamp(1.25rem, 2.5vw, 2.25rem); align-items: start;
+}
+.roster__groups { min-width: 0; }
+
+.roster__wheel {
+  position: sticky; top: 7rem;
+  display: grid; gap: 0.5rem;
+  padding: 1rem 0.75rem 1.25rem;
+  border: 1px solid var(--glass-edge);
+  border-radius: var(--r-lg);
+  background: var(--glass);
+  backdrop-filter: blur(16px);
+}
+.roster__wheel-label { color: var(--ink-4); padding-left: 0.6rem; }
+/* the dial fills its container height, so it needs a real column */
+.roster__wheel-ctl { height: 230px; width: 100%; }
+
+@media (max-width: 900px) {
+  .roster__body { grid-template-columns: 1fr; }
+  .roster__wheel { position: static; }
+  .roster__wheel-ctl { height: 170px; }
+}

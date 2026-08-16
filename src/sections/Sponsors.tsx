@@ -1,5 +1,6 @@
 import { sponsors, type Sponsor } from '@/data/sponsors';
 import { Reveal, Spotlight } from '@/components/Motion';
+import BorderGlow from '@/components/reactbits/BorderGlow';
 import './Sponsors.css';
 
 function Mark({ s }: { s: Sponsor }) {
@@ -43,7 +44,23 @@ export default function Sponsors() {
         <Spotlight>
           <div className="sp-grid">
             {sponsors.map((s, i) => (
-              <Reveal key={s.name} delay={i * 45} y={14}><Mark s={s} /></Reveal>
+              <Reveal key={s.name} delay={i * 45} y={14}>
+                {/* React Bits BorderGlow — the edge lights toward the cursor. */}
+                <BorderGlow
+                  className="sp-glow"
+                  glowColor="#4fe0d8"
+                  backgroundColor="rgba(18,20,27,0.72)"
+                  borderRadius={16}
+                  glowRadius={190}
+                  glowIntensity={0.9}
+                  coneSpread={62}
+                  edgeSensitivity={0.42}
+                  colors={['#4fe0d8', '#8b7bff']}
+                  animated
+                >
+                  <Mark s={s} />
+                </BorderGlow>
+              </Reveal>
             ))}
           </div>
         </Spotlight>

@@ -25,3 +25,15 @@
 }
 .svc__body { color: var(--ink-3); text-wrap: pretty; max-width: 56ch; }
 .svc .btn { justify-self: start; }
+
+.svc__lens { margin-top: clamp(2rem, 4vw, 3.5rem); display: grid; gap: 0.75rem; }
+.svc__lens-label { color: var(--ink-4); }
+.svc__lens-stage {
+  position: relative;
+  height: clamp(24rem, 46vw, 34rem);
+  border: 1px solid var(--glass-edge);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: var(--paper-2);
+}
+.svc__lens-stage canvas { width: 100% !important; height: 100% !important; display: block; }

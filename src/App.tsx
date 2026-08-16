@@ -1,9 +1,10 @@
 import { Suspense, lazy, useCallback, useEffect, useState } from 'react';
-import ClickSpark from '@/components/reactbits/ClickSpark';
+import SwarmCursor from '@/components/reactbits/SwarmCursor';
 import Backdrop from '@/components/Backdrop';
 import Nav, { TABS, type TabId } from '@/sections/Nav';
 import Hero from '@/sections/Hero';
 import PartnerStrip from '@/sections/PartnerStrip';
+import Marquee from '@/sections/Marquee';
 import Team from '@/sections/Team';
 import Robot from '@/sections/Robot';
 import Bios from '@/sections/Bios';
@@ -14,17 +15,24 @@ import Contact from '@/sections/Contact';
 import Footer from '@/sections/Footer';
 
 const Admin = lazy(() => import('@/sections/Admin'));
-
 const isTab = (v: string): v is TabId => TABS.some(t => t.id === v);
 
 export default function App() {
   const [admin, setAdmin] = useState(false);
   const [tab, setTab] = useState<TabId>('home');
-  /* `phase` drives the cross-fade: out -> swap -> in. Without it the new tab
-     would pop in while the old one is still painted. */
   const [phase, setPhase] = useState<'in' | 'out'>('in');
+  /* Heavy pointer effects are desktop-only: a swarm following a finger is
+     meaningless on touch and costs a frame budget phones do not have. */
+  const [rich, setRich] = useState(false);
 
-  // deep links and the browser back button both drive the tab
+  useEffect(() => {
+    setRich(
+      window.matchMedia('(hover: hover)').matches &&
+      window.matchMedia('(min-width: 1000px)').matches &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    );
+  }, []);
+
   useEffect(() => {
     const fromHash = () => {
       const h = window.location.hash.replace('#', '');
@@ -51,13 +59,26 @@ export default function App() {
   }, [tab]);
 
   return (
-    <ClickSpark sparkColor="#3fd0c9" sparkSize={9} sparkRadius={18} sparkCount={8} duration={420}>
+    <>
+      {/* React Bits SwarmCursor as a SIBLING overlay, never a wrapper: its
+          children slot is `position:absolute; inset:0; place-items:center;
+          pointer-events:none`, which would centre the whole document and make
+          every link dead. Rendered childless over a fixed layer instead. */}
+      {rich && (
+        <div className="swarm-layer" aria-hidden="true">
+          <SwarmCursor
+            color="#4fe0d8" accentColor="#8b7bff" count={16} size={9} merge={0.55}
+            glow={0.5} opacity={0.5} spread={70} separation={26} speed={0.16}
+            wander={0.5} trail={0.7} scatterOnClick
+          />
+        </div>
+      )}
       <Backdrop />
       <a className="skip" href="#main">Skip to content</a>
       <Nav tab={tab} onTab={go} onAdmin={() => setAdmin(true)} />
 
       <main id="main" className={`view view--${phase}`} key={tab}>
-        {tab === 'home' && <><Hero onTab={go} /><PartnerStrip /></>}
+        {tab === 'home' && <><Hero onTab={go} /><PartnerStrip /><Marquee /></>}
         {tab === 'team' && <Team />}
         {tab === 'robot' && <Robot />}
         {tab === 'roster' && <Bios />}
@@ -73,6 +94,6 @@ export default function App() {
           <Admin open onClose={() => { setAdmin(false); if (window.location.hash === '#admin') history.replaceState(null, '', './'); }} />
         </Suspense>
       )}
-    </ClickSpark>
+    </>
   );
 }

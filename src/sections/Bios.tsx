@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { captain, coaches, members, type Member } from '@/data/team';
 import ChromaGrid from '@/components/reactbits/ChromaGrid';
 import { Reveal } from '@/components/Motion';
+import OptionWheel from '@/components/reactbits/OptionWheel';
 import './Bios.css';
 
 /* Grouped roster. A person appears under every group they work in, so the
@@ -35,7 +37,12 @@ const toItem = (m: Member, tint: string) => ({
   gradient: `linear-gradient(160deg, ${tint}66, rgba(10,12,17,0.92))`,
 });
 
+const WHEEL = ['Everyone', 'Mechanical', 'Software', 'Outreach'] as const;
+
 export default function Bios() {
+  const [pick, setPick] = useState<string>('Everyone');
+  const shown = GROUPS.filter(g => pick === 'Everyone' || g.key === pick);
+
   return (
     <section className="band" id="roster">
       <div className="wrap">
@@ -78,7 +85,34 @@ export default function Bios() {
         </Reveal>
 
         {/* ── Working groups ─────────────────────────────────────── */}
-        {GROUPS.map((g, gi) => {
+        <div className="roster__body">
+        {/* React Bits OptionWheel — a physical dial for the working groups. */}
+        <div className="roster__wheel">
+          <p className="mono roster__wheel-label">Show</p>
+          <OptionWheel
+            items={[...WHEEL]}
+            defaultSelected={0}
+            onChange={(_i, item) => setPick(item)}
+            textColor="#6d7583"
+            activeColor="#4fe0d8"
+            /* fontSize is in REM and spacing is a MULTIPLIER
+               (rowH = fontSize * spacing * 16px), not pixels. */
+            fontSize={1.05}
+            spacing={1.9}
+            curve={18}
+            tilt={12}
+            blur={1.2}
+            fade={0.7}
+            minOpacity={0.2}
+            inset={18}
+            loop
+            draggable
+            className="roster__wheel-ctl"
+          />
+        </div>
+
+        <div className="roster__groups">
+        {shown.map((g, gi) => {
           const list = members.filter(g.pick);
           if (!list.length) return null;
           return (
@@ -100,6 +134,8 @@ export default function Bios() {
             </Reveal>
           );
         })}
+        </div>
+        </div>
       </div>
     </section>
   );

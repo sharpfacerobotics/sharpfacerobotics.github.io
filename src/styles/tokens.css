@@ -215,3 +215,11 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .view--in .band > .wrap > * { animation: none; }
   .card:hover { transform: none; }
 }
+
+/* SwarmCursor overlay: above the page, never intercepting input. */
+.swarm-layer {
+  position: fixed; inset: 0; z-index: 90;
+  pointer-events: none;
+}
+.swarm-layer > * { width: 100%; height: 100%; }
+.swarm-layer canvas { pointer-events: none !important; }

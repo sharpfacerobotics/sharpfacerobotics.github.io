@@ -1,18 +1,16 @@
 .mq {
-  padding-block: clamp(1.5rem, 3vw, 2.5rem);
-  border-block: 1px solid var(--rule);
+  position: relative;
+  padding-block: clamp(1rem, 2vw, 2rem);
+  border-block: 1px solid var(--glass-edge);
   background: var(--glass);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
   overflow: hidden;
 }
+/* CurvedLoop renders SVG text; style the fill and weight here. */
 .mq__text {
   font-family: var(--display);
-  font-variation-settings: 'wdth' 112, 'wght' 800;
-  font-size: clamp(2rem, 5.5vw, 4.5rem);
-  line-height: 1;
-  letter-spacing: -0.02em;
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(20, 22, 27, 0.18);
+  font-weight: 700;
+  fill: var(--ink);
+  opacity: 0.16;
 }
-/* the second line runs the other way and sits back */
-.mq > div > div:nth-child(2) .mq__text { opacity: 0.45; }
+.mq svg { width: 100%; height: auto; display: block; }
