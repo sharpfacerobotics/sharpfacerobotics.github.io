@@ -4,9 +4,10 @@
   transition: background .4s var(--ease), border-color .4s var(--ease);
 }
 .nav.is-stuck {
-  background: rgba(8, 9, 12, 0.86);
-  backdrop-filter: blur(10px) saturate(1.2);
-  border-bottom-color: var(--rule);
+  background: rgba(10, 12, 17, 0.55);
+  backdrop-filter: blur(20px) saturate(1.7);
+  -webkit-backdrop-filter: blur(20px) saturate(1.7);
+  border-bottom-color: var(--glass-edge);
 }
 .nav__in { display: flex; align-items: center; gap: 2rem; height: 68px; }
 
@@ -25,7 +26,8 @@
 .nav__link.is-active { color: var(--teal); }
 .nav__link.is-active::after {
   content: ''; position: absolute; left: 0; right: 0; bottom: -7px;
-  height: 1px; background: var(--teal);
+  height: 2px; background: var(--iris);
+  box-shadow: 0 0 12px rgba(63,208,201,0.6);
 }
 
 .nav__end { display: flex; align-items: center; gap: 0.75rem; margin-left: 1rem; }
@@ -46,7 +48,9 @@
 
 .nav__sheet {
   position: fixed; inset: 68px 0 0; z-index: 59;
-  background: var(--ink-900);
+  background: rgba(8,9,12,0.82);
+  backdrop-filter: blur(24px) saturate(1.5);
+  -webkit-backdrop-filter: blur(24px) saturate(1.5);
   border-top: 1px solid var(--rule);
   display: grid; align-content: start;
   overflow-y: auto;

@@ -22,11 +22,20 @@
   --dim:    #7b8598;   /* secondary */
   --faint:  #545d6e;   /* tertiary / captions */
 
-  /* --- accents: teal is the brand, amber is the instrument ----- */
+  /* --- accents: brand teal, an iridescent violet partner, amber data --- */
   --teal:      #3fd0c9;
   --teal-deep: #1c8e89;
+  --violet:    #8b7bff;
+  --magenta:   #e05fc4;
   --amber:     #f0a03c;
   --amber-deep:#b0691c;
+
+  /* --- glass ---------------------------------------------------- */
+  --glass:        rgba(255, 255, 255, 0.045);
+  --glass-strong: rgba(255, 255, 255, 0.075);
+  --glass-edge:   rgba(255, 255, 255, 0.14);
+  --glass-blur:   18px;
+  --iris: linear-gradient(115deg, var(--teal), var(--violet) 55%, var(--magenta));
 
   /* --- typefaces ----------------------------------------------- */
   --display: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
@@ -64,6 +73,7 @@ html {
 
 body {
   background: var(--ink-900);
+  background-attachment: fixed;
   color: var(--body);
   font-family: var(--sans);
   font-variation-settings: 'wdth' 100, 'wght' 400;
@@ -132,7 +142,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .band { padding-block: var(--band); position: relative; }
 
 /* the hairline that separates every band — structural, not decorative */
-.band + .band { border-top: 1px solid var(--rule); }
+.band + .band { border-top: 1px solid var(--glass-edge); }
 
 /* section header: 01 / LABEL ——— TITLE */
 .sec-head { display: grid; gap: 1.25rem; margin-bottom: clamp(1.75rem, 3.2vw, 2.75rem); }
@@ -215,3 +225,43 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   transition: transform .25s var(--ease);
 }
 .skip:focus { transform: translate(-50%, 0); }
+
+
+/* =========================================================
+   Liquid-glass layer
+   The animated field sits fixed behind everything; panels are
+   translucent so it actually refracts through them.
+   ========================================================= */
+.bg-field {
+  position: fixed; inset: 0; z-index: -2;
+  pointer-events: none;
+}
+.bg-field > * { width: 100%; height: 100%; }
+.bg-veil {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(120% 80% at 50% -10%, rgba(63,208,201,0.10), transparent 60%),
+    radial-gradient(90% 70% at 90% 20%, rgba(139,123,255,0.10), transparent 62%),
+    linear-gradient(180deg, rgba(8,9,12,0.55) 0%, rgba(8,9,12,0.86) 45%, rgba(8,9,12,0.95) 100%);
+}
+
+/* a translucent panel that lets the field through */
+.pane {
+  background: var(--glass);
+  border: 1px solid var(--glass-edge);
+  backdrop-filter: blur(var(--glass-blur)) saturate(1.35);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.35);
+}
+.pane--solid { background: rgba(12, 14, 19, 0.72); }
+
+/* iridescent text + rules */
+.iris-text {
+  background: var(--iris);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+}
+.iris-rule { height: 1px; background: var(--iris); opacity: 0.55; }
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-field { display: none; }
+}

@@ -1,0 +1,23 @@
+.mq {
+  padding-block: clamp(1.5rem, 3vw, 2.5rem);
+  border-block: 1px solid var(--glass-edge);
+  background: var(--glass);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  overflow: hidden;
+}
+.mq__text {
+  font-family: var(--display);
+  font-variation-settings: 'wdth' 112, 'wght' 800;
+  font-size: clamp(2rem, 5.5vw, 4.5rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  background: var(--iris);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+}
+/* the second line runs the other way and sits back */
+.mq > div > div:nth-child(2) .mq__text {
+  -webkit-text-fill-color: transparent;
+  opacity: 0.4;
+}

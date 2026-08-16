@@ -1,38 +1,47 @@
 import { team, awards } from '@/data/site';
-import DotGrid from '@/components/reactbits/DotGrid';
-import CountUp from '@/components/reactbits/CountUp';
 import { members } from '@/data/team';
+import SplitText from '@/components/reactbits/SplitText';
+import ShinyText from '@/components/reactbits/ShinyText';
+import StarBorder from '@/components/reactbits/StarBorder';
+import GlassSurface from '@/components/reactbits/GlassSurface';
+import CountUp from '@/components/reactbits/CountUp';
 import './Hero.css';
 
 export default function Hero() {
   return (
     <header className="hero" id="top">
-      {/* ReactBits DotGrid — a grid, not a gradient blob. It reacts to the
-          pointer, which makes the ground feel like a surface rather than art. */}
-      <div className="hero__field" aria-hidden="true">
-        <DotGrid
-          dotSize={2}
-          gap={30}
-          baseColor="#1b2029"
-          activeColor="#3fd0c9"
-          proximity={130}
-          shockRadius={220}
-          shockStrength={4}
-          resistance={760}
-          returnDuration={1.5}
-        />
-      </div>
-
       <div className="wrap hero__in">
         <div className="hero__copy">
           <p className="mono hero__eyebrow">
             <span className="hero__dot" aria-hidden="true" />
-            FTC {team.number} · {team.school} · {team.city}
+            <ShinyText text={`FTC ${team.number} · ${team.school} · ${team.city}`} speed={4} />
           </p>
 
           <h1 className="d1 hero__h1">
-            Sharp Face<br />
-            <span className="hero__accent">Robotics</span>
+            <SplitText
+              text="Sharp Face"
+              tag="span"
+              className="hero__line"
+              splitType="chars"
+              delay={28}
+              duration={0.85}
+              ease="power4.out"
+              from={{ opacity: 0, y: 64, rotateX: -70 }}
+              to={{ opacity: 1, y: 0, rotateX: 0 }}
+              threshold={0.05}
+            />
+            <SplitText
+              text="Robotics"
+              tag="span"
+              className="hero__line hero__line--iris"
+              splitType="chars"
+              delay={34}
+              duration={0.9}
+              ease="power4.out"
+              from={{ opacity: 0, y: 64, rotateX: -70 }}
+              to={{ opacity: 1, y: 0, rotateX: 0 }}
+              threshold={0.05}
+            />
           </h1>
 
           <p className="lede hero__lede">
@@ -42,32 +51,47 @@ export default function Hero() {
           </p>
 
           <div className="hero__ctas">
-            <a className="btn btn--solid" href="#robot">See the robot</a>
-            <a className="btn" href="#contact">Get in touch</a>
+            <StarBorder as="a" href="#robot" color="#3fd0c9" speed="5s" thickness={2} className="sb">
+              See the robot
+            </StarBorder>
+            <StarBorder as="a" href="#contact" color="#8b7bff" speed="6s" thickness={2} className="sb">
+              Get in touch
+            </StarBorder>
           </div>
         </div>
 
-        {/* The team's own photograph, framed like a plate in a build log —
-            registration marks, a caption, a plate number. Nothing generated. */}
         <figure className="plate">
-          <div className="plate__frame ticked">
+          <div className="plate__frame pane">
             <img src="/assets/team.png" alt="The Sharp Face Robotics team with their robot" />
-            <span className="plate__reg plate__reg--tl" aria-hidden="true" />
-            <span className="plate__reg plate__reg--br" aria-hidden="true" />
+            <span className="plate__sheen" aria-hidden="true" />
           </div>
           <figcaption className="plate__cap mono-sm">
-            <span>Plate 01 — Team {team.number}</span>
+            <span>Team {team.number}</span>
             <span>{team.season}</span>
           </figcaption>
         </figure>
       </div>
 
-      {/* A readout strip instead of a row of glowing "feature cards" */}
-      <div className="readout">
+      <GlassSurface
+        width="100%"
+        height={92}
+        borderRadius={0}
+        blur={14}
+        displace={1.2}
+        distortionScale={-160}
+        redOffset={2}
+        greenOffset={8}
+        blueOffset={14}
+        brightness={58}
+        opacity={0.9}
+        backgroundOpacity={0.06}
+        saturation={1.4}
+        className="readout"
+      >
         <div className="wrap readout__in">
           <div className="readout__cell">
             <span className="mono-sm">Roster</span>
-            <b><CountUp to={members.length} duration={1.1} className="tab" />&nbsp;on the build team</b>
+            <b><CountUp to={members.length} duration={1.2} className="tab" /> on the build team</b>
           </div>
           <div className="readout__cell">
             <span className="mono-sm">Robot</span>
@@ -80,7 +104,7 @@ export default function Hero() {
             </div>
           ))}
         </div>
-      </div>
+      </GlassSurface>
     </header>
   );
 }

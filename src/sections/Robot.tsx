@@ -1,16 +1,25 @@
 import { team, specs, subsystems } from '@/data/site';
-import SpotlightCard from '@/components/reactbits/SpotlightCard';
-import AnimatedContent from '@/components/reactbits/AnimatedContent';
+import MagicBento from '@/components/reactbits/MagicBento';
 import './Robot.css';
 
 export default function Robot() {
+  /* MagicBento renders the spotlight/particle/tilt grid; feed it the real
+     subsystems instead of its shipped demo data. */
+  const cards = subsystems.map(s => ({
+    label: s.n,
+    title: s.h,
+    description: s.p,
+    color: 'rgba(14, 17, 24, 0.62)',
+  }));
+
   return (
     <section className="band" id="robot">
       <div className="wrap">
         <header className="sec-head">
           <div className="sec-index"><b>02</b><span>The robot</span></div>
           <h2 className="d2">
-            {team.robot} <span className="robot__sub">— {team.season}</span>
+            <span className="iris-text">{team.robot}</span>
+            <span className="robot__sub"> — {team.season}</span>
           </h2>
           <p className="lede">
             Built around reliability, cycle speed and being serviceable between matches.
@@ -21,7 +30,7 @@ export default function Robot() {
 
         <div className="robot__top">
           <figure className="robot__plate">
-            <div className="plate__frame ticked">
+            <div className="plate__frame pane">
               <img
                 src="/assets/explodedCad.png"
                 alt="Exploded CAD view of robot KG showing the shooter, transfer, intake, drivetrain and electronics assemblies."
@@ -29,12 +38,12 @@ export default function Robot() {
               />
             </div>
             <figcaption className="plate__cap mono-sm">
-              <span>Plate 02 — Exploded assembly</span>
+              <span>Exploded assembly</span>
               <span>{team.robot}</span>
             </figcaption>
           </figure>
 
-          <dl className="spec-list robot__specs">
+          <dl className="spec-list robot__specs pane">
             {specs.map(s => (
               <div className="spec" key={s.k}>
                 <dt>{s.k}</dt>
@@ -44,19 +53,21 @@ export default function Robot() {
           </dl>
         </div>
 
-        <ol className="subsys">
-          {subsystems.map((s, i) => (
-            <AnimatedContent key={s.n} distance={36} duration={0.65} delay={(i % 3) * 0.07} threshold={0.12}>
-              <li>
-                <SpotlightCard className="subsys__card" spotlightColor="rgba(63, 208, 201, 0.12)">
-                  <span className="mono subsys__n">{s.n}</span>
-                  <h3 className="d3">{s.h}</h3>
-                  <p>{s.p}</p>
-                </SpotlightCard>
-              </li>
-            </AnimatedContent>
-          ))}
-        </ol>
+        <div className="robot__bento">
+          <MagicBento
+            cards={cards}
+            textAutoHide={false}
+            enableStars
+            enableSpotlight
+            enableBorderGlow
+            enableTilt
+            enableMagnetism
+            clickEffect
+            spotlightRadius={340}
+            particleCount={10}
+            glowColor="63, 208, 201"
+          />
+        </div>
       </div>
     </section>
   );

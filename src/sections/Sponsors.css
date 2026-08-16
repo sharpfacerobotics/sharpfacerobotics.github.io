@@ -2,7 +2,7 @@
    background draws the grid; there are no card shadows anywhere on this site. */
 .sp-grid {
   display: grid; gap: 1px;
-  background: var(--rule); border: 1px solid var(--rule);
+  background: var(--glass-edge); border: 1px solid var(--glass-edge);
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
 }
 
@@ -10,10 +10,12 @@
   position: relative;
   display: flex; align-items: center; gap: 1.15rem;
   padding: 1.5rem 1.4rem;
-  background: var(--ink-850);
+  background: rgba(12,14,19,0.55);
+  backdrop-filter: blur(12px) saturate(1.3);
+  -webkit-backdrop-filter: blur(12px) saturate(1.3);
   transition: background 0.4s var(--ease);
 }
-.sp:hover { background: var(--ink-700); }
+.sp:hover { background: rgba(63,208,201,0.09); }
 
 /* The old site dropped logos with baked-in white backgrounds straight onto
    black, so they read as grey stickers. A white frame puts every mark on the
@@ -66,7 +68,9 @@
   display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
   gap: 1.75rem;
   padding: clamp(1.75rem, 4vw, 2.75rem);
-  border: 1px solid var(--rule);
-  background: var(--ink-850);
+  border: 1px solid var(--glass-edge);
+  background: var(--glass);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
 }
 .become .lede { max-width: 52ch; }

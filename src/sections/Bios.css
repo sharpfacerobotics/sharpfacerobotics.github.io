@@ -1,62 +1,73 @@
-.lead-row {
-  display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-  gap: 1px; background: var(--rule); border: 1px solid var(--rule);
-  margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+.coaches {
+  padding: 1.5rem 1.75rem;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+  display: grid; gap: 1.1rem;
 }
-@media (max-width: 820px) { .lead-row { grid-template-columns: 1fr; } }
-
-.lead {
-  display: flex; gap: 1.5rem; align-items: center;
-  background: var(--ink-850); padding: 1.75rem;
+.coaches__label { color: var(--teal); }
+.coaches__grid {
+  display: grid; gap: 1.25rem 2.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
 }
-.lead__img { flex: none; width: 7.5rem; }
-.lead__img img { width: 100%; aspect-ratio: 1; object-fit: cover; border: 1px solid var(--rule-strong); filter: saturate(0.92); }
-.lead__role { color: var(--teal); margin-bottom: 0.4rem; }
-.lead__grade { margin-top: 0.35rem; }
+.coach { border-left: 2px solid var(--glass-edge); padding-left: 1rem; }
 
-.coaches { background: var(--ink-850); padding: 1.75rem; display: grid; gap: 1.1rem; align-content: start; }
-.coaches__label { color: var(--faint); }
-.coach { border-top: 1px solid var(--rule); padding-top: 1rem; }
-.coaches .coach:first-of-type { border-top: 0; padding-top: 0; }
-
-.bios__bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
-.bios__filters { display: flex; gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+.bios__bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.75rem; }
+.bios__filters {
+  display: flex; gap: 1px; background: var(--glass-edge);
+  border: 1px solid var(--glass-edge);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+}
 .bios__filter {
   display: inline-flex; align-items: center; gap: 0.5rem;
-  padding: 0.6rem 1rem; background: var(--ink-850); color: var(--dim);
+  padding: 0.6rem 1rem; background: rgba(12,14,19,0.6); color: var(--dim);
   transition: color .3s var(--ease), background .3s var(--ease);
 }
 .bios__filter em { font-style: normal; color: var(--faint); font-variant-numeric: tabular-nums; }
 .bios__filter:hover { color: var(--paper); }
-.bios__filter.is-on { background: var(--ink-700); color: var(--teal); }
+.bios__filter.is-on { background: rgba(63,208,201,0.14); color: var(--teal); }
 .bios__filter.is-on em { color: var(--teal); }
 
-.bios__grid {
-  list-style: none; display: grid; gap: 1px;
-  background: var(--rule); border: 1px solid var(--rule);
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+/* ChromaGrid hardcodes `repeat(var(--cols), 320px)` and a 320px card width,
+   which neither fills nor fits our container. Override to a fluid grid and let
+   the cards flex; the component's spotlight logic is unaffected. */
+.bios__chroma {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr)) !important;
+  gap: 1rem !important;
+  justify-content: stretch !important;
+  padding: 0 !important;
 }
-.bio { background: var(--ink-850); padding: 1.35rem; display: grid; gap: 0.9rem; align-content: start; }
-.bio__img {
-  width: 100%; aspect-ratio: 5 / 4; max-height: 13rem; overflow: hidden;
-  background: var(--ink-800); display: grid; place-items: center;
-  border: 1px solid var(--rule);
+.bios__chroma .chroma-card {
+  width: 100% !important;
+  border-radius: 3px;
 }
-.bio__img img { width: 100%; height: 100%; object-fit: cover; filter: saturate(0.92); }
-.bio__initials {
-  font-family: var(--display); font-variation-settings: 'wdth' 108, 'wght' 700;
-  font-size: 2rem; color: var(--faint);
+/* the portrait crop keeps 14 very differently-framed photos reading as a set */
+.bios__chroma .chroma-card { align-self: stretch; }
+/* flex:none — without it the wrapper's flex-basis follows the image's intrinsic
+   height and aspect-ratio is ignored, so 14 differently-shaped photos produce
+   14 different card heights. */
+.bios__chroma .chroma-img-wrapper { flex: none; aspect-ratio: 4 / 5; height: auto; }
+.bios__chroma .chroma-img-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+/* the shipped footer is `1fr auto`, which squeezes names onto two lines */
+.bios__chroma .chroma-info {
+  grid-template-columns: 1fr !important;
+  gap: 0.2rem !important;
+  padding: 0.85rem 1rem 1rem;
 }
+.bios__chroma .name { font-family: var(--display); font-variation-settings: 'wdth' 104, 'wght' 650; font-size: 1rem; }
+.bios__chroma .role, .bios__chroma .handle, .bios__chroma .location {
+  font-family: var(--mono); font-size: 0.625rem; letter-spacing: 0.12em; text-transform: uppercase;
+}
+/* clamp the quote so cards settle to a common height */
+.bios__chroma .location {
+  text-transform: none; letter-spacing: 0; font-family: var(--sans);
+  font-size: 0.8125rem; line-height: 1.4; color: var(--dim);
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.bios__chroma .handle { color: var(--faint); }
+.bios__chroma .role { color: var(--teal); }
+
 .bio__name {
   font-family: var(--display); font-variation-settings: 'wdth' 104, 'wght' 650;
   font-size: 1.0625rem; color: var(--paper); line-height: 1.2;
 }
-.bio__meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin-top: 0.3rem; }
-.bio__tag { padding: 0.15rem 0.4rem; border: 1px solid currentColor; }
-.bio__tag--mechanical { color: var(--amber); }
-.bio__tag--software { color: var(--teal); }
-.bio__tag--outreach { color: var(--dim); border-style: dashed; }
-.bio__quote {
-  font-size: 0.875rem; line-height: 1.5; color: var(--dim);
-  text-wrap: pretty; margin-top: 0.55rem;
-}
+.bio__quote { font-size: 0.875rem; line-height: 1.5; color: var(--dim); text-wrap: pretty; margin-top: 0.4rem; }
