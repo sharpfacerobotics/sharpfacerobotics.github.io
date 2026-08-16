@@ -4,12 +4,12 @@
 }
 .svc {
   background: var(--card);
-  backdrop-filter: blur(14px); padding: clamp(1.5rem, 3vw, 2.25rem);
+  backdrop-filter: blur(14px); padding: clamp(1rem, 2.2vh, 1.6rem) clamp(1.1rem, 2.4vw, 1.75rem);
   display: grid; gap: 1.25rem; align-content: start;
 }
 .svc__head { display: flex; align-items: center; gap: 1rem; position: relative; }
 .svc__mark {
-  flex: none; width: 3.5rem; height: 3.5rem;
+  flex: none; width: 2.75rem; height: 2.75rem;
   display: grid; place-items: center;
   border: 1px solid var(--rule-strong); background: var(--paper-2);
 }
@@ -26,11 +26,11 @@
 .svc__body { color: var(--ink-3); text-wrap: pretty; max-width: 56ch; }
 .svc .btn { justify-self: start; }
 
-.svc__lens { margin-top: clamp(2rem, 4vw, 3.5rem); display: grid; gap: 0.75rem; }
+.svc__lens { margin-top: clamp(0.75rem, 1.8vh, 1.5rem); display: grid; gap: 0.4rem; }
 .svc__lens-label { color: var(--ink-4); }
 .svc__lens-stage {
   position: relative;
-  height: clamp(24rem, 46vw, 34rem);
+  height: clamp(10rem, 22vh, 15rem);
   border: 1px solid var(--glass-edge);
   border-radius: var(--r-lg);
   overflow: hidden;

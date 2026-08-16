@@ -140,6 +140,8 @@ export default function Bios() {
             fade={0.7}
             minOpacity={0.2}
             inset={18}
+            /* 200ms tau snapped almost instantly; 560 lets the turn read. */
+            smoothing={560}
             loop
             draggable
             className="roster__wheel-ctl"
@@ -153,8 +155,26 @@ export default function Bios() {
             <svg viewBox="0 0 16 16" width="14" height="14"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
           </span>
           </div>
+          {/* Real buttons. OptionWheel's own items DO carry an onClick, but it
+              transforms the unselected ones out of the visible box, so they
+              cannot actually be hit with a mouse. These are the reliable path
+              for anyone not using the keyboard or dragging. */}
+          <ul className="roster__picks">
+            {WHEEL.map(w => (
+              <li key={w}>
+                <button
+                  type="button"
+                  className={`mono roster__pick${pick === w ? ' is-on' : ''}`}
+                  aria-pressed={pick === w}
+                  onClick={() => setPick(w)}
+                >
+                  {w}
+                </button>
+              </li>
+            ))}
+          </ul>
           <p className="mono-sm roster__wheel-keys">
-            <kbd>←</kbd><kbd>→</kbd> arrow keys
+            <kbd>←</kbd><kbd>→</kbd> or click
           </p>
           </GlassSurface>
         </div>
