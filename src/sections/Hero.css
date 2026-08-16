@@ -9,10 +9,7 @@
   padding-bottom: clamp(1.5rem, 3vw, 2.5rem);
 }
 .hero__eyebrow { display: flex; align-items: center; gap: 0.6rem; margin-top: clamp(1.5rem, 3.4vh, 3rem); }
-.hero__dot {
-  flex: none; width: 7px; height: 7px; border-radius: 50%;
-  background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft);
-}
+
 /* Each ParticleText canvas centres its glyphs in a taller box, so the two
    lines sit far apart at their natural height. Pull them together. */
 .hero__h1 { max-width: none; width: 100%; display: grid; gap: 0; margin-block: 0; }
