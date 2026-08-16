@@ -23,16 +23,3 @@
 .team__reel {
   margin: 0 calc(var(--gutter) * -1) clamp(1rem, 2.4vh, 2rem);
 }
-
-/* ── the glass lens moment ───────────────────────────────────────────── */
-.team__lens { margin-top: clamp(1.5rem, 3.5vh, 3rem); display: grid; gap: 0.6rem; }
-.team__lens-label { color: var(--ink-4); }
-.team__lens-stage {
-  position: relative;
-  height: clamp(18rem, 40vh, 28rem);
-  border: 1px solid var(--glass-edge);
-  border-radius: var(--r-lg);
-  overflow: hidden;
-  background: var(--paper);
-}
-.team__lens-stage canvas { display: block; width: 100% !important; height: 100% !important; }

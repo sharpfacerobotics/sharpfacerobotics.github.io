@@ -1,16 +1,7 @@
 import { team } from '@/data/site';
 import { members, coaches } from '@/data/team';
 import { Reveal, Spotlight } from '@/components/Motion';
-import { Suspense, lazy, useEffect, useState } from 'react';
 import SkewedCarousel from '@/components/SkewedCarousel';
-
-/* three.js — its own chunk, desktop only. */
-const FluidGlass = lazy(async () => {
-  const mod = await import('@/components/reactbits/FluidGlass');
-  // hand the scene every photograph before it mounts
-  mod.setLensPhotos(outreachPhotos.map(p => p.src));
-  return mod;
-});
 import { outreachPhotos } from '@/data/outreachPhotos';
 import './Team.css';
 
@@ -21,14 +12,6 @@ const PILLARS = [
 ];
 
 export default function Team() {
-  const [rich, setRich] = useState(false);
-  useEffect(() => {
-    setRich(
-      window.matchMedia('(min-width: 1000px)').matches &&
-      !window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    );
-  }, []);
-
   return (
     <section className="band" id="team">
       <div className="wrap">
@@ -69,28 +52,6 @@ export default function Team() {
             ))}
           </ol></Spotlight>
         </div>
-
-        {/* React Bits FluidGlass. It renders its OWN three.js scene rather than
-            refracting the page, so it only works as a standalone moment — here
-            its scene is the team's own photographs and wordmark, and you drag a
-            real glass lens across them. */}
-        {rich && (
-          <Reveal className="team__lens">
-            <p className="mono team__lens-label">Drag the lens · {outreachPhotos.length} photos</p>
-            <div className="team__lens-stage">
-              <Suspense fallback={null}>
-                <FluidGlass
-                  mode="lens"
-                  lensProps={{
-                    scale: 0.22, ior: 1.16, thickness: 4, chromaticAberration: 0.09,
-                    anisotropy: 0.01, transmission: 1, roughness: 0,
-                    color: '#ffffff', attenuationColor: '#4fe0d8', attenuationDistance: 0.5,
-                  }}
-                />
-              </Suspense>
-            </div>
-          </Reveal>
-        )}
       </div>
     </section>
   );
