@@ -118,7 +118,10 @@ const ModeWrapper = memo(function ModeWrapper({
     gl.setRenderTarget(buffer);
     gl.render(scene, camera);
     gl.setRenderTarget(null);
-    gl.setClearColor(0x5227ff, 1);
+    // LOCAL: was 0x5227ff — React Bits' own brand violet, baked in as the
+    // canvas clear colour. That is why the lens rendered as a flat purple
+    // panel on a dark site. Matched to this page's ground instead.
+    gl.setClearColor(0x07080b, 1);
   });
 
   const { scale, ior, thickness, anisotropy, chromaticAberration, ...extraMat } = modeProps as {

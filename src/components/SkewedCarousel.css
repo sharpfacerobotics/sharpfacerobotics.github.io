@@ -1,7 +1,16 @@
+/* The rotation lives on the CONTAINER, not the track. The track is
+   width:max-content — several thousand pixels — so rotating it swung its ends
+   over 100px vertically and the cards fell out of the clip box. Rotating the
+   fixed-width container tilts the same plane with no displacement; the slight
+   scale hides the triangular gaps the rotation opens at the edges. */
 .skew {
   position: relative;
   overflow: hidden;
-  padding-block: clamp(1.25rem, 3vh, 2.5rem);
+  transform: rotate(var(--rot)) scale(1.04);
+  /* A card skewed by θ over width W gains W·tan(θ) of vertical extent, and
+     the hover scale adds ~6% more. Padding has to cover both or overflow:hidden
+     slices the corners off. */
+  padding-block: clamp(2.5rem, 5.5vh, 4rem);
   /* the plane the whole strip sits on */
   perspective: 1200px;
   mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
@@ -12,14 +21,14 @@
   gap: clamp(0.85rem, 1.8vw, 1.5rem);
   width: max-content;
   padding-inline: 1rem;
-  transform: rotate(var(--rot)) translateX(var(--drag, 0px));
+  transform: translateX(var(--drag, 0px));
   animation: skew-run var(--dur) linear infinite;
   cursor: grab;
   touch-action: pan-y;
 }
 .skew__track.is-paused { animation-play-state: paused; }
 .skew__track:active { cursor: grabbing; }
-@keyframes skew-run { to { transform: rotate(var(--rot)) translateX(calc(var(--drag, 0px) - 50%)); } }
+@keyframes skew-run { to { transform: translateX(calc(var(--drag, 0px) - 50%)); } }
 
 .skew__item { flex: none; }
 
