@@ -11,7 +11,6 @@ export default function Hero({ onTab }: { onTab: (t: 'robot' | 'contact') => voi
     <header className="hero fitview" id="top">
       <div className="wrap hero__in">
         <p className="mono hero__eyebrow">
-          <span className="hero__dot" aria-hidden="true" />
           FTC {team.number} · {team.school} · {team.city}
         </p>
 

@@ -1,10 +1,11 @@
 import { sponsors } from '@/data/sponsors';
 import './PartnerStrip.css';
 
-/* A hand-rolled marquee rather than LogoLoop: each mark needs two stacked
-   images (mono at rest, brand colour on hover), which the component's
-   single-image API cannot express. Duplicated once and translated by -50%,
-   so the seam is exact. */
+/* A rotational partner wheel. Each mark rides a continuous turn — scaling up
+   and brightening as it comes through the front, receding as it leaves — so
+   the bar reads as a rotating carousel rather than a flat slider. Two stacked
+   images per mark (mono at rest, brand colour on hover), which LogoLoop's
+   single-image API cannot express. */
 export default function PartnerStrip() {
   const row = [...sponsors, ...sponsors];
 
@@ -15,7 +16,11 @@ export default function PartnerStrip() {
         <div className="strip__mask">
           <ul className="strip__track">
             {row.map((s, i) => (
-              <li key={`${s.name}-${i}`} className="strip__item">
+              <li
+                key={`${s.name}-${i}`}
+                className="strip__item"
+                style={{ '--turn': `${(i / sponsors.length) * -100}%` } as React.CSSProperties}
+              >
                 <a
                   href={s.href ?? undefined}
                   target={s.href ? '_blank' : undefined}

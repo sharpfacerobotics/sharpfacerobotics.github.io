@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { team } from '@/data/site';
+import GlassSurface from '@/components/reactbits/GlassSurface';
 import './Nav.css';
 
 export const TABS = [
@@ -50,6 +51,25 @@ export default function Nav({ tab, onTab, onAdmin }: { tab: TabId; onTab: (t: Ta
     };
   }, [onAdmin]);
 
+  /* Measure the active tab so the glass pill can slide onto it. */
+  const listRef = useRef<HTMLUListElement>(null);
+  const [pill, setPill] = useState<{ x: number; w: number } | null>(null);
+  useEffect(() => {
+    const measure = () => {
+      const list = listRef.current;
+      if (!list) return;
+      const el = list.querySelector<HTMLElement>('.nav__link.is-active');
+      if (!el) return setPill(null);
+      const lb = list.getBoundingClientRect();
+      const eb = el.getBoundingClientRect();
+      setPill({ x: eb.left - lb.left, w: eb.width });
+    };
+    measure();
+    const id = window.setTimeout(measure, 60);
+    window.addEventListener('resize', measure);
+    return () => { window.clearTimeout(id); window.removeEventListener('resize', measure); };
+  }, [tab]);
+
   return (
     <nav className={`nav${stuck ? ' is-stuck' : ''}`} aria-label="Primary">
       <div className="wrap nav__in">
@@ -61,7 +81,21 @@ export default function Nav({ tab, onTab, onAdmin }: { tab: TabId; onTab: (t: Ta
           </span>
         </button>
 
-        <ul className="nav__links" role="tablist">
+        <ul className="nav__links" role="tablist" ref={listRef}>
+          {/* React Bits GlassSurface as the active-tab indicator — it slides
+              between tabs and genuinely refracts the bar behind it. */}
+          {pill && (
+            <li className="nav__pill" aria-hidden="true"
+                style={{ transform: `translateX(${pill.x}px)`, width: pill.w }}>
+              <GlassSurface
+                width="100%" height="100%" borderRadius={999}
+                blur={10} displace={0.8} distortionScale={-140}
+                redOffset={2} greenOffset={7} blueOffset={12}
+                brightness={70} opacity={0.92} backgroundOpacity={0.14} saturation={1.6}
+                className="nav__pill-glass"
+              />
+            </li>
+          )}
           {TABS.map(l => (
             <li key={l.id}>
               <button

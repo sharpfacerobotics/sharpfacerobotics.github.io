@@ -1,7 +1,7 @@
 /* Capped: at full container width the 1000x340 viewBox renders ~620px tall
    and pushes the readout off the fold. */
 .chart {
-  max-width: 62rem;
+  max-width: 74rem;
   margin-inline: auto;
   width: 100%;
   border: 1px solid var(--glass-edge);
@@ -25,7 +25,7 @@
 .chart__plot svg {
   width: 100%; height: auto; display: block; overflow: visible;
   /* cap against the viewport so the whole section fits without scrolling */
-  max-height: clamp(8rem, 21vh, 14rem);
+  max-height: clamp(12rem, 34vh, 22rem);
 }
 .chart__plot { padding-block: 0.5rem; }
 .chart__xlab {
@@ -105,3 +105,43 @@
 
 /* wider measure = fewer lines = the section fits the viewport */
 .outreach__lede { max-width: 78ch; }
+
+/* ── the graph never sits still ──────────────────────────────────────────
+   After the draw-in finishes the series breathes: the fill pulses gently and
+   a highlight travels the stroke, so the section reads as live rather than
+   as a static plot. */
+.chart__plot.is-drawn .chart__line {
+  animation:
+    chart-draw 1500ms cubic-bezier(0.33, 0.9, 0.3, 1) forwards,
+    chart-breathe 6s ease-in-out 1600ms infinite;
+}
+@keyframes chart-breathe {
+  0%, 100% { stroke-width: 2.5; opacity: 1; }
+  50%      { stroke-width: 3.2; opacity: 0.86; }
+}
+.chart__plot.is-drawn .chart__area {
+  animation:
+    chart-fill 1100ms cubic-bezier(0.22, 0.61, 0.36, 1) 260ms forwards,
+    chart-swell 6s ease-in-out 1600ms infinite;
+}
+@keyframes chart-swell {
+  0%, 100% { transform: scaleY(1); }
+  50%      { transform: scaleY(0.985); }
+}
+/* a light travelling along the series */
+.chart__spark {
+  fill: none; stroke: #7df3ec; stroke-width: 3; stroke-linecap: round;
+  stroke-dasharray: 0.06 0.94; opacity: 0.9;
+  animation: chart-run 5.5s linear 1600ms infinite;
+}
+@keyframes chart-run { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+
+.chart__mile circle { animation: mile-pulse 3.2s ease-in-out infinite; }
+@keyframes mile-pulse { 0%,100% { r: 5; } 50% { r: 6.4; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .chart__plot.is-drawn .chart__line,
+  .chart__plot.is-drawn .chart__area,
+  .chart__spark, .chart__mile circle { animation: none !important; }
+  .chart__spark { display: none; }
+}

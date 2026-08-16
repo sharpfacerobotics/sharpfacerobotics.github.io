@@ -1,6 +1,5 @@
 import { Suspense, lazy, useCallback, useEffect, useState } from 'react';
 import Backdrop from '@/components/Backdrop';
-import GlassSurface from '@/components/reactbits/GlassSurface';
 import Nav, { TABS, type TabId } from '@/sections/Nav';
 import Hero from '@/sections/Hero';
 import PartnerStrip from '@/sections/PartnerStrip';
@@ -21,7 +20,6 @@ export default function App() {
   const [tab, setTab] = useState<TabId>('home');
   const [phase, setPhase] = useState<'in' | 'out'>('in');
   const [dir, setDir] = useState<1 | -1>(1);
-  const [wipe, setWipe] = useState(false);
   useEffect(() => {
     const fromHash = () => {
       const h = window.location.hash.replace('#', '');
@@ -39,8 +37,6 @@ export default function App() {
     const from = TABS.findIndex(t => t.id === tab);
     const to = TABS.findIndex(t => t.id === next);
     setDir(to > from ? 1 : -1);
-    setWipe(true);
-    window.setTimeout(() => setWipe(false), 620);
     setPhase('out');
     window.setTimeout(() => {
       setTab(next);
@@ -57,20 +53,6 @@ export default function App() {
       <Backdrop />
       <a className="skip" href="#main">Skip to content</a>
       <Nav tab={tab} onTab={go} onAdmin={() => setAdmin(true)} />
-
-      {/* React Bits GlassSurface as a real refracting wipe across the tab
-          change — it sweeps the direction you moved along the tab bar. */}
-      {wipe && (
-        <div className={`wipe wipe--${dir > 0 ? 'fwd' : 'back'}`} aria-hidden="true">
-          <GlassSurface
-            width="46%" height="100%" borderRadius={0}
-            blur={12} displace={1.6} distortionScale={-190}
-            redOffset={3} greenOffset={11} blueOffset={19}
-            brightness={62} opacity={0.85} backgroundOpacity={0.05} saturation={1.5}
-            className="wipe__pane"
-          />
-        </div>
-      )}
 
       <main id="main" className={`view view--${phase} view--${dir > 0 ? 'fwd' : 'back'}`} key={tab}>
         {tab === 'home' && <><Hero onTab={go} /><PartnerStrip /></>}

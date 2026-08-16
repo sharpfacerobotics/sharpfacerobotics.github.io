@@ -11,7 +11,7 @@ const PILLARS = [
 
 export default function Team() {
   return (
-    <section className="band" id="team">
+    <section className="band fitview" id="team">
       <div className="wrap">
         <header className="sec-head">
           <div className="sec-index"><b>01</b><span>Who we are</span></div>

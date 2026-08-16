@@ -101,6 +101,8 @@ export default function Outreach() {
                 ))}
 
                 <path className="chart__area" d={area} fill={`url(#fill-${gid})`} />
+                {/* a highlight that runs the length of the series, forever */}
+                <path className="chart__spark" d={d} pathLength={1} />
                 <path className="chart__line" d={d} fill="none" stroke={SERIES} strokeWidth="2.5" strokeLinecap="round" pathLength={1} />
 
                 {/* milestones get the second validated hue + a direct label */}

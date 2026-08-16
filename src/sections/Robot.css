@@ -34,17 +34,18 @@
 .subsys__art {
   position: relative;
   aspect-ratio: 16 / 10;
-  display: grid; place-items: center;
-  padding: 1.1rem;
   border-bottom: 1px solid var(--rule);
   background:
     radial-gradient(120% 100% at 50% 0%, rgba(63,208,201,0.06), transparent 70%);
   overflow: hidden;
 }
 .subsys__art img {
-  /* width/height 100% + contain guarantees a fit inside the padded box;
-     max-* alone lets a very tall render (the whole-robot crop) overflow. */
-  width: 100%; height: 100%; object-fit: contain;
+  /* Absolute against a definite box. A percentage height does NOT resolve
+     against an aspect-ratio parent, so the image fell back to its intrinsic
+     ratio and overflowed the frame. */
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; padding: 1.1rem;
+  object-fit: contain;
   opacity: 0.9;
   transition: transform 520ms var(--ease), opacity 320ms var(--ease);
 }
