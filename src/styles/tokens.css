@@ -272,3 +272,38 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 @media (prefers-reduced-motion: reduce) {
   .bg-field { display: none; }
 }
+
+/* =========================================================
+   Tab views — cross-fade so switching never flashes or jumps
+   ========================================================= */
+.view {
+  transition: opacity 190ms var(--ease), transform 190ms var(--ease), filter 190ms var(--ease);
+  min-height: 60vh;
+}
+.view--in  { opacity: 1; transform: none; filter: none; }
+.view--out { opacity: 0; transform: translate3d(0, 8px, 0); filter: blur(2px); }
+
+/* each view's own content staggers in behind the fade */
+.view--in .band > .wrap > * { animation: view-rise 520ms var(--ease) both; }
+.view--in .band > .wrap > *:nth-child(2) { animation-delay: 60ms; }
+.view--in .band > .wrap > *:nth-child(3) { animation-delay: 110ms; }
+.view--in .band > .wrap > *:nth-child(4) { animation-delay: 150ms; }
+@keyframes view-rise { from { opacity: 0; transform: translate3d(0, 14px, 0); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .view, .view--out { transition: none; opacity: 1; transform: none; filter: none; }
+  .view--in .band > .wrap > * { animation: none; }
+}
+
+/* Knock the baked-in backgrounds out of the sponsor artwork.
+   invert+grayscale turns dark-on-white into white-on-black, then `screen`
+   composites the black away — the mark blends into the page with no chip. */
+.logo-knockout {
+  filter: invert(1) grayscale(1) brightness(1.9) contrast(1.15);
+  mix-blend-mode: screen;
+  opacity: 0.82;
+  transition: opacity 320ms var(--ease), filter 320ms var(--ease);
+}
+.logo-knockout:hover,
+a:hover > .logo-knockout,
+a:hover .logo-knockout { opacity: 1; filter: invert(1) grayscale(1) brightness(2.1) contrast(1.2); }

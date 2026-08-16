@@ -7,7 +7,7 @@ import GlassSurface from '@/components/reactbits/GlassSurface';
 import CountUp from '@/components/reactbits/CountUp';
 import './Hero.css';
 
-export default function Hero() {
+export default function Hero({ onTab }: { onTab: (t: 'robot' | 'contact') => void }) {
   return (
     <header className="hero" id="top">
       <div className="wrap hero__in">
@@ -51,8 +51,8 @@ export default function Hero() {
           </p>
 
           <div className="hero__ctas">
-            <GlowButton href="#robot">See the robot</GlowButton>
-            <GlowButton href="#contact" tone="violet">Get in touch</GlowButton>
+            <GlowButton onClick={() => onTab('robot')}>See the robot</GlowButton>
+            <GlowButton onClick={() => onTab('contact')} tone="violet">Get in touch</GlowButton>
           </div>
         </div>
 

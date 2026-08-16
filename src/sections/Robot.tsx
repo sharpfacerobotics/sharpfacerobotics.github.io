@@ -1,6 +1,7 @@
 import { team, specs, subsystems } from '@/data/site';
 import MagicBento from '@/components/reactbits/MagicBento';
 import { Reveal } from '@/components/Motion';
+import RobotScroll from './RobotScroll';
 import './Robot.css';
 
 export default function Robot() {
@@ -29,11 +30,13 @@ export default function Robot() {
           </p>
         </header>
 
+        <RobotScroll />
+
         <Reveal className="robot__top">
           <figure className="robot__plate">
             <div className="plate__frame">
               <img
-                src="/assets/explodedCad.png"
+                src="/assets/explodedCad-cutout.png"
                 alt="Exploded CAD view of robot KG showing the shooter, transfer, intake, drivetrain and electronics assemblies."
                 loading="lazy"
               />

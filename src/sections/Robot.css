@@ -12,14 +12,13 @@
 @media (max-width: 900px) { .robot__top { grid-template-columns: 1fr; } }
 
 
-/* The CAD export is portrait AND has a baked-in black background, which reads
-   as a hard black box on a dark page. `screen` drops pure black to nothing and
-   keeps the white line art. */
+/* Uses the pre-cut transparent PNG (explodedCad-cutout.png), generated from the
+   original by mapping luminance to alpha. Blend modes were unreliable here —
+   any sticky or backdrop-filter ancestor isolates them and the black returns. */
 .robot__plate .plate__frame { background: transparent; border-color: transparent; }
 .robot__plate .plate__frame img {
   aspect-ratio: auto; object-fit: contain; padding: 0;
   max-height: 30rem; margin-inline: auto;
-  mix-blend-mode: screen;
 }
 .robot__specs { padding: 0.4rem 1.4rem; }
 

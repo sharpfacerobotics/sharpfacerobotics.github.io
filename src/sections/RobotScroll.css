@@ -1,0 +1,80 @@
+/* The tall wrapper is the scroll runway; the inner pin is what you see. */
+.rs { position: relative; height: 460vh; }
+.rs__pin { position: sticky; top: 68px; height: calc(100vh - 68px); display: grid; align-items: center; }
+
+.rs__stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: clamp(1.5rem, 4vw, 4rem);
+  align-items: center;
+  width: 100%; max-width: var(--maxw);
+  margin-inline: auto; padding-inline: var(--gutter);
+}
+@media (max-width: 900px) {
+  .rs { height: 380vh; }
+  .rs__stage { grid-template-columns: 1fr; gap: 1.25rem; }
+}
+
+.rs__viewport {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  max-height: min(72vh, 640px);
+  overflow: hidden;
+  border: 1px solid var(--glass-edge);
+  /* No background and NO backdrop-filter here: either one creates a stacking
+     context that isolates the image's mix-blend-mode, and the CAD's baked-in
+     black field comes back as a visible box. */
+  background: transparent;
+}
+.rs__viewport img {
+  width: 100%; height: 100%;
+  object-fit: contain;
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+
+/* a slow scanning line — reads as instrumentation, not decoration */
+.rs__scan {
+  position: absolute; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(63,208,201,0.55), transparent);
+  animation: rs-scan 5.5s var(--ease) infinite;
+  pointer-events: none;
+}
+@keyframes rs-scan { 0% { top: 4%; } 50% { top: 96%; } 100% { top: 4%; } }
+
+.rs__readout { display: grid; gap: 1.75rem; align-content: center; }
+
+.rs__ticks { display: grid; gap: 0.1rem; }
+.rs__ticks li {
+  display: flex; align-items: center; gap: 0.85rem;
+  padding: 0.4rem 0;
+  color: var(--faint);
+  transition: color 320ms var(--ease);
+}
+.rs__ticks li.is-on { color: var(--teal); }
+.rs__tickmark {
+  width: 26px; height: 1px; background: currentColor; flex: none;
+  transition: width 320ms var(--ease), background 320ms var(--ease);
+}
+.rs__ticks li.is-on .rs__tickmark { width: 46px; }
+
+.rs__copy { display: grid; gap: 0.6rem; animation: rs-in 420ms var(--ease) both; }
+@keyframes rs-in { from { opacity: 0; transform: translateY(10px); } }
+.rs__step { color: var(--teal); }
+.rs__body { color: var(--dim); max-width: 46ch; text-wrap: pretty; }
+
+.rs__spec {
+  margin-top: 0.4rem; padding-top: 0.9rem;
+  border-top: 1px solid var(--glass-edge);
+  display: grid; gap: 0.25rem;
+}
+.rs__spec dt { color: var(--faint); }
+.rs__spec dd { color: var(--paper); font-size: 0.9375rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .rs { height: auto; }
+  .rs__pin { position: static; height: auto; padding-block: 2rem; }
+  .rs__viewport img { transform: none !important; }
+  .rs__scan { animation: none; opacity: 0; }
+  .rs__copy { animation: none; }
+}

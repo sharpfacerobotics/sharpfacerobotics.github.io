@@ -59,3 +59,14 @@
   color: var(--paper);
 }
 .nav__sheet a:active { background: var(--ink-800); }
+
+/* tab-bar affordances */
+.nav__brand { background: none; border: 0; cursor: pointer; text-align: left; }
+.nav__link { cursor: pointer; }
+.nav__sheet-item {
+  text-align: left; width: 100%; cursor: pointer;
+  padding: 1.2rem var(--gutter);
+  border: 0; border-bottom: 1px solid var(--glass-edge);
+  color: var(--paper); background: none;
+}
+.nav__sheet-item.is-active { color: var(--teal); }
