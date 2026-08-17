@@ -66,7 +66,7 @@ export default function Bios() {
   }, []);
 
   return (
-    <section className="band" id="roster">
+    <section className="band band--lift" id="roster">
       <div className="wrap">
         <header className="sec-head">
           <div className="sec-index"><b>03</b><span>Roster</span></div>

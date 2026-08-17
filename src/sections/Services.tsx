@@ -7,7 +7,7 @@ import './Services.css';
 export default function Services() {
   return (
     <>
-    <section className="band fitview" id="services">
+    <section className="band fitview band--sunk" id="services">
       <div className="wrap">
         <header className="sec-head">
           <div className="sec-index"><b>04</b><span>What we built for everyone else</span></div>

@@ -311,3 +311,23 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   font-variation-settings: inherit;
   letter-spacing: inherit;
 }
+
+/* =========================================================
+   #3 Tonal variation.
+   Eight tabs on an identical near-black ground gave the site
+   no rhythm — nothing lifted or receded, so the darkness read
+   as a default rather than a decision. Sections now sit on one
+   of three grounds. The .band background is a wash ABOVE the
+   fixed backdrop, so the aurora still shows through.
+   ========================================================= */
+.band--lift {
+  background: linear-gradient(180deg, rgba(255,255,255,0.030), rgba(255,255,255,0.012));
+}
+.band--lift::before,
+.band--sunk::before {
+  content: ''; position: absolute; left: 0; right: 0; top: 0;
+  height: 1px; background: var(--glass-edge);
+}
+.band--sunk {
+  background: linear-gradient(180deg, rgba(0,0,0,0.42), rgba(0,0,0,0.22));
+}

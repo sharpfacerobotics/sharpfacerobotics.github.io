@@ -6,7 +6,7 @@ import './Robot.css';
 
 export default function Robot() {
   return (
-    <section className="robot-tab" id="robot">
+    <section className="robot-tab band--sunk" id="robot">
       <RobotScroll />
 
       <div className="band"><div className="wrap">

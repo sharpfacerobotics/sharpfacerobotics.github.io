@@ -31,7 +31,7 @@ function Mark({ s }: { s: Sponsor }) {
 
 export default function Sponsors() {
   return (
-    <section className="band fitview" id="sponsors">
+    <section className="band fitview band--sunk" id="sponsors">
       <div className="wrap">
         <header className="sec-head">
           <div className="sec-index"><b>06</b><span>Partners</span></div>

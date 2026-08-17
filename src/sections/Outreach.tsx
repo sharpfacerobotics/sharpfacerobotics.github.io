@@ -58,7 +58,7 @@ export default function Outreach() {
   const cur = active === null ? null : outreach[active];
 
   return (
-    <section className="band fitview" id="outreach">
+    <section className="band fitview band--lift" id="outreach">
       <div className="wrap">
         <header className="sec-head">
           <div className="sec-index"><b>05</b><span>Outreach</span></div>

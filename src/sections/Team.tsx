@@ -15,13 +15,15 @@ const PILLARS = [
 
 export default function Team() {
   return (
-    <section className="band" id="team">
-      <div className="wrap">
-        <header className="sec-head">
+    <section className="band team-tab" id="team">
+      {/* Photo-led. Every other tab opens with the same eyebrow/heading stack;
+          this one opens with the team itself, full-bleed, heading over it. */}
+      <div className="team__lead">
+        <img className="team__lead-img" src="/assets/hi/team.jpg" alt="The Sharp Face Robotics team with their robot" />
+        <div className="team__lead-scrim" aria-hidden="true" />
+        <div className="wrap team__lead-copy">
           <div className="sec-index"><b>01</b><span>Who we are</span></div>
-          {/* The stem stays put and the tail types, so the heading is always
-              readable and only the claim changes. */}
-          <h2 className="d2">
+          <h1 className="d2 team__lead-h">
             A rookie team that{' '}
             <TextType
               as="span"
@@ -41,9 +43,11 @@ export default function Team() {
               cursorCharacter="_"
               textColors={['#4fe0d8']}
             />
-          </h2>
-        </header>
+          </h1>
+        </div>
+      </div>
 
+      <div className="wrap">
         {/* The team's own photographs, high on the page where they are the
             first thing seen — a skewed drifting carousel, draggable. */}
         <div className="team__reel">

@@ -26,3 +26,37 @@
 
 .team__typed { display: flex; align-items: baseline; gap: 0.5rem; min-height: 1.5em; color: var(--ink-3); }
 .team__typed-lead { color: var(--ink-4); }
+
+/* ── #1 composition: photo-led opening, flush to the top ──────────────── */
+.team-tab { padding-top: 0; }
+
+.team__lead {
+  position: relative;
+  margin: 0 calc(var(--gutter) * -1) clamp(1.5rem, 3.5vh, 3rem);
+  min-height: clamp(19rem, 46vh, 30rem);
+  display: grid; align-items: end;
+  overflow: hidden;
+}
+.team__lead-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center 38%;
+}
+/* the scrim is what makes text over a photograph legible — without it the
+   heading fights whatever happens to be behind it */
+.team__lead-scrim {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, rgba(7,8,11,0.78) 0%, rgba(7,8,11,0.25) 34%, rgba(7,8,11,0.92) 100%),
+    linear-gradient(90deg, rgba(7,8,11,0.7), transparent 62%);
+}
+.team__lead-copy {
+  position: relative;
+  padding-block: clamp(1.25rem, 3vh, 2.5rem);
+  display: grid; gap: 0.75rem;
+}
+.team__lead-h { max-width: 20ch; }
+
+@media (max-width: 700px) {
+  .team__lead { min-height: clamp(15rem, 40vh, 22rem); }
+}
