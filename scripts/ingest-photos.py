@@ -62,7 +62,10 @@ for f in sorted(glob.glob(f'{SRC}/*')):
     body = im.crop((0, 0, w, int(h * 0.93)))
     xs = brightness_profile(body, 'x')
     ys = brightness_profile(body, 'y')
-    thresh = max(38.0, (sum(xs) / len(xs)) * 0.55)
+    # A brightness threshold this high clips the DARK edges of a photograph —
+    # dark hair against a dark wall reads as chrome and the crop cuts heads off.
+    # Lower floor plus a margin of grace on each side.
+    thresh = max(22.0, (sum(xs) / len(xs)) * 0.34)
     x0, x1 = longest_bright_run(xs, thresh)
     y0, y1 = longest_bright_run(ys, thresh)
 
@@ -70,8 +73,12 @@ for f in sorted(glob.glob(f'{SRC}/*')):
         print(f'  skip (no photo) {os.path.basename(f)}')
         continue
 
-    pad = 3
-    crop = im.crop((x0 + pad, y0 + pad, x1 - pad, y1 - pad))
+    # Grow the detected box outward — better to include a sliver of chrome than
+    # to amputate the subject.
+    grow_x, grow_y = int(w * 0.012), int(h * 0.025)
+    x0 = max(0, x0 - grow_x); x1 = min(w, x1 + grow_x)
+    y0 = max(0, y0 - grow_y); y1 = min(int(h * 0.93), y1 + grow_y)
+    crop = im.crop((x0, y0, x1, y1))
 
     # Reject undersized results. A bad detection yields a small sliver, and a
     # 310x715 crop is not a usable photograph on a full-width carousel.
