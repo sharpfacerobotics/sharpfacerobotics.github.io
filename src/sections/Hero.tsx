@@ -5,6 +5,7 @@ import Counter from '@/components/reactbits/Counter';
 import RippleDistortion from '@/components/reactbits/RippleDistortion';
 import { Magnetic } from '@/components/Motion';
 import GlassSurface from '@/components/reactbits/GlassSurface';
+import { Trophy, Roster, RobotIcon } from '@/components/Icons';
 import './Hero.css';
 
 export default function Hero({ onTab }: { onTab: (t: 'robot' | 'contact') => void }) {
@@ -106,20 +107,20 @@ export default function Hero({ onTab }: { onTab: (t: 'robot' | 'contact') => voi
           brightness={62} opacity={0.9} backgroundOpacity={0.05} saturation={1.5}
         >
         <dl className="hero__stats">
-          <div className="hero__stat">
-            <dt className="mono-sm">Build team</dt>
+          <div className="hero__stat hero__stat--team">
+            <dt className="mono-sm"><span className="hero__ico"><Roster size={15} /></span>Build team</dt>
             <dd className="hero__count">
               <Counter value={members.length} fontSize={34} places={[10, 1]} gap={2}
-                textColor="#f2f4f7" gradientHeight={0} borderRadius={6} horizontalPadding={4} />
+                textColor="#4fe0d8" gradientHeight={0} borderRadius={6} horizontalPadding={4} />
             </dd>
           </div>
-          <div className="hero__stat">
-            <dt className="mono-sm">Robot</dt>
+          <div className="hero__stat hero__stat--robot">
+            <dt className="mono-sm"><span className="hero__ico"><RobotIcon size={15} /></span>Robot</dt>
             <dd>{team.robot}</dd>
           </div>
           {awards.map(a => (
-            <div className="hero__stat" key={a.title}>
-              <dt className="mono-sm">{a.detail}</dt>
+            <div className="hero__stat hero__stat--award" key={a.title}>
+              <dt className="mono-sm"><span className="hero__ico"><Trophy size={15} /></span>{a.detail}</dt>
               <dd className="hero__stat--sm">{a.title}</dd>
             </div>
           ))}

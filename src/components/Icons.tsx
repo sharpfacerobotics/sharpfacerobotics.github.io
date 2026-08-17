@@ -18,3 +18,41 @@ export function GitHub({ size = 20 }: { size?: number }) {
     </svg>
   );
 }
+
+export function Trophy({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M7 4h10v5a5 5 0 0 1-10 0V4Z" />
+      <path d="M7 5.5H4.6a.6.6 0 0 0-.6.7c.2 1.9 1.3 3.4 3 3.7" />
+      <path d="M17 5.5h2.4a.6.6 0 0 1 .6.7c-.2 1.9-1.3 3.4-3 3.7" />
+      <path d="M12 14v3.5" />
+      <path d="M8.5 20.5h7l-.7-2.2a1 1 0 0 0-1-.8h-3.6a1 1 0 0 0-1 .8l-.7 2.2Z" />
+    </svg>
+  );
+}
+
+export function Roster({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="9" cy="8" r="3.2" />
+      <path d="M3 19.5c0-3 2.7-5 6-5s6 2 6 5" />
+      <path d="M16 6.2a3 3 0 0 1 0 5.6" />
+      <path d="M18 19.5c0-2.2-1-3.8-2.6-4.6" />
+    </svg>
+  );
+}
+
+export function RobotIcon({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="4" y="8" width="16" height="11" rx="2.4" />
+      <path d="M12 8V4.8" /><circle cx="12" cy="3.6" r="1.2" />
+      <circle cx="9" cy="13" r="1.1" fill="currentColor" stroke="none" />
+      <circle cx="15" cy="13" r="1.1" fill="currentColor" stroke="none" />
+      <path d="M9.5 16.3h5" /><path d="M2.5 12v3" /><path d="M21.5 12v3" />
+    </svg>
+  );
+}

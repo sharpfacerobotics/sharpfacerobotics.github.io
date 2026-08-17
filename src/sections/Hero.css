@@ -83,3 +83,35 @@
 .hero .gs .glass-surface { border-radius: var(--r-md); }
 
 
+
+/* ── stat rail: colour-coded, with icons and a little life ───────────── */
+.hero__stat dt { display: flex; align-items: center; gap: 0.45rem; }
+.hero__ico {
+  display: grid; place-items: center;
+  width: 22px; height: 22px; border-radius: 6px;
+  color: var(--accent); background: var(--accent-soft);
+  flex: none;
+}
+.hero__stat--robot .hero__ico { color: var(--accent-2); background: rgba(139,123,255,0.16); }
+.hero__stat--award .hero__ico { color: #f0b03c; background: rgba(240,176,60,0.16); }
+.hero__stat--award dd { color: #ffd98a; }
+.hero__stat--robot dd { color: var(--accent-2); }
+
+/* the trophies catch the light on a slow cycle, offset so they never flash together */
+.hero__stat--award .hero__ico svg { animation: trophy-gleam 5.5s var(--ease) infinite; }
+.hero__stat--award:nth-of-type(4) .hero__ico svg { animation-delay: 2.2s; }
+@keyframes trophy-gleam {
+  0%, 82%, 100% { transform: rotate(0deg) scale(1); filter: none; }
+  88%           { transform: rotate(-9deg) scale(1.12); filter: drop-shadow(0 0 6px rgba(240,176,60,0.8)); }
+  94%           { transform: rotate(7deg) scale(1.08); }
+}
+
+/* each cell lifts under the cursor */
+.hero__stat { transition: background 340ms var(--ease); }
+.hero__stat:hover { background: rgba(255,255,255,0.045); }
+.hero__stat:hover .hero__ico { transform: scale(1.1); }
+.hero__ico { transition: transform 320ms var(--ease); }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__stat--award .hero__ico svg { animation: none; }
+}
