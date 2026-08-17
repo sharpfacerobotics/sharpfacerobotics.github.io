@@ -21,7 +21,7 @@
 .chart__plot svg {
   width: 100%; height: auto; display: block; overflow: visible;
   /* cap against the viewport so the whole section fits without scrolling */
-  max-height: clamp(8rem, 34vh, 24rem);
+  max-height: clamp(7rem, 31vh, 22rem);
 }
 .chart__plot { padding-block: 0.5rem; }
 .chart__xlab {
@@ -142,3 +142,6 @@
   .chart__spark { display: none; }
 }
 
+
+.outreach__typed { display: flex; align-items: baseline; gap: 0.5rem; min-height: 1.5em; color: var(--ink-3); }
+.outreach__typed-lead { color: var(--ink-4); }

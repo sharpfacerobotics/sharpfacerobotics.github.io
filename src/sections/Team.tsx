@@ -2,6 +2,7 @@ import { team } from '@/data/site';
 import { members, coaches } from '@/data/team';
 import { Reveal, Spotlight } from '@/components/Motion';
 import SkewedCarousel from '@/components/SkewedCarousel';
+import TextType from '@/components/reactbits/TextType';
 import { outreachPhotos } from '@/data/outreachPhotos';
 import { excludedPhotos } from '@/data/photoPicks';
 import './Team.css';
@@ -19,6 +20,23 @@ export default function Team() {
         <header className="sec-head">
           <div className="sec-index"><b>01</b><span>Who we are</span></div>
           <h2 className="d2">A rookie team that wrote everything down</h2>
+          {/* React Bits TextType — the three benches, which are the actual
+              groups people are sorted into on the roster. */}
+          <p className="mono team__typed">
+            <span className="team__typed-lead">Built by</span>
+            <TextType
+              as="span"
+              text={['mechanical.', 'software.', 'outreach.', 'all three, together.']}
+              typingSpeed={54}
+              deletingSpeed={28}
+              pauseDuration={1800}
+              initialDelay={600}
+              loop
+              showCursor
+              cursorCharacter="_"
+              textColors={['#4fe0d8']}
+            />
+          </p>
         </header>
 
         {/* The team's own photographs, high on the page where they are the

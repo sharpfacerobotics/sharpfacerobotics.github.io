@@ -3,6 +3,7 @@ import { outreach, RELATIVE_ONLY, unit, type OutreachPoint } from '@/data/outrea
 import { members, outreachCount } from '@/data/team';
 import { Reveal } from '@/components/Motion';
 import GlassSurface from '@/components/reactbits/GlassSurface';
+import TextType from '@/components/reactbits/TextType';
 import './Outreach.css';
 
 /* Validated against the dark surface #0b0d11 with the dataviz palette
@@ -65,6 +66,23 @@ export default function Outreach() {
           <p className="lede outreach__lede">
             A competition season is not one weekend. This is the rhythm of our outreach across
             a year — recruiting, build, league play, then the community work that carries into summer.
+          </p>
+          {/* The phases are read straight out of the chart data, so the typed
+              line and the graph can never disagree. */}
+          <p className="mono outreach__typed">
+            <span className="outreach__typed-lead">The year runs</span>
+            <TextType
+              as="span"
+              text={[...new Set(outreach.map(o => o.phase))].map(p => p.toLowerCase() + '.')}
+              typingSpeed={54}
+              deletingSpeed={28}
+              pauseDuration={1700}
+              initialDelay={600}
+              loop
+              showCursor
+              cursorCharacter="_"
+              textColors={['#4fe0d8']}
+            />
           </p>
           <p className="mono outreach__stat">
             <b>{outreachCount}</b> of {members.length} on the build team also run outreach

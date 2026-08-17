@@ -23,3 +23,6 @@
 .team__reel {
   margin: 0 calc(var(--gutter) * -1) clamp(1rem, 2.4vh, 2rem);
 }
+
+.team__typed { display: flex; align-items: baseline; gap: 0.5rem; min-height: 1.5em; color: var(--ink-3); }
+.team__typed-lead { color: var(--ink-4); }
