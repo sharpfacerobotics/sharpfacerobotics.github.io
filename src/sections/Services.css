@@ -25,3 +25,6 @@
 }
 .svc__body { color: var(--ink-3); text-wrap: pretty; max-width: 56ch; }
 .svc .btn { justify-self: start; }
+
+/* the typed tail of the heading keeps the display face */
+.svc__typed { font-family: inherit; font-variation-settings: inherit; }

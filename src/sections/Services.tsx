@@ -1,6 +1,7 @@
 import { services } from '@/data/site';
 import { Reveal, Spotlight } from '@/components/Motion';
 import SignOff from '@/components/SignOff';
+import TextType from '@/components/reactbits/TextType';
 import './Services.css';
 
 export default function Services() {
@@ -10,7 +11,22 @@ export default function Services() {
       <div className="wrap">
         <header className="sec-head">
           <div className="sec-index"><b>04</b><span>What we built for everyone else</span></div>
-          <h2 className="d2">Tools we wished existed</h2>
+          <h2 className="d2">
+            Tools we wished{' '}
+            <TextType
+              as="span"
+              className="svc__typed"
+              text={['existed.', 'someone had built.', 'we had in year one.']}
+              typingSpeed={55}
+              deletingSpeed={28}
+              pauseDuration={2200}
+              initialDelay={500}
+              loop
+              showCursor
+              cursorCharacter="_"
+              textColors={['#4fe0d8']}
+            />
+          </h2>
         </header>
 
         <Spotlight><div className="svc__grid">

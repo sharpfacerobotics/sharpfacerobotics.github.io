@@ -39,7 +39,7 @@
 
 /* ── the plate: image-first, full width, generous radius ─────────────── */
 /* capped near the source's native 1100px so it is never upscaled on screen */
-.hero__plate { position: relative; border-radius: var(--r-xl); max-width: min(1120px, 19vh * 2.17); margin-inline: auto; }
+.hero__plate { position: relative; border-radius: var(--r-xl); max-width: min(1120px, 17.5vh * 2.17); margin-inline: auto; }
 .hero__ripple, .hero__plate canvas { width: 100%; aspect-ratio: 1100 / 508; display: block; }
 .hero__plate img {
   width: 100%; aspect-ratio: 1100 / 508; max-height: 42vh; object-fit: cover; object-position: center 42%;
@@ -81,3 +81,14 @@
 /* the hero stat rail is a tight bar, not a padded panel */
 .hero .gs .glass-surface__content { padding: 0; }
 .hero .gs .glass-surface { border-radius: var(--r-md); }
+
+/* typed line under the wordmark */
+.hero__typed {
+  display: flex; align-items: baseline; justify-content: center;
+  gap: 0.5rem; min-height: 1.45em;
+  font-size: clamp(0.95rem, 0.9rem + 0.35vw, 1.15rem);
+  color: var(--ink-2);
+}
+.hero__typed-lead { color: var(--ink-4); }
+.hero__typed-text { font-family: var(--sans); }
+@media (max-width: 560px) { .hero__typed { font-size: 0.9rem; } }

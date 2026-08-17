@@ -5,6 +5,7 @@ import Counter from '@/components/reactbits/Counter';
 import RippleDistortion from '@/components/reactbits/RippleDistortion';
 import { Magnetic } from '@/components/Motion';
 import GlassSurface from '@/components/reactbits/GlassSurface';
+import TextType from '@/components/reactbits/TextType';
 import './Hero.css';
 
 export default function Hero({ onTab }: { onTab: (t: 'robot' | 'contact') => void }) {
@@ -56,6 +57,32 @@ export default function Hero({ onTab }: { onTab: (t: 'robot' | 'contact') => voi
             className="hero__particles"
           />
         </h1>
+
+        {/* React Bits TextType — cycles what the team actually does, so the
+            line carries information rather than being decoration. */}
+        <p className="hero__typed">
+          <span className="mono hero__typed-lead">We</span>
+          <TextType
+            as="span"
+            className="hero__typed-text"
+            text={[
+              'design a competition robot.',
+              'build it, then rebuild it.',
+              'program autonomous routes.',
+              'write down what we learn.',
+              'show it to the next kids.',
+            ]}
+            typingSpeed={52}
+            deletingSpeed={26}
+            pauseDuration={1900}
+            initialDelay={700}
+            loop
+            showCursor
+            cursorCharacter="_"
+            cursorBlinkDuration={0.7}
+            textColors={['#4fe0d8']}
+          />
+        </p>
 
         <div className="hero__meta">
           <p className="lede">
