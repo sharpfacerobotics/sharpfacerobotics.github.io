@@ -58,38 +58,27 @@ export default function Hero({ onTab }: { onTab: (t: 'robot' | 'contact') => voi
           />
         </h1>
 
-        {/* React Bits TextType — cycles what the team actually does, so the
-            line carries information rather than being decoration. */}
-        <p className="hero__typed">
-          <span className="mono hero__typed-lead">We</span>
+        <div className="hero__meta">
+          {/* React Bits TextType on the main white line — the lede types
+              itself through several true statements about the team. */}
           <TextType
-            as="span"
-            className="hero__typed-text"
+            as="p"
+            className="lede hero__lede-typed"
             text={[
-              'design a competition robot.',
-              'build it, then rebuild it.',
-              'program autonomous routes.',
-              'write down what we learn.',
-              'show it to the next kids.',
+              `A FIRST Tech Challenge team at ${team.school} in Dublin, California.`,
+              'We design, build and program a competition robot every season.',
+              'We write down what we learn so the next team does not start from zero.',
+              `${members.length} students across mechanical, software and outreach.`,
             ]}
-            typingSpeed={52}
-            deletingSpeed={26}
-            pauseDuration={1900}
-            initialDelay={700}
+            typingSpeed={26}
+            deletingSpeed={12}
+            pauseDuration={2600}
+            initialDelay={500}
             loop
             showCursor
             cursorCharacter="_"
             cursorBlinkDuration={0.7}
-            textColors={['#4fe0d8']}
           />
-        </p>
-
-        <div className="hero__meta">
-          <p className="lede">
-            A FIRST Tech Challenge team at {team.school} in Dublin, California. We design,
-            build and program a competition robot every season — and write down what we
-            learn so the next team does not start from zero.
-          </p>
           <div className="hero__ctas">
             <Magnetic><button className="btn btn--solid" onClick={() => onTab('robot')}>See the robot</button></Magnetic>
             <Magnetic><button className="btn" onClick={() => onTab('contact')}>Get in touch</button></Magnetic>

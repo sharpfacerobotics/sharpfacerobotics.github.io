@@ -82,13 +82,12 @@
 .hero .gs .glass-surface__content { padding: 0; }
 .hero .gs .glass-surface { border-radius: var(--r-md); }
 
-/* typed line under the wordmark */
-.hero__typed {
-  display: flex; align-items: baseline; justify-content: center;
-  gap: 0.5rem; min-height: 1.45em;
-  font-size: clamp(0.95rem, 0.9rem + 0.35vw, 1.15rem);
-  color: var(--ink-2);
+
+/* The typed lede is the main white line. A fixed min-height stops the block
+   below it jumping every time a sentence shortens. */
+.hero__lede-typed {
+  min-height: 4.6em;
+  color: var(--ink);
+  margin-inline: auto; max-width: 74ch;
 }
-.hero__typed-lead { color: var(--ink-4); }
-.hero__typed-text { font-family: var(--sans); }
-@media (max-width: 560px) { .hero__typed { font-size: 0.9rem; } }
+@media (max-width: 700px) { .hero__lede-typed { min-height: 6.5em; } }
