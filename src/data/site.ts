@@ -47,10 +47,10 @@ export const services = [
   {
     name: 'Telemark',
     tag: 'Master FTC programming',
-    href: 'https://sharpfacerobotics.github.io/ftc-curriculum',
+    href: 'https://sharpfacerobotics.github.io/telemark/',
     cta: 'Visit Telemark',
     logo: '/assets/telemark.png',
-    status: 'Coming soon',
+    status: null,
     body: 'A place for new members to learn Java for FTC, with a built-in simulator. A structured, level-gated curriculum written by student engineers — from Blocks to Bézier curves, every concept hands-on.',
   },
 ];
