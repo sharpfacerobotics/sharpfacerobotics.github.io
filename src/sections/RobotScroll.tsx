@@ -24,7 +24,7 @@ const STOPS: Stop[] = [
   { key: 'Intake', img: '/assets/robot/intake.png', title: subOf(1).h, body: subOf(1).p, spec: 'Intake' },
   { key: 'Transfer', img: '/assets/robot/transfer.png', title: 'Transfer path',
     body: 'A short handoff from intake to launcher: flicker plus a passive ramp, kept compact so nothing stalls between stages.', spec: 'Transfer' },
-  { key: 'Launcher', img: '/assets/robot/launcher.png', title: subOf(2).h, body: subOf(2).p, spec: 'Launcher' },
+  { key: 'Shooter', img: '/assets/robot/shooter.png', title: subOf(2).h, body: subOf(2).p, spec: 'Launcher' },
   { key: 'Drivetrain', img: '/assets/robot/drivetrain.png', title: subOf(0).h, body: subOf(0).p, spec: 'Drivebase' },
   { key: 'Electronics', img: '/assets/robot/electronics.png', title: subOf(5).h, body: subOf(5).p, spec: 'Controls' },
 ];
