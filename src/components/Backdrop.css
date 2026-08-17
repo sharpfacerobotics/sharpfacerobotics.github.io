@@ -29,3 +29,13 @@
   .bd__aurora { display: none; }
   .bd__pointer { transition: none; }
 }
+
+/* Static stand-in for Aurora on scroll-driven pages — same tonal presence,
+   no per-frame GPU cost. */
+.bd__quiet {
+  position: absolute; inset: 0 0 auto; height: 70vh;
+  background:
+    radial-gradient(70% 60% at 18% 0%, rgba(14, 93, 90, 0.42), transparent 68%),
+    radial-gradient(60% 55% at 82% 6%, rgba(91, 75, 214, 0.34), transparent 70%);
+  mask-image: linear-gradient(180deg, #000 0%, #000 42%, transparent 100%);
+}
