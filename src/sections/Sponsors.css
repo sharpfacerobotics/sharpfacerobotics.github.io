@@ -1,7 +1,7 @@
 /* One flat grid — no tiers, no size hierarchy. The 1px gap over a shared
    background draws the grid; there are no card shadows anywhere on this site. */
 .sp-grid {
-  display: grid; gap: 0.7rem;
+  display: grid; gap: 0.55rem;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
 }
 
@@ -10,7 +10,7 @@
 .sp {
   position: relative;
   display: flex; align-items: center; gap: 0.85rem;
-  padding: clamp(0.7rem, 1.5vh, 1.05rem);
+  padding: clamp(0.55rem, 1.1vh, 0.85rem);
   border-radius: var(--r-md);
   background: transparent;
   backdrop-filter: blur(12px);
@@ -24,7 +24,7 @@
 .sp__frame {
   flex: none;
   position: relative;              /* definite containing block for the img */
-  width: 4.5rem; height: 3rem;
+  width: 4.25rem; height: 2.75rem;
   background: transparent;
   border: 0;
 }
@@ -72,7 +72,7 @@
 .sp-loop img { background: #fff; padding: 5px 8px; border-radius: 1px; }
 
 .become {
-  margin-top: clamp(1rem, 2.4vh, 2rem);
+  margin-top: clamp(2.25rem, 5.5vh, 4rem);
   display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
   gap: 1.75rem;
   padding: 0;
