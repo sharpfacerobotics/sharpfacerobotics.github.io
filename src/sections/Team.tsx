@@ -2,6 +2,7 @@ import { team } from '@/data/site';
 import { members, coaches } from '@/data/team';
 import { Reveal, Spotlight } from '@/components/Motion';
 import SkewedCarousel from '@/components/SkewedCarousel';
+import TextType from '@/components/reactbits/TextType';
 import { outreachPhotos } from '@/data/outreachPhotos';
 import { excludedPhotos } from '@/data/photoPicks';
 import './Team.css';
@@ -18,7 +19,29 @@ export default function Team() {
       <div className="wrap">
         <header className="sec-head">
           <div className="sec-index"><b>01</b><span>Who we are</span></div>
-          <h2 className="d2">A rookie team that wrote everything down</h2>
+          {/* The stem stays put and the tail types, so the heading is always
+              readable and only the claim changes. */}
+          <h2 className="d2">
+            A rookie team that{' '}
+            <TextType
+              as="span"
+              className="head__typed"
+              text={[
+                'wrote everything down.',
+                'keeps its notes.',
+                'documents the mistakes.',
+                'hands it forward.',
+              ]}
+              typingSpeed={48}
+              deletingSpeed={24}
+              pauseDuration={2400}
+              initialDelay={600}
+              loop
+              showCursor
+              cursorCharacter="_"
+              textColors={['#4fe0d8']}
+            />
+          </h2>
         </header>
 
         {/* The team's own photographs, high on the page where they are the

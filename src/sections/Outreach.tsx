@@ -3,6 +3,7 @@ import { outreach, RELATIVE_ONLY, unit, type OutreachPoint } from '@/data/outrea
 import { members, outreachCount } from '@/data/team';
 import { Reveal } from '@/components/Motion';
 import GlassSurface from '@/components/reactbits/GlassSurface';
+import TextType from '@/components/reactbits/TextType';
 import './Outreach.css';
 
 /* Validated against the dark surface #0b0d11 with the dataviz palette
@@ -61,7 +62,22 @@ export default function Outreach() {
       <div className="wrap">
         <header className="sec-head">
           <div className="sec-index"><b>05</b><span>Outreach</span></div>
-          <h2 className="d2">Where the season actually goes</h2>
+          <h2 className="d2">
+            Where the season actually{' '}
+            <TextType
+              as="span"
+              className="head__typed"
+              text={['goes.', 'lands.', 'adds up.', 'reaches people.']}
+              typingSpeed={48}
+              deletingSpeed={24}
+              pauseDuration={2400}
+              initialDelay={600}
+              loop
+              showCursor
+              cursorCharacter="_"
+              textColors={['#4fe0d8']}
+            />
+          </h2>
           <p className="lede outreach__lede">
             A competition season is not one weekend. This is the rhythm of our outreach across
             a year — recruiting, build, league play, then the community work that carries into summer.

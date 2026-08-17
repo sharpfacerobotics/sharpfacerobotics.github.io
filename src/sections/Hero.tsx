@@ -5,7 +5,6 @@ import Counter from '@/components/reactbits/Counter';
 import RippleDistortion from '@/components/reactbits/RippleDistortion';
 import { Magnetic } from '@/components/Motion';
 import GlassSurface from '@/components/reactbits/GlassSurface';
-import TextType from '@/components/reactbits/TextType';
 import './Hero.css';
 
 export default function Hero({ onTab }: { onTab: (t: 'robot' | 'contact') => void }) {
@@ -59,26 +58,11 @@ export default function Hero({ onTab }: { onTab: (t: 'robot' | 'contact') => voi
         </h1>
 
         <div className="hero__meta">
-          {/* React Bits TextType on the main white line — the lede types
-              itself through several true statements about the team. */}
-          <TextType
-            as="p"
-            className="lede hero__lede-typed"
-            text={[
-              `A FIRST Tech Challenge team at ${team.school} in Dublin, California.`,
-              'We design, build and program a competition robot every season.',
-              'We write down what we learn so the next team does not start from zero.',
-              `${members.length} students across mechanical, software and outreach.`,
-            ]}
-            typingSpeed={26}
-            deletingSpeed={12}
-            pauseDuration={2600}
-            initialDelay={500}
-            loop
-            showCursor
-            cursorCharacter="_"
-            cursorBlinkDuration={0.7}
-          />
+          <p className="lede">
+            A FIRST Tech Challenge team at {team.school} in Dublin, California. We design,
+            build and program a competition robot every season — and write down what we
+            learn so the next team does not start from zero.
+          </p>
           <div className="hero__ctas">
             <Magnetic><button className="btn btn--solid" onClick={() => onTab('robot')}>See the robot</button></Magnetic>
             <Magnetic><button className="btn" onClick={() => onTab('contact')}>Get in touch</button></Magnetic>

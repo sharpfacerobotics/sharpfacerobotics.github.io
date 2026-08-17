@@ -83,11 +83,3 @@
 .hero .gs .glass-surface { border-radius: var(--r-md); }
 
 
-/* The typed lede is the main white line. A fixed min-height stops the block
-   below it jumping every time a sentence shortens. */
-.hero__lede-typed {
-  min-height: 4.6em;
-  color: var(--ink);
-  margin-inline: auto; max-width: 74ch;
-}
-@media (max-width: 700px) { .hero__lede-typed { min-height: 6.5em; } }

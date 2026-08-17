@@ -303,3 +303,11 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 /* the glass panel supplies the surface; wrapped content sits inside its padding */
 .gs > .glass-surface { padding: 0; }
 .gs .glass-surface__content > * { width: 100%; }
+
+/* A typed tail inside a display heading keeps the heading's own face and
+   weight, and reserves room so the line below never jumps mid-cycle. */
+.head__typed {
+  font-family: inherit;
+  font-variation-settings: inherit;
+  letter-spacing: inherit;
+}
