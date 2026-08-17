@@ -70,7 +70,7 @@ export default function Admin({ open, onClose }: { open: boolean; onClose: () =>
 
             <div className="admin__body">
               <section>
-                <h3 className="mono admin__legend">Roster</h3>
+                <h3 className="mono admin__legend">Members</h3>
                 {draft.members.map((m, i) => (
                   <div className="admin__row" key={m.name + i}>
                     <input aria-label="Name" value={m.name} onChange={e => setMember(i, { name: e.target.value })} />

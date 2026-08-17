@@ -7,7 +7,7 @@ export const TABS = [
   { id: 'home',     label: 'Home' },
   { id: 'team',     label: 'Team' },
   { id: 'robot',    label: 'Robot' },
-  { id: 'roster',   label: 'Roster' },
+  { id: 'roster',   label: 'Members' },
   { id: 'services', label: 'Services' },
   { id: 'outreach', label: 'Outreach' },
   { id: 'partners', label: 'Partners' },

@@ -69,7 +69,7 @@ export default function Bios() {
     <section className="band band--lift" id="roster">
       <div className="wrap">
         <header className="sec-head">
-          <div className="sec-index"><b>03</b><span>Roster</span></div>
+          <div className="sec-index"><b>03</b><span>Members</span></div>
           <h2 className="d2">The people who build it</h2>
         </header>
 

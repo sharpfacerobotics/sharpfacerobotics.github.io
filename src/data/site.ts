@@ -18,6 +18,11 @@ export const teams = [
   },
 ];
 
+/* Programme-wide headcount across both teams and the wider club — deliberately
+   NOT members.length, which only counts the people with cards on the site. */
+export const memberCount = 45;
+export const memberCountLabel = '45+';
+
 export const team = {
   number: '30450',
   name: 'Sharp Face Robotics',

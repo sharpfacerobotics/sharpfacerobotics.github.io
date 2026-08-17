@@ -1,5 +1,4 @@
-import { team, awards } from '@/data/site';
-import { members } from '@/data/team';
+import { team, awards, memberCount } from '@/data/site';
 import ParticleText from '@/components/reactbits/ParticleText';
 import Counter from '@/components/reactbits/Counter';
 import RippleDistortion from '@/components/reactbits/RippleDistortion';
@@ -108,10 +107,12 @@ export default function Hero({ onTab }: { onTab: (t: 'robot' | 'contact') => voi
         >
         <dl className="hero__stats">
           <div className="hero__stat hero__stat--team">
-            <dt className="mono-sm"><span className="hero__ico"><Roster size={15} /></span>Build team</dt>
+            <dt className="mono-sm"><span className="hero__ico"><Roster size={15} /></span>Members</dt>
             <dd className="hero__count">
-              <Counter value={members.length} fontSize={34} places={[10, 1]} gap={2}
+              <Counter value={memberCount} fontSize={34} places={[10, 1]} gap={2}
                 textColor="#4fe0d8" gradientHeight={0} borderRadius={6} horizontalPadding={4} />
+              <span className="hero__plus" aria-hidden="true">+</span>
+              <span className="sr-only">plus</span>
             </dd>
           </div>
           <div className="hero__stat hero__stat--robot">

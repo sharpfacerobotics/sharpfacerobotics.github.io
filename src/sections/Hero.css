@@ -115,3 +115,11 @@
 @media (prefers-reduced-motion: reduce) {
   .hero__stat--award .hero__ico svg { animation: none; }
 }
+
+/* the "+" sits with the counter rather than after a gap */
+.hero__count { display: flex; align-items: baseline; gap: 0.06em; }
+.hero__plus {
+  font-family: var(--display); font-variation-settings: 'wght' 650;
+  font-size: clamp(1.1rem, min(2vw, 2.4vh), 1.6rem);
+  color: var(--accent); line-height: 1;
+}

@@ -1,6 +1,6 @@
 import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { outreach, RELATIVE_ONLY, unit, type OutreachPoint } from '@/data/outreach';
-import { members, outreachCount } from '@/data/team';
+import { outreachCount } from '@/data/team';
 import { Reveal } from '@/components/Motion';
 import GlassSurface from '@/components/reactbits/GlassSurface';
 import TextType from '@/components/reactbits/TextType';
@@ -83,7 +83,7 @@ export default function Outreach() {
             a year — recruiting, build, league play, then the community work that carries into summer.
           </p>
           <p className="mono outreach__stat">
-            <b>{outreachCount}</b> of {members.length} on the build team also run outreach
+            <b>{outreachCount}</b> students on the build team also run outreach
           </p>
         </header>
 
