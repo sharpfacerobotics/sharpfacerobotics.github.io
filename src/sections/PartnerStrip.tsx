@@ -29,8 +29,6 @@ export default function PartnerStrip() {
             gap={72}
             pauseOnHover
             scaleOnHover
-            fadeOut
-            fadeOutColor="#07080b"
             ariaLabel="Our partners"
           />
         </div>

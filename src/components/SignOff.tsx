@@ -27,8 +27,6 @@ export default function SignOff({ direction = 'right' }: { direction?: 'left' | 
           logoHeight={22}
           gap={56}
           pauseOnHover
-          fadeOut
-          fadeOutColor="#07080b"
           ariaLabel="Our partners"
         />
       </div>
