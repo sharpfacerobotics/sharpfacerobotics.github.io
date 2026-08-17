@@ -72,10 +72,15 @@
 .sp-loop img { background: #fff; padding: 5px 8px; border-radius: 1px; }
 
 .become {
-  margin-top: clamp(3.5rem, 9vh, 6.5rem);
   display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
   gap: 1.75rem;
   padding: 0;
   background: transparent;
 }
 .become .lede { max-width: 52ch; }
+
+
+/* The Support-the-team panel is a GlassSurface inside .wrap.gs. Any gap has to
+   go on THAT wrapper — margin on .become only pads the panel's own contents and
+   grows the panel downward, leaving the visible edge flush against the grid. */
+#sponsors .wrap.gs { margin-top: clamp(2.5rem, 6vh, 4.5rem); }
