@@ -1,3 +1,23 @@
+/* The programme runs TWO FTC teams out of Emerald High School.
+   `team` stays as the primary/site-owner team so nothing else has to change. */
+export const teams = [
+  {
+    name: 'Sharp Face Robotics',
+    number: '30450',
+    blurb: 'The founding team. Built KG for DECODE and documents every season so the next one does not start from zero.',
+    accent: '#4fe0d8',
+    primary: true,
+  },
+  {
+    name: 'Dark Force Robotics',
+    // TODO: FTC number not supplied — left null rather than guessed.
+    number: null as string | null,
+    blurb: 'Our second team out of Emerald High School, competing in the same DECODE season.',
+    accent: '#8b7bff',
+    primary: false,
+  },
+];
+
 export const team = {
   number: '30450',
   name: 'Sharp Face Robotics',

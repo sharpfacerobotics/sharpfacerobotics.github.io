@@ -70,3 +70,34 @@
 @media (max-width: 700px) {
   .team__lead { min-height: clamp(15rem, 40vh, 22rem); }
 }
+
+/* ── the two teams ────────────────────────────────────────────────────── */
+.teams { display: grid; gap: 0.9rem; }
+.teams__label { color: var(--ink-4); }
+.teams__list { display: grid; gap: 0.75rem; }
+
+.teams__item {
+  position: relative;
+  padding: 1.05rem 1.15rem 1.05rem 1.4rem;
+  border: 1px solid var(--glass-edge);
+  border-radius: var(--r-md);
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  transition: border-color 320ms var(--ease), transform 320ms var(--ease);
+}
+/* a colour spine per team, so the two read as siblings not duplicates */
+.teams__item::before {
+  content: ''; position: absolute; left: 0; top: 0.9rem; bottom: 0.9rem;
+  width: 3px; border-radius: 3px;
+  background: var(--accent-team, var(--accent));
+}
+.teams__item:hover { border-color: var(--rule-strong); transform: translateX(3px); }
+
+.teams__head { display: flex; align-items: baseline; gap: 0.7rem; flex-wrap: wrap; }
+.teams__name {
+  font-family: var(--display); font-variation-settings: 'wdth' 104, 'wght' 660;
+  font-size: 1.0625rem; color: var(--ink); letter-spacing: -0.012em;
+}
+.teams__num { color: var(--accent-team, var(--accent)); }
+.teams__blurb { margin-top: 0.3rem; font-size: 0.875rem; line-height: 1.45; color: var(--ink-3); text-wrap: pretty; }
+.teams__foot { color: var(--ink-4); }

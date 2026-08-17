@@ -1,5 +1,5 @@
-import { team } from '@/data/site';
-import { members, coaches } from '@/data/team';
+import { team, teams } from '@/data/site';
+import { coaches } from '@/data/team';
 import { Reveal, Spotlight } from '@/components/Motion';
 import SkewedCarousel from '@/components/SkewedCarousel';
 import TextType from '@/components/reactbits/TextType';
@@ -62,12 +62,25 @@ export default function Team() {
               engineering habits that outlast any one season.
             </p>
 
-            <dl className="spec-list">
-              <div className="spec"><dt>Build team</dt><dd><b>{members.length}</b> students across mechanical and software</dd></div>
-              <div className="spec"><dt>Coaches</dt><dd>{coaches.map(c => c.name).join(' · ')}</dd></div>
-              <div className="spec"><dt>Season</dt><dd>{team.season}</dd></div>
-              <div className="spec"><dt>Home</dt><dd>{team.school}, {team.city}</dd></div>
-            </dl>
+            {/* Two teams run out of the same school, so the page says so
+                rather than presenting one as the whole programme. */}
+            <div className="teams">
+              <p className="mono teams__label">Two teams · {team.school}</p>
+              <ul className="teams__list">
+                {teams.map(t => (
+                  <li className="teams__item" key={t.name} style={{ '--accent-team': t.accent } as React.CSSProperties}>
+                    <div className="teams__head">
+                      <h3 className="teams__name">{t.name}</h3>
+                      {t.number && <span className="mono teams__num">FTC {t.number}</span>}
+                    </div>
+                    <p className="teams__blurb">{t.blurb}</p>
+                  </li>
+                ))}
+              </ul>
+              <p className="mono-sm teams__foot">
+                {team.season} · {coaches.map(c => c.name).join(' · ')}
+              </p>
+            </div>
           </div>
 
           <Spotlight className="pillars-wrap"><ol className="pillars">
