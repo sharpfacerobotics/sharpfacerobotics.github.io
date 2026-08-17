@@ -18,8 +18,9 @@ export const teams = [
   },
 ];
 
-/* Programme-wide headcount across both teams and the wider club — deliberately
-   NOT members.length, which only counts the people with cards on the site. */
+/* Headcount across BOTH FTC teams — Sharp Face Robotics and Dark Force
+   Robotics. Deliberately not members.length, which only counts the people who
+   currently have a card on the site. */
 export const memberCount = 45;
 export const memberCountLabel = '45+';
 

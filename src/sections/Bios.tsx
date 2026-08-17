@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { captain, coaches, members, type Member } from '@/data/team';
+import { memberCountLabel, teams } from '@/data/site';
 import ChromaGrid from '@/components/reactbits/ChromaGrid';
 import GlareHover from '@/components/reactbits/GlareHover';
 import GlassSurface from '@/components/reactbits/GlassSurface';
@@ -71,6 +72,18 @@ export default function Bios() {
         <header className="sec-head">
           <div className="sec-index"><b>03</b><span>Members</span></div>
           <h2 className="d2">The people who build it</h2>
+          {/* States the scope of the 45+ figure, so the cards below do not read
+              as contradicting the headline number. */}
+          <p className="lede members__scope">
+            <b>{memberCountLabel}</b> members across{' '}
+            {teams.map((t, i) => (
+              <span key={t.name}>
+                <span style={{ color: t.accent }}>{t.name}</span>
+                {i < teams.length - 1 ? ' and ' : ''}
+              </span>
+            ))}
+            . Cards below are the students currently profiled.
+          </p>
         </header>
 
         {/* ── Leadership: tier 01 when the wheel is on Everyone ─────── */}

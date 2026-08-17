@@ -169,3 +169,6 @@
 /* GlareHover wraps the grid; it must not impose its own box or clip the cards */
 .bios__glare { display: block; width: 100%; height: auto !important; }
 .bios__glare > * { position: static !important; }
+
+.members__scope { max-width: 68ch; }
+.members__scope b { color: var(--ink); font-weight: 600; }
