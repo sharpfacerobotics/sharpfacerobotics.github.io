@@ -1,5 +1,5 @@
 import { services } from '@/data/site';
-import { Reveal, Spotlight } from '@/components/Motion';
+import { Reveal, Spotlight, Tilt } from '@/components/Motion';
 import SignOff from '@/components/SignOff';
 import TextType from '@/components/reactbits/TextType';
 import './Services.css';
@@ -32,6 +32,7 @@ export default function Services() {
         <Spotlight><div className="svc__grid">
           {services.map((s, i) => (
             <Reveal as="article" className="svc" key={s.name} delay={i * 80}>
+              <Tilt max={2.5} scale={1.008}>
               <div className="svc__head">
                 <div className="svc__mark">
                   {s.logo
@@ -51,6 +52,7 @@ export default function Services() {
                 {s.cta} <span aria-hidden="true">↗</span>
                 <span className="sr-only">(opens in a new tab)</span>
               </a>
+              </Tilt>
             </Reveal>
           ))}
         </div></Spotlight>

@@ -121,3 +121,42 @@ export function Spotlight({
 
   return <div ref={ref} className={`spot ${className}`}>{children}</div>;
 }
+
+/* ───────────────────────────────────────────────────────────────
+   Tilt — a subtle 3D lean toward the cursor, for cards that only had a
+   flat hover-lift before. Cheap: transform only, no layout, off on touch.
+   ─────────────────────────────────────────────────────────────── */
+export function Tilt({
+  children, max = 6, scale = 1.015, className = '',
+}: { children: ReactNode; max?: number; scale?: number; className?: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || reduced() || !window.matchMedia('(hover: hover)').matches) return;
+    let raf = 0;
+    const move = (e: PointerEvent) => {
+      const r = el.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width - 0.5;
+      const py = (e.clientY - r.top) / r.height - 0.5;
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        el.style.transform =
+          `perspective(700px) rotateX(${(-py * max).toFixed(2)}deg) rotateY(${(px * max).toFixed(2)}deg) scale(${scale})`;
+      });
+    };
+    const leave = () => {
+      cancelAnimationFrame(raf);
+      el.style.transform = 'perspective(700px) rotateX(0) rotateY(0) scale(1)';
+    };
+    el.addEventListener('pointermove', move);
+    el.addEventListener('pointerleave', leave);
+    return () => {
+      cancelAnimationFrame(raf);
+      el.removeEventListener('pointermove', move);
+      el.removeEventListener('pointerleave', leave);
+    };
+  }, [max, scale]);
+
+  return <div ref={ref} className={`tilt ${className}`}>{children}</div>;
+}

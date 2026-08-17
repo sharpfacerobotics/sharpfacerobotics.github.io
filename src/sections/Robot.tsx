@@ -33,11 +33,11 @@ export default function Robot() {
             ))}
           </div>
           <dl className="spec-list robot__specs pane">
-            {specs.map(s => (
-              <div className="spec" key={s.k}>
+            {specs.map((s, i) => (
+              <Reveal as="div" className="spec" key={s.k} delay={i * 55} y={10}>
                 <dt>{s.k}</dt>
                 <dd>{s.v}</dd>
-              </div>
+              </Reveal>
             ))}
           </dl>
         </Reveal>

@@ -38,3 +38,10 @@
   .mag { transition: none; }
   .spot::before { display: none; }
 }
+
+.tilt {
+  transition: transform 420ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) { .tilt { transition: none; } }

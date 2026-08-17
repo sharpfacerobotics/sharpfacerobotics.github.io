@@ -1,5 +1,5 @@
 import { sponsors, type Sponsor } from '@/data/sponsors';
-import { Reveal, Spotlight } from '@/components/Motion';
+import { Reveal, Spotlight, Tilt } from '@/components/Motion';
 import BorderGlow from '@/components/reactbits/BorderGlow';
 import GlassSurface from '@/components/reactbits/GlassSurface';
 import './Sponsors.css';
@@ -46,6 +46,7 @@ export default function Sponsors() {
           <div className="sp-grid">
             {sponsors.map((s, i) => (
               <Reveal key={s.name} delay={i * 45} y={14}>
+                <Tilt max={4} scale={1.02}>
                 {/* React Bits BorderGlow — the edge lights toward the cursor. */}
                 <BorderGlow
                   className="sp-glow"
@@ -61,6 +62,7 @@ export default function Sponsors() {
                 >
                   <Mark s={s} />
                 </BorderGlow>
+                </Tilt>
               </Reveal>
             ))}
           </div>

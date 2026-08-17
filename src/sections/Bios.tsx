@@ -82,7 +82,7 @@ export default function Bios() {
               <p className="tier__blurb">Captain and coaching staff</p>
             </div>
             <div className="lead-row">
-              <article className="lead pane">
+              <Reveal as="article" className="lead pane" y={12}>
                 <div className="lead__img">
                   <img src={captain.photo} alt={captain.name} loading="lazy" />
                 </div>
@@ -92,16 +92,16 @@ export default function Bios() {
                   <p className="mono-sm lead__grade">{captain.grade}</p>
                   {captain.favorite && <p className="bio__quote">“{captain.favorite}”</p>}
                 </div>
-              </article>
+              </Reveal>
 
-              {coaches.map(c => (
-                <article className="lead lead--coach pane" key={c.name}>
+              {coaches.map((c, i) => (
+                <Reveal as="article" className="lead lead--coach pane" key={c.name} delay={(i + 1) * 90} y={12}>
                   <div>
                     <p className="mono lead__role">{c.title}</p>
                     <h4 className="d3">{c.name}</h4>
                     {c.note && <p className="bio__quote">“{c.note}”</p>}
                   </div>
-                </article>
+                </Reveal>
               ))}
             </div>
           </div>
