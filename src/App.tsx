@@ -50,8 +50,7 @@ export default function App() {
 
   return (
     <>
-      {/* the walkthrough is scroll-driven; give it the frames */}
-      <Backdrop quiet={tab === 'robot'} />
+      <Backdrop />
       <a className="skip" href="#main">Skip to content</a>
       <Nav tab={tab} onTab={go} onAdmin={() => setAdmin(true)} />
 
