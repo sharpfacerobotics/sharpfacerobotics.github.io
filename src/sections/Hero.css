@@ -22,7 +22,7 @@
    total for the h1). The min-height is the rule that actually had to go. */
 .hero__h1 .hero__particles {
   display: block; width: 100%;
-  height: clamp(1.9rem, min(5.5vw, 7.5vh), 4.5rem);
+  height: clamp(1.75rem, min(5vw, 6.6vh), 4rem);
   min-height: 0;
 }
 .hero__particles > *,
@@ -35,11 +35,11 @@
 
 .hero__meta { display: grid; justify-items: center; gap: clamp(0.75rem, 1.8vh, 1.5rem); margin-top: 0.25rem; }
 
-.hero__ctas { display: flex; flex-wrap: wrap; gap: 0.7rem; justify-content: center; }
+.hero__ctas { display: flex; flex-wrap: wrap; gap: 0.7rem; justify-content: center; margin-bottom: clamp(0.4rem, 1.2vh, 1rem); }
 
 /* ── the plate: image-first, full width, generous radius ─────────────── */
 /* capped near the source's native 1100px so it is never upscaled on screen */
-.hero__plate { position: relative; border-radius: var(--r-xl); max-width: min(1120px, 17.5vh * 2.17); margin-inline: auto; }
+.hero__plate { position: relative; border-radius: var(--r-xl); max-width: min(920px, 27vh * 2.17); margin-inline: auto; }
 .hero__ripple, .hero__plate canvas { width: 100%; aspect-ratio: 1100 / 508; display: block; }
 .hero__plate img {
   width: 100%; aspect-ratio: 1100 / 508; max-height: 42vh; object-fit: cover; object-position: center 42%;
@@ -47,7 +47,7 @@
 }
 .hero__plate:hover img { transform: scale(1.02); }
 .hero__cap {
-  position: absolute; left: 0.75rem; right: auto; bottom: 0.75rem;
+  position: absolute; left: 0.85rem; right: auto; bottom: 0.85rem;
   display: inline-flex; align-items: center; gap: 0.85rem;
   padding: 0.3rem 0.7rem;
   border-radius: var(--r-pill);
@@ -59,7 +59,7 @@
 
 /* ── stats ───────────────────────────────────────────────────────────── */
 .hero__stats {
-  margin-top: clamp(0.55rem, 1.3vh, 1.1rem);
+  margin-top: clamp(1rem, 2.4vh, 1.75rem);
   display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));
   gap: 1px;
   background: var(--rule);
@@ -76,7 +76,7 @@
 .tab { font-variant-numeric: tabular-nums; }
 
 /* wider measure keeps the lede to two lines, which the viewport budget needs */
-.hero__meta .lede { max-width: 74ch; font-size: clamp(0.95rem, 0.9rem + 0.3vw, 1.0625rem); }
+.hero__meta .lede { max-width: 96ch; font-size: clamp(0.9rem, 0.85rem + 0.25vw, 1rem); line-height: 1.45; }
 
 /* the hero stat rail is a tight bar, not a padded panel */
 .hero .gs .glass-surface__content { padding: 0; }
