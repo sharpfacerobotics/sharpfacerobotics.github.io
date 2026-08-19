@@ -47,20 +47,22 @@ export default function Bios() {
   const shown = GROUPS.filter(g => pick === 'Everyone' || g.key === pick);
   const showLeadership = pick === 'Everyone';
 
-  /* OptionWheel only handles keys while it holds focus, so the arrows did
-     nothing unless you had clicked the dial first. Drive the group from
-     Left/Right at the page level instead — no focus required. */
+  /* OptionWheel only acts on arrow keys while it HOLDS FOCUS, so the page-level
+     handler forwards the keystroke into it rather than setting state directly.
+     Setting state here was what forced a remount and killed the animation. */
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
       const t = e.target as HTMLElement | null;
       if (t && /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)) return;
+
+      const wheel = document.querySelector<HTMLElement>('.roster__wheel-ctl');
+      if (!wheel) return;
+      if (wheel.contains(t)) return;        // already focused; let it handle itself
+
       e.preventDefault();
-      setPick(cur => {
-        const i = WHEEL.indexOf(cur as (typeof WHEEL)[number]);
-        const n = (i + (e.key === 'ArrowRight' ? 1 : -1) + WHEEL.length) % WHEEL.length;
-        return WHEEL[n];
-      });
+      wheel.focus({ preventScroll: true });
+      wheel.dispatchEvent(new KeyboardEvent('keydown', { key: e.key, bubbles: true }));
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
@@ -138,8 +140,7 @@ export default function Bios() {
           <div className="roster__wheel-stage">
           <OptionWheel
             items={[...WHEEL]}
-            key={pick}
-            defaultSelected={Math.max(0, WHEEL.indexOf(pick as (typeof WHEEL)[number]))}
+            defaultSelected={0}
             onChange={(_i, item) => setPick(item)}
             textColor="#6d7583"
             activeColor="#4fe0d8"
