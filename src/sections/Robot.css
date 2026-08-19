@@ -1,0 +1,88 @@
+.robot-tab > .rw { margin-top: 0; }
+.robot-tab .band:first-child { padding-top: var(--band); }
+.robot__sub {
+  font-family: var(--mono); font-size: 0.875rem; letter-spacing: 0.1em;
+  color: var(--ink-4); text-transform: uppercase;
+  font-variation-settings: normal; vertical-align: middle;
+}
+
+.robot__top {
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(1.25rem, 3vw, 2.5rem); align-items: start;
+}
+@media (max-width: 900px) { .robot__top { grid-template-columns: 1fr; } }
+
+.robot__shots { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+.robot__shot {
+  border-radius: var(--r-md); overflow: hidden;
+  border: 1px solid var(--glass-edge); background: var(--card);
+}
+.robot__shot img {
+  width: 100%; aspect-ratio: 4 / 3; object-fit: cover;
+  filter: saturate(0.92); transition: transform 620ms var(--ease), filter 620ms var(--ease);
+}
+.robot__shot:hover img { transform: scale(1.06); filter: none; }
+@media (max-width: 900px) { .robot__top { grid-template-columns: 1fr; } }
+
+
+/* Uses the pre-cut transparent PNG (explodedCad-cutout.png), generated from the
+   original by mapping luminance to alpha. Blend modes were unreliable here —
+   any sticky or backdrop-filter ancestor isolates them and the black returns. */
+.robot__plate .plate__frame { background: transparent; border-color: transparent; }
+.robot__plate .plate__frame img {
+  aspect-ratio: auto; object-fit: contain; padding: 0;
+  max-height: 30rem; margin-inline: auto;
+}
+.robot__specs { padding: 0.4rem 1.4rem; }
+
+.subsys {
+  display: grid; gap: 1px;
+  background: var(--rule); border: 1px solid var(--rule);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+}
+.subsys__card {
+  background: var(--card);
+  backdrop-filter: blur(12px);
+  display: grid; grid-template-rows: auto 1fr;
+  overflow: hidden;
+}
+.subsys__art {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border-bottom: 1px solid var(--rule);
+  background:
+    radial-gradient(120% 100% at 50% 0%, rgba(63,208,201,0.06), transparent 70%);
+  overflow: hidden;
+}
+.subsys__art img {
+  /* Absolute against a definite box. A percentage height does NOT resolve
+     against an aspect-ratio parent, so the image fell back to its intrinsic
+     ratio and overflowed the frame. */
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; padding: 1.1rem;
+  object-fit: contain;
+  opacity: 0.9;
+  transition: transform 520ms var(--ease), opacity 320ms var(--ease);
+}
+.subsys__card:hover .subsys__art img { transform: scale(1.07); opacity: 1; }
+
+.subsys__text { padding: 1.35rem 1.4rem 1.6rem; display: grid; gap: 0.45rem; align-content: start; }
+.subsys__n { color: var(--accent); }
+.subsys__text p { color: var(--ink-3); font-size: 0.9375rem; text-wrap: pretty; }
+
+.robot__specs { padding: 0.4rem 1.4rem; }
+
+/* MagicBento owns its own grid; give it our surface language. */
+.robot__bento .magic-bento-card {
+  background: var(--card) !important;
+  backdrop-filter: blur(14px);
+  border-color: var(--rule) !important;
+  border-radius: 2px !important;
+}
+.robot__bento .magic-bento-card__label { font-family: var(--mono); font-size: 0.625rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); }
+.robot__bento .magic-bento-card__title {
+  font-family: var(--display); font-variation-settings: 'wdth' 104, 'wght' 650;
+  font-size: 1.15rem; color: var(--ink);
+}
+.robot__bento .magic-bento-card__description { color: var(--ink-3); font-size: 0.9rem; line-height: 1.55; }

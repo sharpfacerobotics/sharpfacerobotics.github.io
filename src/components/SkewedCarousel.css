@@ -1,0 +1,78 @@
+/* The rotation lives on the CONTAINER, not the track. The track is
+   width:max-content — several thousand pixels — so rotating it swung its ends
+   over 100px vertically and the cards fell out of the clip box. Rotating the
+   fixed-width container tilts the same plane with no displacement; the slight
+   scale hides the triangular gaps the rotation opens at the edges. */
+.skew {
+  position: relative;
+  overflow: hidden;
+  transform: rotate(var(--rot)) scale(1.04);
+  /* A card skewed by θ over width W gains W·tan(θ) of vertical extent, and
+     the hover scale adds ~6% more. Padding has to cover both or overflow:hidden
+     slices the corners off. */
+  padding-block: clamp(2.5rem, 5.5vh, 4rem);
+  /* the plane the whole strip sits on */
+  perspective: 1200px;
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+
+.skew__track {
+  display: flex;
+  gap: clamp(0.85rem, 1.8vw, 1.5rem);
+  width: max-content;
+  padding-inline: 1rem;
+  transform: translateX(var(--drag, 0px));
+  animation: skew-run var(--dur) linear infinite;
+  cursor: grab;
+  touch-action: pan-y;
+}
+.skew__track.is-paused { animation-play-state: paused; }
+.skew__track:active { cursor: grabbing; }
+@keyframes skew-run { to { transform: translateX(calc(var(--drag, 0px) - 50%)); } }
+
+.skew__item { flex: none; }
+
+.skew__card {
+  position: relative;
+  width: clamp(11rem, 17vw, 15rem);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background: var(--card);
+  border: 1px solid var(--glass-edge);
+  box-shadow: var(--lift-2);
+  /* the skew that gives the carousel its name */
+  transform: skewY(var(--skew)) scale(0.97);
+  transition: transform 520ms var(--ease), box-shadow 520ms var(--ease), filter 520ms var(--ease);
+  filter: saturate(0.9) brightness(0.86);
+}
+.skew__item:hover .skew__card {
+  /* the card under the pointer straightens up and comes forward */
+  transform: skewY(0deg) scale(1.06);
+  box-shadow: var(--lift-3);
+  filter: none;
+  z-index: 2;
+}
+
+.skew__card img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+}
+
+.skew__cap {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 0.85rem 0.7rem 0.5rem;
+  color: #eef1f5;
+  background: linear-gradient(transparent, rgba(4, 5, 8, 0.85));
+  opacity: 0; transform: translateY(6px);
+  transition: opacity 400ms var(--ease), transform 400ms var(--ease);
+}
+.skew__item:hover .skew__cap { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .skew__track { animation: none; }
+  .skew__card { transform: none; filter: none; transition: none; }
+  .skew__cap { opacity: 1; transform: none; }
+}

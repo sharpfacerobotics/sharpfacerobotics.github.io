@@ -1,0 +1,147 @@
+/* Capped: at full container width the 1000x340 viewBox renders ~620px tall
+   and pushes the readout off the fold. */
+.chart {
+  max-width: 80rem;
+  margin-inline: auto;
+  width: 100%;
+  background: transparent;
+  padding: 0;
+}
+.chart__cap {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; padding-bottom: 0.5rem; margin-bottom: 0.25rem;
+  border-bottom: 1px solid var(--rule);
+}
+.chart__toggle {
+  border: 1px solid var(--rule-strong); padding: 0.4rem 0.8rem;
+  color: var(--ink-3); transition: color .3s var(--ease), border-color .3s var(--ease);
+}
+.chart__toggle:hover { color: var(--accent); border-color: var(--accent); }
+
+.chart__plot svg {
+  width: 100%; height: auto; display: block; overflow: visible;
+  /* cap against the viewport so the whole section fits without scrolling */
+  max-height: clamp(7rem, 31vh, 22rem);
+}
+.chart__plot { padding-block: 0.5rem; }
+.chart__xlab {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em;
+  fill: var(--ink-4); transition: fill .2s var(--ease);
+}
+.chart__xlab.is-on { fill: var(--paper); }
+.chart__mile circle { transition: r .3s var(--ease); }
+
+.chart__read {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem 1.25rem;
+  min-height: 1.4rem; margin-top: 0.45rem; padding-top: 0.5rem;
+  border-top: 1px solid var(--rule);
+  font-family: var(--mono); font-size: 0.6875rem;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3);
+}
+.chart__read b { color: var(--ink); font-weight: 600; }
+.chart__read em { font-style: normal; }
+.chart__hint { color: var(--ink-4); }
+
+.chart__table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+.chart__table th, .chart__table td {
+  text-align: left; padding: 0.7rem 1rem 0.7rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.chart__table thead th {
+  font-family: var(--mono); font-size: 0.625rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--ink-3); font-weight: 500;
+}
+.chart__table tbody th { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+.chart__table td { color: var(--ink-2); }
+
+.chart__note { margin-top: 0.5rem; color: var(--ink-4); letter-spacing: 0.1em; text-transform: none; }
+
+.outreach__stat { color: var(--ink-3); margin-top: 1rem; }
+.outreach__stat b { color: var(--accent); font-weight: 600; font-variant-numeric: tabular-nums; }
+
+
+/* ── entry animation ─────────────────────────────────────────────────────
+   pathLength={1} normalises the line so one dash covers it exactly, whatever
+   the real path length is. */
+.chart__line {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+.chart__area { opacity: 0; transform: scaleY(0.6); transform-origin: bottom; }
+.chart__mile { opacity: 0; }
+
+.chart__plot.is-drawn .chart__line {
+  animation: chart-draw 1500ms cubic-bezier(0.33, 0.9, 0.3, 1) forwards;
+}
+.chart__plot.is-drawn .chart__area {
+  animation: chart-fill 1100ms cubic-bezier(0.22, 0.61, 0.36, 1) 260ms forwards;
+}
+.chart__plot.is-drawn .chart__mile {
+  animation: chart-pop 420ms cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  animation-delay: calc(560ms + var(--mi, 0) * 110ms);
+}
+.chart__plot.is-drawn .chart__xlab {
+  animation: chart-lab 420ms var(--ease) both;
+}
+
+@keyframes chart-draw { to { stroke-dashoffset: 0; } }
+@keyframes chart-fill { to { opacity: 1; transform: scaleY(1); } }
+@keyframes chart-pop  { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@keyframes chart-lab  { from { opacity: 0; } to { opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .chart__line { stroke-dashoffset: 0; }
+  .chart__area, .chart__mile { opacity: 1; transform: none; }
+  .chart__plot.is-drawn * { animation: none !important; }
+}
+
+/* the section owns its vertical rhythm via .fitview */
+.band.fitview .sec-head { margin-bottom: clamp(0.75rem, 1.6vh, 1.4rem); gap: 0.6rem; }
+.band.fitview .outreach__stat { margin-top: 0.3rem; }
+
+/* wider measure = fewer lines = the section fits the viewport */
+.outreach__lede { max-width: 78ch; }
+
+/* ── the graph never sits still ──────────────────────────────────────────
+   After the draw-in finishes the series breathes: the fill pulses gently and
+   a highlight travels the stroke, so the section reads as live rather than
+   as a static plot. */
+.chart__plot.is-drawn .chart__line {
+  animation:
+    chart-draw 1500ms cubic-bezier(0.33, 0.9, 0.3, 1) forwards,
+    chart-breathe 6s ease-in-out 1600ms infinite;
+}
+@keyframes chart-breathe {
+  0%, 100% { stroke-width: 2.5; opacity: 1; }
+  50%      { stroke-width: 3.2; opacity: 0.86; }
+}
+.chart__plot.is-drawn .chart__area {
+  animation:
+    chart-fill 1100ms cubic-bezier(0.22, 0.61, 0.36, 1) 260ms forwards,
+    chart-swell 6s ease-in-out 1600ms infinite;
+}
+@keyframes chart-swell {
+  0%, 100% { transform: scaleY(1); }
+  50%      { transform: scaleY(0.985); }
+}
+/* a light travelling along the series */
+.chart__spark {
+  fill: none; stroke: #7df3ec; stroke-width: 3; stroke-linecap: round;
+  stroke-dasharray: 0.06 0.94; opacity: 0.9;
+  animation: chart-run 5.5s linear 1600ms infinite;
+}
+@keyframes chart-run { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+
+.chart__mile circle { animation: mile-pulse 3.2s ease-in-out infinite; }
+@keyframes mile-pulse { 0%,100% { r: 5; } 50% { r: 6.4; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .chart__plot.is-drawn .chart__line,
+  .chart__plot.is-drawn .chart__area,
+  .chart__spark, .chart__mile circle { animation: none !important; }
+  .chart__spark { display: none; }
+}
+
+
+.outreach__typed { display: flex; align-items: baseline; gap: 0.5rem; min-height: 1.5em; color: var(--ink-3); }
+.outreach__typed-lead { color: var(--ink-4); }

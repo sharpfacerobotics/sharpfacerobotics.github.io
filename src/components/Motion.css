@@ -1,0 +1,47 @@
+/* Reveal — 380ms, no overshoot. Linear's motion is fast and flat, not springy. */
+.rv {
+  opacity: 0;
+  transform: translate3d(0, var(--rv-y, 18px), 0);
+  transition:
+    opacity 380ms cubic-bezier(0.22, 0.61, 0.36, 1) var(--rv-delay, 0ms),
+    transform 380ms cubic-bezier(0.22, 0.61, 0.36, 1) var(--rv-delay, 0ms);
+  will-change: opacity, transform;
+}
+.rv.is-in { opacity: 1; transform: none; will-change: auto; }
+
+/* If JS never runs, content must still be visible. */
+.no-js .rv { opacity: 1; transform: none; }
+
+.mag {
+  display: inline-flex;
+  transition: transform 420ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: transform;
+}
+
+/* Cursor light over a surface. Cheap: one radial gradient, opacity-animated. */
+.spot { position: relative; }
+.spot::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 1;
+  pointer-events: none;
+  opacity: var(--so, 0);
+  transition: opacity 320ms var(--ease);
+  background: radial-gradient(
+    360px circle at var(--sx, 50%) var(--sy, 50%),
+    rgba(63, 208, 201, 0.09),
+    transparent 62%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rv { opacity: 1; transform: none; transition: none; }
+  .mag { transition: none; }
+  .spot::before { display: none; }
+}
+
+.tilt {
+  transition: transform 420ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) { .tilt { transition: none; } }

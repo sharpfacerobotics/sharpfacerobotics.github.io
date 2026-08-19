@@ -1,0 +1,86 @@
+/* One flat grid — no tiers, no size hierarchy. The 1px gap over a shared
+   background draws the grid; there are no card shadows anywhere on this site. */
+.sp-grid {
+  display: grid; gap: 0.55rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+}
+
+/* BorderGlow supplies the surface and the edge; the inner card is transparent. */
+.sp-glow { height: 100%; }
+.sp {
+  position: relative;
+  display: flex; align-items: center; gap: 0.85rem;
+  padding: clamp(0.55rem, 1.1vh, 0.85rem);
+  border-radius: var(--r-md);
+  background: transparent;
+  backdrop-filter: blur(12px);
+  transition: background .4s var(--ease), border-color .4s var(--ease), transform .4s var(--ease), box-shadow .4s var(--ease);
+}
+.sp:hover { transform: translateY(-2px); }
+
+/* The old site dropped logos with baked-in white backgrounds straight onto
+   black, so they read as grey stickers. A white frame puts every mark on the
+   same ground and hides those baked-in backgrounds completely. */
+.sp__frame {
+  flex: none;
+  position: relative;              /* definite containing block for the img */
+  width: 4.25rem; height: 2.75rem;
+  background: transparent;
+  border: 0;
+}
+
+/* Absolutely positioned against a definite box. Percentage heights do NOT
+   resolve for a centred grid item, so `height:100%` (and even
+   `max-height:100%`) fall back to the PNG's intrinsic 1:1 ratio — a square
+   logo then overflows a wide frame, visibly, as a white cross. */
+/* Two stacked cutouts: monochrome at rest, the brand colour cross-fading in on
+   hover. Both are pre-cut PNGs, so there is no filter or blend to break. */
+.sp__frame img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  padding: 0.55rem;
+  object-fit: contain;
+  transition: opacity 340ms var(--ease), transform 340ms var(--ease);
+}
+.sp__mono  { opacity: 0.72; }
+.sp__color { opacity: 0; }
+.sp:hover .sp__mono  { opacity: 0; transform: scale(1.04); }
+.sp:hover .sp__color { opacity: 1; transform: scale(1.04); }
+
+.sp__meta { display: grid; gap: 0.3rem; min-width: 0; }
+.sp__name {
+  font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--ink);
+}
+.sp__note { font-size: 0.6875rem; line-height: 1.35; color: var(--ink-3); text-wrap: pretty; }
+
+.sp__ext {
+  position: absolute; top: 0.85rem; right: 0.95rem;
+  font-size: 0.8rem; color: var(--ink-4);
+  opacity: 0; transform: translate(-2px, 2px);
+  transition: opacity .35s var(--ease), transform .35s var(--ease), color .35s var(--ease);
+}
+.sp:hover .sp__ext { opacity: 1; transform: none; color: var(--accent); }
+.sp--static { cursor: default; }
+
+.sp-loop {
+  margin: clamp(2rem, 5vw, 3.5rem) 0;
+  padding-block: 1.5rem;
+  border-block: 1px solid var(--rule);
+  --logoloop-logoHeight: 26px;
+}
+.sp-loop img { background: #fff; padding: 5px 8px; border-radius: 1px; }
+
+.become {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 1.75rem;
+  padding: 0;
+  background: transparent;
+}
+.become .lede { max-width: 52ch; }
+
+
+/* The Support-the-team panel is a GlassSurface inside .wrap.gs. Any gap has to
+   go on THAT wrapper — margin on .become only pads the panel's own contents and
+   grows the panel downward, leaving the visible edge flush against the grid. */
+#sponsors .wrap.gs { margin-top: clamp(2.5rem, 6vh, 4.5rem); }

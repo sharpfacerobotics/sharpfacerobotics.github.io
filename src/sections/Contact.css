@@ -1,0 +1,45 @@
+
+.contact__in { position: relative; z-index: 1; }
+.contact__in {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 26rem);
+  gap: clamp(1.75rem, 4vw, 4rem); align-items: start;
+}
+@media (max-width: 900px) { .contact__in { position: relative; z-index: 1; }
+.contact__in { grid-template-columns: 1fr; } }
+
+.contact__lead { display: grid; gap: 1rem; }
+.contact__h { max-width: 16ch; }
+
+.contact__panel { padding: 1.5rem; display: grid; gap: 0.9rem; }
+
+.contact__mail {
+  position: relative; display: grid; gap: 0.2rem; text-align: left;
+  padding: 1rem 1.2rem; width: 100%;
+  border: 1px solid var(--rule); border-radius: var(--r-md);
+  background: var(--card);
+  transition: border-color 300ms var(--ease), background 300ms var(--ease);
+}
+.contact__mail:hover { border-color: var(--accent); background: var(--paper-2); }
+.contact__mail b {
+  font-family: var(--mono); font-size: 0.9375rem; color: var(--ink); font-weight: 500;
+  overflow-wrap: anywhere;
+}
+.contact__copy { position: absolute; top: 0.85rem; right: 1rem; color: var(--accent); font-size: 0.5625rem; }
+.contact__copy.is-on { color: var(--accent); }
+.contact__mailto { justify-self: start; }
+
+.contact__social { display: grid; gap: 0.5rem; margin-top: 0.35rem; }
+.contact__social a {
+  display: flex; align-items: center; gap: 0.85rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--rule); border-radius: var(--r-md);
+  color: var(--ink-2);
+  transition: border-color 300ms var(--ease), color 300ms var(--ease), transform 300ms var(--ease);
+}
+.contact__social a:hover { border-color: var(--accent); color: var(--ink); transform: translateX(3px); }
+.contact__ico {
+  display: grid; place-items: center; flex: none;
+  width: 38px; height: 38px; border-radius: var(--r-pill);
+  background: var(--accent-soft); color: var(--accent);
+}
+.contact__arrow { margin-left: auto; color: var(--ink-4); }

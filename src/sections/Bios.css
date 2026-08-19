@@ -1,0 +1,174 @@
+/* Leadership is tier 01 when the wheel is on "Everyone". grid-template-rows
+   0fr -> 1fr is the one way to animate to auto height without a fixed max. */
+.lead-wrap {
+  display: grid; grid-template-rows: 0fr;
+  opacity: 0; transform: translateY(-42px);
+  transition: grid-template-rows 520ms var(--ease), opacity 380ms var(--ease),
+              transform 520ms var(--ease);
+}
+.lead-wrap.is-open { grid-template-rows: 1fr; opacity: 1; transform: none; }
+.lead-wrap__inner { overflow: hidden; min-height: 0; }
+/* height 0 alone still leaves the block focusable and readable by a screen
+   reader; take it out of the tree once the collapse has finished. */
+.lead-wrap:not(.is-open) .lead-wrap__inner { visibility: hidden; transition: visibility 0s 520ms; }
+@media (prefers-reduced-motion: reduce) {
+  .lead-wrap { transition: none; }
+}
+
+.tier { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+.tier__head {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem 1.25rem;
+  padding-bottom: 0.7rem; margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--rule);
+}
+.tier__blurb { font-size: 0.875rem; color: var(--ink-3); }
+.tier__count { margin-left: auto; color: var(--ink-4); font-variant-numeric: tabular-nums; }
+
+.lead-row {
+  display: grid; gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+}
+.lead { display: flex; gap: 1.25rem; align-items: center; padding: 1.35rem; }
+.lead--coach { align-items: start; }
+.lead__img { flex: none; width: 6rem; }
+.lead__img img {
+  width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: center 22%;
+  border: 1px solid var(--rule);
+}
+.lead__role { color: var(--accent); margin-bottom: 0.35rem; }
+.lead__grade { margin-top: 0.3rem; }
+
+/* ChromaGrid hardcodes `repeat(var(--cols), 320px)` and a 320px card width,
+   which neither fills nor fits our container. Override to a fluid grid and let
+   the cards flex; the component's spotlight logic is unaffected. */
+.bios__chroma {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 10.5rem), 1fr)) !important;
+  gap: 0.7rem !important;
+  justify-content: stretch !important;
+  padding: 0 !important;
+}
+.bios__chroma .chroma-card {
+  width: 100% !important;
+  border-radius: 3px;
+}
+/* the portrait crop keeps 14 very differently-framed photos reading as a set */
+.bios__chroma .chroma-card { align-self: stretch; }
+/* flex:none — without it the wrapper's flex-basis follows the image's intrinsic
+   height and aspect-ratio is ignored, so 14 differently-shaped photos produce
+   14 different card heights. */
+.bios__chroma .chroma-img-wrapper {
+  flex: none !important;
+  aspect-ratio: 3 / 4 !important;
+  height: auto !important;
+  overflow: hidden;
+}
+.bios__chroma .chroma-img-wrapper img {
+  width: 100% !important; height: 100% !important;
+  object-fit: cover !important; object-position: center 22%;
+}
+.bios__chroma .chroma-img-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+/* the shipped footer is `1fr auto`, which squeezes names onto two lines */
+.bios__chroma .chroma-info {
+  grid-template-columns: 1fr !important;
+  gap: 0.12rem !important;
+  padding: 0.6rem 0.7rem 0.75rem;
+}
+.bios__chroma .name { font-family: var(--display); font-variation-settings: 'wdth' 104, 'wght' 650; font-size: 0.8125rem; line-height: 1.2; }
+.bios__chroma .role, .bios__chroma .handle {
+  font-family: var(--mono); font-size: 0.5rem; letter-spacing: 0.1em; text-transform: uppercase;
+}
+/* clamp the quote so cards settle to a common height */
+.bios__chroma .location {
+  text-transform: none; letter-spacing: 0; font-family: var(--sans);
+  font-size: 0.6875rem; line-height: 1.35; color: var(--ink-3);
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.bios__chroma .handle { color: var(--ink-4); }
+.bios__chroma .role { color: var(--accent); }
+
+.bio__name {
+  font-family: var(--display); font-variation-settings: 'wdth' 104, 'wght' 650;
+  font-size: 1.0625rem; color: var(--ink); line-height: 1.2;
+}
+.bio__quote { font-size: 0.875rem; line-height: 1.5; color: var(--ink-3); text-wrap: pretty; margin-top: 0.4rem; }
+
+/* OptionWheel needs a fixed height or it collapses; give it a glass rail. */
+/* A real grid column, not a float: floating made the dial overlay the first
+   card instead of reserving space for itself. */
+.roster__body {
+  display: grid; grid-template-columns: 11rem minmax(0, 1fr);
+  gap: clamp(1.25rem, 2.5vw, 2.25rem); align-items: start;
+}
+.roster__groups { min-width: 0; }
+
+.roster__wheel {
+  position: sticky; top: 7rem;
+  display: grid; gap: 0.45rem;
+  padding: 0;
+  background: transparent;
+}
+.roster__wheel-label {
+  display: flex; align-items: center; justify-content: space-between;
+  color: var(--ink-4); padding-inline: 0.6rem;
+}
+.roster__wheel-hint {
+  font-size: 0.5rem; letter-spacing: 0.14em;
+  color: var(--accent); opacity: 0.85;
+  border: 1px solid currentColor; border-radius: var(--r-pill);
+  padding: 0.15rem 0.4rem;
+}
+
+/* the band marks the live slot — the single clearest "this is a dial" cue */
+.roster__wheel-band {
+  position: absolute; left: 0.1rem; right: 0.1rem;
+  top: 50%; transform: translateY(-50%);
+  height: 2.1rem; pointer-events: none;
+  border-radius: var(--r-sm);
+  border-block: 1px solid var(--accent-soft);
+  background: linear-gradient(90deg, rgba(79,224,216,0.10), rgba(79,224,216,0.02));
+}
+.roster__wheel-arrow {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  color: var(--ink-4); pointer-events: none;
+  animation: wheel-nudge 2.4s var(--ease) infinite;
+}
+.roster__wheel-arrow--up { top: -0.15rem; }
+.roster__wheel-arrow--down { bottom: -0.15rem; animation-delay: 1.2s; }
+@keyframes wheel-nudge {
+  0%, 100% { opacity: 0.3; transform: translate(-50%, 0); }
+  50%      { opacity: 0.85; }
+}
+.roster__wheel-arrow--up   { --d: -3px; }
+.roster__wheel-arrow--down { --d: 3px; }
+@media (prefers-reduced-motion: reduce) { .roster__wheel-arrow { animation: none; opacity: 0.5; } }
+/* the dial fills its container height, so it needs a real column */
+/* the stage is the positioning context, so the band and chevrons line up with
+   the wheel's own centre instead of the panel's (they were 12px out) */
+.roster__wheel-stage { position: relative; }
+.roster__wheel-ctl { height: 168px; width: 100%; }
+
+/* keyboard hint — the component already handles ArrowUp/ArrowDown */
+.roster__wheel-keys {
+  display: flex; align-items: center; gap: 0.3rem;
+  justify-content: center; color: var(--ink-4);
+  font-size: 0.5625rem; letter-spacing: 0.08em;
+}
+.roster__wheel-keys kbd {
+  font-family: var(--mono); font-size: 0.625rem; line-height: 1;
+  padding: 0.15rem 0.3rem; border-radius: 4px;
+  border: 1px solid var(--rule); background: var(--paper-2); color: var(--ink-3);
+}
+
+@media (max-width: 900px) {
+  .roster__body { grid-template-columns: 1fr; }
+  .roster__wheel { position: static; }
+  .roster__wheel-ctl { height: 150px; }
+}
+
+/* GlareHover wraps the grid; it must not impose its own box or clip the cards */
+.bios__glare { display: block; width: 100%; height: auto !important; }
+.bios__glare > * { position: static !important; }
+
+.members__scope { max-width: 68ch; }
+.members__scope b { color: var(--ink); font-weight: 600; }

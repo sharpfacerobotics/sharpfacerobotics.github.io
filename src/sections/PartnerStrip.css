@@ -1,0 +1,30 @@
+.strip {
+  border-block: 1px solid var(--glass-edge);
+  background: var(--glass);
+  backdrop-filter: blur(14px);
+}
+.strip__in {
+  display: flex; align-items: center; gap: 2rem;
+  padding-block: clamp(0.6rem, 1.3vh, 1.2rem);
+}
+.strip__label { flex: none; color: var(--ink-4); }
+
+.strip__loop { flex: 1; min-width: 0; --logoloop-logoHeight: 30px; }
+
+/* One image, two states: desaturated at rest, full brand colour on hover.
+   LogoLoop renders a single <img> per logo, so this is how the reveal is
+   expressed without a second layer. */
+.strip__loop img {
+  filter: grayscale(1) brightness(1.7) contrast(0.95);
+  opacity: 0.6;
+  transition: filter 340ms var(--ease), opacity 340ms var(--ease);
+}
+.strip__loop a:hover img,
+.strip__loop li:hover img {
+  filter: none;
+  opacity: 1;
+}
+
+@media (max-width: 700px) {
+  .strip__in { flex-direction: column; align-items: stretch; gap: 0.85rem; }
+}

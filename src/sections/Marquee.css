@@ -1,0 +1,19 @@
+.mq {
+  position: relative;
+  height: clamp(5.5rem, 9vw, 8rem);
+  display: grid; align-items: center;
+  padding-block: 0;
+  border-block: 1px solid var(--glass-edge);
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  overflow: hidden;
+}
+/* CurvedLoop renders SVG text; style the fill and weight here. */
+.mq__text {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 2.4rem;
+  fill: var(--ink);
+  opacity: 0.12;
+}
+.mq svg { width: 100%; height: 100%; display: block; }

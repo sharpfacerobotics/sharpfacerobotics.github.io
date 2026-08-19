@@ -1,0 +1,333 @@
+/* =========================================================
+   Sharp Face Robotics
+   Direction: cosmos.so — a light, image-forward gallery —
+   with Apple-style liquid glass for the floating chrome.
+
+   Deliberately NOT dark-with-a-neon-accent. That combination
+   is the house style of AI-generated sites; every polish pass
+   inside it lands back in the same genre.
+   ========================================================= */
+
+:root {
+  /* --- ground: ink, not pure black -------------------------------- */
+  --paper:      #07080b;   /* page ground */
+  --paper-2:    #0d0f14;   /* recessed */
+  --card:       #12141b;   /* raised surface */
+
+  /* --- type ------------------------------------------------------- */
+  --ink:        #f2f4f7;   /* headings */
+  --ink-2:      #b9c0cb;   /* body */
+  --ink-3:      #8e96a4;   /* secondary */
+  --ink-4:      #6d7583;   /* captions  (4.6:1 on --card, above AA) */
+
+  /* --- one restrained accent + a cool partner ---------------------- */
+  --accent:     #4fe0d8;
+  --accent-2:   #8b7bff;
+  --accent-soft:rgba(79, 224, 216, 0.14);
+  --warn:       #f0a03c;
+
+  --rule:        rgba(255, 255, 255, 0.10);
+  --rule-strong: rgba(255, 255, 255, 0.22);
+  --lift-1: 0 1px 2px rgba(0,0,0,0.4);
+  --lift-2: 0 4px 16px rgba(0,0,0,0.45);
+  --lift-3: 0 12px 44px rgba(0,0,0,0.55);
+
+  /* --- liquid glass ------------------------------------------------ */
+  --glass:      rgba(255, 255, 255, 0.05);
+  --glass-2:    rgba(255, 255, 255, 0.08);
+  --glass-edge: rgba(255, 255, 255, 0.14);
+  --glass-line: rgba(255, 255, 255, 0.08);
+  --glass-blur: 22px;
+
+  --r-sm: 10px;
+  --r-md: 16px;
+  --r-lg: 24px;
+  --r-xl: 32px;
+  --r-pill: 999px;
+
+  --display: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --sans:    'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --mono:    'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --gutter: clamp(1.15rem, 4vw, 3rem);
+  --maxw: 1440px;
+  --band: clamp(2rem, 5vh, 5.5rem);
+
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; padding: 0; }
+ul, ol { list-style: none; }
+
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink-2);
+  font-family: var(--sans);
+  font-size: clamp(0.95rem, 0.9rem + 0.2vw, 1.0625rem);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection { background: var(--accent); color: #04211f; }
+a { color: inherit; text-decoration: none; }
+img, svg, video { display: block; max-width: 100%; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+/* =========================================================
+   Type — one ramp: 11 / 13 / 16 / 20 / display
+   ========================================================= */
+.d1, .d2, .d3 {
+  font-family: var(--display);
+  color: var(--ink);
+  line-height: 0.96;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+.d1 { font-size: clamp(2.75rem, 7.5vw, 6.5rem);  font-variation-settings: 'wdth' 100, 'wght' 700; }
+.d2 { font-size: clamp(2rem, 4.4vw, 3.5rem);     font-variation-settings: 'wdth' 100, 'wght' 640; }
+.d3 { font-size: clamp(1.25rem, 1.9vw, 1.6rem);  font-variation-settings: 'wdth' 100, 'wght' 600; letter-spacing: -0.018em; line-height: 1.15; }
+
+.mono {
+  font-family: var(--mono); font-size: 0.6875rem; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3);
+}
+.mono-sm { font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-4); }
+
+.lede {
+  font-size: clamp(1.0625rem, 0.95rem + 0.5vw, 1.3125rem);
+  line-height: 1.5; color: var(--ink-2); max-width: 46ch; text-wrap: pretty;
+}
+
+/* =========================================================
+   Layout
+   ========================================================= */
+.wrap { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gutter); }
+.band { padding-block: var(--band); position: relative; }
+/* The nav floats over the content, so the first band of any tab needs
+   headroom or its heading sits behind the pill. */
+.view > section:first-child > .band:first-child,
+.view > section:first-child.band { padding-top: clamp(1.25rem, 3vh, 2.5rem); }
+
+.sec-head { display: grid; gap: clamp(0.5rem, 1.2vh, 1rem); margin-bottom: clamp(0.85rem, 2vh, 2.25rem); }
+.sec-index { display: flex; align-items: center; gap: 0.9rem; font-family: var(--mono);
+  font-size: 0.6875rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-4); }
+.sec-index b { color: var(--accent); font-weight: 500; }
+.sec-index::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+
+/* =========================================================
+   Liquid glass — the floating chrome
+   ========================================================= */
+.glass {
+  background: var(--glass);
+  backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-edge);
+  box-shadow:
+    var(--lift-2),
+    inset 0 1px 0 rgba(255,255,255,0.16),
+    inset 0 -1px 0 rgba(0,0,0,0.35);
+  border-radius: var(--r-lg);
+}
+/* the specular sweep that makes glass read as glass */
+.glass--spec { position: relative; overflow: hidden; }
+.glass--spec::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, transparent 34%, transparent 66%, rgba(255,255,255,0.10) 100%);
+  mix-blend-mode: overlay;
+}
+
+/* =========================================================
+   Cards — cosmos: image first, generous radius, soft lift
+   ========================================================= */
+.card {
+  background: var(--card);
+  border-radius: var(--r-md);
+  box-shadow: var(--lift-1);
+  overflow: hidden;
+  transition: transform 480ms var(--ease), box-shadow 480ms var(--ease);
+}
+.card:hover { transform: translateY(-4px); box-shadow: var(--lift-3); }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  padding: 0.85rem 1.45rem;
+  border-radius: var(--r-pill);
+  font-family: var(--mono); font-size: 0.6875rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  border: 1px solid var(--rule-strong); color: var(--ink);
+  background: var(--card);
+  box-shadow: var(--lift-1);
+  transition: transform 300ms var(--ease), box-shadow 300ms var(--ease), background 300ms var(--ease);
+}
+.btn:hover { transform: translateY(-2px); box-shadow: var(--lift-2); }
+.btn--solid { background: var(--accent); color: #04211f; border-color: var(--accent); font-weight: 600; }
+.btn--solid:hover { background: #6bece5; }
+
+.spec {
+  display: grid; grid-template-columns: minmax(9rem, 14rem) 1fr;
+  gap: 0.85rem 2rem; padding: 0.9rem 0;
+  border-bottom: 1px solid var(--rule); align-items: baseline;
+}
+.spec dt { font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); }
+.spec dd { color: var(--ink-2); font-size: 1rem; }
+@media (max-width: 640px) { .spec { grid-template-columns: 1fr; gap: 0.15rem; } }
+
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+.skip {
+  position: absolute; left: 50%; top: 0; transform: translate(-50%, -120%);
+  z-index: 200; background: var(--ink); color: var(--paper);
+  padding: 0.7rem 1.2rem; border-radius: 0 0 var(--r-sm) var(--r-sm);
+  font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.1em; text-transform: uppercase;
+  transition: transform 250ms var(--ease);
+}
+.skip:focus { transform: translate(-50%, 0); }
+
+/* =========================================================
+   Tab views
+   ========================================================= */
+.view { transition: opacity 200ms var(--ease), transform 200ms var(--ease); min-height: 60vh; }
+.view--in  { opacity: 1; transform: none; }
+.view--out { opacity: 0; transform: translate3d(0, 6px, 0); }
+.view--in .band > .wrap > * { animation: view-rise 560ms var(--ease) both; }
+.view--in .band > .wrap > *:nth-child(2) { animation-delay: 70ms; }
+.view--in .band > .wrap > *:nth-child(3) { animation-delay: 120ms; }
+.view--in .band > .wrap > *:nth-child(4) { animation-delay: 160ms; }
+@keyframes view-rise { from { opacity: 0; transform: translate3d(0, 16px, 0); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .view, .view--out { transition: none; opacity: 1; transform: none; }
+  .view--in .band > .wrap > * { animation: none; }
+  .card:hover { transform: none; }
+}
+
+/* SwarmCursor overlay: above the page, never intercepting input. */
+.swarm-layer {
+  position: fixed; inset: 0; z-index: 90;
+  pointer-events: none;
+}
+.swarm-layer > * { width: 100%; height: 100%; }
+.swarm-layer canvas { pointer-events: none !important; }
+
+/* =========================================================
+   Tab change — a GlassSurface pane sweeps across, and the
+   view slides the direction you moved along the tab bar.
+   ========================================================= */
+.wipe {
+  position: fixed; inset: 0; z-index: 70;
+  pointer-events: none; overflow: hidden;
+}
+.wipe__pane { position: absolute; top: 0; height: 100%; }
+.wipe--fwd  .wipe__pane { animation: wipe-fwd 620ms cubic-bezier(0.65, 0, 0.35, 1) both; }
+.wipe--back .wipe__pane { animation: wipe-back 620ms cubic-bezier(0.65, 0, 0.35, 1) both; }
+@keyframes wipe-fwd  { from { left: -50%; } to { left: 105%; } }
+@keyframes wipe-back { from { left: 105%; } to { left: -50%; } }
+
+.view--out.view--fwd  { transform: translate3d(-3%, 0, 0); }
+.view--out.view--back { transform: translate3d(3%, 0, 0); }
+.view--in.view--fwd,
+.view--in.view--back { animation: view-slide 460ms var(--ease) both; }
+@keyframes view-slide { from { opacity: 0; transform: translate3d(var(--slide-from, 2%), 0, 0); } }
+.view--in.view--back { --slide-from: -2%; }
+
+@media (prefers-reduced-motion: reduce) {
+  .wipe { display: none; }
+  .view--in.view--fwd, .view--in.view--back { animation: none; }
+  .view--out.view--fwd, .view--out.view--back { transform: none; }
+}
+
+/* =========================================================
+   Fit-to-viewport tabs (Home, Outreach) — no scrolling needed
+   ========================================================= */
+/* --fit-chrome is everything that sits in flow OUTSIDE this section and still
+   consumes viewport: the sticky nav, the footer, and on Home the partner strip.
+   Subtracting only the nav left a constant ~115px overflow at every height. */
+.fitview {
+  --fit-chrome: 172px;
+  min-height: calc(100svh - var(--fit-chrome));
+  display: grid; align-content: center;
+  padding-block: clamp(0.9rem, 2.6vh, 2.25rem) clamp(0.75rem, 1.8vh, 1.5rem);
+}
+@media (max-height: 720px), (max-width: 820px) {
+  .fitview { min-height: 0; align-content: start; }
+}
+
+/* =========================================================
+   Real GlassSurface panels. The component wraps children in
+   .glass-surface__content, which must flow normally for the
+   panel to size to its content.
+   ========================================================= */
+.gs { width: 100%; }
+/* GlassSurface's own fill is nearly invisible at these settings, so the panel
+   read as no panel at all. Give it the surface + edge; the component still
+   supplies the refraction. */
+.gs .glass-surface {
+  position: relative;
+  width: 100% !important; height: auto !important;
+  background:
+    linear-gradient(165deg, rgba(255,255,255,0.085), rgba(255,255,255,0.02) 42%, rgba(255,255,255,0.05));
+  border: 1px solid var(--glass-edge);
+  box-shadow:
+    var(--lift-2),
+    inset 0 1px 0 rgba(255,255,255,0.22),
+    inset 0 -1px 0 rgba(0,0,0,0.3);
+}
+/* the diagonal specular that makes a panel read as glass rather than as a tint */
+.gs .glass-surface::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(255,255,255,0.16) 0%, transparent 34%,
+                                       transparent 68%, rgba(255,255,255,0.09) 100%);
+}
+.gs .glass-surface__content {
+  width: 100%; height: auto;
+  display: block; position: static;
+  padding: clamp(0.9rem, 1.8vh, 1.5rem) clamp(1rem, 2.2vw, 1.75rem);
+}
+
+/* the glass panel supplies the surface; wrapped content sits inside its padding */
+.gs > .glass-surface { padding: 0; }
+.gs .glass-surface__content > * { width: 100%; }
+
+/* A typed tail inside a display heading keeps the heading's own face and
+   weight, and reserves room so the line below never jumps mid-cycle. */
+.head__typed {
+  font-family: inherit;
+  font-variation-settings: inherit;
+  letter-spacing: inherit;
+}
+
+/* =========================================================
+   #3 Tonal variation.
+   Eight tabs on an identical near-black ground gave the site
+   no rhythm — nothing lifted or receded, so the darkness read
+   as a default rather than a decision. Sections now sit on one
+   of three grounds. The .band background is a wash ABOVE the
+   fixed backdrop, so the aurora still shows through.
+   ========================================================= */
+.band--lift {
+  background: linear-gradient(180deg, rgba(255,255,255,0.030), rgba(255,255,255,0.012));
+}
+.band--lift::before,
+.band--sunk::before {
+  content: ''; position: absolute; left: 0; right: 0; top: 0;
+  height: 1px; background: var(--glass-edge);
+}
+.band--sunk {
+  background: linear-gradient(180deg, rgba(0,0,0,0.42), rgba(0,0,0,0.22));
+}

@@ -1,0 +1,125 @@
+/* Home also carries the partner strip below the hero. */
+.hero { padding-top: 0; --fit-chrome: 232px; }
+/* Everything on Home is sized off the viewport so the page needs no scroll:
+   the wordmark, the plate and the stat rail each take a share of the height. */
+.hero .hero__in { padding-bottom: clamp(0.4rem, 1vh, 1.2rem); gap: clamp(0.3rem, 0.9vh, 1rem); }
+
+.hero__in {
+  display: grid; gap: 1.15rem; justify-items: center; text-align: center;
+  padding-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+.hero__eyebrow { display: flex; align-items: center; gap: 0.6rem; margin-top: clamp(0.6rem, 2vh, 2.25rem); }
+
+/* Each ParticleText canvas centres its glyphs in a taller box, so the two
+   lines sit far apart at their natural height. Pull them together. */
+.hero__h1 { max-width: none; width: 100%; display: grid; gap: 0; margin-block: 0; }
+/* no negative pull now that the type is sized to its canvas */
+.hero__h1 .hero__particles + .hero__particles { margin-top: 0; }
+/* ParticleText's own `.particle-text` rule sets the height and is loaded after
+   this file, so an equal-specificity selector lost. Scope it under .hero__h1. */
+/* ParticleText sets `height: 100%` AND `min-height: 240px`. Overriding height
+   alone did nothing — the min-height pinned both lines at 240px each (462px
+   total for the h1). The min-height is the rule that actually had to go. */
+.hero__h1 .hero__particles {
+  display: block; width: 100%;
+  height: clamp(1.75rem, min(5vw, 6.6vh), 4rem);
+  min-height: 0;
+}
+.hero__particles > *,
+.hero__particles canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+.hero__line { display: block; }
+
+.hero__meta { display: grid; justify-items: center; gap: clamp(0.75rem, 1.8vh, 1.5rem); margin-top: 0.25rem; }
+
+.hero__ctas { display: flex; flex-wrap: wrap; gap: 0.7rem; justify-content: center; margin-bottom: clamp(0.4rem, 1.2vh, 1rem); }
+
+/* ── the plate: image-first, full width, generous radius ─────────────── */
+/* capped near the source's native 1100px so it is never upscaled on screen */
+.hero__plate { position: relative; border-radius: var(--r-xl); max-width: min(920px, 27vh * 2.17); margin-inline: auto; }
+.hero__ripple, .hero__plate canvas { width: 100%; aspect-ratio: 1100 / 508; display: block; }
+.hero__plate img {
+  width: 100%; aspect-ratio: 1100 / 508; max-height: 42vh; object-fit: cover; object-position: center 42%;
+  transition: transform 1200ms var(--ease);
+}
+.hero__plate:hover img { transform: scale(1.02); }
+.hero__cap {
+  position: absolute; left: 0.85rem; right: auto; bottom: 0.85rem;
+  display: inline-flex; align-items: center; gap: 0.85rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: var(--r-pill);
+}
+.hero__cap .mono-sm { font-size: 0.5625rem; letter-spacing: 0.12em; }
+.hero__cap .mono-sm { color: var(--ink-2); }
+@media (max-width: 700px) { .hero__ripple, .hero__plate canvas { width: 100%; aspect-ratio: 1100 / 508; display: block; }
+.hero__plate img { aspect-ratio: 4 / 3; } }
+
+/* ── stats ───────────────────────────────────────────────────────────── */
+.hero__stats {
+  margin-top: clamp(1rem, 2.4vh, 1.75rem);
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));
+  gap: 1px;
+  background: var(--rule);
+  border-radius: var(--r-md); overflow: hidden;
+  border: 1px solid var(--rule);
+}
+.hero__stat { background: transparent; padding: clamp(0.4rem, 0.9vh, 0.9rem) 1.35rem; display: grid; gap: 0.15rem; }
+.hero__stat + .hero__stat { box-shadow: inset 1px 0 0 var(--glass-edge); }
+.hero__stat dd {
+  font-family: var(--display); font-variation-settings: 'wght' 650;
+  font-size: clamp(1.25rem, min(2.4vw, 3vh), 2rem); color: var(--ink); line-height: 1;
+}
+.hero__stat--sm { font-size: clamp(1rem, 1.4vw, 1.15rem) !important; line-height: 1.2 !important; }
+.tab { font-variant-numeric: tabular-nums; }
+
+/* wider measure keeps the lede to two lines, which the viewport budget needs */
+.hero__meta .lede { max-width: 96ch; font-size: clamp(0.9rem, 0.85rem + 0.25vw, 1rem); line-height: 1.45; }
+
+/* the hero stat rail is a tight bar, not a padded panel */
+.hero .gs .glass-surface__content { padding: 0; }
+.hero .gs .glass-surface { border-radius: var(--r-md); }
+
+
+
+/* ── stat rail: colour-coded, with icons and a little life ───────────── */
+.hero__stat dt { display: flex; align-items: center; gap: 0.45rem; }
+.hero__ico {
+  display: grid; place-items: center;
+  width: 22px; height: 22px; border-radius: 6px;
+  color: var(--accent); background: var(--accent-soft);
+  flex: none;
+}
+.hero__stat--robot .hero__ico { color: var(--accent-2); background: rgba(139,123,255,0.16); }
+.hero__stat--award .hero__ico { color: #f0b03c; background: rgba(240,176,60,0.16); }
+.hero__stat--award dd { color: #ffd98a; }
+.hero__stat--robot dd { color: var(--accent-2); }
+
+/* the trophies catch the light on a slow cycle, offset so they never flash together */
+.hero__stat--award .hero__ico svg { animation: trophy-gleam 5.5s var(--ease) infinite; }
+.hero__stat--award:nth-of-type(4) .hero__ico svg { animation-delay: 2.2s; }
+@keyframes trophy-gleam {
+  0%, 82%, 100% { transform: rotate(0deg) scale(1); filter: none; }
+  88%           { transform: rotate(-9deg) scale(1.12); filter: drop-shadow(0 0 6px rgba(240,176,60,0.8)); }
+  94%           { transform: rotate(7deg) scale(1.08); }
+}
+
+/* each cell lifts under the cursor */
+.hero__stat { transition: background 340ms var(--ease); }
+.hero__stat:hover { background: rgba(255,255,255,0.045); }
+.hero__stat:hover .hero__ico { transform: scale(1.1); }
+.hero__ico { transition: transform 320ms var(--ease); }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__stat--award .hero__ico svg { animation: none; }
+}
+
+/* the "+" sits with the counter rather than after a gap */
+.hero__count { display: flex; align-items: baseline; gap: 0.06em; }
+.hero__plus {
+  font-family: var(--display); font-variation-settings: 'wght' 650;
+  font-size: clamp(1.1rem, min(2vw, 2.4vh), 1.6rem);
+  color: var(--accent); line-height: 1;
+}
