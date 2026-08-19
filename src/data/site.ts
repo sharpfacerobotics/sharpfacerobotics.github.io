@@ -64,7 +64,7 @@ export const services = [
   {
     name: 'Sharp',
     tag: 'FTC code LLM',
-    href: 'https://sharpai-2-7.vercel.app/',
+    href: 'https://sharpftc.pages.dev',
     cta: 'Launch Sharp AI',
     logo: null,
     status: null,
