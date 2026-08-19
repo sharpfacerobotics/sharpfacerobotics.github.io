@@ -12,7 +12,7 @@ export const teams = [
     name: 'Dark Force Robotics',
     // TODO: FTC number not supplied — left null rather than guessed.
     number: null as string | null,
-    blurb: 'Our second team out of Emerald High School, competing in the same DECODE season.',
+    blurb: 'Our second team out of Emerald High School. BIOBUZZ is their rookie season.',
     accent: '#8b7bff',
     primary: false,
   },
