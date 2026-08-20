@@ -66,7 +66,7 @@ export const services = [
     tag: 'FTC code LLM',
     href: 'https://sharpftc.pages.dev',
     cta: 'Launch Sharp AI',
-    logo: null,
+    logo: '/assets/sharp-ai.svg',
     status: null,
     body: 'As a rookie team we could not find AI tools built for FTC programming, so we wrote our own. Sharp is a language model tuned to generate FTC-ready code — it speeds up our own iteration, and it is open to the wider robotics community.',
   },
