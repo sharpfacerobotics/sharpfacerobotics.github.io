@@ -63,6 +63,9 @@ export const subsystems = [
 export const services = [
   {
     name: 'Sharp',
+    brand: 'sharp',
+    /* Sharp's own wordmark is "Sharp AI" with the AI set in the gradient. */
+    nameMark: 'AI',
     tag: 'FTC code LLM',
     href: 'https://sharpftc.pages.dev',
     cta: 'Launch Sharp AI',
@@ -72,6 +75,7 @@ export const services = [
   },
   {
     name: 'Telemark',
+    brand: 'telemark',
     tag: 'Master FTC programming',
     href: 'https://sharpfacerobotics.github.io/telemark/',
     cta: 'Visit Telemark',

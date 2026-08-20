@@ -28,3 +28,101 @@
 
 /* the typed tail of the heading keeps the display face */
 .svc__typed { font-family: inherit; font-variation-settings: inherit; }
+
+/* ── Per-product identity ──────────────────────────────────────────
+   Each card is dressed in the aesthetic of the site it opens, so the
+   link is previewed before it is clicked. Values below are the real
+   design tokens read off each live site, not approximations:
+
+     Sharp     #0b0e12 ground, #6edb9a accent, a 112deg blue-to-lime
+               gradient, soft 16-32px radii, Space Grotesk
+     Telemark  #05080d ground, #22d3ee cyan, square-shouldered
+               Rajdhani, a cyan glow on its calls to action
+
+   Only the card's own surfaces change. The grid, type scale and
+   spacing stay shared, so the section still reads as one thing. */
+
+.svc--sharp,
+.svc--telemark { position: relative; isolation: isolate; }
+
+/* the brand wash sits behind content and never intercepts a click */
+.svc--sharp::before,
+.svc--telemark::before {
+  content: ''; position: absolute; inset: 0; z-index: -1;
+  pointer-events: none; opacity: 0.55;
+  transition: opacity 500ms var(--ease);
+}
+.svc--sharp:hover::before,
+.svc--telemark:hover::before { opacity: 1; }
+
+/* ── Sharp: atmospheric veil, gradient mark, pill CTA ────────────── */
+.svc--sharp { --brand: #6edb9a; }
+.svc--sharp::before {
+  background:
+    radial-gradient(105% 70% at 12% -8%, rgba(74, 144, 226, 0.20), transparent 58%),
+    radial-gradient(85% 62% at 78% -4%, rgba(110, 219, 154, 0.16), transparent 56%);
+}
+.svc--sharp .svc__mark {
+  border-radius: 12px;
+  border-color: rgba(110, 219, 154, 0.28);
+  background:
+    linear-gradient(112deg, rgba(74, 144, 226, 0.16) 0%, rgba(79, 195, 232, 0.13) 34%,
+                    rgba(110, 219, 154, 0.13) 68%, rgba(155, 232, 112, 0.15) 100%),
+    #0b0e12;
+}
+.svc--sharp .svc__name-mark {
+  background: linear-gradient(112deg, #4a90e2 0%, #4fc3e8 34%, #6edb9a 68%, #9be870 100%);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent; font-style: italic; font-size: 0.72em;
+  margin-left: 0.28em; letter-spacing: 0.01em;
+}
+.svc--sharp .btn {
+  border-radius: var(--r-pill);
+  border-color: transparent; color: #06130f; font-weight: 600;
+  background: linear-gradient(112deg, #4a90e2 0%, #4fc3e8 34%, #6edb9a 68%, #9be870 100%);
+}
+.svc--sharp .btn:hover { box-shadow: 0 8px 26px rgba(110, 219, 154, 0.26); }
+
+/* ── Telemark: square shoulders, cyan rule, glowing CTA ──────────── */
+.svc--telemark { --brand: #22d3ee; }
+.svc--telemark::before {
+  background:
+    linear-gradient(180deg, rgba(34, 211, 238, 0.07), transparent 42%),
+    radial-gradient(80% 60% at 88% 0%, rgba(56, 189, 248, 0.12), transparent 60%);
+}
+/* the cyan hairline Telemark rules its own surfaces with */
+.svc--telemark::after {
+  content: ''; position: absolute; inset: 0 0 auto; height: 1px;
+  background: linear-gradient(90deg, #22d3ee, rgba(34, 211, 238, 0) 62%);
+  pointer-events: none;
+}
+.svc--telemark .svc__mark {
+  border-radius: 2px;
+  border-color: rgba(34, 211, 238, 0.34);
+  background: #080d13;
+  box-shadow: inset 0 0 18px rgba(34, 211, 238, 0.09);
+}
+.svc--telemark .btn {
+  border-radius: 6px;
+  border-color: rgba(34, 211, 238, 0.55); color: #67e8f9;
+  background: rgba(34, 211, 238, 0.06); font-weight: 600;
+}
+.svc--telemark .btn:hover {
+  background: rgba(34, 211, 238, 0.13);
+  box-shadow: 0 0 0 1px rgba(34, 211, 238, 0.3), 0 8px 26px rgba(34, 211, 238, 0.18);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .svc--sharp::before, .svc--telemark::before { transition: none; }
+}
+
+/* Each product's name is set the way that product sets it: Sharp pairs
+   the word with a gradient italic AI, Telemark uses a letterspaced
+   uppercase wordmark. Archivo stands in for Rajdhani, which this site
+   does not load; the proportion carries the resemblance. */
+.svc__name-mark { padding-right: 0.08em; }   /* italic clips under background-clip */
+.svc--telemark .d3 {
+  text-transform: uppercase;
+  letter-spacing: 0.055em;
+  font-size: 0.92em;
+}

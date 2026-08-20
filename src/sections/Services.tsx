@@ -31,7 +31,7 @@ export default function Services() {
 
         <Spotlight><div className="svc__grid">
           {services.map((s, i) => (
-            <Reveal as="article" className="svc" key={s.name} delay={i * 80}>
+            <Reveal as="article" className={`svc svc--${s.brand}`} key={s.name} delay={i * 80}>
               <Tilt max={2.5} scale={1.008}>
               <div className="svc__head">
                 <div className="svc__mark">
@@ -40,7 +40,7 @@ export default function Services() {
                     : <span className="svc__glyph" aria-hidden="true">S</span>}
                 </div>
                 <div>
-                  <h3 className="d3">{s.name}</h3>
+                  <h3 className="d3">{s.name}{'nameMark' in s && s.nameMark ? <span className="svc__name-mark">{s.nameMark}</span> : null}</h3>
                   <p className="mono-sm">{s.tag}</p>
                 </div>
                 {s.status && <span className="mono svc__status">{s.status}</span>}
