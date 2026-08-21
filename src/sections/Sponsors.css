@@ -1,3 +1,11 @@
+/* BorderGlow's .edge-light sits at inset:-190px so the glow can bleed
+   outside the card. On the outer column that reaches ~141px past the
+   viewport, and because the layer is opacity:0 until hover it was adding
+   that much scrollable width with nothing visible to explain it. Clip at
+   the section, which is full-bleed: the glow still spills into the
+   gutters, it just cannot extend the page. */
+#sponsors { overflow-x: clip; }
+
 /* One flat grid — no tiers, no size hierarchy. The 1px gap over a shared
    background draws the grid; there are no card shadows anywhere on this site. */
 .sp-grid {
