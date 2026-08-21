@@ -62,7 +62,7 @@ export default function Outreach() {
       <div className="wrap">
         <header className="sec-head">
           <div className="sec-index"><b>05</b><span>Outreach</span></div>
-          <h2 className="d2">
+          <h1 className="d2">
             Where the season actually{' '}
             <TextType
               as="span"
@@ -77,7 +77,7 @@ export default function Outreach() {
               cursorCharacter="_"
               textColors={['#4fe0d8']}
             />
-          </h2>
+          </h1>
           <p className="lede outreach__lede">
             A competition season is not one weekend. This is the rhythm of our outreach across
             a year — recruiting, build, league play, then the community work that carries into summer.

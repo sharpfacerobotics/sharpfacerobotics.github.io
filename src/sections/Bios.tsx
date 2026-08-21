@@ -73,7 +73,7 @@ export default function Bios() {
       <div className="wrap">
         <header className="sec-head">
           <div className="sec-index"><b>03</b><span>Members</span></div>
-          <h2 className="d2">The people who build it</h2>
+          <h1 className="d2">The people who build it</h1>
           {/* States the scope of the 45+ figure, so the cards below do not read
               as contradicting the headline number. */}
           <p className="lede members__scope">
@@ -93,7 +93,7 @@ export default function Bios() {
           <div className="lead-wrap__inner">
           <div className="tier">
             <div className="tier__head">
-              <h3 className="mono tier__label" style={{ color: '#8b7bff' }}>Leadership</h3>
+              <h2 className="mono tier__label" style={{ color: '#8b7bff' }}>Leadership</h2>
               <p className="tier__blurb">Captain and coaching staff</p>
             </div>
             <div className="lead-row">
@@ -103,7 +103,7 @@ export default function Bios() {
                 </div>
                 <div>
                   <p className="mono lead__role">{captain.title}</p>
-                  <h4 className="d3">{captain.name}</h4>
+                  <h3 className="d3">{captain.name}</h3>
                   <p className="mono-sm lead__grade">{captain.grade}</p>
                   {captain.favorite && <p className="bio__quote">“{captain.favorite}”</p>}
                 </div>
@@ -113,7 +113,7 @@ export default function Bios() {
                 <Reveal as="article" className="lead lead--coach pane" key={c.name} delay={(i + 1) * 90} y={12}>
                   <div>
                     <p className="mono lead__role">{c.title}</p>
-                    <h4 className="d3">{c.name}</h4>
+                    <h3 className="d3">{c.name}</h3>
                     {c.note && <p className="bio__quote">“{c.note}”</p>}
                   </div>
                 </Reveal>
@@ -183,7 +183,7 @@ export default function Bios() {
             <Reveal key={g.key} delay={gi * 60}>
               <div className="tier">
                 <div className="tier__head">
-                  <h3 className="mono tier__label" style={{ color: g.tint }}>{g.label}</h3>
+                  <h2 className="mono tier__label" style={{ color: g.tint }}>{g.label}</h2>
                   <p className="tier__blurb">{g.blurb}</p>
                   <span className="mono tier__count">{String(list.length).padStart(2, '0')}</span>
                 </div>

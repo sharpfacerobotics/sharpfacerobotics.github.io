@@ -12,10 +12,10 @@ export default function Robot() {
       <div className="band"><div className="wrap">
         <header className="sec-head">
           <div className="sec-index"><b>02</b><span>The robot</span></div>
-          <h2 className="d2">
+          <h1 className="d2">
             <span className="iris-text">{team.robot}</span>
             <span className="robot__sub"> — {team.season}</span>
-          </h2>
+          </h1>
           <p className="lede">
             Built around reliability, cycle speed and being serviceable between matches.
             An integrated mecanum drivetrain, a dual-compliant intake, a short transfer path
@@ -53,7 +53,7 @@ export default function Robot() {
                 </figure>
                 <div className="subsys__text">
                   <span className="mono subsys__n">{sub.n}</span>
-                  <h3 className="d3">{sub.h}</h3>
+                  <h2 className="d3">{sub.h}</h2>
                   <p>{sub.p}</p>
                 </div>
               </Reveal>

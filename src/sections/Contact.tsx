@@ -32,7 +32,7 @@ export default function Contact() {
       <div className="wrap contact__in">
         <div className="contact__lead">
           <div className="sec-index"><b>07</b><span>Contact</span></div>
-          <h2 className="d2 contact__h">Sponsor us, mentor us, or bring your team by.</h2>
+          <h1 className="d2 contact__h">Sponsor us, mentor us, or bring your team by.</h1>
           <p className="lede">
             We answer everything — sponsorship, collaborations with other teams, and students
             at {team.school} who want in next season.

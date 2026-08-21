@@ -22,6 +22,12 @@
 /* the photo reel is full-bleed within the section, above the copy */
 .team__reel {
   margin: 0 calc(var(--gutter) * -1) clamp(1rem, 2.4vh, 2rem);
+  /* .skew clips its track with overflow:hidden, but its own rotate+scale(1.04)
+     is applied AFTER that clip, so the clipped box was then painted 4% wider
+     than its layout box and pushed the page 11-33px wide between 390 and
+     1440. Clip here instead of hidden: it contains the transformed child
+     without making this a scroll container. */
+  overflow-x: clip;
 }
 
 .team__typed { display: flex; align-items: baseline; gap: 0.5rem; min-height: 1.5em; color: var(--ink-3); }

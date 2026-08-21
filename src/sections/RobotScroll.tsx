@@ -101,7 +101,7 @@ export default function RobotScroll() {
               <p className="mono rw__idx">
                 {String(active + 1).padStart(2, '0')}<i>/</i>{String(STOPS.length).padStart(2, '0')}
               </p>
-              <h3 className="rw__title">{stop.title}</h3>
+              <h2 className="rw__title">{stop.title}</h2>
               <p className="rw__body">{stop.body}</p>
               {spec && (
                 <dl className="rw__spec">

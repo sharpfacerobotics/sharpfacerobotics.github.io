@@ -11,7 +11,7 @@ export default function Services() {
       <div className="wrap">
         <header className="sec-head">
           <div className="sec-index"><b>04</b><span>What we built for everyone else</span></div>
-          <h2 className="d2">
+          <h1 className="d2">
             Tools we wished{' '}
             <TextType
               as="span"
@@ -26,7 +26,7 @@ export default function Services() {
               cursorCharacter="_"
               textColors={['#4fe0d8']}
             />
-          </h2>
+          </h1>
         </header>
 
         <Spotlight><div className="svc__grid">
@@ -37,10 +37,12 @@ export default function Services() {
                 <div className="svc__mark">
                   {s.logo
                     ? <img src={s.logo} alt="" loading="lazy" />
-                    : <span className="svc__glyph" aria-hidden="true">S</span>}
+                    /* Derived, not hardcoded: this read "S" for every service,
+                       so any logo-less entry would have worn Sharp's initial. */
+                    : <span className="svc__glyph" aria-hidden="true">{s.name.charAt(0)}</span>}
                 </div>
                 <div>
-                  <h3 className="d3">{s.name}{'nameMark' in s && s.nameMark ? <span className="svc__name-mark">{s.nameMark}</span> : null}</h3>
+                  <h2 className="d3">{s.name}{'nameMark' in s && s.nameMark ? <span className="svc__name-mark">{s.nameMark}</span> : null}</h2>
                   <p className="mono-sm">{s.tag}</p>
                 </div>
                 {s.status && <span className="mono svc__status">{s.status}</span>}

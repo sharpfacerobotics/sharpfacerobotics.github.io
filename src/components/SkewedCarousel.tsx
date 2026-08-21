@@ -16,6 +16,7 @@ export default function SkewedCarousel({
   skew = -8,
   rotate = -2,
   className = '',
+  label = 'Photographs of the team',
 }: {
   items: SkewedItem[];
   /** seconds for one full pass */
@@ -23,6 +24,11 @@ export default function SkewedCarousel({
   skew?: number;
   rotate?: number;
   className?: string;
+  /* The photographs carry no per-image captions, so each <img> is
+     decorative (alt=""). One label on the list is what actually helps:
+     a screen reader announces the reel for what it is instead of
+     stepping through 25 unnamed images. */
+  label?: string;
 }) {
   const trackRef = useRef<HTMLUListElement>(null);
   const [paused, setPaused] = useState(false);
@@ -69,6 +75,8 @@ export default function SkewedCarousel({
     >
       <ul
         ref={trackRef}
+        role="list"
+        aria-label={label}
         className={`skew__track${paused ? ' is-paused' : ''}`}
         style={{ '--drag': `${offset}px` } as React.CSSProperties}
         onMouseEnter={() => setPaused(true)}

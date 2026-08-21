@@ -51,7 +51,7 @@ export default function Team() {
         {/* The team's own photographs, high on the page where they are the
             first thing seen — a skewed drifting carousel, draggable. */}
         <div className="team__reel">
-          <SkewedCarousel items={outreachPhotos.filter(p => !excludedPhotos.includes(p.src))} speed={38} skew={-7} rotate={-1.6} />
+          <SkewedCarousel items={outreachPhotos.filter(p => !excludedPhotos.includes(p.src))} speed={38} skew={-7} rotate={-1.6} label="Photographs of Sharp Face Robotics at competitions and outreach events" />
         </div>
 
         <div className="team__grid">
@@ -70,7 +70,7 @@ export default function Team() {
                 {teams.map(t => (
                   <li className="teams__item" key={t.name} style={{ '--accent-team': t.accent } as React.CSSProperties}>
                     <div className="teams__head">
-                      <h3 className="teams__name">{t.name}</h3>
+                      <h2 className="teams__name">{t.name}</h2>
                       {t.number && <span className="mono teams__num">FTC {t.number}</span>}
                     </div>
                     <p className="teams__blurb">{t.blurb}</p>
@@ -87,7 +87,7 @@ export default function Team() {
             {PILLARS.map((p, i) => (
               <Reveal key={p.k} as="li" className="pillar" delay={i * 70}>
                   <span className="mono pillar__k">{p.k}</span>
-                  <h3 className="d3">{p.h}</h3>
+                  <h2 className="d3">{p.h}</h2>
                   <p>{p.p}</p>
               </Reveal>
             ))}

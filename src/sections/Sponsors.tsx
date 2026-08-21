@@ -35,7 +35,7 @@ export default function Sponsors() {
       <div className="wrap">
         <header className="sec-head">
           <div className="sec-index"><b>06</b><span>Partners</span></div>
-          <h2 className="d2">Who makes the season possible</h2>
+          <h1 className="d2">Who makes the season possible</h1>
           <p className="lede">
             Competition fees, aluminium, fabrication, software licences, and the tools in our shop.
             Listed alphabetically — every one of them matters to a season that would not otherwise happen.
@@ -78,7 +78,7 @@ export default function Sponsors() {
         >
         <div className="become">
           <div>
-            <h3 className="d3">Support the team</h3>
+            <h2 className="d3">Support the team</h2>
             <p className="lede" style={{ marginTop: '0.65rem' }}>
               Sponsorship pays for parts, competition entry and travel — and it puts your name in
               front of the engineers this program is trying to produce.
