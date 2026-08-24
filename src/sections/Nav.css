@@ -88,6 +88,12 @@
 }
 
 .nav__sheet {
+  /* .nav sets pointer-events:none so the empty space around the floating pill
+     does not block the page, and .nav__in turns it back on. The sheet is a
+     sibling of .nav__in, not a child, so it inherited none and nothing restored
+     it: the menu opened, looked right, and every tap fell straight through to
+     the hero underneath. */
+  pointer-events: auto;
   position: fixed; inset: 5.5rem var(--gutter) auto; z-index: 59;
   padding: 0.6rem;
   border-radius: var(--r-lg);
