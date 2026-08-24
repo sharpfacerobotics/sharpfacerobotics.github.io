@@ -71,6 +71,7 @@ export default function Nav({ tab, onTab, onAdmin }: { tab: TabId; onTab: (t: Ta
   }, [tab]);
 
   return (
+    <>
     <nav className={`nav${stuck ? ' is-stuck' : ''}`} aria-label="Primary">
       <div className="wrap nav__in">
         <button className="nav__brand" onClick={() => { onTab('home'); setOpen(false); }}>
@@ -128,19 +129,30 @@ export default function Nav({ tab, onTab, onAdmin }: { tab: TabId; onTab: (t: Ta
         </div>
       </div>
 
-      {open && (
-        <div className="nav__sheet">
-          {TABS.map(l => (
-            <button
-              key={l.id}
-              className={`d3 nav__sheet-item${tab === l.id ? ' is-active' : ''}`}
-              onClick={() => { onTab(l.id); setOpen(false); }}
-            >
-              {l.label}
-            </button>
-          ))}
-        </div>
-      )}
     </nav>
+
+    {/* Deliberately a SIBLING of <nav>, not a child. .nav sets
+        pointer-events:none so the space around the floating pill does not
+        block the page, and the sheet used to sit inside it and restore
+        pointer-events:auto on itself. The CSS minifier strips that
+        declaration as a redundant default -- it cannot see that it is
+        overriding an INHERITED none -- so on the deployed build the menu
+        opened, looked correct, and every tap fell through to the hero.
+        Out here it never inherits none, so there is nothing to override
+        and nothing for a minifier to remove. */}
+    {open && (
+      <div className="nav__sheet">
+        {TABS.map(l => (
+          <button
+            key={l.id}
+            className={`d3 nav__sheet-item${tab === l.id ? ' is-active' : ''}`}
+            onClick={() => { onTab(l.id); setOpen(false); }}
+          >
+            {l.label}
+          </button>
+        ))}
+      </div>
+    )}
+    </>
   );
 }

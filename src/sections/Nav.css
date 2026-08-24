@@ -88,13 +88,13 @@
 }
 
 .nav__sheet {
-  /* .nav sets pointer-events:none so the empty space around the floating pill
-     does not block the page, and .nav__in turns it back on. The sheet is a
-     sibling of .nav__in, not a child, so it inherited none and nothing restored
-     it: the menu opened, looked right, and every tap fell straight through to
-     the hero underneath. */
-  pointer-events: auto;
-  position: fixed; inset: 5.5rem var(--gutter) auto; z-index: 59;
+  /* No pointer-events declaration here on purpose. This used to carry
+     `pointer-events: auto` to undo the `none` inherited from .nav, and the
+     minifier deleted it as a redundant default -- it only sees `auto`, not
+     the inherited `none` it exists to beat. The sheet is now rendered as a
+     sibling of <nav> instead, so it never inherits none in the first place.
+     Do not re-parent it into <nav> without reading this. */
+  position: fixed; inset: 5.5rem var(--gutter) auto; z-index: 61;
   padding: 0.6rem;
   border-radius: var(--r-lg);
   background: rgba(14,16,22,0.9);
