@@ -144,7 +144,7 @@ export const members: Member[] = [
   {
     "name": "Ishita Singh",
     "group": "Software",
-    "grade": "Sophomore",
+    "grade": "Junior",
     "favorite": "Cooperating with QUEST",
     "outreach": true,
     "photo": null
