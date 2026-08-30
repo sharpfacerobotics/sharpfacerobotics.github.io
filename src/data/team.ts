@@ -145,7 +145,7 @@ export const members: Member[] = [
     "name": "Vivek Vasishta",
     "group": "Software",
     "grade": "Freshman",
-    "favorite": "Seeing the robots move",
+    "favorite": "Driving during the season",
     "outreach": false,
     "photo": "/assets/members/vivek-vasishta.webp"
   },
