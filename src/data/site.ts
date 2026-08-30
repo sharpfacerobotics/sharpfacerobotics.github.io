@@ -30,7 +30,13 @@ export const team = {
   school: 'Emerald High School',
   city: 'Dublin, California',
   email: 'contact30450@gmail.com',
-  season: '2025–26 · DECODE',
+  /* Two different seasons, and one field used to serve both. The hero, the
+     Team page and the footer mean THIS season; the Robot pages mean the season
+     KG was built for. Varun's 2026-08-24 roster posting moved the programme to
+     BIOBUZZ, at which point one field could no longer be right in both places:
+     KG is and stays the DECODE robot. */
+  season: '2026–27 · BIOBUZZ',
+  robotSeason: '2025–26 · DECODE',
   robot: 'KG',
 };
 

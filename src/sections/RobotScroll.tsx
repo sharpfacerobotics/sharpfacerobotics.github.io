@@ -111,7 +111,7 @@ export default function RobotScroll() {
               )}
             </div>
 
-            <p className="mono-sm rw__hint">{active === 0 ? 'Scroll to continue' : `${team.robot} · ${team.season}`}</p>
+            <p className="mono-sm rw__hint">{active === 0 ? 'Scroll to continue' : `${team.robot} · ${team.robotSeason}`}</p>
           </aside>
         </div>
       </div>

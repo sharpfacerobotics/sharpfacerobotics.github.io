@@ -8,16 +8,16 @@ import { Reveal } from '@/components/Motion';
 import OptionWheel from '@/components/reactbits/OptionWheel';
 import './Bios.css';
 
-/* Grouped roster. A person appears under every group they work in, so the
-   seven who also run outreach show up twice — that is the point of the
-   Outreach group, not a duplication bug. */
+/* Grouped roster. Under the BioBuzz 2026-27 rosters each person belongs to
+   exactly ONE group, so nobody appears twice any more — Outreach is a group
+   in its own right rather than a second hat worn by build-team members. */
 const GROUPS = [
   { key: 'Mechanical', label: 'Mechanical', blurb: 'Design and build',
     tint: '#f0a03c', pick: (m: Member) => m.group === 'Mechanical' },
   { key: 'Software', label: 'Software', blurb: 'Programming and controls',
     tint: '#3fd0c9', pick: (m: Member) => m.group === 'Software' },
   { key: 'Outreach', label: 'Outreach', blurb: 'Community and sponsorship',
-    tint: '#8b7bff', pick: (m: Member) => m.outreach },
+    tint: '#8b7bff', pick: (m: Member) => m.group === 'Outreach' },
 ] as const;
 
 const monogram = (name: string) => {
@@ -30,15 +30,28 @@ const monogram = (name: string) => {
   return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
 };
 
-const toItem = (m: Member, tint: string) => ({
-  image: m.photo ?? monogram(m.name),
-  title: m.name,
-  subtitle: m.group,
-  handle: m.grade,
-  location: m.favorite,
-  borderColor: tint,
-  gradient: `linear-gradient(160deg, ${tint}66, rgba(10,12,17,0.92))`,
-});
+/* Cards are tinted by TEAM, not by group: the group is already the heading
+   above them, so the team is the information the card can add. Accents match
+   the two teams as they are stated in site.ts. */
+const TEAM = {
+  SFR: { label: 'Sharp Face', tint: '#4fe0d8' },
+  DFR: { label: 'Dark Force', tint: '#8b7bff' },
+} as const;
+
+const toItem = (m: Member) => {
+  const t = TEAM[m.team];
+  return {
+    image: m.photo ?? monogram(m.name),
+    title: m.name,
+    subtitle: t.label,
+    /* grade and favourite are empty for the members supplied as first names
+       only; ChromaGrid guards both, so those cards simply show less. */
+    handle: m.grade,
+    location: m.favorite,
+    borderColor: t.tint,
+    gradient: `linear-gradient(160deg, ${t.tint}66, rgba(10,12,17,0.92))`,
+  };
+};
 
 const WHEEL = ['Everyone', 'Mechanical', 'Software', 'Outreach'] as const;
 
@@ -197,7 +210,7 @@ export default function Bios() {
                   className="bios__glare"
                 >
                 <ChromaGrid
-                  items={list.map(m => toItem(m, g.tint))}
+                  items={list.map(toItem)}
                   className="bios__chroma"
                   radius={320}
                   damping={0.42}

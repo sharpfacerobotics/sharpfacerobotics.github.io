@@ -83,7 +83,7 @@ export default function Outreach() {
             a year — recruiting, build, league play, then the community work that carries into summer.
           </p>
           <p className="mono outreach__stat">
-            <b>{outreachCount}</b> students on the build team also run outreach
+            <b>{outreachCount}</b> students run outreach across both teams
           </p>
         </header>
 

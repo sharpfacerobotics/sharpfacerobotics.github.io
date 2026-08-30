@@ -14,7 +14,7 @@ export default function Robot() {
           <div className="sec-index"><b>02</b><span>The robot</span></div>
           <h1 className="d2">
             <span className="iris-text">{team.robot}</span>
-            <span className="robot__sub"> — {team.season}</span>
+            <span className="robot__sub"> — {team.robotSeason}</span>
           </h1>
           <p className="lede">
             Built around reliability, cycle speed and being serviceable between matches.
