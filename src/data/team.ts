@@ -19,8 +19,8 @@ export const captain = {
   name: "Varun Vasishta",
   title: "Team Captain",
   grade: "Senior",
-  favorite: "Crashing into the Fadhil wall with no regret",
-  photo: "/assets/hi/varun.jpg",
+  favorite: "Seeing our club build from the ground up",
+  photo: "/assets/members/varun-vasishta.webp",
 };
 
 export const coaches = [
@@ -41,113 +41,153 @@ export const members: Member[] = [
     "name": "Guhan Bala",
     "group": "Mechanical",
     "grade": "Junior",
-    "favorite": "Being able to help the team from the ground up, learn engineering skills, meeting people from different teams and their approach to the season",
+    "favorite": "Learning about robotics applications, seeing our robot on the field, and building skills across engineering and communication",
     "outreach": true,
-    "photo": "/assets/hi/guhan.jpg"
+    "photo": "/assets/members/guhan-bala.webp"
   },
   {
-    "name": "Rithik Kesani",
+    "name": "Rithik Reddy Kesani",
     "group": "Mechanical",
     "grade": "Sophomore",
-    "favorite": "Designing and building the robot",
+    "favorite": "Making novel mechanical designs",
     "outreach": false,
-    "photo": "/assets/hi/rithik.jpg"
+    "photo": "/assets/members/rithik-reddy-kesani.webp"
   },
   {
-    "name": "Vivaan Brar",
+    "name": "Varun Vasishta",
     "group": "Mechanical",
-    "grade": "Sophomore",
-    "favorite": "The challenge and how it forced us to improvise solutions quickly. Last years challenge was a great learning experience for a rookie team and we are preparing to do our best this season",
-    "outreach": true,
-    "photo": "/assets/hi/vivaan.jpg"
-  },
-  {
-    "name": "Kevin Sun",
-    "group": "Mechanical",
-    "grade": "Junior",
-    "favorite": "Watching the bot successfully have a 12 ball auto",
+    "grade": "Senior",
+    "favorite": "Seeing our club build from the ground up",
     "outreach": false,
-    "photo": "/assets/hi/kevin.jpg"
-  },
-  {
-    "name": "Deep Shah",
-    "group": "Mechanical",
-    "grade": "Junior",
-    "favorite": "Learning throughout the season with my peers as well as creating nicknames for the entire team",
-    "outreach": true,
-    "photo": "/assets/hi/deep.jpg"
-  },
-  {
-    "name": "Hussam Bajwa",
-    "group": "Mechanical",
-    "grade": "Junior",
-    "favorite": "Meeting other teams and cheering on our team during games",
-    "outreach": true,
-    "photo": "/assets/hi/hussam.jpg"
+    "photo": "/assets/members/varun-vasishta.webp"
   },
   {
     "name": "Fadhil Kudbudeen",
     "group": "Mechanical",
     "grade": "Junior",
-    "favorite": "Getting Team Sponsors",
+    "favorite": "Expanding our team",
     "outreach": true,
-    "photo": null
+    "photo": "/assets/members/fadhil-kudbudeen.webp"
   },
   {
-    "name": "Arnav Gupta",
-    "group": "Software",
-    "grade": "Senior",
-    "favorite": "Programming donut routes",
-    "outreach": false,
-    "photo": "/assets/hi/arnav.jpg"
-  },
-  {
-    "name": "Gautham Ramalingam",
-    "group": "Software",
+    "name": "Hussam Bajwa",
+    "group": "Mechanical",
     "grade": "Junior",
-    "favorite": "Optimizing robot performance",
-    "outreach": false,
-    "photo": null
-  },
-  {
-    "name": "Vivek Vasishta",
-    "group": "Software",
-    "grade": "Freshman",
-    "favorite": "Driving and learning more code",
+    "favorite": "Talking to others and collaborating",
     "outreach": true,
-    "photo": null
+    "photo": "/assets/members/hussam-bajwa.webp"
   },
   {
-    "name": "Alex Xu",
+    "name": "Arpit Panda",
+    "group": "Mechanical",
+    "grade": "Junior",
+    "favorite": "Applying engineering to a physical robot",
+    "outreach": false,
+    "photo": "/assets/members/arpit-panda.webp"
+  },
+  {
+    "name": "Raghav Shah",
+    "group": "Mechanical",
+    "grade": "Sophomore",
+    "favorite": "Putting together outreach events for families and students interested in learning more about robotics",
+    "outreach": true,
+    "photo": "/assets/members/raghav-shah.webp"
+  },
+  {
+    "name": "Varshil Kaipu",
+    "group": "Mechanical",
+    "grade": "Sophomore",
+    "favorite": "Communicating with other teams and planning alliance strategy during competitions",
+    "outreach": false,
+    "photo": "/assets/members/varshil-kaipu.webp"
+  },
+  {
+    "name": "Nithya Ganni",
+    "group": "Mechanical",
+    "grade": "Freshman",
+    "favorite": "Collaborating with the team and bringing a design to life",
+    "outreach": false,
+    "photo": "/assets/members/nithya-ganni.webp"
+  },
+  {
+    "name": "Aryan Guddala",
     "group": "Software",
     "grade": "Sophomore",
-    "favorite": "Joining a competetive yet friendly community",
+    "favorite": "Expanding my coding knowledge",
     "outreach": false,
-    "photo": "/assets/hi/alex.jpg"
-  },
-  {
-    "name": "Ryan Hoang",
-    "group": "Software",
-    "grade": "Junior",
-    "favorite": "Cheering on the team",
-    "outreach": false,
-    "photo": null
+    "photo": "/assets/members/aryan-guddala.webp"
   },
   {
     "name": "David Zhang",
     "group": "Software",
     "grade": "Sophomore",
-    "favorite": "Seeing the robot make a shot",
+    "favorite": "Coding paths and winning",
     "outreach": false,
-    "photo": "/assets/hi/david.jpg"
+    "photo": "/assets/members/david-zhang.webp"
+  },
+  {
+    "name": "Gautham Ramalingam",
+    "group": "Software",
+    "grade": "Junior",
+    "favorite": "The freedom to code creatively and work with my teammates to make the best possible robot",
+    "outreach": false,
+    "photo": "/assets/members/gautham-ramalingam.webp"
+  },
+  {
+    "name": "Viraj Jaura",
+    "group": "Software",
+    "grade": "Sophomore",
+    "favorite": "Finding the coding experience calming",
+    "outreach": false,
+    "photo": "/assets/members/viraj-jaura.webp"
+  },
+  {
+    "name": "Vivek Vasishta",
+    "group": "Software",
+    "grade": "Freshman",
+    "favorite": "Seeing the robots move",
+    "outreach": false,
+    "photo": "/assets/members/vivek-vasishta.webp"
+  },
+  {
+    "name": "Corey Wan",
+    "group": "Software",
+    "grade": "Sophomore",
+    "favorite": "Learning more and going further than where I started",
+    "outreach": false,
+    "photo": "/assets/members/corey-wan.webp"
+  },
+  {
+    "name": "Ryan Hoang",
+    "group": "Software",
+    "grade": "Junior",
+    "favorite": "Spending time with the team",
+    "outreach": false,
+    "photo": "/assets/members/ryan-hoang.webp"
+  },
+  {
+    "name": "Arnav Gupta",
+    "group": "Software",
+    "grade": "Senior",
+    "favorite": "Driving the robot and coding autonomous routines",
+    "outreach": false,
+    "photo": "/assets/members/arnav-gupta.webp"
+  },
+  {
+    "name": "Alex Xu",
+    "group": "Software",
+    "grade": "Sophomore",
+    "favorite": "Being part of a competitive yet friendly community",
+    "outreach": false,
+    "photo": "/assets/members/alex-xu.webp"
   },
   {
     "name": "Ishita Singh",
     "group": "Software",
     "grade": "Junior",
-    "favorite": "Cooperating with QUEST",
+    "favorite": "Working with others",
     "outreach": true,
-    "photo": null
+    "photo": "/assets/members/ishita-singh.webp"
   }
 ];
 
