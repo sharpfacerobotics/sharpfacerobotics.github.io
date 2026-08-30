@@ -1,15 +1,17 @@
-// Source of truth: the BioBuzz 2026-27 team rosters posted by Varun on
-// 2026-08-24. That posting assigns every person to ONE team (SFR or DFR) and
-// ONE group, which replaced the old model where Outreach was a boolean worn on
-// top of Mechanical or Software.
+// Source of truth: the BioBuzz 2026-27 team rosters Varun posted on
+// 2026-08-24, reconciled with the portrait/roster commits pushed to main the
+// same day. Where both had a person, the pushed record wins: it carries the
+// full name, the new portrait and the freshest quote. Three people the pushed
+// roster dropped (Vivaan, Kevin, Deep) are still on Varun's roster, so their
+// existing records were kept rather than deleted.
 //
-// Fifteen of the thirty are new and were given as first names only, so they
-// carry a name and their assignment and nothing else. Empty grade/favorite
-// means NOT SUPPLIED, never unknown-so-guessed: names, grades and quotes are
-// the team's own words and are not invented or paraphrased here.
+// The posting assigns every person to ONE team and ONE group, which replaced
+// the old model where Outreach was a boolean worn on top of Mechanical or
+// Software. Eight people were given as first names only and carry a name and
+// an assignment and nothing else; empty grade/favorite means NOT SUPPLIED,
+// never unknown-so-guessed. Names, grades and quotes are the team's own words.
 //
-// Grades on the returning members were advanced one year for the new school
-// year (Freshman->Sophomore, Sophomore->Junior, Junior->Senior).
+// Grades on returning members were advanced one year for the new school year.
 // The roster is marked subject to change until two weeks before competition.
 
 export type Member = {
@@ -30,8 +32,8 @@ export const captain = {
   team: "SFR" as const,
   group: "Mechanical" as const,
   grade: "Senior",
-  favorite: "Crashing into the Fadhil wall with no regret",
-  photo: "/assets/hi/varun.jpg",
+  favorite: "Seeing our club build from the ground up",
+  photo: "/assets/members/varun-vasishta.webp",
 };
 
 export const coaches = [
@@ -53,40 +55,40 @@ export const members: Member[] = [
     "team": "SFR",
     "group": "Mechanical",
     "grade": "Junior",
-    "favorite": "Being able to help the team from the ground up, learn engineering skills, meeting people from different teams and their approach to the season",
-    "photo": "/assets/hi/guhan.jpg"
+    "favorite": "Learning about robotics applications, seeing our robot on the field, and building skills across engineering and communication",
+    "photo": "/assets/members/guhan-bala.webp"
   },
   {
-    "name": "Nithya",
+    "name": "Nithya Ganni",
     "team": "SFR",
     "group": "Mechanical",
-    "grade": "",
-    "favorite": "",
-    "photo": null
+    "grade": "Freshman",
+    "favorite": "Collaborating with the team and bringing a design to life",
+    "photo": "/assets/members/nithya-ganni.webp"
   },
   {
-    "name": "Arpit",
+    "name": "Arpit Panda",
     "team": "SFR",
     "group": "Mechanical",
-    "grade": "",
-    "favorite": "",
-    "photo": null
+    "grade": "Junior",
+    "favorite": "Applying engineering to a physical robot",
+    "photo": "/assets/members/arpit-panda.webp"
   },
   {
     "name": "Arnav Gupta",
     "team": "SFR",
     "group": "Software",
     "grade": "Senior",
-    "favorite": "Programming donut routes",
-    "photo": "/assets/hi/arnav.jpg"
+    "favorite": "Driving the robot and coding autonomous routines",
+    "photo": "/assets/members/arnav-gupta.webp"
   },
   {
     "name": "Alex Xu",
     "team": "SFR",
     "group": "Software",
     "grade": "Sophomore",
-    "favorite": "Joining a competetive yet friendly community",
-    "photo": "/assets/hi/alex.jpg"
+    "favorite": "Being part of a competitive yet friendly community",
+    "photo": "/assets/members/alex-xu.webp"
   },
   {
     "name": "Vaibhav",
@@ -101,56 +103,56 @@ export const members: Member[] = [
     "team": "SFR",
     "group": "Software",
     "grade": "Freshman",
-    "favorite": "Driving and learning more code",
-    "photo": null
+    "favorite": "Driving during the season",
+    "photo": "/assets/members/vivek-vasishta.webp"
   },
   {
     "name": "Gautham Ramalingam",
     "team": "SFR",
     "group": "Software",
     "grade": "Junior",
-    "favorite": "Optimizing robot performance",
-    "photo": null
+    "favorite": "The freedom to code creatively and work with my teammates to make the best possible robot",
+    "photo": "/assets/members/gautham-ramalingam.webp"
   },
   {
     "name": "Ryan Hoang",
     "team": "SFR",
     "group": "Software",
     "grade": "Junior",
-    "favorite": "Cheering on the team",
-    "photo": null
+    "favorite": "Spending time with the team",
+    "photo": "/assets/members/ryan-hoang.webp"
   },
   {
     "name": "Hussam Bajwa",
     "team": "SFR",
     "group": "Outreach",
     "grade": "Junior",
-    "favorite": "Meeting other teams and cheering on our team during games",
-    "photo": "/assets/hi/hussam.jpg"
+    "favorite": "Talking to others and collaborating",
+    "photo": "/assets/members/hussam-bajwa.webp"
   },
   {
     "name": "Fadhil Kudbudeen",
     "team": "SFR",
     "group": "Outreach",
     "grade": "Junior",
-    "favorite": "Getting Team Sponsors",
-    "photo": null
+    "favorite": "Expanding our team",
+    "photo": "/assets/members/fadhil-kudbudeen.webp"
   },
   {
-    "name": "Rithik Kesani",
+    "name": "Rithik Reddy Kesani",
     "team": "DFR",
     "group": "Mechanical",
     "grade": "Sophomore",
-    "favorite": "Designing and building the robot",
-    "photo": "/assets/hi/rithik.jpg"
+    "favorite": "Making novel mechanical designs",
+    "photo": "/assets/members/rithik-reddy-kesani.webp"
   },
   {
-    "name": "Varshil",
+    "name": "Varshil Kaipu",
     "team": "DFR",
     "group": "Mechanical",
-    "grade": "",
-    "favorite": "",
-    "photo": null
+    "grade": "Sophomore",
+    "favorite": "Communicating with other teams and planning alliance strategy during competitions",
+    "photo": "/assets/members/varshil-kaipu.webp"
   },
   {
     "name": "Vivaan Brar",
@@ -177,12 +179,12 @@ export const members: Member[] = [
     "photo": null
   },
   {
-    "name": "Raghav",
+    "name": "Raghav Shah",
     "team": "DFR",
     "group": "Mechanical",
-    "grade": "",
-    "favorite": "",
-    "photo": null
+    "grade": "Sophomore",
+    "favorite": "Putting together outreach events for families and students interested in learning more about robotics",
+    "photo": "/assets/members/raghav-shah.webp"
   },
   {
     "name": "Advait",
@@ -205,24 +207,24 @@ export const members: Member[] = [
     "team": "DFR",
     "group": "Software",
     "grade": "Junior",
-    "favorite": "Cooperating with QUEST",
-    "photo": null
+    "favorite": "Working with others",
+    "photo": "/assets/members/ishita-singh.webp"
   },
   {
     "name": "David Zhang",
     "team": "DFR",
     "group": "Software",
     "grade": "Sophomore",
-    "favorite": "Seeing the robot make a shot",
-    "photo": "/assets/hi/david.jpg"
+    "favorite": "Coding paths and winning",
+    "photo": "/assets/members/david-zhang.webp"
   },
   {
-    "name": "Corey",
+    "name": "Corey Wan",
     "team": "DFR",
     "group": "Software",
-    "grade": "",
-    "favorite": "",
-    "photo": null
+    "grade": "Sophomore",
+    "favorite": "Learning more and going further than where I started",
+    "photo": "/assets/members/corey-wan.webp"
   },
   {
     "name": "Adharsh",
@@ -233,12 +235,12 @@ export const members: Member[] = [
     "photo": null
   },
   {
-    "name": "Aryan",
+    "name": "Aryan Guddala",
     "team": "DFR",
     "group": "Software",
-    "grade": "",
-    "favorite": "",
-    "photo": null
+    "grade": "Sophomore",
+    "favorite": "Expanding my coding knowledge",
+    "photo": "/assets/members/aryan-guddala.webp"
   },
   {
     "name": "Irya",
@@ -257,12 +259,12 @@ export const members: Member[] = [
     "photo": null
   },
   {
-    "name": "Viraj",
+    "name": "Viraj Jaura",
     "team": "DFR",
     "group": "Software",
-    "grade": "",
-    "favorite": "",
-    "photo": null
+    "grade": "Sophomore",
+    "favorite": "Finding the coding experience calming",
+    "photo": "/assets/members/viraj-jaura.webp"
   },
   {
     "name": "Kevin Sun",
