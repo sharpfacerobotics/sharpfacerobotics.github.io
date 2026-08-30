@@ -30,7 +30,7 @@ export const team = {
   school: 'Emerald High School',
   city: 'Dublin, California',
   email: 'contact30450@gmail.com',
-  season: '2025–26 · DECODE',
+  season: '2026–27 · DECODE',
   robot: 'KG',
 };
 
