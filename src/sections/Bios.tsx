@@ -55,6 +55,13 @@ const toItem = (m: Member) => {
 
 const WHEEL = ['Everyone', 'Mechanical', 'Software', 'Outreach'] as const;
 
+/* site.ts holds the display names; team.ts holds the two-letter keys the
+   roster was posted with. One map so neither file has to know the other's. */
+const TEAM_KEY: Record<string, Member['team']> = {
+  'Sharp Face Robotics': 'SFR',
+  'Dark Force Robotics': 'DFR',
+};
+
 export default function Bios() {
   const [pick, setPick] = useState<string>('Everyone');
   const shown = GROUPS.filter(g => pick === 'Everyone' || g.key === pick);
@@ -188,36 +195,56 @@ export default function Bios() {
           </GlassSurface>
         </div>
 
-        <div className="roster__groups">
-        {shown.map((g, gi) => {
-          const list = members.filter(g.pick);
-          if (!list.length) return null;
+        {/* Team is the OUTER axis, group the inner one. Grouping across both
+            teams was the reason "we have two teams" did not come across: a
+            Mechanical heading with eleven faces under it reads as one team of
+            eleven. Each team now owns a titled block, and the wheel filters
+            groups inside both. */}
+        <div className="roster__teams">
+        {teams.map((t, ti) => {
+          const roster = members.filter(m => m.team === TEAM_KEY[t.name]);
+          const groups = shown
+            .map(g => ({ g, list: roster.filter(g.pick) }))
+            .filter(x => x.list.length > 0);
+          if (!groups.length) return null;
           return (
-            <Reveal key={g.key} delay={gi * 60}>
-              <div className="tier">
-                <div className="tier__head">
-                  <h2 className="mono tier__label" style={{ color: g.tint }}>{g.label}</h2>
-                  <p className="tier__blurb">{g.blurb}</p>
-                  <span className="mono tier__count">{String(list.length).padStart(2, '0')}</span>
+            <Reveal as="section" className="teamblock" key={t.name} delay={ti * 90}>
+              <header className="teamblock__head" style={{ '--team': t.accent } as React.CSSProperties}>
+                <h2 className="d3 teamblock__name">{t.name}</h2>
+                <span className="mono teamblock__meta">
+                  {t.number ? `FTC ${t.number}` : 'FTC number pending'}
+                </span>
+                <span className="mono teamblock__count">
+                  {String(roster.length).padStart(2, '0')} members
+                </span>
+              </header>
+
+              {groups.map(({ g, list }) => (
+                <div className="tier" key={g.key}>
+                  <div className="tier__head">
+                    <h3 className="mono tier__label" style={{ color: g.tint }}>{g.label}</h3>
+                    <p className="tier__blurb">{g.blurb}</p>
+                    <span className="mono tier__count">{String(list.length).padStart(2, '0')}</span>
+                  </div>
+                  {/* React Bits GlareHover — a light sweep across the group,
+                      which gives the now-smaller cards life without needing space. */}
+                  <GlareHover
+                    width="100%" height="auto" background="transparent"
+                    borderRadius="16px" borderColor="transparent"
+                    glareColor="#ffffff" glareOpacity={0.14} glareAngle={-32}
+                    glareSize={220} transitionDuration={900} playOnce={false}
+                    className="bios__glare"
+                  >
+                  <ChromaGrid
+                    items={list.map(toItem)}
+                    className="bios__chroma"
+                    radius={320}
+                    damping={0.42}
+                    fadeOut={0.55}
+                  />
+                  </GlareHover>
                 </div>
-                {/* React Bits GlareHover — a light sweep across the group,
-                    which gives the now-smaller cards life without needing space. */}
-                <GlareHover
-                  width="100%" height="auto" background="transparent"
-                  borderRadius="16px" borderColor="transparent"
-                  glareColor="#ffffff" glareOpacity={0.14} glareAngle={-32}
-                  glareSize={220} transitionDuration={900} playOnce={false}
-                  className="bios__glare"
-                >
-                <ChromaGrid
-                  items={list.map(toItem)}
-                  className="bios__chroma"
-                  radius={320}
-                  damping={0.42}
-                  fadeOut={0.55}
-                />
-                </GlareHover>
-              </div>
+              ))}
             </Reveal>
           );
         })}

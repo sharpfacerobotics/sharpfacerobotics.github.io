@@ -100,7 +100,11 @@
   display: grid; grid-template-columns: 11rem minmax(0, 1fr);
   gap: clamp(1.25rem, 2.5vw, 2.25rem); align-items: start;
 }
-.roster__groups { min-width: 0; }
+/* min-width:0 lets this shrink inside .roster__body's grid column. Without
+   it the cards set the column's minimum and the page grows sideways -- 743px
+   of horizontal scroll on a phone when the container was renamed and this
+   rule was left pointing at the old class. */
+.roster__teams, .teamblock, .teamblock .tier { min-width: 0; }
 
 .roster__wheel {
   position: sticky; top: 7rem;
@@ -172,3 +176,43 @@
 
 .members__scope { max-width: 68ch; }
 .members__scope b { color: var(--ink); font-weight: 600; }
+
+/* ── Two teams, two blocks ─────────────────────────────────────────
+   Varun: "the fact that we have 2 teams isn't clear". It was not clear
+   because the roster grouped by discipline ACROSS both teams, so a
+   Mechanical heading with eleven faces under it read as one team of
+   eleven. Team is the outer axis now, and each block is given enough
+   separation that the eye reads two things rather than one long list. */
+.roster__teams { display: grid; gap: clamp(2.5rem, 5vh, 4rem); }
+
+.teamblock { display: grid; gap: clamp(1.1rem, 2.4vh, 1.75rem); }
+
+.teamblock__head {
+  display: flex; align-items: baseline; gap: 0.9rem 1.1rem; flex-wrap: wrap;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid var(--rule);
+  /* the team's own accent, carried from site.ts */
+  box-shadow: inset 0 -1px 0 var(--team);
+}
+.teamblock__name {
+  margin: 0; color: var(--team);
+  font-variation-settings: 'wght' 700;
+}
+.teamblock__meta {
+  font-size: 0.6875rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink-4);
+  border: 1px solid var(--rule-strong); border-radius: var(--r-pill);
+  padding: 0.22rem 0.6rem;
+}
+.teamblock__count {
+  margin-left: auto; color: var(--ink-4);
+  font-size: 0.6875rem; letter-spacing: 0.1em; text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+}
+
+/* the inner group headings step down so the team name leads */
+.teamblock .tier__label { font-size: 0.72rem; }
+
+@media (max-width: 40rem) {
+  .teamblock__count { margin-left: 0; width: 100%; }
+}
