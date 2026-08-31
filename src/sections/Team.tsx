@@ -24,15 +24,14 @@ export default function Team() {
         <div className="wrap team__lead-copy">
           <div className="sec-index"><b>01</b><span>Who we are</span></div>
           <h1 className="d2 team__lead-h">
-            A rookie team that{' '}
+            Two teams out of{' '}
             <TextType
               as="span"
               className="head__typed"
               text={[
-                'wrote everything down.',
-                'keeps its notes.',
-                'documents the mistakes.',
-                'hands it forward.',
+                'Emerald High School.',
+                'Dublin, California.',
+                'one workshop.',
               ]}
               typingSpeed={48}
               deletingSpeed={24}

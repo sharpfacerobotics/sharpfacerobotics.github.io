@@ -4,7 +4,7 @@ export const teams = [
   {
     name: 'Sharp Face Robotics',
     number: '30450',
-    blurb: 'The founding team. Built KG for DECODE and documents every season so the next one does not start from zero.',
+    blurb: 'The founding team, competing as FTC 30450. BIOBUZZ is its second season.',
     accent: '#4fe0d8',
     primary: true,
   },

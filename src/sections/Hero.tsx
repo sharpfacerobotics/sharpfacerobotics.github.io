@@ -59,9 +59,9 @@ export default function Hero({ onTab }: { onTab: (t: 'robot' | 'contact') => voi
 
         <div className="hero__meta">
           <p className="lede">
-            A FIRST Tech Challenge team at {team.school} in Dublin, California. We design,
-            build and program a competition robot every season — and write down what we
-            learn so the next team does not start from zero.
+            Two FIRST Tech Challenge teams at {team.school} in Dublin, California.
+            We design, build and program competition robots, and we compete as
+            Sharp Face Robotics and Dark Force Robotics.
           </p>
           <div className="hero__ctas">
             <Magnetic><button className="btn btn--solid" onClick={() => onTab('robot')}>See the robot</button></Magnetic>
@@ -93,7 +93,9 @@ export default function Hero({ onTab }: { onTab: (t: 'robot' | 'contact') => voi
           <span className="sr-only">The Sharp Face Robotics team with their robot</span>
           <figcaption className="hero__cap glass glass--spec">
             <span className="mono-sm">Team {team.number}</span>
-            <span className="mono-sm">{team.season}</span>
+            {/* the photograph is the KG-era team, so it carries the robot's
+                season -- team.season is now BIOBUZZ and would mislabel it */}
+            <span className="mono-sm">{team.robotSeason}</span>
           </figcaption>
         </figure>
       </div>
