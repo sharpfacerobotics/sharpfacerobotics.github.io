@@ -70,7 +70,7 @@ export default function Team() {
                   <li className="teams__item" key={t.name} style={{ '--accent-team': t.accent } as React.CSSProperties}>
                     <div className="teams__head">
                       <h2 className="teams__name">{t.name}</h2>
-                      {t.number && <span className="mono teams__num">FTC {t.number}</span>}
+                      <span className="mono teams__num">FTC {t.number}</span>
                     </div>
                     <p className="teams__blurb">{t.blurb}</p>
                   </li>

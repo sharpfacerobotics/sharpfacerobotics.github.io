@@ -212,7 +212,7 @@ export default function Bios() {
               <header className="teamblock__head" style={{ '--team': t.accent } as React.CSSProperties}>
                 <h2 className="d3 teamblock__name">{t.name}</h2>
                 <span className="mono teamblock__meta">
-                  {t.number ? `FTC ${t.number}` : 'FTC number pending'}
+                  FTC {t.number}
                 </span>
                 <span className="mono teamblock__count">
                   {String(roster.length).padStart(2, '0')} members

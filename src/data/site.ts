@@ -4,14 +4,13 @@ export const teams = [
   {
     name: 'Sharp Face Robotics',
     number: '30450',
-    blurb: 'The founding team, competing as FTC 30450. BIOBUZZ is its second season.',
+    blurb: 'The founding team. BIOBUZZ is its second season.',
     accent: '#4fe0d8',
     primary: true,
   },
   {
     name: 'Dark Force Robotics',
-    // TODO: FTC number not supplied — left null rather than guessed.
-    number: null as string | null,
+    number: '36705',
     blurb: 'Our second team out of Emerald High School. BIOBUZZ is their rookie season.',
     accent: '#8b7bff',
     primary: false,
