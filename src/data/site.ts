@@ -105,6 +105,6 @@ export const services = [
 ];
 
 export const socials = [
-  { label: 'Instagram', href: 'https://www.instagram.com/sharpfacerobotics/' },
+  { label: 'Instagram', href: 'https://www.instagram.com/sharpfacerobotics_ehs/' },
   { label: 'GitHub',    href: 'https://github.com/sharpfacerobotics' },
 ];
