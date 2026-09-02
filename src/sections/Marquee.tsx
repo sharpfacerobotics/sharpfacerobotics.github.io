@@ -6,7 +6,7 @@ export default function Marquee() {
   return (
     <div className="mq" aria-hidden="true">
       <CurvedLoop
-        marqueeText="SHARP FACE ROBOTICS ✦ FTC 30450 ✦ DESIGN ✦ BUILD ✦ PROGRAM ✦ COMPETE ✦"
+        marqueeText="EMERALD HIGH SCHOOL ROBOTICS ✦ FTC 30450 ✦ FTC 36705 ✦ DESIGN ✦ BUILD ✦ PROGRAM ✦ COMPETE ✦"
         speed={1.4}
         curveAmount={90}
         direction="left"

@@ -1,6 +1,6 @@
 import LogoLoop from '@/components/reactbits/LogoLoop';
 import { sponsors } from '@/data/sponsors';
-import { team } from '@/data/site';
+import { program, teamNumbers } from '@/data/site';
 import './SignOff.css';
 
 /* Closing band: the wordmark at display scale over the partner strip.
@@ -11,10 +11,10 @@ export default function SignOff({ direction = 'right' }: { direction?: 'left' | 
     <div className="signoff">
       <div className="wrap signoff__in">
         <p className="signoff__mark">
-          Sharp Face <span className="signoff__accent">Robotics</span>
+          Emerald High <span className="signoff__accent">Robotics</span>
         </p>
         <p className="mono signoff__meta">
-          FTC {team.number} · {team.season} · {team.city}
+          FTC {teamNumbers} · {program.season} · {program.city}
         </p>
       </div>
       <div className="signoff__loop">

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { team, socials } from '@/data/site';
+import { program, socials } from '@/data/site';
 import { Instagram, GitHub } from '@/components/Icons';
 import { Magnetic } from '@/components/Motion';
 import { outreachPhotos } from '@/data/outreachPhotos';
@@ -15,11 +15,11 @@ export default function Contact() {
 
   const copy = async () => {
     try {
-      await navigator.clipboard.writeText(team.email);
+      await navigator.clipboard.writeText(program.email);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      window.location.href = `mailto:${team.email}`;
+      window.location.href = `mailto:${program.email}`;
     }
   };
 
@@ -35,18 +35,18 @@ export default function Contact() {
           <h1 className="d2 contact__h">Sponsor us, mentor us, or bring your team by.</h1>
           <p className="lede">
             We answer everything — sponsorship, collaborations with other teams, and students
-            at {team.school} who want in next season.
+            at {program.school} who want in next season.
           </p>
         </div>
 
         <div className="contact__panel glass glass--spec">
           <button className="contact__mail" onClick={copy}>
             <span className="mono-sm">Email</span>
-            <b>{team.email}</b>
+            <b>{program.email}</b>
             <span className={`mono contact__copy${copied ? ' is-on' : ''}`}>{copied ? 'Copied' : 'Copy'}</span>
           </button>
 
-          <Magnetic><a className="btn btn--solid contact__mailto" href={`mailto:${team.email}`}>Open mail app</a></Magnetic>
+          <Magnetic><a className="btn btn--solid contact__mailto" href={`mailto:${program.email}`}>Open mail app</a></Magnetic>
 
           <ul className="contact__social">
             {socials.map(s => {

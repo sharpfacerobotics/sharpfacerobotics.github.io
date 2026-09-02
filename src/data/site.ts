@@ -23,9 +23,16 @@ export const teams = [
 export const memberCount = 45;
 export const memberCountLabel = '45+';
 
-export const team = {
-  number: '30450',
-  name: 'Sharp Face Robotics',
+/* The site belongs to the SCHOOL PROGRAMME, not to either of its teams.
+   Sharp Face and Dark Force are peers and live in `teams` above; this is the
+   thing that owns them. Renamed from `team` deliberately: while it was called
+   that it carried number '30450', and every piece of site-wide chrome quietly
+   wore one team's number. There is no single number any more -- use
+   `teamNumbers` where both belong. */
+export const program = {
+  name: 'Emerald High School Robotics',
+  /** for tight spaces: the nav wordmark, the sign-off */
+  short: 'EHS Robotics',
   school: 'Emerald High School',
   city: 'Dublin, California',
   email: 'contact30450@gmail.com',
@@ -38,6 +45,13 @@ export const team = {
   robotSeason: '2025–26 · DECODE',
   robot: 'KG',
 };
+
+/** The team the programme started as. The DECODE-era photograph is this
+    team, from before there were two. */
+export const foundingTeam = teams.find(t => t.primary)!;
+
+/** Both FTC numbers, for the places that used to print a single team's. */
+export const teamNumbers = teams.map(t => t.number).join(' · ');
 
 export const awards = [
   { title: '2nd Place Inspire', detail: 'League Award' },

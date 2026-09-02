@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { team } from '@/data/site';
+import { program, teamNumbers } from '@/data/site';
 import GlassSurface from '@/components/reactbits/GlassSurface';
 import './Nav.css';
 
@@ -75,10 +75,10 @@ export default function Nav({ tab, onTab, onAdmin }: { tab: TabId; onTab: (t: Ta
     <nav className={`nav${stuck ? ' is-stuck' : ''}`} aria-label="Primary">
       <div className="wrap nav__in">
         <button className="nav__brand" onClick={() => { onTab('home'); setOpen(false); }}>
-          <img src="/assets/SharpFace.png" alt="" width="34" height="34" />
+          <img src="/assets/ehs-crest.png" alt="" width="34" height="34" />
           <span>
-            <b>Sharp Face Robotics</b>
-            <em className="mono-sm">FTC {team.number}</em>
+            <b>{program.short}</b>
+            <em className="mono-sm">FTC {teamNumbers}</em>
           </span>
         </button>
 

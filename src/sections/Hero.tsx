@@ -1,4 +1,4 @@
-import { team, awards, memberCount } from '@/data/site';
+import { program, awards, memberCount, teamNumbers, foundingTeam } from '@/data/site';
 import ParticleText from '@/components/reactbits/ParticleText';
 import Counter from '@/components/reactbits/Counter';
 import RippleDistortion from '@/components/reactbits/RippleDistortion';
@@ -12,15 +12,15 @@ export default function Hero({ onTab }: { onTab: (t: 'robot' | 'contact') => voi
     <header className="hero fitview" id="top">
       <div className="wrap hero__in">
         <p className="mono hero__eyebrow">
-          FTC {team.number} · {team.school} · {team.city}
+          FTC {teamNumbers} · {program.school} · {program.city}
         </p>
 
         {/* React Bits ParticleText — the wordmark assembles from particles and
             scatters away from the pointer. */}
         <h1 className="hero__h1">
-          <span className="sr-only">Sharp Face Robotics</span>
+          <span className="sr-only">{program.name}</span>
           <ParticleText
-            text="SHARP FACE"
+            text="EMERALD HIGH"
             fontFamily="Archivo, sans-serif"
             fontWeight={700}
             fontSize="clamp(1.6rem, min(4.4vw, 5.6vh), 3.4rem)"
@@ -59,7 +59,7 @@ export default function Hero({ onTab }: { onTab: (t: 'robot' | 'contact') => voi
 
         <div className="hero__meta">
           <p className="lede">
-            Two FIRST Tech Challenge teams at {team.school} in Dublin, California.
+            Two FIRST Tech Challenge teams at {program.school} in Dublin, California.
             We design, build and program competition robots, and we compete as
             Sharp Face Robotics and Dark Force Robotics.
           </p>
@@ -92,10 +92,10 @@ export default function Hero({ onTab }: { onTab: (t: 'robot' | 'contact') => voi
           />
           <span className="sr-only">The Sharp Face Robotics team with their robot</span>
           <figcaption className="hero__cap glass glass--spec">
-            <span className="mono-sm">Team {team.number}</span>
+            <span className="mono-sm">Team {foundingTeam.number}</span>
             {/* the photograph is the KG-era team, so it carries the robot's
-                season -- team.season is now BIOBUZZ and would mislabel it */}
-            <span className="mono-sm">{team.robotSeason}</span>
+                season -- program.season is now BIOBUZZ and would mislabel it */}
+            <span className="mono-sm">{program.robotSeason}</span>
           </figcaption>
         </figure>
       </div>
@@ -119,7 +119,7 @@ export default function Hero({ onTab }: { onTab: (t: 'robot' | 'contact') => voi
           </div>
           <div className="hero__stat hero__stat--robot">
             <dt className="mono-sm"><span className="hero__ico"><RobotIcon size={15} /></span>Robot</dt>
-            <dd>{team.robot}</dd>
+            <dd>{program.robot}</dd>
           </div>
           {awards.map(a => (
             <div className="hero__stat hero__stat--award" key={a.title}>

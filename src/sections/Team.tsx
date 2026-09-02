@@ -1,4 +1,4 @@
-import { team, teams } from '@/data/site';
+import { program, teams } from '@/data/site';
 import { coaches } from '@/data/team';
 import { Reveal, Spotlight } from '@/components/Motion';
 import SkewedCarousel from '@/components/SkewedCarousel';
@@ -56,15 +56,15 @@ export default function Team() {
         <div className="team__grid">
           <div className="team__lead">
             <p className="lede">
-              Sharp Face Robotics is a FIRST Tech Challenge team at {team.school} in {team.city}.
-              We design, build and program a competition robot — and along the way we build the
-              engineering habits that outlast any one season.
+              {program.name} runs two FIRST Tech Challenge teams out of {program.school}
+              in {program.city}. We design, build and program competition robots — and along the
+              way we build the engineering habits that outlast any one season.
             </p>
 
             {/* Two teams run out of the same school, so the page says so
                 rather than presenting one as the whole programme. */}
             <div className="teams">
-              <p className="mono teams__label">Two teams · {team.school}</p>
+              <p className="mono teams__label">Two teams · {program.school}</p>
               <ul className="teams__list">
                 {teams.map(t => (
                   <li className="teams__item" key={t.name} style={{ '--accent-team': t.accent } as React.CSSProperties}>
@@ -77,7 +77,7 @@ export default function Team() {
                 ))}
               </ul>
               <p className="mono-sm teams__foot">
-                {team.season} · {coaches.map(c => c.name).join(' · ')}
+                {program.season} · {coaches.map(c => c.name).join(' · ')}
               </p>
             </div>
           </div>

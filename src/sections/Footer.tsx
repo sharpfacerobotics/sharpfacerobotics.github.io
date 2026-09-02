@@ -1,4 +1,4 @@
-import { team } from '@/data/site';
+import { program, teamNumbers } from '@/data/site';
 import './Footer.css';
 
 export default function Footer() {
@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className="foot">
       <div className="wrap foot__in">
         <p className="mono-sm">
-          © {new Date().getFullYear()} {team.name} · FTC Team {team.number} · {team.school} · {team.city}
+          © {new Date().getFullYear()} {program.name} · FTC {teamNumbers} · {program.city}
         </p>
       </div>
     </footer>

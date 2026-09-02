@@ -1,4 +1,4 @@
-import { team, specs, subsystems } from '@/data/site';
+import { program, specs, subsystems } from '@/data/site';
 import { Reveal, Spotlight } from '@/components/Motion';
 import RobotScroll from './RobotScroll';
 import { robotPhotos } from '@/data/photoPicks';
@@ -13,8 +13,8 @@ export default function Robot() {
         <header className="sec-head">
           <div className="sec-index"><b>02</b><span>The robot</span></div>
           <h1 className="d2">
-            <span className="iris-text">{team.robot}</span>
-            <span className="robot__sub"> — {team.robotSeason}</span>
+            <span className="iris-text">{program.robot}</span>
+            <span className="robot__sub"> — {program.robotSeason}</span>
           </h1>
           <p className="lede">
             Built around reliability, cycle speed and being serviceable between matches.

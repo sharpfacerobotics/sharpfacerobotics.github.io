@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { subsystems, specs, team } from '@/data/site';
+import { subsystems, specs, program } from '@/data/site';
 import './RobotScroll.css';
 
 /* Full-bleed, scroll-driven walkthrough of the assembly.
@@ -78,7 +78,7 @@ export default function RobotScroll() {
               <img
                 key={s.key}
                 src={s.img}
-                alt={i === active ? `${s.title} — ${team.robot}` : ''}
+                alt={i === active ? `${s.title} — ${program.robot}` : ''}
                 aria-hidden={i !== active}
                 className={`rw__img${i === active ? ' is-on' : ''}`}
                 loading={i === 0 ? 'eager' : 'lazy'}
@@ -111,7 +111,7 @@ export default function RobotScroll() {
               )}
             </div>
 
-            <p className="mono-sm rw__hint">{active === 0 ? 'Scroll to continue' : `${team.robot} · ${team.robotSeason}`}</p>
+            <p className="mono-sm rw__hint">{active === 0 ? 'Scroll to continue' : `${program.robot} · ${program.robotSeason}`}</p>
           </aside>
         </div>
       </div>
