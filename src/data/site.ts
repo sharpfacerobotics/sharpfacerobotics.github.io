@@ -1,3 +1,8 @@
+/* Injected by vite.config.ts, which is the single place the public origin
+   is defined. See the note there before changing any deployed URL. */
+declare const __SITE_ORIGIN__: string;
+export const origin = __SITE_ORIGIN__;
+
 /* The programme runs TWO FTC teams out of Emerald High School.
    `team` stays as the primary/site-owner team so nothing else has to change. */
 export const teams = [
@@ -96,7 +101,7 @@ export const services = [
     name: 'Telemark',
     brand: 'telemark',
     tag: 'Master FTC programming',
-    href: 'https://sharpfacerobotics.github.io/telemark/',
+    href: `${origin}/telemark/`,
     cta: 'Visit Telemark',
     logo: '/assets/telemark.png',
     status: null,
