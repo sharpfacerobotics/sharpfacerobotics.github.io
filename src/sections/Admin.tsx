@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { User } from 'firebase/auth';
 import { seed, saveContent, signIn, signOutAdmin, watchAuth, SCHEMA_VERSION, type SiteContent } from '@/lib/cms';
+import type { Group } from '@/data/team';
 import './Admin.css';
 
 /* A forms-based editor over the typed content document.
@@ -74,9 +75,22 @@ export default function Admin({ open, onClose }: { open: boolean; onClose: () =>
                 {draft.members.map((m, i) => (
                   <div className="admin__row" key={m.name + i}>
                     <input aria-label="Name" value={m.name} onChange={e => setMember(i, { name: e.target.value })} />
-                    <select aria-label="Group" value={m.group} onChange={e => setMember(i, { group: e.target.value as 'Mechanical' | 'Software' })}>
+                    {/* Multi-select because a member can be in more than one
+                        group. This was a single select offering only Mechanical
+                        and Software, so editing anyone in Outreach silently
+                        dropped them out of it. */}
+                    <select
+                      aria-label="Groups"
+                      multiple
+                      size={3}
+                      value={m.groups}
+                      onChange={e => setMember(i, {
+                        groups: [...e.target.selectedOptions].map(o => o.value as Group),
+                      })}
+                    >
                       <option>Mechanical</option>
                       <option>Software</option>
+                      <option>Outreach</option>
                     </select>
                     <input aria-label="Grade" value={m.grade} onChange={e => setMember(i, { grade: e.target.value })} />
                     <input aria-label="Favourite part" value={m.favorite} onChange={e => setMember(i, { favorite: e.target.value })} />

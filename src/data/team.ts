@@ -14,11 +14,16 @@
 // Grades on returning members were advanced one year for the new school year.
 // The roster is marked subject to change until two weeks before competition.
 
+export type Group = 'Mechanical' | 'Software' | 'Outreach';
+
 export type Member = {
   name: string;
   /** Sharp Face Robotics or Dark Force Robotics */
   team: 'SFR' | 'DFR';
-  group: 'Mechanical' | 'Software' | 'Outreach';
+  /* A person can work in more than one group -- Vivek runs outreach
+     alongside software -- so this is a list, not a single value. Order is
+     not meaningful. */
+  groups: Group[];
   /** empty when the team has not supplied it yet */
   grade: string;
   /** empty when the team has not supplied it yet */
@@ -30,7 +35,7 @@ export const captain = {
   name: "Varun Vasishta",
   title: "Team Captain",
   team: "SFR" as const,
-  group: "Mechanical" as const,
+  groups: ["Mechanical"] as Group[],
   grade: "Senior",
   favorite: "Seeing our club build from the ground up",
   photo: "/assets/members/varun-vasishta.webp",
@@ -53,7 +58,9 @@ export const members: Member[] = [
   {
     "name": "Guhan Bala",
     "team": "SFR",
-    "group": "Mechanical",
+    "groups": [
+      "Mechanical"
+    ],
     "grade": "Junior",
     "favorite": "Learning about robotics applications, seeing our robot on the field, and building skills across engineering and communication",
     "photo": "/assets/members/guhan-bala.webp"
@@ -61,7 +68,9 @@ export const members: Member[] = [
   {
     "name": "Nithya Ganni",
     "team": "SFR",
-    "group": "Mechanical",
+    "groups": [
+      "Mechanical"
+    ],
     "grade": "Freshman",
     "favorite": "Collaborating with the team and bringing a design to life",
     "photo": "/assets/members/nithya-ganni.webp"
@@ -69,7 +78,9 @@ export const members: Member[] = [
   {
     "name": "Arpit Panda",
     "team": "SFR",
-    "group": "Mechanical",
+    "groups": [
+      "Mechanical"
+    ],
     "grade": "Junior",
     "favorite": "Applying engineering to a physical robot",
     "photo": "/assets/members/arpit-panda.webp"
@@ -77,7 +88,9 @@ export const members: Member[] = [
   {
     "name": "Arnav Gupta",
     "team": "SFR",
-    "group": "Software",
+    "groups": [
+      "Software"
+    ],
     "grade": "Senior",
     "favorite": "Driving the robot and coding autonomous routines",
     "photo": "/assets/members/arnav-gupta.webp"
@@ -85,7 +98,9 @@ export const members: Member[] = [
   {
     "name": "Alex Xu",
     "team": "SFR",
-    "group": "Software",
+    "groups": [
+      "Software"
+    ],
     "grade": "Sophomore",
     "favorite": "Being part of a competitive yet friendly community",
     "photo": "/assets/members/alex-xu.webp"
@@ -93,7 +108,9 @@ export const members: Member[] = [
   {
     "name": "Vaibhav",
     "team": "SFR",
-    "group": "Software",
+    "groups": [
+      "Software"
+    ],
     "grade": "",
     "favorite": "",
     "photo": null
@@ -101,7 +118,10 @@ export const members: Member[] = [
   {
     "name": "Vivek Vasishta",
     "team": "SFR",
-    "group": "Software",
+    "groups": [
+      "Software",
+      "Outreach"
+    ],
     "grade": "Freshman",
     "favorite": "Driving during the season",
     "photo": "/assets/members/vivek-vasishta.webp"
@@ -109,7 +129,9 @@ export const members: Member[] = [
   {
     "name": "Gautham Ramalingam",
     "team": "SFR",
-    "group": "Software",
+    "groups": [
+      "Software"
+    ],
     "grade": "Junior",
     "favorite": "The freedom to code creatively and work with my teammates to make the best possible robot",
     "photo": "/assets/members/gautham-ramalingam.webp"
@@ -117,7 +139,9 @@ export const members: Member[] = [
   {
     "name": "Ryan Hoang",
     "team": "SFR",
-    "group": "Software",
+    "groups": [
+      "Software"
+    ],
     "grade": "Junior",
     "favorite": "Spending time with the team",
     "photo": "/assets/members/ryan-hoang.webp"
@@ -125,7 +149,9 @@ export const members: Member[] = [
   {
     "name": "Hussam Bajwa",
     "team": "SFR",
-    "group": "Outreach",
+    "groups": [
+      "Outreach"
+    ],
     "grade": "Junior",
     "favorite": "Talking to others and collaborating",
     "photo": "/assets/members/hussam-bajwa.webp"
@@ -133,7 +159,9 @@ export const members: Member[] = [
   {
     "name": "Fadhil Kudbudeen",
     "team": "SFR",
-    "group": "Outreach",
+    "groups": [
+      "Outreach"
+    ],
     "grade": "Junior",
     "favorite": "Expanding our team",
     "photo": "/assets/members/fadhil-kudbudeen.webp"
@@ -141,7 +169,9 @@ export const members: Member[] = [
   {
     "name": "Rithik Reddy Kesani",
     "team": "DFR",
-    "group": "Mechanical",
+    "groups": [
+      "Mechanical"
+    ],
     "grade": "Sophomore",
     "favorite": "Making novel mechanical designs",
     "photo": "/assets/members/rithik-reddy-kesani.webp"
@@ -149,7 +179,9 @@ export const members: Member[] = [
   {
     "name": "Varshil Kaipu",
     "team": "DFR",
-    "group": "Mechanical",
+    "groups": [
+      "Mechanical"
+    ],
     "grade": "Sophomore",
     "favorite": "Communicating with other teams and planning alliance strategy during competitions",
     "photo": "/assets/members/varshil-kaipu.webp"
@@ -157,7 +189,9 @@ export const members: Member[] = [
   {
     "name": "Vivaan Brar",
     "team": "DFR",
-    "group": "Mechanical",
+    "groups": [
+      "Mechanical"
+    ],
     "grade": "Sophomore",
     "favorite": "The challenge and how it forced us to improvise solutions quickly. Last years challenge was a great learning experience for a rookie team and we are preparing to do our best this season",
     "photo": "/assets/hi/vivaan.jpg"
@@ -165,7 +199,9 @@ export const members: Member[] = [
   {
     "name": "Sidhak",
     "team": "DFR",
-    "group": "Mechanical",
+    "groups": [
+      "Mechanical"
+    ],
     "grade": "",
     "favorite": "",
     "photo": null
@@ -173,7 +209,9 @@ export const members: Member[] = [
   {
     "name": "Rishi",
     "team": "DFR",
-    "group": "Mechanical",
+    "groups": [
+      "Mechanical"
+    ],
     "grade": "",
     "favorite": "",
     "photo": null
@@ -181,7 +219,9 @@ export const members: Member[] = [
   {
     "name": "Raghav Shah",
     "team": "DFR",
-    "group": "Mechanical",
+    "groups": [
+      "Mechanical"
+    ],
     "grade": "Sophomore",
     "favorite": "Putting together outreach events for families and students interested in learning more about robotics",
     "photo": "/assets/members/raghav-shah.webp"
@@ -189,7 +229,9 @@ export const members: Member[] = [
   {
     "name": "Advait",
     "team": "DFR",
-    "group": "Mechanical",
+    "groups": [
+      "Mechanical"
+    ],
     "grade": "",
     "favorite": "",
     "photo": null
@@ -197,7 +239,9 @@ export const members: Member[] = [
   {
     "name": "Dhriti",
     "team": "DFR",
-    "group": "Mechanical",
+    "groups": [
+      "Mechanical"
+    ],
     "grade": "",
     "favorite": "",
     "photo": null
@@ -205,7 +249,9 @@ export const members: Member[] = [
   {
     "name": "Ishita Singh",
     "team": "DFR",
-    "group": "Software",
+    "groups": [
+      "Software"
+    ],
     "grade": "Junior",
     "favorite": "Working with others",
     "photo": "/assets/members/ishita-singh.webp"
@@ -213,7 +259,9 @@ export const members: Member[] = [
   {
     "name": "David Zhang",
     "team": "DFR",
-    "group": "Software",
+    "groups": [
+      "Software"
+    ],
     "grade": "Sophomore",
     "favorite": "Coding paths and winning",
     "photo": "/assets/members/david-zhang.webp"
@@ -221,7 +269,9 @@ export const members: Member[] = [
   {
     "name": "Corey Wan",
     "team": "DFR",
-    "group": "Software",
+    "groups": [
+      "Software"
+    ],
     "grade": "Sophomore",
     "favorite": "Learning more and going further than where I started",
     "photo": "/assets/members/corey-wan.webp"
@@ -229,7 +279,9 @@ export const members: Member[] = [
   {
     "name": "Adharsh",
     "team": "DFR",
-    "group": "Software",
+    "groups": [
+      "Software"
+    ],
     "grade": "",
     "favorite": "",
     "photo": null
@@ -237,7 +289,9 @@ export const members: Member[] = [
   {
     "name": "Aryan Guddala",
     "team": "DFR",
-    "group": "Software",
+    "groups": [
+      "Software"
+    ],
     "grade": "Sophomore",
     "favorite": "Expanding my coding knowledge",
     "photo": "/assets/members/aryan-guddala.webp"
@@ -245,7 +299,9 @@ export const members: Member[] = [
   {
     "name": "Irya",
     "team": "DFR",
-    "group": "Software",
+    "groups": [
+      "Software"
+    ],
     "grade": "",
     "favorite": "",
     "photo": null
@@ -253,7 +309,9 @@ export const members: Member[] = [
   {
     "name": "Leo",
     "team": "DFR",
-    "group": "Software",
+    "groups": [
+      "Software"
+    ],
     "grade": "",
     "favorite": "",
     "photo": null
@@ -261,7 +319,9 @@ export const members: Member[] = [
   {
     "name": "Viraj Jaura",
     "team": "DFR",
-    "group": "Software",
+    "groups": [
+      "Software"
+    ],
     "grade": "Sophomore",
     "favorite": "Finding the coding experience calming",
     "photo": "/assets/members/viraj-jaura.webp"
@@ -269,7 +329,9 @@ export const members: Member[] = [
   {
     "name": "Kevin Sun",
     "team": "DFR",
-    "group": "Outreach",
+    "groups": [
+      "Outreach"
+    ],
     "grade": "Junior",
     "favorite": "Watching the bot successfully have a 12 ball auto",
     "photo": "/assets/hi/kevin.jpg"
@@ -277,7 +339,9 @@ export const members: Member[] = [
   {
     "name": "Deep Shah",
     "team": "DFR",
-    "group": "Outreach",
+    "groups": [
+      "Outreach"
+    ],
     "grade": "Junior",
     "favorite": "Learning throughout the season with my peers as well as creating nicknames for the entire team",
     "photo": "/assets/hi/deep.jpg"
@@ -286,4 +350,4 @@ export const members: Member[] = [
 
 /* The BioBuzz roster makes Outreach its own group rather than a second hat
    worn by build-team members, so this counts group membership. */
-export const outreachCount = members.filter(m => m.group === 'Outreach').length;
+export const outreachCount = members.filter(m => m.groups.includes('Outreach')).length;

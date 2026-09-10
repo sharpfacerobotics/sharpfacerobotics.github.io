@@ -8,16 +8,17 @@ import { Reveal } from '@/components/Motion';
 import OptionWheel from '@/components/reactbits/OptionWheel';
 import './Bios.css';
 
-/* Grouped roster. Under the BioBuzz 2026-27 rosters each person belongs to
-   exactly ONE group, so nobody appears twice any more — Outreach is a group
-   in its own right rather than a second hat worn by build-team members. */
+/* Grouped roster. Outreach is a group in its own right, and a person can
+   work in more than one — Vivek runs outreach alongside software — so a
+   member appears under every group they are in. Seeing the same face twice
+   inside a team block is that, not a duplication bug. */
 const GROUPS = [
   { key: 'Mechanical', label: 'Mechanical', blurb: 'Design and build',
-    tint: '#f0a03c', pick: (m: Member) => m.group === 'Mechanical' },
+    tint: '#f0a03c', pick: (m: Member) => m.groups.includes('Mechanical') },
   { key: 'Software', label: 'Software', blurb: 'Programming and controls',
-    tint: '#3fd0c9', pick: (m: Member) => m.group === 'Software' },
+    tint: '#3fd0c9', pick: (m: Member) => m.groups.includes('Software') },
   { key: 'Outreach', label: 'Outreach', blurb: 'Community and sponsorship',
-    tint: '#8b7bff', pick: (m: Member) => m.group === 'Outreach' },
+    tint: '#8b7bff', pick: (m: Member) => m.groups.includes('Outreach') },
 ] as const;
 
 const monogram = (name: string) => {
