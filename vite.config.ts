@@ -8,7 +8,7 @@ import path from 'node:path'
    found by hand on a domain change. They are now %SITE_ORIGIN% placeholders
    filled in at build time. To move the site, change this one line (and set
    the matching custom domain or org name on GitHub). */
-const SITE_ORIGIN = 'https://sharpfacerobotics.github.io';
+const SITE_ORIGIN = 'https://ehsrobotic.github.io';
 
 export default defineConfig({
   plugins: [

@@ -101,7 +101,11 @@ export const services = [
     name: 'Telemark',
     brand: 'telemark',
     tag: 'Master FTC programming',
-    href: `${origin}/telemark/`,
+    /* Deliberately absolute and NOT derived from `origin`. Telemark is its
+       own Pages site in the old sharpfacerobotics org and is not moving, so
+       following this site to its new address would point at a page that does
+       not exist. Change this only if Telemark itself moves. */
+    href: 'https://sharpfacerobotics.github.io/telemark/',
     cta: 'Visit Telemark',
     logo: '/assets/telemark.png',
     status: null,
