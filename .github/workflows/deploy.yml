@@ -19,13 +19,37 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      # The site itself now lives at emeraldhighrobotics.github.io. This
-      # address serves a redirect only, so there is nothing to build --
-      # publishing the two static pages in redirect/ is the whole job.
+
+      # ONE branch feeds TWO repositories, and they publish different things:
+      # the new home builds the app, the old address serves only the redirect
+      # pages that forward to it. Deciding by repository name keeps both on the
+      # same branch. Getting this wrong publishes the redirect to BOTH, which
+      # leaves the two addresses pointing at each other and no site anywhere.
+      - name: Decide what this repository publishes
+        id: mode
+        run: |
+          if [ "${{ github.repository }}" = "sharpfacerobotics/sharpfacerobotics.github.io" ]; then
+            echo "path=redirect" >> "$GITHUB_OUTPUT"
+            echo "Old address -> publishing the redirect"
+          else
+            echo "path=dist" >> "$GITHUB_OUTPUT"
+            echo "Site home -> building the app"
+          fi
+
+      - uses: actions/setup-node@v4
+        if: steps.mode.outputs.path == 'dist'
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+        if: steps.mode.outputs.path == 'dist'
+      - run: npm run build
+        if: steps.mode.outputs.path == 'dist'
+
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: redirect
+          path: ${{ steps.mode.outputs.path }}
 
   deploy:
     needs: build
